@@ -1,12 +1,15 @@
-import React from 'react';
-
+import React, {Fragment} from 'react';
 import './App.css';
+import Producto from './components/formularioProducto/formularioProducto';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Astrid Toy's</h1>
-    </div>
+    <Fragment> 
+      <div className="App">
+        <Producto></Producto>
+        <h1>Astrid Toy's</h1>
+      </div>
+    </Fragment>
   );
 }
 
