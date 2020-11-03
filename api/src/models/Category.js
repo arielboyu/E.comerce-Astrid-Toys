@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+import Product from './Product.js'
+
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('category', {
@@ -8,5 +8,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    description:{
+      type: DataTypes.STRING
+    }
   });
 };
