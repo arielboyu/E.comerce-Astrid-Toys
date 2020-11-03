@@ -5,7 +5,10 @@ import Producto from './components/formularioProducto/formularioProducto';
 function App() {
   return (
     <Fragment> 
-      <Producto></Producto>
+      <div className="App">
+        <Producto></Producto>
+        <h1>Astrid Toy's</h1>
+      </div>
     </Fragment>
   );
 }
