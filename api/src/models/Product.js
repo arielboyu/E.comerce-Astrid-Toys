@@ -23,3 +23,4 @@ Precio
 Stock
 Pertenecer a una o más categorías.
 Tener por lo menos una imagen. */
+//otro
