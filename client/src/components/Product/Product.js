@@ -1,22 +1,18 @@
 import React from 'react';
 
 
-export default function Product({product}){
+export default function Product({title,description,price,stock}){
     return (
         <div>
-          <div>
-           <h1>{product.price}</h1>
-           </div >
-           <div>
+           <h1>{product.title}</h1>
            <p>{product.description}</p>
-           </div>
-           <div>
-           <span>{ "$" + product.Precio  }</span>
-           </div>
-            <div>{poduct.img}</div>  
-           <div>{poduct.img.review1}</div> 
-           <div>{poduct.img.review2}</div> 
-           <div>{poduct.img.review3}</div> 
+           <span>{ "$" + product.Price}</span>
+            <div>
+                {poduct.img}
+            <span> 5 reviews   </span>
+            <button> Add to Cart  </button>
+            <h3>stock</h3>
+            </div> 
            </div>
       );
 }
