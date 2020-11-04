@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const { Category } = requiere("./Category");
+//const { Category } = requiere("./Category");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 
