@@ -1,15 +1,20 @@
 import React, {Fragment} from 'react';
 
 const Producto = () => {
+    
     return (
-        <form>
-            <select>
-                <option>Cargar producto</option>
-                <option>Modificar producto</option>
-                <option>Eliminar producto</option>
+        <>
+            <select value=''>
+                <option value=''>Seleccione una acción</option>
+                <option value=''>Cargar producto</option>
+                <option value=''>Modificar producto</option>
+                <option value=''>Eliminar producto</option>
             </select>
+            <form>
+                
             <button>Realizar</button>
-        </form>
+            </form>
+        </>
     )
 }
 
