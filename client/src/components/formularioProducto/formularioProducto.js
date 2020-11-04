@@ -1,21 +1,22 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from "react";
+import Category from "../Category/Category";
 
 const Producto = () => {
-    
-    return (
-        <>
-            <select value=''>
-                <option value=''>Seleccione una acción</option>
-                <option value=''>Cargar producto</option>
-                <option value=''>Modificar producto</option>
-                <option value=''>Eliminar producto</option>
-            </select>
-            <form>
-                
-            <button>Realizar</button>
-            </form>
-        </>
-    )
-}
+  return (
+    <form>
+      <select>
+        <option>Cargar producto</option>
+        <option>Modificar producto</option>
+        <option>Eliminar producto</option>
+      </select>
+      <button>Realizar</button>
+      <Category>
+        {/* El formulario debe poder:
+            -Agregarle una o mas categorias al producto que estamos cargando
+            -Eliminar una categoria en el caso de que nos hayamos equivocado */}
+      </Category>
+    </form>
+  );
+};
 
 export default Producto;

@@ -1,15 +1,19 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import './App.css';
-import Producto from './components/formularioProducto/formularioProducto';
+
+/*Importaciones de componentes*/ 
+/*Componente Catalogo*/
+import Catalogo from './components/catalogo/catalogo';
+/*Componente Navbar*/
+
+
 
 function App() {
   return (
-    <Fragment>
       <div className="App">
         <h1>Astrid Toy's</h1>
-        <Producto ></Producto>
+        <Catalogo/>
       </div>
-    </Fragment>
   );
 }
 
