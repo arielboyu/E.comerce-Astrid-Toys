@@ -1,5 +1,4 @@
 const { DataTypes } = require('sequelize');
-//import Product from './Product.js'
 
 module.exports = (sequelize) => {
   // defino el modelo
