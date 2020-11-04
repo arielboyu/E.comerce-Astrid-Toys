@@ -2,7 +2,14 @@ import React, {Fragment} from 'react';
 
 const Producto = () => {
     return (
-        <h1>ESTOY PROBANDO</h1>
+        <form>
+            <select>
+                <option>Cargar producto</option>
+                <option>Modificar producto</option>
+                <option>Eliminar producto</option>
+            </select>
+            <button>Realizar</button>
+        </form>
     )
 }
 
