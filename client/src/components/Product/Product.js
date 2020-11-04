@@ -11,7 +11,7 @@ export default function Product({title,description,price,stock}){
              <h3>{title}</h3>
              <p>{description}</p>
              <span>{ "$" + price}</span> 
-             <h4>{stock}</h4>  
+             <span>{stock}</span>
              <span> 5 reviews </span>
              <button> Add to Cart  </button>
              </div>
