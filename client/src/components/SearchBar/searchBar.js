@@ -4,20 +4,21 @@ import React from 'react';
     class SearchBar extends React.Component {
     constructor(props) {
         super(props);
+      
         
-        this.handleSubmit = this.handleSubmit.bind(this);
+       // this.handleSubmit = this.handleSubmit.bind(this);
     }
-        handleSubmit(e) {
+      //  handleSubmit(e) {
         //e.preventDefault();
-        this.setState({value: e.target.value})
-    }
+      //  this.setState({value: e.target.value})
+    //}
       render() {
         return (
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit = {"" /*this.handleSubmit*/}> 
             <label>
               FunkoPop             
             </label>
-              <input type="text" value={this.state.value} placeholder="Buscar..." />
+              <input type="text" placeholder="Buscar..."/>
               <button type= "submit"> Submit </button>
            </form>
         )
