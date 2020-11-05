@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 
+
 /*Importaciones de componentes*/ 
 /*Componente Catalogo*/
 import Catalogo from './components/catalogo/catalogo';
