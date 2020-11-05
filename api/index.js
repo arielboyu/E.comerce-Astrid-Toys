@@ -20,7 +20,7 @@
 const server = require("./src/app.js");
 const { conn, Product, Category } = require("./src/db.js");
 const DataProducts = require ("./DataProducts.js"); //importo este modulo para cargar las tablas.
-const { default: Category } = require("../client/src/components/category/category.js");
+
 
 
 // Syncing all the models at once.
