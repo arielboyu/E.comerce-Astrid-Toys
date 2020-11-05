@@ -7,7 +7,6 @@ import Catalogo from './components/catalogo/catalogo';
 /*Componente Navbar*/
 import Navbar from './components/SearchBar/searchBar'
 
-
 function App() {
   return (
       <div className="App container bg-info p-5 ">
