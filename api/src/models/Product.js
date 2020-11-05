@@ -1,6 +1,8 @@
 const { DataTypes } = require("sequelize");
+
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
+
 
 
 module.exports = (sequelize) => {
@@ -10,11 +12,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    descripcion: {
+    description: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    precio: {
+    price: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
