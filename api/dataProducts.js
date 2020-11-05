@@ -1,161 +1,138 @@
-//estructura:;
-/* {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    descripcion: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    precio: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    stock: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    image: {
-      type: DataTypes.BLOB,
-      allowNull: true,
-    },
-  } */
+//ESTE MODULO ES PARA GENERAR DATOS PARA LAS TABLAS Y HACER TEST
 function returnRandom() {
     return Math.floor(Math.random() * 100);     // returns a random integer from 0 to 99
 }
 
-const dataProducts = [{
+const DataProducts = [{
     name: 'Mazie',
     description: 'Specialist',
     price: 43,
     stock: returnRandom(),
-},
-{
+  },
+  {
     name: 'Heather',
-    descripcion: 'Assistant',
+    description: 'Assistant',
     price: 31,
     stock: returnRandom(),
     
-},
-{
+  },
+  {
     name: 'Benton',
-    descripcion: 'Assistant',
+    description: 'Assistant',
     price: 31,
     stock: returnRandom(),
     
-},
-{
+  },
+  {
     name: 'Alva',
-    descripcion: 'Manpricer',
+    description: 'Manpricer',
     price: 22,
     stock: returnRandom(),
     
-},
-{
+  },
+  {
     name: 'Lonie',
-    descripcion: 'Architect',
+    description: 'Architect',
     price: 57,
     stock: returnRandom(),
     workingAt: 'Cayman Islands',
     likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
-},
-{
+  },
+  {
     name: 'Evelyn',
-    descripcion: 'Strategist',
+    description: 'Strategist',
     price: 30,
     stock: returnRandom(),
     workingAt: 'Austria',
     likings: { color: 'cyan', programmingLanguprice: 'Swift' }
-},
-{
+  },
+  {
     name: 'Dallin',
-    descripcion: 'Strategist',
+    description: 'Strategist',
     price: 41,
     stock: returnRandom(),
     workingAt: 'Libyan Arab Jamahiriya',
     likings: { color: 'sky blue', programmingLanguprice: 'PL/SQL' }
-},
-{
+  },
+  {
     name: 'Vita',
-    descripcion: 'Manpricer',
+    description: 'Manpricer',
     price: 61,
     stock: returnRandom(),
     workingAt: 'Canada',
     likings: { color: 'plum', programmingLanguprice: 'C' }
-},
-{
+  },
+  {
     name: 'Ronaldo',
-    descripcion: 'Orchestrator',
+    description: 'Orchestrator',
     price: 52,
     stock: returnRandom(),
     workingAt: 'Isle of Man',
     likings: { color: 'maroon', programmingLanguprice: 'MATLAB' }
-},
-{
+  },
+  {
     name: 'Leone',
-    descripcion: 'Specialist',
+    description: 'Specialist',
     price: 21,
     stock: returnRandom(),
     workingAt: 'Honduras',
     likings: { color: 'violet', programmingLanguprice: 'JavaScript' }
-},
-{
+  },
+  {
     name: 'Adaline',
-    descripcion: 'Liaison',
+    description: 'Liaison',
     price: 24,
     stock: returnRandom(),
     workingAt: 'Timor-Leste',
     likings: { color: 'grey', programmingLanguprice: 'Python' }
-},
-{
+  },
+  {
     name: 'Macey',
-    descripcion: 'Strategist',
+    description: 'Strategist',
     price: 58,
     stock: returnRandom(),
     workingAt: 'Namibia',
     likings: { color: 'mpricenta', programmingLanguprice: 'Swift' }
-},
-{
+  },
+  {
     name: 'Alysson',
-    descripcion: 'Developer',
+    description: 'Developer',
     price: 49,
     stock: returnRandom(),
     workingAt: 'Japan',
     likings: { color: 'violet', programmingLanguprice: 'R' }
-},
-{
+  },
+  {
     name: 'Lazaro',
-    descripcion: 'Technician',
+    description: 'Technician',
     price: 70,
     stock: returnRandom(),
     workingAt: 'Slovenia',
     likings: { color: 'teal', programmingLanguprice: 'Java' }
-},
-{
+  },
+  {
     name: 'Dane',
-    descripcion: 'Engineer',
+    description: 'Engineer',
     price: 57,
     stock: returnRandom(),
     workingAt: 'Iran',
     likings: { color: 'mpricenta', programmingLanguprice: 'Go' }
-},
-{
+  },
+  {
     name: 'Austen',
-    descripcion: 'Facilitator',
+    description: 'Facilitator',
     price: 48,
     stock: returnRandom(),
     workingAt: 'Swaziland',
     likings: { color: 'sky blue', programmingLanguprice: 'Visual Basic .NET' }
-},
-{
+  },
+  {
     name: 'Mabelle',
-    descripcion: 'Strategist',
+    description: 'Strategist',
     price: 47,
     stock: returnRandom(),
     workingAt: 'Armenia',
     likings: { color: 'salmon', programmingLanguprice: 'Assembly languprice' }
-}];
+  }];
 
-
-module.exports = dataProducts;
+module.exports = DataProducts;
