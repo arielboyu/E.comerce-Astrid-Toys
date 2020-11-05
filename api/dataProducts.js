@@ -127,6 +127,7 @@ const DataProducts = [{
     likings: { color: 'sky blue', programmingLanguprice: 'Visual Basic .NET' }
   },
   {
+      
     name: 'Mabelle',
     description: 'Strategist',
     price: 47,
