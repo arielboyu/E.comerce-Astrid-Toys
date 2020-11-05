@@ -38,7 +38,21 @@ server.post('/category/', (req,res) => {
     )
     .then(category => 
         res.send(category))
+  
 })
+
+// S19 : Crear Ruta para eliminar Categoria
+// DELETE /products/category/:id
+
+// revisar el path, esta el modelo armado falta revisar funcionamiento.
+server.delete('/products/:idCategoria', (req,res)=>{
+    Category.find({where:{categoryId=req.params.idCategoria}})
+    .on('success',(category)=>{
+        category.removeCategory(req.params.idCategoria)
+    })
+    .catch(e=>res.send(e))
+});
+
 
 
 
