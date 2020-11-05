@@ -10,7 +10,7 @@ import Navbar from './components/SearchBar/searchBar'
 
 function App() {
   return (
-      <div className="App container bg-info p-5 ">
+      <div className="App container bg-info p-5">
         <div className="row flex-direction-row">
           <div className="col-3 bg-dark p-5">
             <h1 className="pl-3">LOGO</h1>
