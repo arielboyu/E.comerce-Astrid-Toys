@@ -21,11 +21,11 @@ import React from 'react';
       render() {
         return (
           <form onSubmit={this.handleSubmit}>
-              <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Buscar..." />
             <label>
-              Funko:             
+              FunkoPop             
             </label>
-          </form>
+              <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Buscar..." />
+           </form>
         )
       }
     }
