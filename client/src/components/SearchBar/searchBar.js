@@ -1,28 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
-    class SearchBar extends React.Component {
-    constructor(props) {
-        super(props);
+    export default function SearchBar({onSearch}) {
       
-        
-       // this.handleSubmit = this.handleSubmit.bind(this);
-    }
-      //  handleSubmit(e) {
-        //e.preventDefault();
-      //  this.setState({value: e.target.value})
-    //}
-      render() {
-        return (
-          <form onSubmit = {"" /*this.handleSubmit*/}> 
+      const { funko, setFunko} = useState('');
+       return (
+          <form onSubmit = {(e) => {
+            e.preventDefault();
+            onSearch(funko);
+            setFunko('');
+          }}> 
             <label>
               FunkoPop             
             </label>
-              <input type="text" placeholder="Buscar..."/>
+              <input type="text"
+              placeholder="Buscar..."
+              value= {funko}
+              onCange = { e => setFunko(e.target.value)}
+              />
               <button type= "submit"> Submit </button>
            </form>
-        )
-      }
-    }
+        );
+      };
 
-    export default SearchBar;
+  
