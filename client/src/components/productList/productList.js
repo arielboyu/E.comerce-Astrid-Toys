@@ -1,10 +1,8 @@
 import React from 'react'
 import ProductCard from '../productCard/productCard';
 
-
-function ProductList (){
-    return
-    (
+const ProductList = () => {
+    return (
         <div>
             <ProductCard/>
         </div>
