@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Category from "../Category/Category";
+import Category from "../category/category";
 
 const Producto = () => {
   return (

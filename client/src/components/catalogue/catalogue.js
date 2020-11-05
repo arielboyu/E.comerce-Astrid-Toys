@@ -2,7 +2,7 @@ import React from 'react'
 import ProductList from '../productList/productList';
 import CategoryList from '../productList/categoryList';
 
-const Catalogo = () => {
+const Catalogue = () => {
     return (
         <div className='container'>
             <div>
@@ -15,4 +15,4 @@ const Catalogo = () => {
     )
 }
 
-export default Catalogo;
+export default Catalogue;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 
+import React, { useState } from 'react';
 
     export default function SearchBar({onSearch}) {
       
@@ -22,5 +22,3 @@ import React, { useState } from 'react';
            </form>
         );
       };
-
-  
