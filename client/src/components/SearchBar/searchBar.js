@@ -6,7 +6,9 @@ import React, { useState } from 'react';
        return (
           <form onSubmit = {(e) => {
             e.preventDefault();
+
             onSearch('');
+
             setFunko('');
           }}> 
             <label>
@@ -14,7 +16,9 @@ import React, { useState } from 'react';
             </label>
               <input type="text"
               placeholder="Buscar..."
+
               value= {''}
+
               onCange = { e => setFunko(e.target.value)}
               />
               <button type= "submit"> Submit </button>
