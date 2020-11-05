@@ -1,25 +1,24 @@
-import React from "react";
-// import { NavLink } from "react-router-dom";
 
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
+import React, { useState } from 'react';
 
-    // this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  //  handleSubmit(e) {
-  //e.preventDefault();
-  //  this.setState({value: e.target.value})
-  //}
-  render() {
-    return (
-      <form onSubmit={"" /*this.handleSubmit*/}>
-        <label>FunkoPop</label>
-        <input type="text" placeholder="Buscar..." />
-        <button type="submit"> Submit </button>
-      </form>
-    );
-  }
-}
-
-export default SearchBar;
+    export default function SearchBar({onSearch}) {
+      
+      const { funko, setFunko} = useState('');
+       return (
+          <form onSubmit = {(e) => {
+            e.preventDefault();
+            onSearch(funko);
+            setFunko('');
+          }}> 
+            <label>
+              FunkoPop             
+            </label>
+              <input type="text"
+              placeholder="Buscar..."
+              value= {funko}
+              onCange = { e => setFunko(e.target.value)}
+              />
+              <button type= "submit"> Submit </button>
+           </form>
+        );
+      };
