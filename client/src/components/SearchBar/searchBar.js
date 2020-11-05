@@ -1,10 +1,33 @@
 import React from 'react';
 
-export default function SearchBar(props) {
-    return (
-        <div>
-            <input placeholder="Buscar..."/>
-            <button onClick= {props}> Buscando </button>
-        </div>
-    )
-}
+
+    class SearchBar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ''
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+        handleChange(e) {
+        this.setState({value: e.target.value});
+    }
+
+        handleSubmit(e) {
+        //e.preventDefault();
+        this.setState({value: e.target.value})
+    }
+      render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+              <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Buscar..." />
+            <label>
+              Funko:             
+            </label>
+          </form>
+        )
+      }
+    }
+
+    export default SearchBar;
