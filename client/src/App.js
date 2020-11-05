@@ -5,6 +5,7 @@ import './App.css';
 /*Componente Catalogo*/
 import Catalogo from './components/catalogo/catalogo';
 /*Componente Navbar*/
+import Navbar from './components/SearchBar/searchBar'
 
 
 function App() {
@@ -18,10 +19,8 @@ function App() {
             <h1>ASTRID TOY'S</h1>
           </div>
           <div className="col-12 bg-success p-2 text-center">
-            <h3>soy un NAAAAAAAAAAAAAVBAR</h3>
+            <Navbar></Navbar>
           </div>
-          
-          
           <div className="col-3 bg-warning p-5">
             <div className="pl-3">FILTROS<Catalogo/></div>
           </div>
