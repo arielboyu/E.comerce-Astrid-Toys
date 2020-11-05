@@ -3,9 +3,9 @@ import './App.css';
 
 /*Importaciones de componentes*/ 
 /*Componente Catalogo*/
-import Catalogo from './components/catalogo/catalogo';
+import Catalogo from './components/catalogue/catalogue';
 /*Componente Navbar*/
-import Navbar from './components/SearchBar/searchBar'
+import Navbar from './components/searchBar/searchBar'
 
 function App() {
   return (
