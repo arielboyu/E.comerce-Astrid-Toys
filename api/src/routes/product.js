@@ -1,6 +1,6 @@
 const server = require("express").Router();
-
 const { Product, Category } = require("../db.js");
+const { Op } = require("sequelize");
 
 server.get("/", (req, res, next) => {
   Product.findAll()
@@ -28,6 +28,33 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
     })
     .catch(next);
 });
+
+
+// S23 : Crear ruta que retorne productos segun el keyword de búsqueda
+// GET /search?query={valor}
+// Retorna todos los productos que tengan {valor} en su nombre o descripcion.
+server.get("/search", (req, res,) => {
+	const data = req.body.query
+	console.log(data)
+	Product.findAll({
+		where: {
+		  [Op.or]: {
+			name: {
+			  [Op.Like]: `%${data}%`,
+			},
+			description: {
+			  [Op.Like]: `%${data}%`,
+			},
+		  },
+		},
+	  })
+	  .then(products => 
+		  res.send(products))
+	  .catch(e=>res.send(e))
+	});
+  
+  
+
 // s25 : Crear ruta para crear/agregar Producto
 // POST /products
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
