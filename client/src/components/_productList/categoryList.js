@@ -1,16 +1,18 @@
 import React from 'react';
 import Category from '../_category/category.js';
+import { Link } from 'react-router-dom';
 
 export default function CategoryList({category}){
     return (
-        <div>
-            <h3>Categories</h3>
+        <div className="p-4">
+            <h2 className="mb-3">Categories</h2>
             {/* MAP COMENTADO */}
-            <ul>
+            <ul className="list-unstyled ">
                 {category.map((cat)=>(
-                    <li>{cat.name}</li>
+                    <Link to='#'><li><h4 className="ml-4 text-dark text-decoration-none">{cat.name}</h4></li></Link>
                 ))}
             </ul>
+            <h3 className="mt-5">Sub-Categories</h3>
         </div>
       );
 }

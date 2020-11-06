@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import {BrowserRouter, Route, Switch, Link, useParams} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Link, useParams} from 'react-router-dom';
 
 
 /*Importaciones de componentes*/ 
@@ -33,7 +33,7 @@ function App() {
   },[product, category])
 
   return (
-    <BrowserRouter>
+    <Router>
       <Navbar/>
       <Switch>
         <Route path="/products/:index">
@@ -43,7 +43,7 @@ function App() {
           <Catalogue product={product} category={category}/>
         </Route>
       </Switch> 
-    </BrowserRouter>
+    </Router>
   );
 }
 
