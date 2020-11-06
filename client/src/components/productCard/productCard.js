@@ -1,15 +1,23 @@
 import React from 'react';
+import {Link, useParams} from 'react-router-dom'
 
-export default function ProductCard({title,price}){
+export default function ProductCard({product}){
+    const imagen = {
+        backgroundColor: "DodgerBlue",
+        height: "100px"
+    };
+    const {index} = useParams();
     return (
-        <div>
-            <div>
-                <img></img>
-             </div>
-             <div>
-             <h3>{title}</h3>
-             <span>{price}</span>
-             </div>
-        </div>
+        <Link to={`/products/${product.id}`}>
+            <div className="card col-4">
+                <div style={imagen}>
+                    Imagen
+                </div>
+                <div className="card-body">
+                    <h3>{product.name}</h3>
+                    <span>{product.price}</span>
+                </div>
+            </div>
+        </Link>
       );
 }

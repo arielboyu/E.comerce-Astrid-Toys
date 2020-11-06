@@ -1,11 +1,16 @@
 import React from 'react';
 import Category from '../category/category.js';
 
-export default function CategoryList({categories}){
+export default function CategoryList({category}){
     return (
         <div>
+            <h3>Categories</h3>
             {/* MAP COMENTADO */}
-            {/* <ul>{categories.map(category=><li><Category name={category.name} description={category.description} /></li>)}</ul> */}
+            <ul>
+                {category.map((cat)=>(
+                    <li>{cat.name}</li>
+                ))}
+            </ul>
         </div>
       );
 }

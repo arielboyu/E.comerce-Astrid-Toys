@@ -1,37 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import axios from 'axios';
+import {BrowserRouter, Route, Switch, Link, useParams} from 'react-router-dom';
 
 
 /*Importaciones de componentes*/ 
 /*Componente Catalogo*/
-import Catalogo from './components/catalogue/catalogue';
+import Catalogue from './components/catalogue/catalogue';
 /*Componente Navbar*/
-import Navbar from './components/searchBar/searchBar'
+import Navbar from './components/navBar/navBar'
+import Product from './components/product/product';
+
+
+const getProduct = axios.get("http://localhost:3002/products");
+const getCategory = axios.get("http://localhost:3002/categories");
+
 
 function App() {
+  const [product, setProduct]= useState([]);
+  const [category, setCategory]= useState([]);
+
+
+  useEffect(()=>{
+    console.log(product)
+    console.log(category)
+    getProduct.then((res)=>{
+      setProduct(res.data)
+    })
+    getCategory.then((res)=>{
+      setCategory(res.data)
+    })
+  },[product, category])
+
   return (
-      <div className="App container bg-info p-5">
-        <div className="row flex-direction-row">
-          <div className="col-3 bg-dark p-5">
-            <h1 className="pl-3">LOGO</h1>
-          </div>
-          <div className="col-9 bg-dark p-5">
-            <h1>ASTRID TOY'S</h1>
-          </div>
-          <div className="col-12 bg-success p-2 text-center">
-            <Navbar></Navbar>
-          </div>
-          <div className="col-3 bg-warning p-5">
-            <div className="pl-3">FILTROS<Catalogo/></div>
-          </div>
-          <div className="col-9 bg-warning p-5">
-            CATALOGO de PRODUCTOS<Catalogo/>
-          </div>
-          <div className="col-12 bg-danger text-center">
-            FOOTER
-          </div>
-        </div>
-      </div>
+    <BrowserRouter>
+      <Navbar/>
+      <Switch>
+        <Route path="/products/:index">
+          <Product/>
+        </Route>
+        <Route path="/products">
+          <Catalogue product={product} category={category}/>
+        </Route>
+      </Switch> 
+    </BrowserRouter>
   );
 }
 
