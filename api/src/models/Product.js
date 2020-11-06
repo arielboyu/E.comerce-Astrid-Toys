@@ -28,6 +28,10 @@ module.exports = (sequelize) => {
       type: DataTypes.BLOB,
       allowNull: true,
     },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   });
 };
 
