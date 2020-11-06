@@ -7,10 +7,9 @@ const Producto = () => {
   function optionHandler(option){
     setOption(option.value);
   };
-  useEffect(()=>{
-    // setOption(option.value);
-    console.log('hola')
-  },[])
+  // useEffect(()=>{
+  //   // setOption(option.value);
+  // },[])
   return (
       <form>
         <select onChange={optionHandler}>
@@ -19,9 +18,9 @@ const Producto = () => {
           <option value='delete'>Eliminar producto</option>
         </select>
         <div>
-          {optionState==='create'?<InputCreate/>}
-          {optionState==='create'?<InputUpdate/>}
-          {optionState==='create'?<InputDelete/>}         
+          {optionState==='create'?<createForm/>}
+          {optionState==='create'?<updateForm/>}
+          {optionState==='create'?<deleteForm/>}         
         </div>
         
         <button type='submit'>Realizar</button>
