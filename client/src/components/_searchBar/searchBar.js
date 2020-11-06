@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
+//Searchbar
 export default function SearchBar() {
-  
   
   return (
     <form> 

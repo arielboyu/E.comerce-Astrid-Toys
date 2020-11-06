@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductList from '../productList/productList';
-import CategoryList from '../productList/categoryList';
+import ProductList from '../_productList/productList';
+import CategoryList from '../_productList/categoryList';
 
 const Catalogue = ({product, category}) => {
     return (
