@@ -20,22 +20,22 @@ export default function Product() {
     margin: "10px",
     textAlign: "center",
     padding: "10px",
-    width: "500px",
+    width: "600px",
     height: "350px",
   };
   const imagen = {
     backgroundColor: "DodgerBlue",
-    width: "200px",
+    width: "300px",
     height: "80%",
-    margin: "20px",
+    margin: "20px auto",
   };
   if (fuko) {
     return (
-      <div style={card} className="bg-primary d-flex flex-direction-row justify-content-center align-items-center">
+      <div style={card} className="bg-primary d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded-right rounded-left">
         {fuko.map((f) => (
           <>
-            <div style={imagen}>Imagen</div>
-            <div className="m-5">
+            <div style={imagen}></div>
+            <div className="m-5 p-3">
               <h1>{f.name}</h1>
               <h4 className="text-white">{f.description}</h4>
               <h5 className="p-1 font-weight-bold"> ${f.price}</h5>

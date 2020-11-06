@@ -14,7 +14,7 @@ export default function NavBar() {
   };
   
   return (
-    <nav className="d-flex flex-direction-column navbar navbar-dark bg-warning">
+    <nav className="bg-warning d-flex flex-direction-column navbar navbar-dark">
       <h1 className="col-sm-12 col-md-12 col-4 text-center px-5 pt-5 pb-3">
         Astrid Toys
       </h1>
