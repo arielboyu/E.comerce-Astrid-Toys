@@ -45,6 +45,110 @@ const DataProducts = [{
     stock: returnRandom(),
     workingAt: 'Austria',
     likings: { color: 'cyan', programmingLanguprice: 'Swift' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
+  },
+  {
+    name: 'Lonie',
+    description: 'Architect',
+    price: 57,
+    stock: returnRandom(),
+    workingAt: 'Cayman Islands',
+    likings: { color: 'mpricenta', programmingLanguprice: 'JavaScript' }
   }];
 
 module.exports = DataProducts;
