@@ -18,8 +18,9 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product } = require("./src/db.js");
-const DataProducts = require ("./DataProducts.js") //importo este modulo para cargar las tablas.
+const { conn, Product, Category } = require("./src/db.js");
+const DataProducts = require ("./DataProducts.js"); //importo este modulo para cargar las tablas.
+
 
 
 // Syncing all the models at once.
@@ -39,6 +40,13 @@ conn.sync({ force: true }).then(() => {
           stock: DataProducts[i].stock,
         });
       }
+      for (let i = 0;i<3;i++){
+        var category = await Category.create({
+          name: `Category ${i}`,
+          description: `Category ${i} Description`
+        })
+      }
+      
     }
     cargarTablas();
     console.log("tablas cargadas");

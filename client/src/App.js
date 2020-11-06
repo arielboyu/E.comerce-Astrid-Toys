@@ -6,7 +6,7 @@ import './App.css';
 /*Componente Catalogo*/
 import Catalogo from './components/catalogue/catalogue';
 /*Componente Navbar*/
-import Navbar from './components/searchBar/searchBar'
+import Navbar from './components/navBar/navBar.js';
 
 function App() {
   return (
