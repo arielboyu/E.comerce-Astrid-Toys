@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8e27abeafbc1bb49d3ab73fdf34c1c09561b1218
 import React, { useState } from 'react';
 
     export default function SearchBar({onSearch}) {
@@ -8,7 +11,9 @@ import React, { useState } from 'react';
        return (
           <form onSubmit = {(e) => {
             e.preventDefault();
-            onSearch(funko);
+
+            onSearch('');
+
             setFunko('');
           }}> 
             <label>
@@ -16,7 +21,9 @@ import React, { useState } from 'react';
             </label>
               <input type="text"
               placeholder="Buscar..."
-              value= {funko}
+
+              value= {''}
+
               onCange = { e => setFunko(e.target.value)}
               />
               <button type= "submit"> Submit </button>

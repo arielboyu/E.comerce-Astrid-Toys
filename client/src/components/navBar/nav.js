@@ -1,14 +1,16 @@
 import React from 'react';
 import SearchBar from './components/SearchBar/searchBar.js';
-import './components/navBar/Nav.css';
+import './nav.css';
 
-export default function Nav({ onSearch}) {
+export default function nav({ onSearch}) {
     return (
-        <div>
-            <nav class= 'navbar navbar-dark bg-primary'>
-            <p> Astrid Toys</p>
+        <nav class= 'navbar navbar-dark bg-primary'>
+            <p className= {style.name}> Astrid Toys</p>
+            <p>About</p>
+            <p>Categories</p>
+            <p>Product</p>
+            <p>Cart</p>
             <SearchBar onSearch= {onSearch}/>
-            </nav>
-        </div>
+        </nav>
     );
 };
