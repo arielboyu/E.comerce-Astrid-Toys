@@ -29,7 +29,7 @@ function App() {
     getCategory.then((res)=>{
       setCategory(res.data)
     })
-  },[product,category])
+  },[product, category])
 
   return (
     <Router>
