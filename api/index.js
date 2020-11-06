@@ -40,13 +40,6 @@ conn.sync({ force: true }).then(() => {
           stock: DataProducts[i].stock,
         });
       }
-      for (let i = 0;i<3;i++){
-        var category = await Category.create({
-          name: `Category ${i}`,
-          description: `Category ${i} Description`
-        })
-      }
-
       //Las siguientes lineas HACEN LO MISMO:
       //Para relacionar un producto con una categoria
       //product.addCategories([category])
