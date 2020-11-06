@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductCard from '../_productCard/productCard';
+import axios from 'axios'
 
-const ProductList = ({product}) => {
+const ProductList = ({product}) => { 
+
     return (
         <div>
             <h2 className="py-3 pl-5">Catalogue</h2>

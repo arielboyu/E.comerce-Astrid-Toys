@@ -10,6 +10,7 @@ import Catalogue from './components/_catalogue/catalogue';
 /*Componente Navbar*/
 import Navbar from './components/_navBar/navBar'
 import Product from './components/_product/product';
+import DashboardLoadProduct from './components/_dashboardLoadProduct/dashboardLoadProduct';
 
 
 const getProduct = axios.get("http://localhost:3002/products");
@@ -22,15 +23,13 @@ function App() {
 
 
   useEffect(()=>{
-    console.log(product)
-    console.log(category)
     getProduct.then((res)=>{
       setProduct(res.data)
     })
     getCategory.then((res)=>{
       setCategory(res.data)
     })
-  },[product, category])
+  },[product,category])
 
   return (
     <Router>
@@ -41,6 +40,9 @@ function App() {
         </Route>
         <Route path="/products">
           <Catalogue product={product} category={category}/>
+        </Route>
+        <Route path="/dashboard/product/create">
+          <DashboardLoadProduct/>
         </Route>
       </Switch> 
     </Router>

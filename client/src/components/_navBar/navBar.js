@@ -28,7 +28,7 @@ export default function NavBar() {
         <Link to="#">
           <li style={link}>Categories</li>
         </Link>
-        <Link to="#">
+        <Link to="/dashboard">
           <li style={link}>Dashboard</li>
         </Link>
       </ul>
