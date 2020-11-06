@@ -31,27 +31,30 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
 
 
 // S23 : Crear ruta que retorne productos segun el keyword de búsqueda
-// GET /search?query={valor}
+// GET /search?data={valor}
 // Retorna todos los productos que tengan {valor} en su nombre o descripcion.
-server.get("/search", (req, res,) => {
-	const data = req.body.query
-	console.log(data)
+//ATENCION: NO ES CASE SENSITIVE.
+server.get("/search", (req, res, next) => {
+	var data = req.query.data
+	console.log("esto es la data: "+data)
 	Product.findAll({
 		where: {
 		  [Op.or]: {
 			name: {
-			  [Op.Like]: `%${data}%`,
+			  [Op.iLike]: `%${data}%`,
 			},
 			description: {
-			  [Op.Like]: `%${data}%`,
+			  [Op.iLike]: `%${data}%`,
 			},
 		  },
 		},
 	  })
-	  .then(products => 
-		  res.send(products))
-	  .catch(e=>res.send(e))
-	});
+	  .then((products) => {
+		res.send(products);
+	  })
+	  .catch(next);
+  });
+  
   
   
 
