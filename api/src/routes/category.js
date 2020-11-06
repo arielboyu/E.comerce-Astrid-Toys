@@ -32,12 +32,6 @@ server.delete('/:idProducto/category/:idCategoria', (req,res)=>{
 });
 
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> S11-RouterApp
 // S18 : Crear ruta para crear/agregar Categoria
 // POST /products/category/
 // Crea una categoría nueva.

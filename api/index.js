@@ -19,13 +19,8 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn, Product, Category } = require("./src/db.js");
-<<<<<<< HEAD
-const DataProducts = require ("./DataProducts.js"); //importo este modulo para cargar las tablas.
-
-=======
 const DataProducts = require ("./dataProducts.js"); //importo este modulo para cargar las tablas.
 const DataCategories = require("./dataCategories.js");
->>>>>>> S11-RouterApp
 
 
 // Syncing all the models at once.
