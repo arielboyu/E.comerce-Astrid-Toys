@@ -40,6 +40,13 @@ conn.sync({ force: true }).then(() => {
           stock: DataProducts[i].stock,
         });
       }
+      for (let i = 0;i<3;i++){
+        var category = await Category.create({
+          name: `Category ${i}`,
+          description: `Category ${i} Description`
+        })
+      }
+      
     }
     cargarTablas();
     console.log("tablas cargadas");
