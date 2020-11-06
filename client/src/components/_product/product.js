@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom'
 import axios from 'axios'
-
-
-
+//Product
 
 export default function Product(){
     const [fuko, setFuko]= useState([]);

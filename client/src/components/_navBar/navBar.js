@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from '../searchBar/searchBar';
+import SearchBar from '../_searchBar/searchBar';
 import Login from './login';
 import Cart from './cart';
 

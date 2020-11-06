@@ -1,5 +1,5 @@
 import React from 'react';
-import Category from '../category/category.js';
+import Category from '../_category/category.js';
 
 export default function CategoryList({category}){
     return (

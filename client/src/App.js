@@ -6,10 +6,10 @@ import {BrowserRouter, Route, Switch, Link, useParams} from 'react-router-dom';
 
 /*Importaciones de componentes*/ 
 /*Componente Catalogo*/
-import Catalogue from './components/catalogue/catalogue';
+import Catalogue from './components/_catalogue/catalogue';
 /*Componente Navbar*/
-import Navbar from './components/navBar/navBar'
-import Product from './components/product/product';
+import Navbar from './components/_navBar/navBar'
+import Product from './components/_product/product';
 
 
 const getProduct = axios.get("http://localhost:3002/products");
