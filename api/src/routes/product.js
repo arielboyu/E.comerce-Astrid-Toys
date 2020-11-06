@@ -9,4 +9,18 @@ server.get('/', (req, res, next) => {
 		.catch(next);
 });
 
+server.get('/:id', (req, res, next) => {
+	Product.findAll({
+		where: {
+		  id: req.params.id
+		}
+	  })
+	.then(r => {
+		res.send(r)
+	})
+	.catch(next);
+});
+
+
+
 module.exports = server;

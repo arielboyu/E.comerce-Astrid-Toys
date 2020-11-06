@@ -18,21 +18,22 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product } = require("./src/db.js");
-const DataProducts = require ("./DataProducts.js") //importo este modulo para cargar las tablas.
+const { conn, Product, Category } = require("./src/db.js");
+const DataProducts = require ("./dataProducts.js"); //importo este modulo para cargar las tablas.
+const DataCategories = require("./dataCategories.js");
 
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3000, () => {
-    console.log("%s listening at 3001"); // eslint-disable-line no-console
+  server.listen(3002, () => {
+    console.log("%s listening at 3002"); // eslint-disable-line no-console
 
     /* ------------------------------------------------------- */
     //INSTANCIAMOS MODELOS DE LA TABLA Y SALVAMOS DATOS
     //Hacer un Create es lo mismo que hacer un Build y luego Save de Sequelize.
     async function cargarTablas() {
       for (let i = 0; i < DataProducts.length; i++) {
-        var product = await Product.create({
+        await Product.create({
           name: DataProducts[i].name,
           description: DataProducts[i].description,
           price: DataProducts[i].price,
@@ -42,6 +43,17 @@ conn.sync({ force: true }).then(() => {
     }
     cargarTablas();
     console.log("tablas cargadas");
+
+    async function cargarCategories() {
+      for (let i = 0; i < DataCategories.length; i++) {
+        await Category.create({
+          name: DataCategories[i].name,
+          description: DataCategories[i].description,
+        });
+      }
+    }
+    cargarCategories();
+    console.log("Categorias cargadas");
   /* ------------------------------------------------------- */
 
     

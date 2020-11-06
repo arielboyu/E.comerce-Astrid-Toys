@@ -5,8 +5,16 @@ const { Product,Category } = require('../db.js');
 // Agrega la categoria al producto.
 // DELETE /products/:idProducto/category/:idCategoria
 // Elimina la categoria al producto.
+
+server.get('/', (req, res) => {
+    Category.findAll()
+        .then(category => {
+            res.send(category);
+        })
+});
+
 server.post('/:idProducto/category/:idCategoria', (req,res)=>{
-    Product.find({where:{productId=req.params.idProducto}})
+    Product.find({where:{productId:req.params.idProducto}})
     .on('success',(product)=>{
         product.setCategories(req.params.idCategoria)
     })
@@ -14,12 +22,13 @@ server.post('/:idProducto/category/:idCategoria', (req,res)=>{
 });
 
 server.delete('/:idProducto/category/:idCategoria', (req,res)=>{
-    Product.find({where:{productId=req.params.idProducto}})
+    Product.find({where:{productId:req.params.idProducto}})
     .on('success',(product)=>{
         product.removeCategory(req.params.idCategoria)
     })
     .catch(e=>res.send(e))
 });
+
 
 
 
@@ -46,7 +55,7 @@ server.post('/category/', (req,res) => {
 
 // revisar el path, esta el modelo armado falta revisar funcionamiento.
 server.delete('/products/:idCategoria', (req,res)=>{
-    Category.find({where:{categoryId=req.params.idCategoria}})
+    Category.find({where:{categoryId:req.params.idCategoria}})
     .on('success',(category)=>{
         category.removeCategory(req.params.idCategoria)
     })
@@ -56,4 +65,4 @@ server.delete('/products/:idCategoria', (req,res)=>{
 
 
 
-export default router;
+module.exports=(server);
