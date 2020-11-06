@@ -63,5 +63,29 @@ server.put("/:id", (req, res) => {
 		res.status(400).send("Los campos enviados no son correctos" + err);
 	  });
   });
+  
+// S27 : Crear Ruta para eliminar Producto
+// DELETE /products/:id
+// PUT /products/:id
+// Retorna 200 si se elimino con exito.
+
+server.delete("/:productID", (req, res) => {
+	const productID = req.params.productID;
+	Product.destroy({
+	  where: {
+		id: productID,
+	  },
+	})
+	  .then((product) => {
+		if (product) {
+		  res.status(200).send("Se eliminó el producto" + product);
+		} else {
+		  res.status(400).send("No se encontró producto con ID " + productID);
+		}
+	  })
+	  .catch((err) => {
+		console.log("Error en PUT" + err);
+	  });
+  });
 
 module.exports = server;
