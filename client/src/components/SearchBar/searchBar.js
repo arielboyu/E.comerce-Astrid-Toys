@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import React, { useState } from 'react';
 
@@ -22,3 +23,17 @@ import React, { useState } from 'react';
            </form>
         );
       };
+=======
+import React, { useState } from 'react';
+
+export default function SearchBar() {
+  
+  
+  return (
+    <form> 
+        <input type="text"/>
+        <button type= "submit"> Submit </button>
+      </form>
+  );
+};
+>>>>>>> S11-RouterApp
