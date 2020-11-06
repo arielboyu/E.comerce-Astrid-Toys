@@ -25,8 +25,8 @@ const DataCategories = require("./dataCategories.js");
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3000, () => {
-    console.log("%s listening at 3001"); // eslint-disable-line no-console
+  server.listen(3002, () => {
+    console.log("%s listening at 3002"); // eslint-disable-line no-console
 
     /* ------------------------------------------------------- */
     //INSTANCIAMOS MODELOS DE LA TABLA Y SALVAMOS DATOS
@@ -51,7 +51,10 @@ conn.sync({ force: true }).then(() => {
     cargarTablas();
     console.log("tablas cargadas");
 
+<<<<<<< HEAD
+=======
     // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE CATEGORIAS
+>>>>>>> eddcb2bf12114e874ca2c90f7f11b1b4652fc23f
     async function cargarCategories() {
       for (let i = 0; i < DataCategories.length; i++) {
         await Category.create({
