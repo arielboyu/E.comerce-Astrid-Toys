@@ -4,7 +4,7 @@ para CREAR categorias nuevas */
 import React from 'react';
 //importo el componente Category, puesto que 
 //cuando "cargue" una nueva categoria, debo generar ese component
-import Category from "./Category/Category.js.js.js" 
+import Category from "./Category/Category.js.js.js.js" 
 
 export default function CategoryForm(){
 

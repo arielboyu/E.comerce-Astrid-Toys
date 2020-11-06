@@ -19,21 +19,21 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn, Product, Category } = require("./src/db.js");
-const DataProducts = require ("./DataProducts.js"); //importo este modulo para cargar las tablas.
-
+const DataProducts = require ("./dataProducts.js"); //importo este modulo para cargar las tablas.
+const DataCategories = require("./dataCategories.js");
 
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3000, () => {
-    console.log("%s listening at 3001"); // eslint-disable-line no-console
+  server.listen(3002, () => {
+    console.log("%s listening at 3002"); // eslint-disable-line no-console
 
     /* ------------------------------------------------------- */
     //INSTANCIAMOS MODELOS DE LA TABLA Y SALVAMOS DATOS
     //Hacer un Create es lo mismo que hacer un Build y luego Save de Sequelize.
     async function cargarTablas() {
       for (let i = 0; i < DataProducts.length; i++) {
-        var product = await Product.create({
+        await Product.create({
           name: DataProducts[i].name,
           description: DataProducts[i].description,
           price: DataProducts[i].price,
@@ -46,10 +46,28 @@ conn.sync({ force: true }).then(() => {
           description: `Category ${i} Description`
         })
       }
-      
+
+      //Las siguientes lineas HACEN LO MISMO:
+      //Para relacionar un producto con una categoria
+      //product.addCategories([category])
+      //Para relacionar una categoria con un producto
+      //category.addCategories([product])
+
     }
     cargarTablas();
     console.log("tablas cargadas");
+
+    // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE CATEGORIAS
+    async function cargarCategories() {
+      for (let i = 0; i < DataCategories.length; i++) {
+        await Category.create({
+          name: DataCategories[i].name,
+          description: DataCategories[i].description,
+        });
+      }
+    }
+    cargarCategories();
+    console.log("Categorias cargadas");
   /* ------------------------------------------------------- */
 
     
