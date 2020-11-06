@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./dashboardLoadCategory.module.css"
 
 function DashboardLoadCategory() {
   const [categoryLoad, setCategory] = useState({
@@ -12,11 +13,11 @@ function DashboardLoadCategory() {
     setCategory({ ...categoryLoad, [e.target.name]: e.target.value });
   }
 
-  function handlerFormSubmit() {
+  function handlerFormSubmit(e) {
     axios
-      .post("http://localhost:3002/categories/category",{})
+      .post("http://localhost:3002/categories/category",categoryLoad)
       .then((response) => {
-        return "todo ok";
+        return "Categoria Cargada";
       })
       .catch((e) => {
         console.log(e);
@@ -25,9 +26,9 @@ function DashboardLoadCategory() {
 
   return (
     <div>
-      <h2>Load Product</h2>
+      <h2 class="display-4 ">Load Product</h2>
       <form onSubmit={handlerFormSubmit}>
-        <div className="form-group">
+        <div className="form-group col-6">
           <label htmlFor="categoryName" className="d-none">
             Name Category
           </label>
@@ -40,7 +41,7 @@ function DashboardLoadCategory() {
             onChange={handlerChange}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group col-6">
           <label htmlFor="categoryDescription">Description Category</label>
           <textarea
             className="form-control"
@@ -50,7 +51,7 @@ function DashboardLoadCategory() {
             onChange={handlerChange}
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary ">
           Submit
         </button>
       </form>
