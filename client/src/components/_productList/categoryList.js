@@ -3,7 +3,7 @@ import Category from '../_category/category.js';
 
 export default function CategoryList({category}){
     return (
-        <div>
+        <div className="p-4">
             <h3>Categories</h3>
             {/* MAP COMENTADO */}
             <ul>
