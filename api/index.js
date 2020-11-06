@@ -51,10 +51,7 @@ conn.sync({ force: true }).then(() => {
     cargarTablas();
     console.log("tablas cargadas");
 
-<<<<<<< HEAD
-=======
     // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE CATEGORIAS
->>>>>>> eddcb2bf12114e874ca2c90f7f11b1b4652fc23f
     async function cargarCategories() {
       for (let i = 0; i < DataCategories.length; i++) {
         await Category.create({
