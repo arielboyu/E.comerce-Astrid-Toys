@@ -11,6 +11,7 @@ export default function CategoryList({category}){
                     <li>{cat.name}</li>
                 ))}
             </ul>
+            <h3>Sub-Categories</h3>
         </div>
       );
 }

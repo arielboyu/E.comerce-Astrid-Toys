@@ -11,12 +11,13 @@ export default function NavBar() {
         listStyle: "none",
         textDecoration: "none",
         margin: "20px",
+        paddingTop: "10px",
         color: "black"
     };
     return (
         <nav className= 'navbar navbar-dark bg-warning'>
             <ul className="d-flex flex-direction-row">
-                <Link to="/"><li style={link}>Inicio</li></Link>
+                <Link to="/"><li style={link}>Home</li></Link>
                 <Link to="/products"><li style={link}>Products</li></Link>
                 <Link to="#"><li style={link}>Categories</li></Link>
                 <Link to="#"><li style={link}>Dashboard</li></Link>

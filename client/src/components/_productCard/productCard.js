@@ -13,14 +13,14 @@ export default function ProductCard({product}){
     };
     const {index} = useParams();
     return (
-        <Link to={`/products/${product.id}`}>
+        <Link className="text-decoration-none" to={`/products/${product.id}`}>
             <div style={carta} className="card m-2 p-1">
                 <div style={imagen}></div>
                 <div className="card-body">
                     <h3>{product.name}</h3>
                     <span>${product.price}</span>
                 </div>
-                <button className="btn btn-danger mx-3 mb-1">ADD TO CART</button>
+                <button className="btn btn-danger mx-3 mb-1 ">ADD TO CART</button>
             </div>
         </Link>
       );
