@@ -1,15 +1,33 @@
 const server = require("express").Router();
-const { Product } = require("../db.js");
+
+const { Product, Category } = require("../db.js");
 
 server.get("/", (req, res, next) => {
   Product.findAll()
     .then((products) => {
       console.log("GET OK");
+
       res.send(products);
     })
     .catch(next);
 });
 
+///products/categoria/:nombreCa
+server.get("/categoria/:nombreCat", (req, res, next) => {
+  let categoryId = req.params.nombreCat;
+  Category.findAll({
+    where: { id: categoryId },
+    include: [
+      {
+        model: Product,
+      },
+    ],
+  })
+    .then((products) => {
+      res.send(products);
+    })
+    .catch(next);
+});
 // s25 : Crear ruta para crear/agregar Producto
 // POST /products
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
@@ -109,6 +127,7 @@ server.get('/:id', (req, res, next) => {
 		res.send(r)
 	})
 	.catch(next);
+
 });
 
 

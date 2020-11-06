@@ -46,7 +46,13 @@ conn.sync({ force: true }).then(() => {
           description: `Category ${i} Description`
         })
       }
-      
+
+      //Las siguientes lineas HACEN LO MISMO:
+      //Para relacionar un producto con una categoria
+      //product.addCategories([category])
+      //Para relacionar una categoria con un producto
+      //category.addCategories([product])
+
     }
     cargarTablas();
     console.log("tablas cargadas");
