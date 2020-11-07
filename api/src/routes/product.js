@@ -18,7 +18,12 @@ server.get("/actives", (req, res, next) => {
 
 
 server.get("/", (req, res, next) => {
-	Product.findAll()
+	Product.findAll({
+		order : [
+			['id', 'ASC']
+		]			
+	}
+	)
 	  .then((products) => {
 		console.log("GET OK");
   
