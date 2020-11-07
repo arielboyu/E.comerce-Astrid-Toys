@@ -1,34 +1,38 @@
 import React, { useEffect, useState } from "react";
 import Category from "../_category/category.js";
 import axios from "axios";
-const getProduct = axios.get("http://localhost:3002/products");
 
+
+const getProduct = axios.get("http://localhost:3002/products");
 
 const DashboardUpdateProduct = () => {
   const [product, setProduct] = useState([]);
+
+  
 
   useEffect(() => {
     getProduct.then((res) => {
       setProduct(res.data);
     });
-  }, []);
+  }, [product]);
 
   const handleDelete = (e) =>{
       console.log(e.target.name)
   }
 
+ 
+
   const removeData = (prod) => {
-    console.log("entro a remove");
-    console.log(prod)
-    const act = {active: false}
-    console.log(act)
-    axios.put(`http://localhost:3002/products/${prod.id}`, act)
+    axios.put(`http://localhost:3002/products/${prod.id}`, {active: !prod.active})
     .then(r =>{
       console.log(r)
     })
     .catch(er =>{
       console.log(er)
     })
+    getProduct.then((res) => {
+      setProduct(res.data);
+    });
   };
   return (
     <div>
@@ -59,7 +63,7 @@ const DashboardUpdateProduct = () => {
                 <button>Update</button>
               </td>
               <td>
-                <button onClick={()=>removeData(prod)}>Delete</button>
+                <button onClick={()=>removeData(prod)}>{prod.active ? "Desactive": "Active"}</button>
               </td>
             </tr>
           ))}
