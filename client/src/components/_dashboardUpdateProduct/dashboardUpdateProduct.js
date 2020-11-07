@@ -1,38 +1,51 @@
 import React, { useEffect, useState } from "react";
 import Category from "../_category/category.js";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-
-const getProduct = axios.get("http://localhost:3002/products")
+const getProduct = axios.get("http://localhost:3002/products");
 
 const DashboardUpdateProduct = () => {
-   
- 
-  const [product, setProduct] = useState([]);  
+  const [product, setProduct] = useState([]);
 
   useEffect(() => {
     getProduct.then((res) => {
       setProduct(res.data);
     });
-  },[product]);
-
+  }, [product]);
 
   const changeStateActive = (prod) => {
-    axios.put(`http://localhost:3002/products/${prod.id}`, {active: !prod.active})
-    .then(r =>{
-      console.log(r)
-    })
-    .catch(er =>{
-      console.log(er)
-    })
+    axios
+      .put(`http://localhost:3002/products/${prod.id}`, {
+        active: !prod.active,
+      })
+      .then((r) => {
+        console.log(r);
+      })
+      .catch((er) => {
+        console.log(er);
+      });
     getProduct.then((res) => {
       setProduct(res.data);
     });
   };
 
   return (
-    <div>
-      <button>Insert Product</button>
+    <div className="container">
+      <div class="jumbotron">
+        <h1 class="display-3">CRUD Products</h1>
+        <p class="lead">
+          Si aca quieren poner una description de lo que se hace en el crud... haganloN no me molestaria,,, no se me cae una idea
+        </p>
+        <hr class="my-2" />
+        <p class="lead">
+          <Link to="/dashboard/product/create">
+            <button class="btn btn-primary btn-lg">
+              Add Product <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>
+            </button>
+          </Link>
+        </p>
+      </div>
       <table className="table">
         <thead>
           <tr>
@@ -42,8 +55,8 @@ const DashboardUpdateProduct = () => {
             <th>Price</th>
             <th>Stock</th>
             <th>Active</th>
-            <th> </th>
-            <th> </th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -59,9 +72,14 @@ const DashboardUpdateProduct = () => {
                 <button>Update</button>
               </td>
               <td>
-                <button onClick={()=>{changeStateActive(prod);
-                window.location.reload()
-                }}>{prod.active ? "Desactive": "Active"}</button>
+                <button
+                  onClick={() => {
+                    changeStateActive(prod);
+                    window.location.reload();
+                  }}
+                >
+                  {prod.active ? "Desactive" : "Active"}
+                </button>
               </td>
             </tr>
           ))}

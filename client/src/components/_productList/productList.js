@@ -8,9 +8,9 @@ const ProductList = ({product}) => {
         <div>
             <h2 className="py-3 pl-5">Catalogue</h2>
             <div className="d-flex flex-wrap ml-2 text-center">
-                {product.map((p)=>(
-                    <ProductCard product={p}/>
-                ))}
+                {product.map((p)=>
+                  p.active ?(<ProductCard product={p}/>):<></>
+                )}
             </div>
         </div>
     )

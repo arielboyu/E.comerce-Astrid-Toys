@@ -19,7 +19,7 @@ import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboard
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct"
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct"
 
-const getProduct = axios.get("http://localhost:3002/products/actives");
+const getProduct = axios.get("http://localhost:3002/products");
 const getCategory = axios.get("http://localhost:3002/categories");
 
 function App() {
@@ -28,8 +28,6 @@ function App() {
 
 
   useEffect(() => {
-    console.log(product);
-    console.log(category);
     getProduct.then((res) => {
       setProduct(res.data);
     });
@@ -40,7 +38,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar category={category} />
       <Switch>
         <Route path="/products/:index">
           <Product />

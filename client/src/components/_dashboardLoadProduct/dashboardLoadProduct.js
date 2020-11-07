@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const getCategory = axios.get("http://localhost:3002/categories");
 
@@ -148,6 +149,11 @@ function DashboardLoadProduct() {
         >
           Submit
         </button>
+        <Link to="/dashboard/product/update">
+        <button className="btn btn-danger ml-2">
+          Back
+        </button>
+        </Link>
         {/* <!-- Modal --> */}
         <div
           class="modal"
