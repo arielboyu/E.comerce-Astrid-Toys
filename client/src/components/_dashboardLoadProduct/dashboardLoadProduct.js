@@ -20,6 +20,7 @@ function DashboardLoadProduct(){
         active: false,
         image:"/asdas/asd"
     });
+    const getCategory = axios.get("http://localhost:3002/categories");
     //ejecuto la primesa cuando se hace el pre render
     useEffect(()=>{
         getCategory.then((res)=>{
