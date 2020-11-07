@@ -19,7 +19,7 @@ import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboard
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct"
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct"
 
-const getProduct = axios.get("http://localhost:3002/products");
+const getProduct = axios.get("http://localhost:3002/products/actives");
 const getCategory = axios.get("http://localhost:3002/categories");
 
 function App() {
