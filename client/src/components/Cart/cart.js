@@ -16,6 +16,9 @@ function cartsNumbers(product) {
     let productNumbers = localStorage.getItem('cartNumbers');
       productNumbers = parseInt(productNumbers);
       if(productNumbers) {
+        localStorage.setItem('cartNumbers', productNumbers +1);
+        document.querySelector('.cart').textContent= productNumbers + 1;
+      } else {
           localStorage.setItem('cartNumbers', 1);
         document.querySelector('.cart').textContent= 1;
     }
@@ -23,12 +26,25 @@ function cartsNumbers(product) {
 }
 
 function setItems(product) {
-    product.inCart = 1;
+    let cartItems = localStorage.getItem('productsInCart');
+    cartItems= JSON.parse(cartItems);
 
-    let cartItems = {
-        [product.id]: product
+    if(cartItems !== null) {
+        if (cartItems[product.id] == undefined) {
+            cartItems = {
+                ...cartItems,
+                [product.id]: product
+            }
+        }
+        cartItems[product.id].inCart += 1;
+    } else {
+        product.inCart= 1;
+        cartItems = {
+            [product.id]: product
+        }
     }
-    localStorage.setItem('productsInCart', cartItems);
+
+    localStorage.setItem('productsInCart', JSON.stringify(cartItems));
 }
     onLoadCartNumbers();
        
