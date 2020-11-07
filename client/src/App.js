@@ -17,6 +17,7 @@ import Navbar from "./components/_navBar/navBar";
 import Product from "./components/_product/product";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct"
+import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct"
 
 const getProduct = axios.get("http://localhost:3002/products");
 const getCategory = axios.get("http://localhost:3002/categories");
@@ -51,6 +52,9 @@ function App() {
         </Route>
         <Route path="/dashboard/product/create">
           <DashboardLoadProduct/>
+        </Route>
+        <Route path="/dashboard/product/update">
+          <DashboardUpdateProduct/>
         </Route>
       </Switch> 
     </Router>
