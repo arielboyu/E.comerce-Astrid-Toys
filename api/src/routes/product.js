@@ -2,8 +2,12 @@ const server = require("express").Router();
 const { Product, Category } = require("../db.js");
 const { Op } = require("sequelize");
 
-server.get("/", (req, res, next) => {
-  Product.findAll()
+server.get("/actives", (req, res, next) => {
+  Product.findAll({
+	  where: {
+		  active: true
+	  }
+  })
     .then((products) => {
       console.log("GET OK");
 
@@ -12,6 +16,16 @@ server.get("/", (req, res, next) => {
     .catch(next);
 });
 
+
+server.get("/", (req, res, next) => {
+	Product.findAll()
+	  .then((products) => {
+		console.log("GET OK");
+  
+		res.send(products);
+	  })
+	  .catch(next);
+  });
 ///products/categoria/:nombreCa
 server.get("/categoria/:nombreCat", (req, res, next) => {
   let categoryId = req.params.nombreCat;
