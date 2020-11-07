@@ -1,9 +1,13 @@
 const server = require("express").Router();
-
 const { Product, Category } = require("../db.js");
+const { Op } = require("sequelize");
 
-server.get("/", (req, res, next) => {
-  Product.findAll()
+server.get("/actives", (req, res, next) => {
+  Product.findAll({
+	  where: {
+		  active: true
+	  }
+  })
     .then((products) => {
       console.log("GET OK");
 
@@ -12,6 +16,21 @@ server.get("/", (req, res, next) => {
     .catch(next);
 });
 
+
+server.get("/", (req, res, next) => {
+	Product.findAll({
+		order : [
+			['id', 'ASC']
+		]			
+	}
+	)
+	  .then((products) => {
+		console.log("GET OK");
+  
+		res.send(products);
+	  })
+	  .catch(next);
+  });
 ///products/categoria/:nombreCa
 server.get("/categoria/:nombreCat", (req, res, next) => {
   let categoryId = req.params.nombreCat;
@@ -28,6 +47,36 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
     })
     .catch(next);
 });
+
+
+// S23 : Crear ruta que retorne productos segun el keyword de búsqueda
+// GET /search?data={valor}
+// Retorna todos los productos que tengan {valor} en su nombre o descripcion.
+//ATENCION: NO ES CASE SENSITIVE.
+server.get("/search", (req, res, next) => {
+	var data = req.query.data
+	console.log("esto es la data: "+data)
+	Product.findAll({
+		where: {
+		  [Op.or]: {
+			name: {
+			  [Op.iLike]: `%${data}%`,
+			},
+			description: {
+			  [Op.iLike]: `%${data}%`,
+			},
+		  },
+		},
+	  })
+	  .then((products) => {
+		res.send(products);
+	  })
+	  .catch(next);
+  });
+  
+  
+  
+
 // s25 : Crear ruta para crear/agregar Producto
 // POST /products
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
@@ -64,7 +113,6 @@ server.post("/", (req, res) => {
 server.put("/:id", (req, res) => {
 	const product = req.params.id;
 	const { name, description, price, stock, image } = req.body;
-	
 	if(typeof product === 'Number'){
 		Product.findOne({
 		where: {

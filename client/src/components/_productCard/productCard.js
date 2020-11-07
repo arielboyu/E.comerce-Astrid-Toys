@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Link, useParams} from 'react-router-dom'
 
 
 export default function ProductCard({product}){
+
+
     const carta = {
         width: "200px",
         height: "300px"
