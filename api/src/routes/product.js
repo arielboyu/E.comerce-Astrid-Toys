@@ -63,7 +63,7 @@ server.post("/", (req, res) => {
 // Este put modifica el producto al que se apunta por parámetro
 server.put("/:id", (req, res) => {
 	const product = req.params.id;
-	const { name, description, price, stock, image } = req.body;
+	const { name, description, price, stock, image, active } = req.body;
 	Product.findOne({
 	  where: {
 		id: product,
@@ -71,7 +71,7 @@ server.put("/:id", (req, res) => {
 	})
 	  .then((product) => {
 		if (product) {
-		  product.update({ name, description, price, stock, image });
+		  product.update({ name, description, price, stock, image, active });
 		  res.status(200).send(product);
 		} else {
 		  res.status(400).send("No se encontró producto con ese ID");
