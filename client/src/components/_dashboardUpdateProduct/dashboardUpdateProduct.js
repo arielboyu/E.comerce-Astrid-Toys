@@ -3,14 +3,15 @@ import Category from "../_category/category.js";
 import axios from "axios";
 const getProduct = axios.get("http://localhost:3002/products");
 
-const Producto = () => {
+
+const DashboardUpdateProduct = () => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
     getProduct.then((res) => {
       setProduct(res.data);
     });
-  }, [product]);
+  }, []);
 
   const handleDelete = (e) =>{
       console.log(e.target.name)
@@ -19,14 +20,15 @@ const Producto = () => {
   const removeData = (prod) => {
     console.log("entro a remove");
     console.log(prod)
-    const data = { active: false };
-    const id = prod.id;
-    const headers =  {"Access-Control-Allow-Methods": true };
-    axios.put(`http://localhost:3002/products/${id}`,data,headers).then((res) => {
-      // const del = product.filter((product) => id !== product.id);
-      // setProduct(del);
-      console.log(res)
-    });
+    const act = {active: false}
+    console.log(act)
+    axios.put(`http://localhost:3002/products/${prod.id}`, act)
+    .then(r =>{
+      console.log(r)
+    })
+    .catch(er =>{
+      console.log(er)
+    })
   };
   return (
     <div>
@@ -74,4 +76,4 @@ const Producto = () => {
   );
 };
 
-export default Producto;
+export default DashboardUpdateProduct;
