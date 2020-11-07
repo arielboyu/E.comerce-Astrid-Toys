@@ -26,6 +26,7 @@ function App() {
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
 
+
   useEffect(() => {
     console.log(product);
     console.log(category);
