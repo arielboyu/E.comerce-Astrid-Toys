@@ -28,7 +28,12 @@ function DashboardLoadProduct() {
 
   //seteo el estado producto mediante voy cambiando los valores del input
   const handlerChange = (e) => {
-    setProduct({ ...productLoad, [e.target.name]: e.target.value });
+    if(e.target.name === "active"){
+      setProduct({ ...productLoad, [e.target.name]: e.target.checked });
+    } else {
+      setProduct({ ...productLoad, [e.target.name]: e.target.value });
+    }
+    console.log(e.target.name+" > " +productLoad.active)
   };
   //el submit hace un post con axio y le paso el req.body como segundo parametro
   const handlerSubmit = (e) => {
@@ -111,7 +116,7 @@ function DashboardLoadProduct() {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="productDescription">Example textarea</label>
+          <label htmlFor="productDescription">Description</label>
           <textarea
             className="form-control"
             name="description"
@@ -122,7 +127,7 @@ function DashboardLoadProduct() {
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="productImage">Cargar Imagen</label>
+            <label htmlFor="productImage">Upload Image</label>
             <input
               type="file"
               class="form-control-file"
@@ -133,11 +138,12 @@ function DashboardLoadProduct() {
             <input
               className="form-check-input"
               type="checkbox"
-              value="productCheck"
-              name="productCheck"
+              value={productLoad.active}
+              name="active"
+              onChange={handlerChange}
             />
             <label className="form-check-label" htmlFor="productCheck">
-              Activar producto en la tienda?
+            activate product in store?
             </label>
           </div>
         </div>
@@ -167,7 +173,7 @@ function DashboardLoadProduct() {
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                  Modal title
+                  Products
                 </h5>
                 <button
                   type="button"
@@ -179,7 +185,7 @@ function DashboardLoadProduct() {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">Producto Agregado</div>
+              <div class="modal-body">Added product</div>
               <div class="modal-footer">
                 <button
                   type="button"
