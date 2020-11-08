@@ -112,23 +112,27 @@ server.post("/", (req, res) => {
 // Este put modifica el producto al que se apunta por parámetro
 server.put("/:id", (req, res) => {
 	const product = req.params.id;
-	const { name, description, price, stock, image, active } = req.body;
-	Product.findOne({
-	  where: {
-		id: product,
-	  },
-	})
-	  .then((product) => {
-		if (product) {
-		  product.update({ name, description, price, stock, image, active });
-		  res.status(200).send(product);
-		} else {
-		  res.status(400).send("No se encontró producto con ese ID");
-		}
-	  })
-	  .catch((err) => {
-		res.status(400).send("Los campos enviados no son correctos" + err);
-	  });
+	const { name, description, price, stock, image } = req.body;
+	if(typeof product === 'Number'){
+		Product.findOne({
+		where: {
+			id: product,
+		},
+		})
+		.then((product) => {
+			if (product) {
+			product.update({ name, description, price, stock, image });
+			res.status(200).send(product);
+			} else {
+			res.status(400).send("No se encontró producto con ese ID");
+			}
+		})
+		.catch((err) => {
+			res.status(400).send("Los campos enviados no son correctos" + err);
+		});
+	} else {
+		res.status(400).send("El valor que intentás enviar no tiene el tipo de dato esperado")
+	}
   });
   
 // S27 : Crear Ruta para eliminar Producto
@@ -151,7 +155,7 @@ server.delete("/:productID", (req, res) => {
 		}
 	  })
 	  .catch((err) => {
-		console.log("Error en PUT" + err);
+		res.status(400).send("Error en DELETE" + err)
 	  });
   });
 
