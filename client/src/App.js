@@ -36,12 +36,12 @@ function App() {
     getCategory.then((res) => {
       setCategory(res.data);
     });
-  }, [ productSearch ]);
+  }, [product, category, productSearch ]);
 
   //EventSearchBar>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const handlerSearch = (search) => {
     axios
-      .get(`http://localhost:3002/products/search?data=${search}`)
+      .get(`http://localhost:3002/products/search?name=${search}`)
       .then((res) => {
         setProductSearch(res.data);
         console.log(res.data);
@@ -59,14 +59,14 @@ function App() {
         <Route path="/dashboard/product/create">
           <DashboardLoadProduct />
         </Route>
+        <Route path="/dashboard/product/update/:id">
+          <UpdateProduct />
+        </Route>
         <Route path="/dashboard/product/update">
           <DashboardUpdateProduct />
         </Route>
         <Route path="/dashboard/category/list">
           <CategoryList />
-        </Route>
-        <Route path="/dashboard/product/update/:id">
-          <UpdateProduct />
         </Route>
         <Route
           path="/categories/series"
