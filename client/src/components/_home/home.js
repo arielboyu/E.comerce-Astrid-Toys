@@ -15,13 +15,13 @@ const Home = () => {
             </ol>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img style={styleImg} src="https://images4.alphacoders.com/103/thumb-1920-1035777.jpg" className="d-block w-100" alt="..."></img>
+                    <img style={styleImg} src="https://images4.alphacoders.com/103/thumb-1920-1035777.jpg" className="w-100" alt="..."></img>
                 </div>
                 <div className="carousel-item">
-                    <img style={styleImg} src='https://wallpapercave.com/wp/wp3611815.jpg' className="d-block w-100 " alt="..."></img>
+                    <img style={styleImg} src="https://images4.alphacoders.com/103/1035785.jpg" className="w-100" alt="..."></img>
                 </div>
                 <div className="carousel-item">
-                    <img style={styleImg} src="https://images4.alphacoders.com/103/1035785.jpg" className="d-block w-100" alt="..."></img>
+                    <img style={styleImg} src="https://cutewallpaper.org/21/funko-pop-wallpaper/Funko-Pop-Marvel-Animation-Free-Wallpaper-and-Backgrounds-.jpg" className="w-100" alt="..."></img>
                 </div>
             </div>
             <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
