@@ -75,7 +75,7 @@ const DashboardUpdateProduct = () => {
                 <button
                   onClick={() => {
                     changeStateActive(prod);
-                    // window.location.reload();
+                    window.location.reload();
                   }}
                 >
                   {prod.active ? "Desactive" : "Active"}

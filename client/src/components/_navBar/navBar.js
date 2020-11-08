@@ -5,7 +5,7 @@ import Cart from "./cart";
 import { Link } from "react-router-dom";
 import "./navBar.css";
 
-export default function NavBar({ category }) {
+export default function NavBar({category, handlerSearch}) {
   const link = {
     listStyle: "none",
     textDecoration: "none",
@@ -49,7 +49,7 @@ export default function NavBar({ category }) {
       <div className="d-flex col-12 col-lg-7 justify-content-center justify-content-lg-end">
         <Login />
         <Cart />
-        <SearchBar />
+        <SearchBar handlerSearch={handlerSearch} />
       </div>
     </nav>
   );
