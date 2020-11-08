@@ -8,7 +8,7 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
-
+import CategoryList from './components/_categoriesList/categoriesList'
 /*Importaciones de componentes*/
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
@@ -58,6 +58,9 @@ function App() {
         </Route>
         <Route path="/dashboard/product/update">
           <DashboardUpdateProduct/>
+        </Route>
+            <Route path="/dashboard/category/list">
+           <CategoryList/>
         </Route>
       </Switch> 
     </Router>

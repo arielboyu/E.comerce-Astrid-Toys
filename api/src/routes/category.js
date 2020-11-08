@@ -59,9 +59,11 @@ server.post('/products/category/', (req,res) => {
 
 // S19 : Crear Ruta para eliminar Categoria
 // DELETE /products/category/:id 
-server.delete('/products/category/:id', (req,res)=>{
+// ruta categories/delete/:id ,hace llamada a handleDelete 
+// con referencia a axios.delete(`http://localhost:3002/categories/delete/${c.id}`, c)
+server.delete('/delete/:id', (req,res)=>{
         const id = req.params.id;
-        Categories.destroy({ where: { id } })
+        Category.destroy({ where: { id } })
         .then(category => 
         res.status(200).send("se elimino la categoria" + category  ))
         .catch((err) => {
