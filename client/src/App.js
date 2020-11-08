@@ -50,19 +50,19 @@ function App() {
           )}
         />
         <Route
-          path="/category/series"
+          path="/categories/series"
           render={({ match }) => (
             <Catalogue product={product} category={category} match={match} />
           )}
         />
         <Route
-          path="/category/movies"
+          path="/categories/movies"
           render={({ match }) => (
             <Catalogue product={product} category={category} match={match} />
           )}
         />
         <Route
-          path="/category/games"
+          path="/categories/games"
           render={({ match }) => (
             <Catalogue product={product} category={category} match={match} />
           )}

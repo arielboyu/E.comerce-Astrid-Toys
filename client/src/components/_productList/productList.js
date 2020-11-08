@@ -5,11 +5,11 @@ import axios from 'axios'
 const ProductList = ({product, match}) => { 
     let tituloCatalogo ='';
     switch(match.url){
-    case '/category/series':
+    case '/categories/series':
         tituloCatalogo = 'Funkos de Series'; break;
-    case '/category/movies' :
+    case '/categories/movies' :
         tituloCatalogo = 'Funkos de Peliculas'; break;
-    case '/category/games' :
+    case '/categories/games' :
         tituloCatalogo = 'Funkos de Juegos'; break;
     default:
         tituloCatalogo = 'Catalogo de Funkos '; 
