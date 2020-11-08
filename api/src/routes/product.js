@@ -25,7 +25,7 @@ server.get("/", (req, res, next) => {
 	}
 	)
 	  .then((products) => {
-		console.log("GET OK");
+		console.log("Se tendrian que renderizar los productos");
   
 		res.send(products);
 	  })
@@ -54,21 +54,19 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
 // Retorna todos los productos que tengan {valor} en su nombre o descripcion.
 //ATENCION: NO ES CASE SENSITIVE.
 server.get("/search", (req, res, next) => {
-	var data = req.query.data
-	console.log("esto es la data: "+data)
+	var data = req.query.name
+	// console.log("esto es la data: "+data)
 	Product.findAll({
 		where: {
 		  [Op.or]: {
 			name: {
-			  [Op.iLike]: `%${data}%`,
-			},
-			description: {
-			  [Op.iLike]: `%${data}%`,
-			},
+			  [Op.substring]: data,
+			}
 		  },
 		},
 	  })
 	  .then((products) => {
+		  console.log(products)
 		res.send(products);
 	  })
 	  .catch(next);
