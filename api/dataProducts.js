@@ -4,116 +4,115 @@ function returnRandom() {
 }
 
 const DataProducts = [{
-    name: 'Mazie',
-    description: 'Serie',
-    price: 1,
+    name: 'Harry Potter',
+    description: 'Un funko de Harry Potter',
+    price: returnRandom(),
+    stock: returnRandom(),
+
+  },
+  {
+    name: 'Spiderman',
+    description: 'Un funko de Spiderman',
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
-    name: 'Heather',
-    description: 'Serie',
-    price: 31,
+    name: 'Hulk',
+    description: 'Un funko de Hulk',
+    price: returnRandom(),
     stock: returnRandom(),
-    
   },
   {
-    name: 'Benton',
-    description: 'Serie',
-    price: 31,
+    name: 'Tai',
+    description: 'Un funko de Tai',
+    price: returnRandom(),
     stock: returnRandom(),
-    
-  },
-  {
-    name: 'Alva',
-    description: 'Serie',
-    price: 22,
-    stock: returnRandom(),
-    
   },
   {
     name: 'Bart',
-    description: 'Serie',
-    price: 57,
+    description: 'Un funko de Bar',
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Capitan',
     description: 'Serie',
-    price: 30,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Legolas',
     description: 'Movie',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Harry',
     description: 'Movie',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Lisandra',
     description: 'Movie',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Antonia',
     description: 'Movie',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Liliana',
     description: 'Movie',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Julia',
     description: 'Movie',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Lisa',
     description: 'Game',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Rita',
     description: 'Game',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Lenny',
     description: 'Game',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Juani',
     description: 'Game',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Tito',
     description: 'Game',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
   {
-    name: 'Charlie',
+    name: 'maxi de filipinas',
     description: 'Game',
-    price: 57,
+    price: returnRandom(),
     stock: returnRandom(),
   },
 ];
+
 
 module.exports = DataProducts;
