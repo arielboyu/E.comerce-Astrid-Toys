@@ -25,9 +25,6 @@ const DashboardUpdateProduct = () => {
       .catch((er) => {
         console.log(er);
       });
-    getProduct.then((res) => {
-      setProduct(res.data);
-    });
   };
 
   return (
@@ -75,7 +72,7 @@ const DashboardUpdateProduct = () => {
                 <button
                   onClick={() => {
                     changeStateActive(prod);
-                    window.location.reload();
+                    // window.location.reload();
                   }}
                 >
                   {prod.active ? "Desactive" : "Active"}

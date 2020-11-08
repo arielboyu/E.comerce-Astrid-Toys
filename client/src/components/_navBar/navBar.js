@@ -31,7 +31,7 @@ export default function NavBar({category}) {
           <button className="dropbtn">Categories</button>
             <div className="dropdown-content">
               {category.map((cat)=>
-                (<Link to={`/category/${cat.name.toLowerCase()}`}>{cat.name}</Link>)
+                (<Link to={`/categories/${cat.name.toLowerCase()}`}>{cat.name}</Link>)
               )}
           </div>
         </div>

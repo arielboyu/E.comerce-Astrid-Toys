@@ -25,7 +25,7 @@ server.get("/", (req, res, next) => {
 	}
 	)
 	  .then((products) => {
-		console.log("GET OK");
+		console.log("Se tendrian que renderizar los productos");
   
 		res.send(products);
 	  })
@@ -112,28 +112,24 @@ server.post("/", (req, res) => {
 // Este put modifica el producto al que se apunta por parámetro
 server.put("/:id", (req, res) => {
 	const product = req.params.id;
-	const { name, description, price, stock, image } = req.body;
-	if(typeof product === 'Number'){
-		Product.findOne({
-		where: {
-			id: product,
-		},
-		})
-		.then((product) => {
-			if (product) {
-			product.update({ name, description, price, stock, image });
-			res.status(200).send(product);
-			} else {
-			res.status(400).send("No se encontró producto con ese ID");
-			}
-		})
-		.catch((err) => {
-			res.status(400).send("Los campos enviados no son correctos" + err);
-		});
-	} else {
-		res.status(400).send("El valor que intentás enviar no tiene el tipo de dato esperado")
-	}
-  });
+	const { name, description, price, stock, image, active } = req.body;
+	Product.findOne({
+	where: {
+		id: product,
+	},
+	})
+	.then((product) => {
+		if (product) {
+		product.update({ name, description, price, stock, image, active });
+		res.status(200).send(product);
+		} else {
+		res.status(400).send("No se encontró producto con ese ID");
+		}
+	})
+	.catch((err) => {
+		res.status(400).send("Los campos enviados no son correctos" + err);
+	});	 
+});
   
 // S27 : Crear Ruta para eliminar Producto
 // DELETE /products/:id

@@ -15,6 +15,22 @@ server.get('/', (req, res) => {
         })
 });
 
+server.get("/:categoryName", (req, res, next) => {
+    let categoryName = req.params.categoryName;
+    Category.findAll({
+      where: { name: categoryName },
+      include: [
+        {
+          model: Product,
+        },
+      ],
+    })
+      .then((category) => {
+        res.send(category);
+      })
+      .catch(next);
+  });
+
 server.post('/:idProducto/category/:idCategoria', (req,res)=>{
     Product.findAll({where:{productId:req.params.idProducto}})
     .on('success',(product)=>{
