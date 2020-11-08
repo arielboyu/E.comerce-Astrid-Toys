@@ -10,7 +10,8 @@ import {
 } from "react-router-dom";
 import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
-import Footer from "./components/footer/footer.js";
+import Home from "./components/_home/home.js"
+import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
 /*Componente Navbar*/
@@ -40,6 +41,7 @@ function App() {
     <Router>
       <Navbar category={category} />
       <Switch>
+        <Route exact path="/" component={Home}/>
         <Route path="/products/:index">
           <Product />
         </Route>

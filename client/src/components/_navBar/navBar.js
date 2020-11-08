@@ -23,8 +23,14 @@ export default function NavBar({ category }) {
             <button className="dropbtn bg-dark">Home</button>
           </div>
         </Link>
+        
+        <Link to="/products">
+          <div className="dropdown">
+            <button className="dropbtn bg-dark">Products</button>
+          </div>
+        </Link>
         <div className="dropdown">
-          <button className="bg-dark dropbtn bg-dark ">Categories</button>
+          <button className="bg-dark dropbtn bg-dark">Categories</button>
           <div className="dropdown-content">
             {category.map((cat) => (
               <Link to={`/categories/${cat.name.toLowerCase()}`}>
@@ -33,13 +39,8 @@ export default function NavBar({ category }) {
             ))}
           </div>
         </div>
-        <Link to="/products">
-          <div className="dropdown">
-            <button className="dropbtn bg-dark">Products</button>
-          </div>
-        </Link>
         <div className="dropdown">
-          <button className="dropbtn bg-dark">Dashboard</button>
+          <button className="dropbtn bg-dark">Admin</button>
           <div className="dropdown-content">
             <Link to="/dashboard/product/update">Products</Link>
             <Link to="/dashboard/category/list">Category</Link>
