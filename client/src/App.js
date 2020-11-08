@@ -8,7 +8,7 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
-import CategoryList from './components/_categoriesList/categoriesList'
+import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
@@ -16,8 +16,8 @@ import Catalogue from "./components/_catalogue/catalogue";
 import Navbar from "./components/_navBar/navBar";
 import Product from "./components/_product/product";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
-import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct"
-import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct"
+import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
+import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
 
 const getProduct = axios.get("http://localhost:3002/products");
 const getCategory = axios.get("http://localhost:3002/categories");
@@ -25,7 +25,6 @@ const getCategory = axios.get("http://localhost:3002/categories");
 function App() {
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
-
 
   useEffect(() => {
     getProduct.then((res) => {
@@ -50,15 +49,15 @@ function App() {
           <DashboardLoadCategory />
         </Route>
         <Route path="/dashboard/product/create">
-          <DashboardLoadProduct/>
+          <DashboardLoadProduct />
         </Route>
         <Route path="/dashboard/product/update">
-          <DashboardUpdateProduct/>
+          <DashboardUpdateProduct />
         </Route>
-            <Route path="/dashboard/category/list">
-           <CategoryList/>
+        <Route path="/dashboard/category/list">
+          <CategoryList />
         </Route>
-      </Switch> 
+      </Switch>
     </Router>
   );
 }

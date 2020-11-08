@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Category from "../_category/category.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -66,7 +65,11 @@ const DashboardUpdateProduct = () => {
               <td>{prod.stock}</td>
               <td>{prod.active.toString()}</td>
               <td>
-                <button>Update</button>
+                <Link to={`/dashboard/product/update/${prod.id}`}>
+                  <button>
+                    Update
+                  </button>
+                </Link>
               </td>
               <td>
                 <button
@@ -83,13 +86,6 @@ const DashboardUpdateProduct = () => {
         </tbody>
       </table>
     </div>
-
-    // // <button type='submit'>Realizar</button>
-    // <Category>
-    //   {/* El formulario debe poder:
-    //       -Agregarle una o mas categorias al producto que estamos cargando
-    //       -Eliminar una categoria en el caso de que nos hayamos equivocado */}
-    // </Category>
   );
 };
 

@@ -114,22 +114,22 @@ server.put("/:id", (req, res) => {
 	const product = req.params.id;
 	const { name, description, price, stock, image, active } = req.body;
 	Product.findOne({
-	where: {
+	  where: {
 		id: product,
-	},
+	  },
 	})
-	.then((product) => {
+	  .then((product) => {
 		if (product) {
-		product.update({ name, description, price, stock, image, active });
-		res.status(200).send(product);
+		  product.update({ name, description, price, stock, image, active });
+		  res.status(200).send(product);
 		} else {
-		res.status(400).send("No se encontró producto con ese ID");
+		  res.status(400).send("No se encontró producto con ese ID");
 		}
-	})
-	.catch((err) => {
+	  })
+	  .catch((err) => {
 		res.status(400).send("Los campos enviados no son correctos" + err);
-	});	 
-});
+	  });
+  });
   
 // S27 : Crear Ruta para eliminar Producto
 // DELETE /products/:id
@@ -151,7 +151,7 @@ server.delete("/:productID", (req, res) => {
 		}
 	  })
 	  .catch((err) => {
-		res.status(400).send("Error en DELETE" + err)
+		console.log("Error en PUT" + err);
 	  });
   });
 

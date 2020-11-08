@@ -26,7 +26,8 @@ server.get("/:categoryName", (req, res, next) => {
       ],
     })
       .then((category) => {
-        res.send(category);
+
+            res.send(category);
       })
       .catch(next);
   });
