@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Category from "../_category/category.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -25,9 +24,6 @@ const DashboardUpdateProduct = () => {
       .catch((er) => {
         console.log(er);
       });
-    getProduct.then((res) => {
-      setProduct(res.data);
-    });
   };
 
   return (
@@ -35,7 +31,7 @@ const DashboardUpdateProduct = () => {
       <div class="jumbotron">
         <h1 class="display-3">CRUD Products</h1>
         <p class="lead">
-          Si aca quieren poner una description de lo que se hace en el crud... haganloN no me molestaria,,, no se me cae una idea
+        in this section the administrator can modify the products
         </p>
         <hr class="my-2" />
         <p class="lead">
@@ -69,13 +65,17 @@ const DashboardUpdateProduct = () => {
               <td>{prod.stock}</td>
               <td>{prod.active.toString()}</td>
               <td>
-                <button>Update</button>
+                <Link to={`/dashboard/product/update/${prod.id}`}>
+                  <button>
+                    Update
+                  </button>
+                </Link>
               </td>
               <td>
                 <button
                   onClick={() => {
                     changeStateActive(prod);
-                    window.location.reload();
+                    // window.location.reload();
                   }}
                 >
                   {prod.active ? "Desactive" : "Active"}
@@ -86,13 +86,6 @@ const DashboardUpdateProduct = () => {
         </tbody>
       </table>
     </div>
-
-    // // <button type='submit'>Realizar</button>
-    // <Category>
-    //   {/* El formulario debe poder:
-    //       -Agregarle una o mas categorias al producto que estamos cargando
-    //       -Eliminar una categoria en el caso de que nos hayamos equivocado */}
-    // </Category>
   );
 };
 

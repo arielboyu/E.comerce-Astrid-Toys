@@ -1,39 +1,35 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const getCategory = axios.get("http://localhost:3002/categories");
 
-function DashboardLoadProduct() {
-  //Seteo un estado general para mostrar las categorias en las listas desplegrables
+function UpdateProduct() {
   const [category, setCategory] = useState([]);
-  //Seteo un estado general
-  const [productLoad, setProduct] = useState({
-    name: "",
-    category: "",
-    subCategory: "",
-    stock: 0,
-    price: 0,
-    description: "",
-    active: false,
-    image: "/asdas/asd",
-  });
-  const getCategory = axios.get("http://localhost:3002/categories");
-  //ejecuto la primesa cuando se hace el pre render
+  const [productUpdate, setProduct] = useState([]);
+  const [load, setLoad] = useState(false);
+
+  const { id } = useParams();
   useEffect(() => {
+    axios.get(`http://localhost:3002/products/${id}`).then((res) => {
+
+      setProduct(res.data[0]);//esto es porque devuelve un array y adentro el obj product
+      setLoad(true);
+      console.log('useEffect:',productUpdate);
+    });
     getCategory.then((res) => {
       setCategory(res.data);
     });
-  }, []);
+  }, [load]);
 
-  //seteo el estado producto mediante voy cambiando los valores del input
   const handlerChange = (e) => {
-    setProduct({ ...productLoad, [e.target.name]: e.target.value });
+    console.log("entra al handlerChange");
+    setProduct({ ...productUpdate, [e.target.name]: e.target.value });
   };
-  //el submit hace un post con axio y le paso el req.body como segundo parametro
   const handlerSubmit = (e) => {
+    console.log("entra al handlerSubmit");
     axios
-      .post("http://localhost:3002/products", productLoad)
+      .put(`http://localhost:3002/products/${id}`, productUpdate)
       .then((r) => {
         console.log(r);
       })
@@ -45,7 +41,7 @@ function DashboardLoadProduct() {
 
   return (
     <div className="container">
-      <h2>Load Product</h2>
+      <h2>Update Product</h2>
       <form onSubmit={handlerSubmit}>
         <div className="form-group">
           <label htmlFor="productName">Product Name</label>
@@ -53,7 +49,7 @@ function DashboardLoadProduct() {
             type="text"
             className="form-control"
             name="name"
-            value={productLoad.name}
+            value={productUpdate.name}
             placeholder="Funko..."
             onChange={handlerChange}
           />
@@ -64,7 +60,7 @@ function DashboardLoadProduct() {
             <select
               className="form-control"
               name="category"
-              value={productLoad.category}
+              value={productUpdate.category}
               onChange={handlerChange}
             >
               <option></option>
@@ -79,7 +75,7 @@ function DashboardLoadProduct() {
               className="form-control"
               name="subCategory"
               onChange={handlerChange}
-              value={productLoad.subCategory}
+              value={productUpdate.subCategory}
             >
               <option></option>
               <option>Sub-Category 1</option>
@@ -95,7 +91,7 @@ function DashboardLoadProduct() {
               type="text"
               className="form-control"
               name="stock"
-              value={productLoad.stock}
+              value={productUpdate.stock}
               onChange={handlerChange}
             />
           </div>
@@ -105,7 +101,7 @@ function DashboardLoadProduct() {
               type="text"
               className="form-control"
               name="price"
-              value={productLoad.price}
+              value={productUpdate.price}
               onChange={handlerChange}
             />
           </div>
@@ -115,14 +111,14 @@ function DashboardLoadProduct() {
           <textarea
             className="form-control"
             name="description"
-            value={productLoad.description}
+            value={productUpdate.description}
             rows="3"
             onChange={handlerChange}
           ></textarea>
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="productImage">Upload Image</label>
+            <label htmlFor="productImage">Upload Image </label>
             <input
               type="file"
               class="form-control-file"
@@ -137,7 +133,7 @@ function DashboardLoadProduct() {
               name="productCheck"
             />
             <label className="form-check-label" htmlFor="productCheck">
-            activate product in store?
+              activate product in store ?
             </label>
           </div>
         </div>
@@ -150,9 +146,7 @@ function DashboardLoadProduct() {
           Submit
         </button>
         <Link to="/dashboard/product/update">
-        <button className="btn btn-danger ml-2">
-          Back
-        </button>
+          <button className="btn btn-danger ml-2">Back</button>
         </Link>
         {/* <!-- Modal --> */}
         <div
@@ -167,7 +161,7 @@ function DashboardLoadProduct() {
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                  Products
+                  Product Update
                 </h5>
                 <button
                   type="button"
@@ -179,7 +173,7 @@ function DashboardLoadProduct() {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">Added product</div>
+              <div class="modal-body">Confirmated.</div>
               <div class="modal-footer">
                 <button
                   type="button"
@@ -198,4 +192,4 @@ function DashboardLoadProduct() {
   );
 }
 
-export default DashboardLoadProduct;
+export default UpdateProduct;

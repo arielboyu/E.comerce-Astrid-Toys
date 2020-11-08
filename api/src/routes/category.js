@@ -15,6 +15,23 @@ server.get('/', (req, res) => {
         })
 });
 
+server.get("/:categoryName", (req, res, next) => {
+    let categoryName = req.params.categoryName;
+    Category.findAll({
+      where: { name: categoryName },
+      include: [
+        {
+          model: Product,
+        },
+      ],
+    })
+      .then((category) => {
+
+            res.send(category);
+      })
+      .catch(next);
+  });
+
 server.post('/:idProducto/category/:idCategoria', (req,res)=>{
     Product.findAll({where:{productId:req.params.idProducto}})
     .on('success',(product)=>{
@@ -33,11 +50,11 @@ server.delete('/:idProducto/category/:idCategoria', (req,res)=>{
 
 
 // S18 : Crear ruta para crear/agregar Categoria
-// POST /products/category/
+// POST /category/create
 // Crea una categoría nueva.
 
 // este post hace referencia a la creacion de una nueva category.
-server.post('/products/category/', (req,res) => {
+server.post('/create', (req,res) => {
     const {name,description} = req.body
     if (!name || !description) {
 		return res.status(400).send('Debes completar todos los campos');
