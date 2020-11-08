@@ -5,32 +5,32 @@ function returnRandom() {
 
 const DataProducts = [{
     name: 'Harry Potter',
-    description: 'Serie',
+    description: 'Un funko de Harry Potter',
     price: returnRandom(),
     stock: returnRandom(),
 
   },
   {
-    name: 'Harry Potter',
-    description: 'Serie',
+    name: 'Spiderman',
+    description: 'Un funko de Spiderman',
     price: returnRandom(),
     stock: returnRandom(),
   },
   {
-    name: 'Harry Potter',
-    description: 'Serie',
+    name: 'Hulk',
+    description: 'Un funko de Hulk',
     price: returnRandom(),
     stock: returnRandom(),
   },
   {
-    name: 'Harry Potter',
-    description: 'Serie',
+    name: 'Tai',
+    description: 'Un funko de Tai',
     price: returnRandom(),
     stock: returnRandom(),
   },
   {
     name: 'Bart',
-    description: 'Serie',
+    description: 'Un funko de Bar',
     price: returnRandom(),
     stock: returnRandom(),
   },
@@ -107,7 +107,7 @@ const DataProducts = [{
     stock: returnRandom(),
   },
   {
-    name: 'Charlie',
+    name: 'maxi de filipinas',
     description: 'Game',
     price: returnRandom(),
     stock: returnRandom(),

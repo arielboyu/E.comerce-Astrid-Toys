@@ -90,6 +90,8 @@ server.post("/", (req, res) => {
       image,
     })
       .then((productCreated) => {
+        //buscar categoria a la que tengo que agregar el producto
+        //productCreated.addCategories(categoria)
         res.status(201).send(productCreated);
       })
       .catch((err) => {
