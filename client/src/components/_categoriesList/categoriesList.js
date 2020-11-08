@@ -4,19 +4,26 @@ import axios from 'axios';
 export default function CategoriesList(){
     const getCategory = axios.get("http://localhost:3002/categories");
     const [category, setCategory]= useState([]);
+    const [deleted, setDeleted]=useState(null);
     useEffect(()=>{
         getCategory.then((res)=>{
             setCategory(res.data)
           })
         },[])
-        
-        const handleDelete = (c) => {
-             axios.delete(`http://localhost:3002/categories/delete/${c.id}`, c)
+
+            // esta funcion elimina la categoria seteada en el estado local
+            const handleDelete = () => {
+             axios.delete(`http://localhost:3002/categories/delete/${deleted.id}`, deleted)
             .then(res => {
                 console.log(res)
             })
             .catch(err => console.log(err))
           };
+
+          // esta funcion setea el estado con la categoria a eliminar 
+          const handleSubmit = (c) => {
+            setDeleted(c)
+          }
     return (
         <div>
             <table class="table table-reflow">
@@ -34,7 +41,7 @@ export default function CategoriesList(){
      <td>{c.name}</td>
      <td>{c.description}</td>
      <button
-          onClick={() => handleDelete(c)}
+          onClick={() =>  handleSubmit(c)}
           type="submit"
           className="btn btn-primary"
           data-toggle="modal"
@@ -59,7 +66,7 @@ export default function CategoriesList(){
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                  Modal title
+                  Categories
                 </h5>
                 <button
                   type="button"
@@ -71,22 +78,21 @@ export default function CategoriesList(){
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">Category Deleted</div>
+              <div class="modal-body">Are you sure to delete? </div>
               <div class="modal-footer">
                 <button
+                  onClick={() => {handleDelete() ;window.location.reload()}}
                   type="button"
                   class="btn btn-primary"
                   data-dismiss="modal"
-                  onClick={() => window.location.reload()}
                 >
-                  Ok
-                </button>
+                  Yes
+                </button>  
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
               </div>
             </div>
           </div>
         </div>
-        </div>
-        
-        
+        </div>     
     )
  }
