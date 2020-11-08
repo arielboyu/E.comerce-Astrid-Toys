@@ -13,6 +13,8 @@ export default function SearchBar({handlerSearch}) {
       setSearch(e.target.value)
     }
     const {name} = useParams();
+
+
     const handlerSubmit = (e) =>{
       e.preventDefault()
       handlerSearch(search)
@@ -22,12 +24,9 @@ export default function SearchBar({handlerSearch}) {
     <>
     <form onSubmit={handlerSubmit} className="form-inline d-none d-md-block">
       <input onChange={handlerInput} className="form-control mr-sm-2" type="text" placeholder="Search . . " aria-label="Search"></input>
-      {/* <NavLink to={{
-    pathname: "/products",
-    search: `?name=${search}`
-  }}> */}
+      {/* <Link to={`/products/search?name=${search}`}> */}
         <button className="btn btn-dark my-2 my-sm-0" type="submit">Submit</button>
-      {/* </NavLink> */}
+      {/* </Link> */}
     </form>
     {/* {flag? <ProductList product={search} />:<></>} */}
     </>

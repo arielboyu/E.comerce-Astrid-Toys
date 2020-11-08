@@ -118,7 +118,7 @@ function UpdateProduct() {
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="productImage">Cargar Imagen</label>
+            <label htmlFor="productImage">Upload Image </label>
             <input
               type="file"
               class="form-control-file"
@@ -133,7 +133,7 @@ function UpdateProduct() {
               name="productCheck"
             />
             <label className="form-check-label" htmlFor="productCheck">
-              Activar producto en la tienda?
+              activate product in store ?
             </label>
           </div>
         </div>

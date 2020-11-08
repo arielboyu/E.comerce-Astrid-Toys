@@ -127,7 +127,7 @@ function DashboardLoadProduct() {
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="productImage">Cargar Imagen</label>
+            <label htmlFor="productImage">Upload Image</label>
             <input
               type="file"
               class="form-control-file"
@@ -143,7 +143,7 @@ function DashboardLoadProduct() {
               onChange={handlerChange}
             />
             <label className="form-check-label" htmlFor="productCheck">
-              Activar producto en la tienda?
+            activate product in store?
             </label>
           </div>
         </div>
@@ -173,7 +173,7 @@ function DashboardLoadProduct() {
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                  Modal title
+                  Products
                 </h5>
                 <button
                   type="button"
@@ -185,7 +185,7 @@ function DashboardLoadProduct() {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">Producto Agregado</div>
+              <div class="modal-body">Added product</div>
               <div class="modal-footer">
                 <button
                   type="button"
