@@ -2,7 +2,7 @@ import React from "react";
 import ProductList from "../_productList/productList";
 import CategoryList from "../_productList/categoryList";
 
-const Catalogue = ({ product, category }) => {
+const Catalogue = ({ product, category, match }) => {
   return (
     <>
       <div className="bg-dark container-fluid p-5 ">
@@ -11,7 +11,7 @@ const Catalogue = ({ product, category }) => {
             <CategoryList category={category} />
           </div>
           <div className="bg-info d-flex col-xs-11 col-s-6 col-md-5 col-lg-6 col-xl-8  py-3 mx-3 my-1 rounded-right rounded-left">
-            <ProductList product={product} />
+            <ProductList product={product} match={match} />
           </div>
         </div>
       </div>
