@@ -10,8 +10,9 @@ import {
 } from "react-router-dom";
 import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
+import Home from "./components/_home/home.js"
 import Cart from "./components/_cart/cart.js";
-import Footer from "./components/footer/footer.js";
+import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
 /*Componente Navbar*/
@@ -55,6 +56,11 @@ function App() {
     <Router>
       <Navbar handlerSearch={handlerSearch} category={category} />
       <Switch>
+
+        <Route exact path="/" component={Home}/>
+        <Route path="/products/:index">
+          <Product />
+        </Route>
         <Route path="/dashboard/category/create">
           <DashboardLoadCategory />
         </Route>
@@ -103,8 +109,8 @@ function App() {
         <Route path="/cart">
           <Cart/>
         </Route>
-        <Footer />
       </Switch>
+      <Footer />
     </Router>
   );
 }
