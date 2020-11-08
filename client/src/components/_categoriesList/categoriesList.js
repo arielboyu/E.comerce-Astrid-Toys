@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default function CategoriesList(){
     const getCategory = axios.get("http://localhost:3002/categories");
@@ -26,6 +27,20 @@ export default function CategoriesList(){
           }
     return (
         <div>
+          <div class="jumbotron">
+        <h1 class="display-3">CRUD Products</h1>
+        <p class="lead">
+          Si aca quieren poner una description de lo que se hace en el crud... haganloN no me molestaria,,, no se me cae una idea
+        </p>
+        <hr class="my-2" />
+        <p class="lead">
+          <Link to="/dashboard/category/create">
+            <button class="btn btn-primary btn-lg">
+              Add Product <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>
+            </button>
+          </Link>
+        </p>
+      </div>
             <table class="table table-reflow">
   <thead>
     <tr>

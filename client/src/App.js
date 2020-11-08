@@ -19,7 +19,6 @@ import Product from "./components/_product/product";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
-import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct";
 
 const getProduct = axios.get("http://localhost:3002/products");
 const getCategory = axios.get("http://localhost:3002/categories");
@@ -70,9 +69,6 @@ function App() {
         />
         <Route path="/dashboard/category/create">
           <DashboardLoadCategory />
-        </Route>
-        <Route path="/dashboard/product/update/:id">
-          <UpdateProduct />
         </Route>
         <Route path="/dashboard/product/create">
           <DashboardLoadProduct />
