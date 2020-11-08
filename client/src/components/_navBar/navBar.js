@@ -24,11 +24,11 @@ export default function NavBar({category}) {
       <ul className="d-flex col-sm-12 col-md-12 col-lg-5 justify-content-center justify-content-lg-start">
         <Link to="/">
           <div className="dropdown">
-            <button className="dropbtn">Home</button>
+            <button className="dropbtn bg-dark">Home</button>
           </div>
         </Link>
         <div className="dropdown">
-          <button className="dropbtn">Categories</button>
+          <button className="bg-dark dropbtn bg-dark ">Categories</button>
             <div className="dropdown-content">
               {category.map((cat)=>
                 (<Link to={`/category/${cat.name.toLowerCase()}`}>{cat.name}</Link>)
@@ -37,11 +37,11 @@ export default function NavBar({category}) {
         </div>
         <Link to="/products">
         <div className="dropdown">
-          <button className="dropbtn">Products</button>
+          <button className="dropbtn bg-dark">Products</button>
         </div>
         </Link>
         <div className="dropdown">
-          <button className="dropbtn">Dashboard</button>
+          <button className="dropbtn bg-dark">Dashboard</button>
             <div className="dropdown-content">
             <Link to="/dashboard/product/update">Products</Link>
             <Link to="/dashboard/category/create">Category</Link>
