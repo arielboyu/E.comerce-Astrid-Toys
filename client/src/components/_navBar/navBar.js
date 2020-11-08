@@ -44,7 +44,7 @@ export default function NavBar({category}) {
           <button className="dropbtn">Dashboard</button>
             <div className="dropdown-content">
             <Link to="/dashboard/product/update">Products</Link>
-            <Link to="/dashboard/category/create">Category</Link>
+            <Link to="/dashboard/category/list">Category</Link>
           </div>
         </div>
       </ul>
