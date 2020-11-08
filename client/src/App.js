@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
+import Footer from "./components/footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
 /*Componente Navbar*/
@@ -42,9 +43,30 @@ function App() {
         <Route path="/products/:index">
           <Product />
         </Route>
-        <Route path="/products">
-          <Catalogue product={product} category={category} />
-        </Route>
+        <Route
+          path="/products"
+          render={({ match }) => (
+            <Catalogue product={product} category={category} match={match} />
+          )}
+        />
+        <Route
+          path="/categories/series"
+          render={({ match }) => (
+            <Catalogue product={product} category={category} match={match} />
+          )}
+        />
+        <Route
+          path="/categories/movies"
+          render={({ match }) => (
+            <Catalogue product={product} category={category} match={match} />
+          )}
+        />
+        <Route
+          path="/categories/games"
+          render={({ match }) => (
+            <Catalogue product={product} category={category} match={match} />
+          )}
+        />
         <Route path="/dashboard/category/create">
           <DashboardLoadCategory />
         </Route>
@@ -58,6 +80,7 @@ function App() {
           <CategoryList />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }
