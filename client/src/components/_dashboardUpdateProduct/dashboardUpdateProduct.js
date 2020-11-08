@@ -31,7 +31,7 @@ const DashboardUpdateProduct = () => {
       <div class="jumbotron">
         <h1 class="display-3">CRUD Products</h1>
         <p class="lead">
-          Si aca quieren poner una description de lo que se hace en el crud... haganloN no me molestaria,,, no se me cae una idea
+        in this section the administrator can modify the products
         </p>
         <hr class="my-2" />
         <p class="lead">

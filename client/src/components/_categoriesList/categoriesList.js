@@ -29,16 +29,15 @@ export default function CategoriesList() {
   return (
     <div>
       <div class="jumbotron">
-        <h1 class="display-3">CRUD Products</h1>
+        <h1 class="display-3">CRUD Categories</h1>
         <p class="lead">
-          Si aca quieren poner una description de lo que se hace en el crud...
-          haganloN no me molestaria,,, no se me cae una idea
+        In this section the administrator can update the list of categories
         </p>
         <hr class="my-2" />
         <p class="lead">
           <Link to="/dashboard/category/create">
             <button class="btn btn-primary btn-lg">
-              Add Product{" "}
+              Add Category{" "}
               <ion-icon
                 style={{ fontSize: "24px" }}
                 name="add-circle-outline"
