@@ -94,19 +94,16 @@ function App() {
         <Route path="/products/:index">
           <Product />
         </Route>
-<<<<<<< HEAD
         <Route
           path="/products"
           render={({ match }) => (
             <Catalogue product={product} category={category} match={match} />
           )}
         />
-=======
         <Route path="/cart">
           <Cart/>
         </Route>
         <Footer />
->>>>>>> a031dc4bc08168a8485bb6a82ffef583231c37b3
       </Switch>
     </Router>
   );
