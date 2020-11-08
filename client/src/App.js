@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
+import Cart from "./components/_cart/cart.js";
 import Footer from "./components/footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
@@ -20,6 +21,7 @@ import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboard
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
 import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct";
+
 
 const getProduct = axios.get("http://localhost:3002/products");
 const getCategory = axios.get("http://localhost:3002/categories");
@@ -92,14 +94,20 @@ function App() {
         <Route path="/products/:index">
           <Product />
         </Route>
+<<<<<<< HEAD
         <Route
           path="/products"
           render={({ match }) => (
             <Catalogue product={product} category={category} match={match} />
           )}
         />
+=======
+        <Route path="/cart">
+          <Cart/>
+        </Route>
+        <Footer />
+>>>>>>> a031dc4bc08168a8485bb6a82ffef583231c37b3
       </Switch>
-      <Footer />
     </Router>
   );
 }
