@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
+import Cart from "./components/_cart/cart.js";
 import Footer from "./components/footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
@@ -19,6 +20,7 @@ import Product from "./components/_product/product";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
+
 
 const getProduct = axios.get("http://localhost:3002/products");
 const getCategory = axios.get("http://localhost:3002/categories");
@@ -79,8 +81,11 @@ function App() {
         <Route path="/dashboard/category/list">
           <CategoryList />
         </Route>
+        <Route path="/cart">
+          <Cart/>
+        </Route>
+        <Footer />
       </Switch>
-      <Footer />
     </Router>
   );
 }

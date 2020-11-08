@@ -1,4 +1,15 @@
-let carts = document.querySelectorAll();
+import React from 'react';
+
+const Cart = () => {
+
+    return (
+        <div> My cart</div>
+
+    )
+}
+
+
+/*let carts = document.querySelectorAll();
 
 for(let i=0; i < carts.length; i++) {
     carts[i].addEventListener('click', ()=> {
@@ -6,6 +17,7 @@ for(let i=0; i < carts.length; i++) {
         totalCost(products[i])
     })
 }
+
 
 function onLoadCartNumbers() {
     let productNumbers = localStorage.getItem('cartNumbers');
@@ -95,4 +107,6 @@ function displayCart() {
     }
 }
     onLoadCartNumbers();
-    displayCart();
+    displayCart();*/
+
+    export default Cart;
