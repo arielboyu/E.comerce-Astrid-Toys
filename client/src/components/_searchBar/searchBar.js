@@ -22,12 +22,12 @@ export default function SearchBar({handlerSearch}) {
     <>
     <form onSubmit={handlerSubmit} className="form-inline d-none d-md-block">
       <input onChange={handlerInput} className="form-control mr-sm-2" type="text" placeholder="Search . . " aria-label="Search"></input>
-      <NavLink to={{
+      {/* <NavLink to={{
     pathname: "/products",
     search: `?name=${search}`
-  }}>
+  }}> */}
         <button className="btn btn-dark my-2 my-sm-0" type="submit">Submit</button>
-      </NavLink>
+      {/* </NavLink> */}
     </form>
     {/* {flag? <ProductList product={search} />:<></>} */}
     </>
