@@ -54,13 +54,13 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
 // Retorna todos los productos que tengan {valor} en su nombre o descripcion.
 //ATENCION: NO ES CASE SENSITIVE.
 server.get("/search", (req, res, next) => {
-	var data = req.query.name
-	// console.log("esto es la data: "+data)
+	var name = req.query.name
+	console.log("esto es la data: "+name)
 	Product.findAll({
 		where: {
 		  [Op.or]: {
 			name: {
-			  [Op.substring]: data,
+			  [Op.substring]: name,
 			}
 		  },
 		},

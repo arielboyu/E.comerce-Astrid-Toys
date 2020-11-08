@@ -25,6 +25,7 @@ const getCategory = axios.get("http://localhost:3002/categories");
 function App() {
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
+  const [productSearch, setProductSearch] = useState([]);
 
   useEffect(() => {
     getProduct.then((res) => {
@@ -35,12 +36,25 @@ function App() {
     });
   }, [product, category]);
 
+  //EventSearchBar>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  const handlerSearch =(search)=>{
+    axios.get(`http://localhost:3002/products/search?name=${search}`)
+      .then(res => {
+        setProductSearch(res.data)
+        console.log(res.data)
+      })
+  }
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
   return (
     <Router>
-      <Navbar category={category} />
+      <Navbar handlerSearch={handlerSearch} category={category} />
       <Switch>
         <Route path="/products/:index">
           <Product />
+        </Route>
+        <Route path="/products?">
+          <Catalogue product={productSearch} category={category} />
         </Route>
         <Route path="/products">
           <Catalogue product={product} category={category} />
