@@ -19,9 +19,8 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn, Product, Category } = require("./src/db.js");
-const DataProducts = require ("./dataProducts.js"); //importo este modulo para cargar las tablas.
+const DataProducts = require("./dataProducts.js"); //importo este modulo para cargar las tablas.
 const DataCategories = require("./dataCategories.js");
-
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
@@ -31,38 +30,51 @@ conn.sync({ force: true }).then(() => {
     /* ------------------------------------------------------- */
     //INSTANCIAMOS MODELOS DE LA TABLA Y SALVAMOS DATOS
     //Hacer un Create es lo mismo que hacer un Build y luego Save de Sequelize.
+    // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE CATEGORIAS
+    var categories = [];
+    async function cargarCategories() {
+      for (let i = 0; i < DataCategories.length; i++) {
+        var category = await Category.create({
+          name: DataCategories[i].name,
+          description: DataCategories[i].description,
+        });
+        categories.push(category)
+      }
+    }
+    cargarCategories();
+    console.log("Categorias cargadas");
+    //para testear subcategorias mas adelante
+    //esta funcion retorna una subcategoria random
+    function getSubCategory() {
+      const subCategories = ["Harry Potter", "Avengers"];
+      return subCategories[Math.floor(Math.random() * subCategories.length)];
+    }
+
     async function cargarTablas() {
       for (let i = 0; i < DataProducts.length; i++) {
-        await Product.create({
+        var product = await Product.create({
           name: DataProducts[i].name,
           description: DataProducts[i].description,
           price: DataProducts[i].price,
           stock: DataProducts[i].stock,
         });
+        //la siguiente linea relaciona el producto que acabo de crear
+        //con una categoria random
+        product.addCategories(categories[Math.floor(Math.random() * categories.length)])
       }
+      
       //Las siguientes lineas HACEN LO MISMO:
       //Para relacionar un producto con una categoria
       //product.addCategories([category])
       //Para relacionar una categoria con un producto
       //category.addCategories([product])
-
     }
     cargarTablas();
     console.log("tablas cargadas");
-
-    // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE CATEGORIAS
-    async function cargarCategories() {
-      for (let i = 0; i < DataCategories.length; i++) {
-        await Category.create({
-          name: DataCategories[i].name,
-          description: DataCategories[i].description,
-        });
-      }
-    }
-    cargarCategories();
-    console.log("Categorias cargadas");
-  /* ------------------------------------------------------- */
-
     
+    //products[Math.floor(Math.random() * products.length)].addCategories(categories[Math.floor(Math.random() * categories.length)])
+    
+
+    /* ------------------------------------------------------- */
   });
 });

@@ -13,4 +13,5 @@ const DataCategories = [
     }
 ]
 
+
 module.exports = DataCategories;
