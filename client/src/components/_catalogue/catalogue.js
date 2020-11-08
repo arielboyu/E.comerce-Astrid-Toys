@@ -15,9 +15,6 @@ const Catalogue = ({ product, category }) => {
           </div>
         </div>
       </div>
-      <div className="bg-danger col-12 text-center p-5 text-white">
-       © 2020 ASTRID TOYS - Todos los derechos reservados
-      </div>
     </>
   );
 };
