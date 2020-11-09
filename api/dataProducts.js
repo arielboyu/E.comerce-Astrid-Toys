@@ -107,7 +107,7 @@ const DataProducts = [{
     stock: returnRandom(),
   },
   {
-    name: 'Maximiliano',
+    name: 'Maxwell',
     description: 'Game',
     price: returnRandom(),
     stock: returnRandom(),

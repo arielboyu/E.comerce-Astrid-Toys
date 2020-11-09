@@ -13,7 +13,7 @@ export default function ProductCard({ product }) {
   const { index } = useParams();
   return (
     <Link className="text-decoration-none" to={`/products/${product.id}`}>
-      <div style={carta} className="card m-2 p-1">
+      <div style={carta} className="card mx-2 m-1 p-2 shadow">
         <div style={imagen}></div>
         <div className="card-body">
           <h3 className="m-0">{product.name}</h3>

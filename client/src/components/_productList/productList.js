@@ -41,10 +41,9 @@ const ProductList = ({ product, match }) => {
 
   return (
     <div>
-      <h2 className="py-3 pl-5">{tituloCatalogo}</h2>
-      <div className="d-flex flex-wrap ml-2 text-center">
+      <div className="d-flex flex-wrap ml-2 justify-content-center justify-content-md-start text-center">
         { isCatalogue && product.map((p) => (p.active && <ProductCard product={p} />))}
-        { !isCatalogue && productos.map((p) => (<ProductCard product={p} />))} 
+        { !isCatalogue && productos.map((p) => (p.active && <ProductCard product={p} />))} 
       </div>
     </div>
   );
