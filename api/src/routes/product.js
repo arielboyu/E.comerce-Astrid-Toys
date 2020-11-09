@@ -190,24 +190,14 @@ server.get("/search/:category", (req, res) => {
       name: categoryName,
     }
   }).then((category) => {
-    console.log(category)
     category.getProducts().then((products) => {
       console.log("entre acá");
       res.send(products);
     });
   })
-/*   Product.findAll({
-    where: {
-      description: req.params.category,
-    },
-  })
-    .then((r) => {
-      console.log("entre acá");
-      res.send(r);
-    }) */
     .catch((err) => {
       console.log("entre acá" + err);
-      send.status(404);
+      res.sendStatus(404);
     });
 });
 

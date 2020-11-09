@@ -21,10 +21,12 @@ const server = require("./src/app.js");
 const { conn, Product, Category } = require("./src/db.js");
 const DataProducts = require("./dataProducts.js"); //importo este modulo para cargar las tablas.
 const DataCategories = require("./dataCategories.js");
+const { reset } = require("nodemon");
 
 // Syncing all the models at once.
 //force = true RESETEA DB force = false NO RESETEA DB
-conn.sync({ force: false }).then(() => {
+//var resetDB = true;
+conn.sync({ force: true }).then(() => {
   server.listen(3002, () => {
     console.log("%s listening at 3002"); // eslint-disable-line no-console
 
@@ -42,7 +44,8 @@ conn.sync({ force: false }).then(() => {
         categories.push(category)
       }
     }
-    cargarCategories();
+     cargarCategories();
+    
     console.log("Categorias cargadas");
     //para testear subcategorias mas adelante
     //esta funcion retorna una subcategoria random
@@ -62,6 +65,7 @@ conn.sync({ force: false }).then(() => {
         //la siguiente linea relaciona el producto que acabo de crear
         //con una categoria random
         product.addCategories(categories[Math.floor(Math.random() * categories.length)])
+          
       }
       //Las siguientes lineas HACEN LO MISMO:
       //Para relacionar un producto con una categoria
