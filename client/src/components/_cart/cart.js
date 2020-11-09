@@ -1,112 +1,106 @@
-import React from 'react';
+//import React from 'react';
+import React, { useState } from "react";
+import {Link} from "react-router-dom";
 
-const Cart = () => {
+//let carrito = [];
 
-    return (
-        <div> My cart</div>
+//cart -product cart o pedido   
+    const Cart = () => {
+        const [cart, setCart]= useState([
+            {
+              id: 1,
+              name: "Harry Potter",
+              description: "Un funko de Harry Potter",
+              price: 99,
+              stock: 89,
+              image: null,
+              active: true
+            },
+            {
+              id: 2,
+              name: "Spiderman",
+              description: "Un funko de Spiderman",
+              price: 80,
+              stock: 16,
+              image: null,
+              active: true
+            },
+            {
+              id: 3,
+              name:" Hulk",
+              description:" Un funko de Hulk",
+              price: 42,
+              stock: 51,
+              image: null,
+              active: true
+            },
+            {
+              id: 4,
+              name: "Tai",
+              description: "Un funko de Tai",
+              price: 10,
+              stock: 5,
+              image: null,
+              active: true
+            },
+            {
+              id: 5,
+              name: "Bart",
+              description: "Un funko de Bar",
+              price: 54,
+              stock: 53,
+              image: null,
+              active: true
+            },
+            {
+              id: 6,
+              name: "Capitan",
+              description: "Serie",
+              price: 38,
+              stock: 76,
+              image: null,
+              active: true
+            }]);
 
+        /*function addCart() { 
+            setCart('My Shopping Cart');
+         }*/
+      if(cart) {
+        return (
+            <table>
+                {cart.map((function) => (
+                    <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Units</th>
+                    <th>Description</th>
+                    <th>Delete Item</th>
+                    </tr>
+                )  
+            )       
+                  <button onClick ={() => addCart() } id="boton-vaciar" class="btn btn-danger m-2">Add to Cart</button>
+                  <h1> {cart} </h1>
+          
+                  <button id="boton-vaciar" class="btn btn-danger m-2">Empty Cart</button>
+                     <h1> My Cart is empty</h1>
+              </table>  
+          )
+      }
+    
+     export default Cart;
+
+
+    /* Carrito --> get. para traer datos. Se llena con una tabla de pedidos.
+    (get = query = ir a la tabla = obtener datosTabla) SELECT * FROM ('pedidos') --> me traigo toda la tabla (BD)
+    listaadoProductos = setear el estado con lo que traigo del get. 
+    mapear =setear estado local = el get devuelve array y este useState. useffect (is behind th scene /set my state local)
+ 
+    render( mapear pedidos --> 
+        mostrarlos por pantalla como tabla
+        productos --> tabla button onClick()=> { } eliminarProducto(x) 
     )
-}
 
-
-/*let carts = document.querySelectorAll();
-
-for(let i=0; i < carts.length; i++) {
-    carts[i].addEventListener('click', ()=> {
-        cartsNumbers(products[i]);
-        totalCost(products[i])
-    })
-}
-
-
-function onLoadCartNumbers() {
-    let productNumbers = localStorage.getItem('cartNumbers');
-
-    if(productNumbers) {
-        document.querySelector('.cart').textContent= 1;
-    }
-}
-function cartsNumbers(product) {
-    let productNumbers = localStorage.getItem('cartNumbers');
-      productNumbers = parseInt(productNumbers);
-      if(productNumbers) {
-        localStorage.setItem('cartNumbers', productNumbers +1);
-        document.querySelector('.cart').textContent= productNumbers + 1;
-      } else {
-          localStorage.setItem('cartNumbers', 1);
-        document.querySelector('.cart').textContent= 1;
-    }
-    setItems(product);
-}
-
-//usar id o tags
-function setItems(product) {
-    let cartItems = localStorage.getItem('productsInCart');
-    cartItems= JSON.parse(cartItems);
-
-    if(cartItems !== null) {
-        if (cartItems[product.id] == undefined) {
-            cartItems = {
-                ...cartItems,
-                [product.id]: product
-            }
-        }
-        cartItems[product.id].inCart += 1;
-    } else {
-        product.inCart= 1;
-        cartItems = {
-            [product.id]: product
-        }
-    }
-
-    localStorage.setItem('productsInCart', JSON.stringify(cartItems));
-}
-
-function totalCost(product) {
-    let cartCost = localStorage.getItem('totalCost');
-
-    if(cartCost !== null) {
-        cartCost = parseInt(cartCost);
-        localStorage.setItems('totalCost', cartCost + product.price);
-    } else {
-        localStorage.setItems('totalCost', product.price);
-    }
-}
-
-function displayCart() {
-    let cartItems= localStorage.getItems('productsInCart');
-    cartItems= JSON.parse(cartItems);
-    let productContainer = document.querySelector(".products");
-
-    if(cartItems && productContainer) {
-        productContainer.innerHTML = '';
-        Object.value(cartItems).map(item => {
-            productContainer.innerHTML +=`
-            <div class= "product">
-                <ion-icon name= "close-circle"></ion-icon>
-                <img src="./images/${item.id}.jpg"/>
-                <span> ${item.name}</span>
-            </div>
-                 <div class ="price">${item.price},00</div>
-                 <div class="quantity">
-            </div>
-                <ion-icon class="decrease" name="arrow-dropleft-circle"></ion-icon>
-            </div>
-                <span>${item.inCart}</span>
-                <ion-icon class="increase" name="arrow-dropright-circle"></ion-icon>
-            </div>
-            <div class="total"> $${itemInCart * item.price},00</div>`
-            ;
-        });
-
-        productContainer.innerHTML +=`
-        <div class="basketTotalContainer">
-            <h4 class="basketTotalTitle"> basket Total</h4>
-            <h4 class="basketTotal"> $${cartCost},00</h4>`
-        ;
-    }
-}
-    onLoadCartNumbers();
-    displayCart();*/
-
-    export default Cart;
+    boton Vaciar carrito --> elimina contenido de la tabla. deleteItems  (devuelve el stock)
+    boton comprar -->  vaciar tabla pedidos (resta productos del stock)
+ 
+    pedidos --> */
