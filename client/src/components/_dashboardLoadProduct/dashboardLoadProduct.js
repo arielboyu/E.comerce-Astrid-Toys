@@ -116,7 +116,7 @@ function DashboardLoadProduct() {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="productDescription">Example textarea</label>
+          <label htmlFor="productDescription">Description</label>
           <textarea
             className="form-control"
             name="description"
