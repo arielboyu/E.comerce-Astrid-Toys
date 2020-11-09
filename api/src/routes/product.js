@@ -2,6 +2,12 @@ const server = require("express").Router();
 const { Product, Category } = require("../db.js");
 const { Op } = require("sequelize");
 
+//esta funcion pasa la primer letra de un word a mayus
+function capitalize(word) {
+  word = word.toLowerCase()
+  return word[0].toUpperCase() + word.slice(1);
+}
+
 server.get("/actives", (req, res, next) => {
   Product.findAll({
     where: {
@@ -49,29 +55,26 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
 // Retorna todos los productos que tengan {valor} en su nombre o descripcion.
 //ATENCION: NO ES CASE SENSITIVE.
 server.get("/search", (req, res, next) => {
-    var data = req.query.data
-    console.log("esto es la data: "+ data)
-    Product.findAll({
-        where: {
-          [Op.or]: {
-            name: {
-              [Op.iLike]: `%${data}%`,
-            },
-            description: {
-              [Op.iLike]: `%${data}%`,
-            },
-          },
+  var data = req.query.data;
+  console.log("esto es la data: " + data);
+  Product.findAll({
+    where: {
+      [Op.or]: {
+        name: {
+          [Op.iLike]: `%${data}%`,
         },
-      })
-      .then((products) => {
-		console.log(products)
-		res.send(products);
-		
-      })
-      .catch(next);
-  });
-  
-  
+        description: {
+          [Op.iLike]: `%${data}%`,
+        },
+      },
+    },
+  })
+    .then((products) => {
+      console.log(products);
+      res.send(products);
+    })
+    .catch(next);
+});
 
 // s25 : Crear ruta para crear/agregar Producto
 // POST /products
@@ -80,7 +83,10 @@ server.get("/search", (req, res, next) => {
 
 // Este post agrega un nuevo producto
 server.post("/", (req, res) => {
-  const { name, description, price, stock, image } = req.body;
+  const { name, description, price, stock, image, category } = req.body;
+  //const categoryId = 0;
+  // Category.findAll({where: {name:category}}).then((res)=>
+  //{categoryId = res.id} )
   if (name && description && price && stock) {
     Product.create({
       name,
@@ -91,8 +97,9 @@ server.post("/", (req, res) => {
     })
       .then((productCreated) => {
         //buscar categoria a la que tengo que agregar el producto
-        //productCreated.addCategories(categoria)
-        res.status(201).send(productCreated);
+        Category.findAll({ where: { name: category } }).then((res) =>
+          productCreated.addCategories(res)
+        );
       })
       .catch((err) => {
         console.log("Error en POST" + err);
@@ -177,20 +184,21 @@ server.get("/:id", (req, res, next) => {
 
 // RUTA PARA TRAER LOS PRODUCTOS CORRESPONDIENTES A UNA CATEGORIA EN PARTICULAR
 server.get("/search/:category", (req, res) => {
-  Product.findAll({
+  var categoryName = capitalize(req.params.category);
+  Category.findOne({
     where: {
-      description: req.params.category,
-    },
-  })
-    .then((r) => {
+      name: categoryName,
+    }
+  }).then((category) => {
+    category.getProducts().then((products) => {
       console.log("entre acá");
-      res.send(r);
-    })
+      res.send(products);
+    });
+  })
     .catch((err) => {
-		console.log("entre acá" + err)
-		send.status(404)
-	}
-	);
+      console.log("entre acá" + err);
+      res.sendStatus(404);
+    });
 });
 
 module.exports = server;

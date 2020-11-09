@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../_productCard/productCard";
 import axios from "axios";
 
-const getSerie = axios.get(`http://localhost:3002/products/search/Serie`);
-const getMovie = axios.get(`http://localhost:3002/products/search/Movie`);
-const getGame = axios.get(`http://localhost:3002/products/search/Game`);
+const getSerie = axios.get(`http://localhost:3002/products/search/Series`);
+const getMovie = axios.get(`http://localhost:3002/products/search/Movies`);
+const getGame = axios.get(`http://localhost:3002/products/search/Games`);
 
 const ProductList = ({ product, match }) => {
   const [productos, setProductos] = useState([]);
