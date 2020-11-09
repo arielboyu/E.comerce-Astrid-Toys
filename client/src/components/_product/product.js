@@ -20,26 +20,27 @@ export default function Product() {
     margin: "10px",
     textAlign: "center",
     padding: "10px",
-    width: "600px",
+    width: "700px",
     height: "350px",
   };
   const imagen = {
-    backgroundColor: "DodgerBlue",
-    width: "300px",
-    height: "80%",
+    
+    height: "90%",
     margin: "20px auto",
   };
   if (fuko) {
     return (
-      <div style={card} className="bg-primary d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded-right rounded-left">
+      <div style={card} className="border d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded shadow">
         {fuko.map((f) => (
           <>
-            <div style={imagen}></div>
-            <div className="m-5 p-3">
+            <div style={imagen}>
+            <img style={imagen} className="border-right" src="https://www.cellshop.com/342978-large_default/boneca-harley-quinn-dc-super-heroes-funko-pop-301.jpg"></img>
+            </div>
+            <div className="m-5 p-3 col-6">
               <h1>{f.name}</h1>
-              <h4 className="text-white">{f.description}</h4>
+              <h4 className="text-info">{f.description}</h4>
               <h5 className="p-1 font-weight-bold"> ${f.price}</h5>
-              <p className="pt-3">Stock:{f.stock}</p>
+              <p className="pt-3">Stock: {f.stock}</p>
               <p> ⭐⭐⭐⭐⭐ </p>
               <button className="btn btn-danger">Add to Cart</button>
             </div>
