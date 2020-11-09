@@ -49,8 +49,8 @@ function DashboardLoadProduct() {
   };
 
   return (
-    <div className="container">
-      <h2>Load Product</h2>
+    <div className="container d-flex flex-column mx-auto my-5 ">
+      <h2 className="display-3">Load Product</h2>
       <form onSubmit={handlerSubmit}>
         <div className="form-group">
           <label htmlFor="productName">Product Name</label>

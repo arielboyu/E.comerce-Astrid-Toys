@@ -26,11 +26,11 @@ function DashboardLoadCategory() {
   }
 
   return (
-    <div>
-      <h2 class="display-4 ">New Category</h2>
+    <div className="container d-flex flex-column mx-auto my-5 col-sm-12 col-md-8 col-lg-6">
+      <h2 class="display-3 mb-4">New Category</h2>
       <form onSubmit={handlerFormSubmit}>
-        <div className="form-group col-6">
-          <label htmlFor="categoryName" className="d-none">
+        <div className="form-group">
+          <label htmlFor="categoryName" className="">
             Name:
           </label>
           <input
@@ -42,7 +42,7 @@ function DashboardLoadCategory() {
             onChange={handlerChange}
           />
         </div>
-        <div className="form-group col-6">
+        <div className="form-group">
           <label htmlFor="categoryDescription">Description:</label>
           <textarea
             className="form-control"
