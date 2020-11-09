@@ -117,7 +117,7 @@ server.post("/", (req, res) => {
 // Este put modifica el producto al que se apunta por parámetro
 server.put("/:id", (req, res) => {
   const product = req.params.id;
-  const { name, description, price, stock, image, active } = req.body;
+  const { name, description, price, stock, image, active, category } = req.body;
   Product.findOne({
     where: {
       id: product,
@@ -131,6 +131,12 @@ server.put("/:id", (req, res) => {
         res.status(400).send("No se encontró producto con ese ID");
       }
     })
+    .then((productUpdated) => {
+      //buscar categoria a la que tengo que agregar el producto
+      Category.findAll({ where: { name: category } }).then((res) =>
+        productUpdated.addCategories(res)
+      );
+    })   
     .catch((err) => {
       res.status(400).send("Los campos enviados no son correctos" + err);
     });
@@ -160,15 +166,6 @@ server.delete("/:productID", (req, res) => {
     });
 });
 
-//Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
-server.get("/products/:id", (req, res, next) => {
-  //const { id, name, description, category, image } = req.body;
-  Product.findOne({ where: { id: req.params.id } })
-    .then((product) => {
-      res.status(201).send(product);
-    })
-    .catch(next);
-});
 
 server.get("/:id", (req, res, next) => {
   Product.findAll({
@@ -178,6 +175,20 @@ server.get("/:id", (req, res, next) => {
   })
     .then((r) => {
       res.send(r);
+    })
+    .catch(next);
+});
+
+//Devuelve las categorias de un producto
+server.get("/:id/categories", (req, res, next) => {
+  Product.findOne({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((product) => {
+      product.getCategories()
+      .then((categories)=>res.send(categories))
     })
     .catch(next);
 });
