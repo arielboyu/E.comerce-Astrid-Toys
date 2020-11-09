@@ -63,7 +63,6 @@ function UpdateProduct() {
             <select
               className="form-control"
               name="category"
-              // value={productUpdate.category}
               onChange={handlerChange}
             >
               {category.map((c) => (
