@@ -23,7 +23,8 @@ const DataProducts = require("./dataProducts.js"); //importo este modulo para ca
 const DataCategories = require("./dataCategories.js");
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+//force = true RESETEA DB force = false NO RESETEA DB
+conn.sync({ force: false }).then(() => {
   server.listen(3002, () => {
     console.log("%s listening at 3002"); // eslint-disable-line no-console
 
@@ -62,7 +63,6 @@ conn.sync({ force: true }).then(() => {
         //con una categoria random
         product.addCategories(categories[Math.floor(Math.random() * categories.length)])
       }
-      
       //Las siguientes lineas HACEN LO MISMO:
       //Para relacionar un producto con una categoria
       //product.addCategories([category])

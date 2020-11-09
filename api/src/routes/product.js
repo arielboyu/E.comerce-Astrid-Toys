@@ -2,6 +2,12 @@ const server = require("express").Router();
 const { Product, Category } = require("../db.js");
 const { Op } = require("sequelize");
 
+//esta funcion pasa la primer letra de un word a mayus
+function capitalize(word) {
+  word = word.toLowerCase()
+  return word[0].toUpperCase() + word.slice(1);
+}
+
 server.get("/actives", (req, res, next) => {
   Product.findAll({
     where: {
@@ -178,7 +184,19 @@ server.get("/:id", (req, res, next) => {
 
 // RUTA PARA TRAER LOS PRODUCTOS CORRESPONDIENTES A UNA CATEGORIA EN PARTICULAR
 server.get("/search/:category", (req, res) => {
-  Product.findAll({
+  var categoryName = capitalize(req.params.category);
+  Category.findOne({
+    where: {
+      name: categoryName,
+    }
+  }).then((category) => {
+    console.log(category)
+    category.getProducts().then((products) => {
+      console.log("entre acá");
+      res.send(products);
+    });
+  })
+/*   Product.findAll({
     where: {
       description: req.params.category,
     },
@@ -186,7 +204,7 @@ server.get("/search/:category", (req, res) => {
     .then((r) => {
       console.log("entre acá");
       res.send(r);
-    })
+    }) */
     .catch((err) => {
       console.log("entre acá" + err);
       send.status(404);
