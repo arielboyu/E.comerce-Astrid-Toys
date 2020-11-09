@@ -26,7 +26,7 @@ const Catalogue = ({ product, category, match }) => {
       </div>
       <div className="container-fluid p-5 ">
         <div className="row">
-          <div className="bg-primary d-none d-sm-flex col-xs-11 col-s-5 col-md-5 col-lg-4 col-xl-3  flex-column pt-3 mx-3 m-1 mb-4 rounded ">
+          <div className="border shadow d-none d-sm-flex col-xs-11 col-s-5 col-md-5 col-lg-4 col-xl-3  flex-column pt-3 mx-3 m-1 mb-4 rounded ">
             <CategoryList category={category} />
           </div>
           <div className="d-flex col-xs-11 col-s-6 col-md-5 col-lg-6 col-xl-8 pb-3 mx-3 mb-1 rounded ">

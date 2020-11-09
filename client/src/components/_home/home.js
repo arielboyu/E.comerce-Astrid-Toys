@@ -33,7 +33,7 @@ const Home = () => {
                 <span className="sr-only">Next</span>
             </a>
         </div>
-        <Link to ="/products"><button className="btn btn-danger text-white btn-lg mb-5">INGRESAR A LA TIENDA</button></Link>
+        <Link to ="/products"><button className="btn btn-outline-dark btn-lg mb-5">INGRESAR A LA TIENDA</button></Link>
         </div>
     ) 
 }

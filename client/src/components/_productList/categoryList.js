@@ -9,7 +9,7 @@ export default function CategoryList({category}){
             {/* MAP COMENTADO */}
             <ul className="list-unstyled ">
                 {category.map((cat)=>(
-                    <Link to={`/categories/${cat.name.toLowerCase()}`} className="text-decoration-none"><li><h4 className="ml-4 text-white">{cat.name}</h4></li></Link>
+                    <Link to={`/categories/${cat.name.toLowerCase()}`} className="text-decoration-none"><li><h4 className="ml-4 text-info">{cat.name}</h4></li></Link>
                 ))}
             </ul>
             <h3 className="mt-5">Sub-Categories</h3>
