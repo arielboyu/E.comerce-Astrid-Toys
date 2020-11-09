@@ -5,7 +5,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Link,
   useParams,
 } from "react-router-dom";
 import CategoryList from "./components/_categoriesList/categoriesList";
@@ -58,9 +57,6 @@ function App() {
       <Switch>
 
         <Route exact path="/" component={Home}/>
-        <Route path="/products/:index">
-          <Product />
-        </Route>
         <Route path="/dashboard/category/create">
           <DashboardLoadCategory />
         </Route>
@@ -76,6 +72,7 @@ function App() {
         <Route path="/dashboard/category/list">
           <CategoryList />
         </Route>
+           
         <Route
           path="/categories/series"
           render={({ match }) => (
@@ -94,6 +91,14 @@ function App() {
             <Catalogue product={product} category={category} match={match} />
           )}
         />
+
+        <Route
+          path="/categories/:category"
+          render={({ match }) => (
+            <Catalogue product={product} category={category} match={match} />
+          )}
+        />
+
         <Route path="/products?search">
           <Catalogue product={productSearch} category={category} />
         </Route>
