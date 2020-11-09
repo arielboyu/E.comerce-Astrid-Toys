@@ -12,22 +12,25 @@ function UpdateProduct() {
   const { id } = useParams();
   useEffect(() => {
     axios.get(`http://localhost:3002/products/${id}`).then((res) => {
-
-      setProduct(res.data[0]);//esto es porque devuelve un array y adentro el obj product
+      let initialState = res.data[0]
       setLoad(true);
-      console.log('useEffect:',productUpdate);
-    });
+      axios.get(`http://localhost:3002/products/${id}/categories`).then((res) =>{
+        initialState.category = res.data[0].name
+        setProduct(initialState)
+      })
+    })
+
     getCategory.then((res) => {
       setCategory(res.data);
     });
   }, [load]);
 
   const handlerChange = (e) => {
-    console.log("entra al handlerChange");
+    console.log("entra al handlerChange: ",e.target.name,"-",e.target.value );
     setProduct({ ...productUpdate, [e.target.name]: e.target.value });
   };
   const handlerSubmit = (e) => {
-    console.log("entra al handlerSubmit");
+    console.log("entra al handlerSubmit: ", productUpdate);
     axios
       .put(`http://localhost:3002/products/${id}`, productUpdate)
       .then((r) => {
@@ -60,11 +63,11 @@ function UpdateProduct() {
             <select
               className="form-control"
               name="category"
-              value={productUpdate.category}
               onChange={handlerChange}
             >
-              <option></option>
               {category.map((c) => (
+                c.name===productUpdate.category?
+                <option selected = "selected">{productUpdate.category}</option>:
                 <option>{c.name}</option>
               ))}
             </select>
@@ -173,7 +176,7 @@ function UpdateProduct() {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">Confirmated.</div>
+              <div class="modal-body">Confirmed.</div>
               <div class="modal-footer">
                 <button
                   type="button"
