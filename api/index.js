@@ -18,7 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product, Category } = require("./src/db.js");
+const { conn, Product, Category, Order,OrderDetails } = require("./src/db.js");
 const DataProducts = require("./dataProducts.js"); //importo este modulo para cargar las tablas.
 const DataCategories = require("./dataCategories.js");
 const { reset } = require("nodemon");
