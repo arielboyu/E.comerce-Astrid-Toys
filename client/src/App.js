@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
-import Home from "./components/_home/home.js"
+import Home from "./components/_home/home.js";
 import Cart from "./components/_cart/cart.js";
 import Login from "./components/_login/login.js";
 import Footer from "./components/_footer/footer.js";
@@ -23,42 +23,27 @@ import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLo
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
 import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct";
 
-
-
-const getProduct = axios.get("http://localhost:3002/products");
-const getCategory = axios.get("http://localhost:3002/categories");
-
 function App() {
-  const [product, setProduct] = useState([]);
-  const [category, setCategory] = useState([]);
-  const [productSearch, setProductSearch] = useState([]);
-
-  useEffect(() => {
-    getProduct.then((res) => {
-      setProduct(res.data);
-    });
-    getCategory.then((res) => {
-      setCategory(res.data);
-    });
-  }, [product, category, productSearch ]);
-
-  //EventSearchBar>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  const handlerSearch = (search) => {
-    axios
-      .get(`http://localhost:3002/products/search?name=${search}`)
-      .then((res) => {
-        setProductSearch(res.data);
-        console.log(res.data);
-      });
-  };
-  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
   return (
     <Router>
-      <Navbar handlerSearch={handlerSearch} category={category} />
+      <Navbar />
       <Switch>
-
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/" component={Home} />
+        <Route path="/products/category/nav/:cat">
+          <Catalogue />
+        </Route>
+        <Route exact path="/products/id/:index">
+          <Product />
+        </Route>
+        <Route path="/products/category/">
+          <Catalogue />
+        </Route>
+        <Route path="/products?search">
+          <Catalogue />
+        </Route>
+        <Route path="/products">
+          <Catalogue />
+        </Route>
         <Route path="/dashboard/category/create">
           <DashboardLoadCategory />
         </Route>
@@ -74,55 +59,12 @@ function App() {
         <Route path="/dashboard/category/list">
           <CategoryList />
         </Route>
-           
-        <Route
-          path="/categories/series"
-          render={({ match }) => (
-            <Catalogue product={product} category={category} match={match} />
-          )}
-        />
-        <Route
-          path="/categories/movies"
-          render={({ match }) => (
-            <Catalogue product={product} category={category} match={match} />
-          )}
-        />
-        <Route
-          path="/categories/games"
-          render={({ match }) => (
-            <Catalogue product={product} category={category} match={match} />
-          )}
-        />
-
-        <Route
-          path="/categories/:category"
-          render={({ match }) => (
-            <Catalogue product={product} category={category} match={match} />
-          )}
-        />
-
-        <Route path="/products?search">
-          <Catalogue product={productSearch} category={category} />
-        </Route>
-        <Route path="/products/:index">
-          <Product />
-        </Route>
-        <Route
-          path="/products"
-          render={({ match }) => (
-            <Catalogue product={product} category={category} match={match} />
-          )}
-        />
-        <Route path="/login">
-          <Login/>
-        </Route>
         <Route path="/cart">
-          <Cart/>
+          <Cart />
         </Route>
       </Switch>
       <Footer />
     </Router>
   );
 }
-
 export default App;
