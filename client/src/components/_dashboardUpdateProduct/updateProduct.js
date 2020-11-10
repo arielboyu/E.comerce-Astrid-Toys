@@ -17,12 +17,10 @@ function UpdateProduct() {
       axios
         .get(`http://localhost:3002/products/${id}/categories`)
         .then((res) => {
-          console.log("getCatByID; ", res.data);
           initialState.categories = [];
           res.data.forEach((category) =>
             initialState.categories.push(category.name)
           );
-          console.log("initialState: ", initialState);
           setProduct(initialState);
         });
     });
@@ -38,7 +36,6 @@ function UpdateProduct() {
   };
 
   const handlerCategories = (e) => {
-    console.log("entra al handlerCategories: ", e.target.name, "-", e.target.value);
     let categoriesAct = productUpdate.categories
     if(categoriesAct && categoriesAct.includes(e.target.value)){
       let index = categoriesAct.indexOf(e.target.value)
@@ -49,11 +46,9 @@ function UpdateProduct() {
       categoriesAct.push(e.target.value);
     }
     setProduct({ ...productUpdate, categories: categoriesAct });
-    console.log("sale del handlerCategories: ",productUpdate)
   }; 
 
   const handlerSubmit = (e) => {
-    console.log("entra al handlerSubmit: ", productUpdate);
     axios
       .put(`http://localhost:3002/products/${id}`, productUpdate)
       .then((r) => {
@@ -81,11 +76,11 @@ function UpdateProduct() {
           />
         </div>
         <div className="form-row">
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-6 ">
             <label htmlFor="productCategory">Categories</label>
             {category.map((c) =>
               productUpdate.categories && productUpdate.categories.includes(c.name) ? (
-                <>
+                <div className="d-flex flex-column ml-4">
                 {/* Si encuentra que el producto esta en esa categoria, la checkea por default */}
                   <input
                     className="form-check-input"
@@ -99,9 +94,9 @@ function UpdateProduct() {
                   <label className="form-check-label" for={c.name}>
                     {c.name}
                   </label>
-                </>
+                </div>
               ) : (
-                <>
+                <div className="d-flex flex-column ml-4">
                   <input
                     className="form-check-input"
                     type="checkbox"
@@ -114,7 +109,7 @@ function UpdateProduct() {
                   <label className="form-check-label" for={c.name}>
                     {c.name}
                   </label>
-                </>
+                </div>
               )
             )}
           </div>
