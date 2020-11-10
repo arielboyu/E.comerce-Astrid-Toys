@@ -92,21 +92,23 @@ server.delete('/delete/:id', (req,res)=>{
 // S20 : Crear ruta para Modificar Categoria
 // PUT /products/category/:id
 // se crea el modelo de ruta modificar categoria, se actualizan los valores y retorna en la data la category  
-server.put('/products/category/:id',(req,res) =>{
+server.put('update/:id',(req,res) =>{
     const { name, description} = req.body;
-    Categories.findByPk(req.params.idCategory)
+    Category.findByPk(req.params.idCategory)
     .then((data) => {
       if (name) data.name = name;
       if (description) data.description = description;
       data.save();
       res
         .status(200)
-        .send( `Se ha actializado la categoria correctamente` );
+        .send( `Se ha actualizado la categoria correctamente` );
     })
     .catch((err) => {
       res.status(400).send(err);
     });
-})
+});
+
+
 
 
 module.exports=(server);
