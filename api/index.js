@@ -18,9 +18,10 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product, Category } = require("./src/db.js");
+const { conn, Product, Category, Order,OrderDetails, User } = require("./src/db.js");
 const DataProducts = require("./dataProducts.js"); //importo este modulo para cargar las tablas.
 const DataCategories = require("./dataCategories.js");
+const DataUsers = require("./dataUser.js")
 const { reset } = require("nodemon");
 
 // Syncing all the models at once.
@@ -33,6 +34,24 @@ conn.sync({ force: true }).then(() => {
     /* ------------------------------------------------------- */
     //INSTANCIAMOS MODELOS DE LA TABLA Y SALVAMOS DATOS
     //Hacer un Create es lo mismo que hacer un Build y luego Save de Sequelize.
+    
+    // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE USUARIOS
+    var usuarios = [];
+    async function cargarUsuarios() {
+      for (let i = 0; i < DataUsers.length; i++) {
+        var user = await User.create({
+          name: DataUsers[i].name,
+          lastname: DataUsers[i].lastname,
+          email: DataUsers[i].email,
+          password : DataUsers[i].password
+        });
+        usuarios.push(user)
+      }
+    }
+    cargarUsuarios();
+
+    console.log("Categorias cargadas");
+
     // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE CATEGORIAS
     var categories = [];
     async function cargarCategories() {
@@ -47,6 +66,7 @@ conn.sync({ force: true }).then(() => {
      cargarCategories();
     
     console.log("Categorias cargadas");
+
     //para testear subcategorias mas adelante
     //esta funcion retorna una subcategoria random
     function getSubCategory() {
