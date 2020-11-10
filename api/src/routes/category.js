@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Product,Category } = require('../db.js');
+const { Product, Category } = require('../db.js');
 
 
 // S17 : Crear ruta para agregar o sacar categorias de un producto.
