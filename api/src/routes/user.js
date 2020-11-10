@@ -32,4 +32,14 @@ server.post("/create", (req, res) => {
   }
 });
 
+server.delete('/delete/:id', (req,res)=>{
+  const id = req.params.id;
+  User.destroy({ where: { id } })
+  .then(user => 
+  res.status(200).send("se elimino la el usuario " + user  ))
+  .catch((err) => {
+   res.status(400).send(err);
+    });
+});
+
 module.exports = server;
