@@ -117,7 +117,7 @@ server.post("/", (req, res) => {
 // Este put modifica el producto al que se apunta por parámetro
 server.put("/:id", (req, res) => {
   const product = req.params.id;
-  const { name, description, price, stock, image, active, category } = req.body;
+  const { name, description, price, stock, image, active, categories } = req.body;
   Product.findOne({
     where: {
       id: product,
@@ -125,18 +125,27 @@ server.put("/:id", (req, res) => {
   })
     .then((product) => {
       if (product) {
-        product.update({ name, description, price, stock, image, active });
-        res.status(200).send(product);
+        product.update({ name, description, price, stock, image, active })
+        .then((productUpdated) => {
+          //elimina las categorias para luego setear el nuevo set
+          productUpdated.setCategories()
+          //recorre las categorias que llegan por body
+          categories.map((category)=>{
+            //buscar categoria a la que tengo que agregar el producto
+            Category.findAll({ where: { name: category } })
+            .then((res) =>
+            productUpdated.addCategories(res)
+            );
+          })
+
+        })
+        .then(res.status(200).send(product)) 
+        
       } else {
         res.status(400).send("No se encontró producto con ese ID");
       }
     })
-    .then((productUpdated) => {
-      //buscar categoria a la que tengo que agregar el producto
-      Category.findAll({ where: { name: category } }).then((res) =>
-        productUpdated.addCategories(res)
-      );
-    })   
+  
     .catch((err) => {
       res.status(400).send("Los campos enviados no son correctos" + err);
     });
