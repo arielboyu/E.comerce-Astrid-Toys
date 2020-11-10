@@ -38,6 +38,9 @@ Product.belongsToMany(Category, { through: "ProductCategory" });
 Category.belongsToMany(Product, { through: "ProductCategory" });
 Order.belongsToMany(Product, { through: "orderdetails" });
 Product.belongsToMany(Order, { through: "orderdetails" });
+User.hasMany(Order)
+Order.belongsTo(User)
+
 
 
 
