@@ -13,7 +13,7 @@ export default function ProductCard({ product }) {
   const { index } = useParams();
   return (
     <Link className="text-decoration-none" to={`/products/${product.id}`}>
-      <div style={carta} className="card mx-2 m-1 p-2 shadow">
+      <div style={carta} className="card mx-2 m-1 pt-3 p-2 shadow">
         <div style={imagen}>
           <img style={imagen} src="https://www.cellshop.com/342978-large_default/boneca-harley-quinn-dc-super-heroes-funko-pop-301.jpg"></img>
         </div>

@@ -11,6 +11,7 @@ import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
 import Home from "./components/_home/home.js"
 import Cart from "./components/_cart/cart.js";
+import Login from "./components/_login/login.js";
 import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
@@ -21,6 +22,7 @@ import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboard
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
 import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct";
+
 
 
 const getProduct = axios.get("http://localhost:3002/products");
@@ -111,6 +113,9 @@ function App() {
             <Catalogue product={product} category={category} match={match} />
           )}
         />
+        <Route path="/login">
+          <Login/>
+        </Route>
         <Route path="/cart">
           <Cart/>
         </Route>
