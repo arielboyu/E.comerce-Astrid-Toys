@@ -18,7 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product, Category, User } = require("./src/db.js");
+const { conn, Product, Category, Order,OrderDetails, User } = require("./src/db.js");
 const DataProducts = require("./dataProducts.js"); //importo este modulo para cargar las tablas.
 const DataCategories = require("./dataCategories.js");
 const DataUsers = require("./dataUser.js")
