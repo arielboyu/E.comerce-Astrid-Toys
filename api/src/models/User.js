@@ -5,31 +5,23 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define("product", {
+  sequelize.define("user", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
+    lastname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
       type: DataTypes.STRING,
       allowNull: true,
+      UNIQUE: true,
     },
-    price: {
-      type: DataTypes.INTEGER,
+    password: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    stock: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    image: {
-      type: DataTypes.BLOB,
-      allowNull: true,
-    },
-    active: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
-    }
   });
 };
-

@@ -6,15 +6,15 @@ const Cart = () => {
     return (
         <div className="d-flex flex-column text-center w-75 w-m-50 mx-auto mt-5">
             <div class="">
-                <h1 class="display-3">My cart</h1>
+                <h1 class="display-3 mb-4">My cart</h1>
                 <p class="lead">
-                    Aun no tienes productos agregados, visita nuestro sección de productos para empezar a comprar
+                    Your cart is empty
                 </p>
                 <hr class="my-2" />
                 <p class="lead">
                 <Link to="/products" className="text-decoration-none">
                     <button class="btn btn-primary btn-lg my-5">
-                        IR A LA TIENDA{" "}
+                        CONTINUE SHOPPING{" "}
                     </button>
                 </Link>
                 </p>

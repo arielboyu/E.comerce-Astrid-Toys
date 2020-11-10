@@ -11,6 +11,7 @@ import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
 import Home from "./components/_home/home.js";
 import Cart from "./components/_cart/cart.js";
+import Login from "./components/_login/login.js";
 import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
