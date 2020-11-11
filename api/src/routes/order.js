@@ -5,10 +5,11 @@ const { Order,Product,User, } = require('../db.js');
 // Frontend con direccion en componente orderTables.js
 // con path en http://localhost:3000/dashboard/users/list
 server.get('/', (req, res) => {
-    const whereStatement = {}
+    let whereStatement = {};
+    let state = req.query.state;
     //S44- agrega filtro por state si es enviado por query
-    if (req.query.state){
-        whereStatement = {where:{state:req.query.state}}
+    if (state){
+        whereStatement = {where:{state:state}}
     }
     Order.findAll(whereStatement,{
         include: [
