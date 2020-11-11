@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User } = require("../db.js");
+const { User,Order,Product } = require("../db.js");
 
 server.get("/", (req, res) => {
   User.findAll()
@@ -83,5 +83,18 @@ server.get("/:idUser/cart", (req, res) => {
 //funciones de instancias
 
 //fulanito.getOrders()
+
+// S45 : Crear Ruta que retorne todas las Ordenes de los usuarios
+server.get("/orders/:id", (req, res) => {
+  const id = req.params.id;
+  Order.findAll({
+    where: {
+      userId: id,
+    },
+  })
+    .then((r) => res
+    .status(200).json(r))
+})
+
 
 module.exports = server;

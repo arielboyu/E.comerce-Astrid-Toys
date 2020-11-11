@@ -8,7 +8,9 @@ export default function CategoriesList() {
   const [deleted, setDeleted] = useState(null);
   useEffect(() => {
     getCategory.then((res) => {
+      console.log(category)
       setCategory(res.data);
+      console.log(res)
     });
   }, []);
 
