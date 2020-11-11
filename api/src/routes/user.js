@@ -71,5 +71,12 @@ server.put('/:id',(req, res) => {
          });
 });
 
+server.get('/:idUser/cart', (req, res) => {
+  const idUsuario = req.params.idUser;
+    User.findOne({ where : {idUser: idUsuario} })
+})
+.then((User) => {
+  res.send(User.getOrders({ where: { state: 'PENDING' } }))
+});
 
 module.exports = server;
