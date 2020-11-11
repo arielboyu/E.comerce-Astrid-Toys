@@ -1,5 +1,6 @@
 const server = require("express").Router();
-const { User } = require("../db.js");
+const { User, Order, OrderDetails, Product } = require("../db.js");
+//const Product = require("../models/Product.js");
 
 server.get("/", (req, res) => {
   User.findAll()
@@ -76,6 +77,43 @@ server.get("/:idUser/cart", (req, res) => {
   });
 });
 
+//ruta para agregar un producto al carrito
+//testeada
+//maneja errores
+server.post("/:idUser/cart/", (req, res) => {
+  const idUser = req.params.idUser;
+  var { quantity, idProduct } = req.body;
+  Order.create({ state: "PENDING" })
+    .then((orden) => {
+      User.findOne({ where: { id: idUser } }).then((user) => {
+        if (user == null) {
+          res.send("no se encontro usuario");
+        } else {
+          orden.setUser(user).then((order) => {
+            Product.findOne({ where: { id: idProduct } }).then((myProduct) => {
+              if (myProduct == null) {
+                res.send("no se encontro producto");
+              } else {
+                order
+                  .addProduct(myProduct, {
+                    through: { price: myProduct.price, quantity: quantity },
+                  })
+                  .then((ord) => {
+                    res.send(ord);
+                  });
+              }
+            });
+          });
+        }
+      });
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
+/* through: { price: myProduct.price,
+  quantity: randomNum(100) }, */
 //funciones de modelos
 
 //var pepito = User.created({name: fulanito})
