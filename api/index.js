@@ -119,8 +119,9 @@ conn.sync({ force: true }).then(() => {
           state: DataOrders[i].state,
         });
         order.setUser(usuarios[Math.floor(Math.random() * usuarios.length)]);
-        order.addProduct(productsArray[randomNum(productsArray.length)], {
-          through: { price: randomNum(100),
+        var myProduct = productsArray[randomNum(productsArray.length)];
+        order.addProduct(myProduct, {
+          through: { price: myProduct.price,
                       quantity: randomNum(100) },
         });
       }
