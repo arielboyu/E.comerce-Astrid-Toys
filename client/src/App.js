@@ -21,8 +21,8 @@ import Product from "./components/_product/product";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
-import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct";
-
+import UpdateProduct from "./components/_dashboardTableOrders/orderTable"
+import OrderList from "./components/_dashboardTableOrders/orderTable"
 function App() {
   return (
     <Router>
@@ -58,6 +58,9 @@ function App() {
         </Route>
         <Route path="/dashboard/category/list">
           <CategoryList />
+        </Route>
+        <Route path="/dashboard/users/list">
+          <OrderList />
         </Route>
         <Route path="/cart">
           <Cart />

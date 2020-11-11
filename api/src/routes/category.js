@@ -101,7 +101,7 @@ server.put('update/:id',(req,res) =>{
       data.save();
       res
         .status(200)
-        .send( `Se ha actualizado la categoria correctamente` );
+        .send( "Se ha actualizado la categoria correctamente" );
     })
     .catch((err) => {
       res.status(400).send(err);
