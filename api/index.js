@@ -22,6 +22,7 @@ const { conn, Product, Category, Order,OrderDetails, User } = require("./src/db.
 const DataProducts = require("./dataProducts.js"); //importo este modulo para cargar las tablas.
 const DataCategories = require("./dataCategories.js");
 const DataUsers = require("./dataUser.js")
+const DataOrders = require("./dataOrders.js")
 const { reset } = require("nodemon");
 
 // Syncing all the models at once.
@@ -49,9 +50,7 @@ conn.sync({ force: true }).then(() => {
       }
     }
     cargarUsuarios();
-
-    console.log("Categorias cargadas");
-
+    console.log("Usuarios cargados");
     // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE CATEGORIAS
     var categories = [];
     async function cargarCategories() {
@@ -74,7 +73,7 @@ conn.sync({ force: true }).then(() => {
       return subCategories[Math.floor(Math.random() * subCategories.length)];
     }
 
-    async function cargarTablas() {
+    async function cargarTablaProduct() {
       for (let i = 0; i < DataProducts.length; i++) {
         var product = await Product.create({
           name: DataProducts[i].name,
@@ -93,12 +92,27 @@ conn.sync({ force: true }).then(() => {
       //Para relacionar una categoria con un producto
       //category.addCategories([product])
     }
-    cargarTablas();
-    console.log("tablas cargadas");
+    cargarTablaProduct();
+    console.log("tablas product cargada");
     
     //products[Math.floor(Math.random() * products.length)].addCategories(categories[Math.floor(Math.random() * categories.length)])
     
 
+    //CARGAR ORDENES
+    //las ordenes tienen varios productos
+    var Orders = []
+    async function cargarTablaOrder() {
+      for (let i = 0; i < DataOrders.length; i++) {
+        console.log(DataOrders[i].state)
+        var order = await Order.create({
+          state: DataOrders[i].state
+        })
+        order.setUser(usuarios[Math.floor(Math.random() * usuarios.length)])
+      }
+      
+    }
+    cargarTablaOrder()
+    console.log ("ordenes Cargadas")
     /* ------------------------------------------------------- */
   });
 });
