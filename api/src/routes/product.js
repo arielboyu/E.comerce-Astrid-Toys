@@ -83,17 +83,17 @@ server.get("/search", (req, res, next) => {
 
 // Este post agrega un nuevo producto
 server.post("/", (req, res) => {
-  const { name, description, price, stock, image, category } = req.body;
+  const { name, description, price, stock, image, categories, active } = req.body;
   //const categoryId = 0;
   // Category.findAll({where: {name:category}}).then((res)=>
   //{categoryId = res.id} )
   if (name && description && price && stock) {
     Product.create({
       name,
-      description,
-      price,
       stock,
-      image,
+      price,
+      description,
+      active,
     })
       .then((productCreated) => {
         //buscar categoria a la que tengo que agregar el producto
