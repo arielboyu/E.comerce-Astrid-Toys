@@ -6,7 +6,7 @@ let carrito = [];
 
 //cart -product cart o pedido   
     const Cart = () => {
-        const [cart, setCart]= useState([])
+        //const [cart, setCart]= useState([])
 
           /*function addCart() { 
            setCart('My Shopping Cart');
