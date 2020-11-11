@@ -5,13 +5,14 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Link,
   useParams,
 } from "react-router-dom";
 import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
+import Home from "./components/_home/home.js";
 import Cart from "./components/_cart/cart.js";
-import Footer from "./components/footer/footer.js";
+import Login from "./components/_login/login.js";
+import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
 /*Componente Navbar*/
@@ -20,60 +21,37 @@ import Product from "./components/_product/product";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
-
-
-const getProduct = axios.get("http://localhost:3002/products");
-const getCategory = axios.get("http://localhost:3002/categories");
+import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct";
 
 function App() {
-  const [product, setProduct] = useState([]);
-  const [category, setCategory] = useState([]);
-
-  useEffect(() => {
-    getProduct.then((res) => {
-      setProduct(res.data);
-    });
-    getCategory.then((res) => {
-      setCategory(res.data);
-    });
-  }, [product, category]);
-
   return (
     <Router>
-      <Navbar category={category} />
+      <Navbar />
       <Switch>
-        <Route path="/products/:index">
+        <Route exact path="/" component={Home} />
+        <Route path="/products/category/nav/:cat">
+          <Catalogue />
+        </Route>
+        <Route exact path="/products/id/:index">
           <Product />
         </Route>
-        <Route
-          path="/products"
-          render={({ match }) => (
-            <Catalogue product={product} category={category} match={match} />
-          )}
-        />
-        <Route
-          path="/categories/series"
-          render={({ match }) => (
-            <Catalogue product={product} category={category} match={match} />
-          )}
-        />
-        <Route
-          path="/categories/movies"
-          render={({ match }) => (
-            <Catalogue product={product} category={category} match={match} />
-          )}
-        />
-        <Route
-          path="/categories/games"
-          render={({ match }) => (
-            <Catalogue product={product} category={category} match={match} />
-          )}
-        />
+        <Route path="/products/category/">
+          <Catalogue />
+        </Route>
+        <Route path="/products?search">
+          <Catalogue />
+        </Route>
+        <Route path="/products">
+          <Catalogue />
+        </Route>
         <Route path="/dashboard/category/create">
           <DashboardLoadCategory />
         </Route>
         <Route path="/dashboard/product/create">
           <DashboardLoadProduct />
+        </Route>
+        <Route path="/dashboard/product/update/:id">
+          <UpdateProduct />
         </Route>
         <Route path="/dashboard/product/update">
           <DashboardUpdateProduct />
@@ -82,12 +60,11 @@ function App() {
           <CategoryList />
         </Route>
         <Route path="/cart">
-          <Cart/>
+          <Cart />
         </Route>
-        <Footer />
       </Switch>
+      <Footer />
     </Router>
   );
 }
-
 export default App;

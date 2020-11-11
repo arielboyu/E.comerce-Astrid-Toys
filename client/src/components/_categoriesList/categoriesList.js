@@ -27,26 +27,22 @@ export default function CategoriesList() {
     setDeleted(c);
   };
   return (
-    <div>
-      <div class="jumbotron">
-        <h1 class="display-3">CRUD Categories</h1>
-        <p class="lead">
+    <div className="d-flex flex-column text-center mx-auto mt-5 ">
+      <div className="">
+        <h1 className="display-3 d-none d-sm-block">CRUD Categories</h1>
+        <p className="lead d-none d-sm-block">
         In this section the administrator can update the list of categories
         </p>
-        <hr class="my-2" />
-        <p class="lead">
+        <hr className="my-2" />
+        <p className="lead ">
           <Link to="/dashboard/category/create">
-            <button class="btn btn-primary btn-lg">
-              Add Category{" "}
-              <ion-icon
-                style={{ fontSize: "24px" }}
-                name="add-circle-outline"
-              ></ion-icon>
+            <button className="btn btn-primary btn-lg d-flex align-items-center mx-auto mt-3">
+            <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Category 
             </button>
           </Link>
         </p>
       </div>
-      <table class="table table-reflow">
+      <table className="table table-reflow w-75 mx-auto mb-5">
         <thead>
           <tr>
             <th>#</th>
@@ -75,22 +71,22 @@ export default function CategoriesList() {
       </table>
       {/* <!-- Modal --> */}
       <div
-        class="modal"
+        className="modal"
         id="exampleModal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Categories
               </h5>
               <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
                 aria-label="Close"
                 onClick={() => window.location.reload()}
@@ -98,20 +94,20 @@ export default function CategoriesList() {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">Are you sure to delete? </div>
-            <div class="modal-footer">
+            <div className="modal-body">Are you sure to delete? </div>
+            <div className="modal-footer">
               <button
                 onClick={() => {
                   handleDelete();
                   window.location.reload();
                 }}
                 type="button"
-                class="btn btn-primary"
+                className="btn btn-primary"
                 data-dismiss="modal"
               >
                 Yes
               </button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">
+              <button type="button" className="btn btn-danger" data-dismiss="modal">
                 No
               </button>
             </div>

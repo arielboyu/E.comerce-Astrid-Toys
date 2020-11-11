@@ -2,6 +2,12 @@ const server = require("express").Router();
 const { Product, Category } = require("../db.js");
 const { Op } = require("sequelize");
 
+//esta funcion pasa la primer letra de un word a mayus
+function capitalize(word) {
+  word = word.toLowerCase()
+  return word[0].toUpperCase() + word.slice(1);
+}
+
 server.get("/actives", (req, res, next) => {
   Product.findAll({
     where: {
@@ -49,13 +55,16 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
 // Retorna todos los productos que tengan {valor} en su nombre o descripcion.
 //ATENCION: NO ES CASE SENSITIVE.
 server.get("/search", (req, res, next) => {
-  var data = req.query.name;
-  // console.log("esto es la data: "+data)
+  var data = req.query.data;
+  console.log("esto es la data: " + data);
   Product.findAll({
     where: {
       [Op.or]: {
         name: {
-          [Op.substring]: data,
+          [Op.iLike]: `%${data}%`,
+        },
+        description: {
+          [Op.iLike]: `%${data}%`,
         },
       },
     },
@@ -74,7 +83,10 @@ server.get("/search", (req, res, next) => {
 
 // Este post agrega un nuevo producto
 server.post("/", (req, res) => {
-  const { name, description, price, stock, image } = req.body;
+  const { name, description, price, stock, image, category } = req.body;
+  //const categoryId = 0;
+  // Category.findAll({where: {name:category}}).then((res)=>
+  //{categoryId = res.id} )
   if (name && description && price && stock) {
     Product.create({
       name,
@@ -84,7 +96,10 @@ server.post("/", (req, res) => {
       image,
     })
       .then((productCreated) => {
-        res.status(201).send(productCreated);
+        //buscar categoria a la que tengo que agregar el producto
+        Category.findAll({ where: { name: category } }).then((res) =>
+          productCreated.addCategories(res)
+        );
       })
       .catch((err) => {
         console.log("Error en POST" + err);
@@ -102,7 +117,7 @@ server.post("/", (req, res) => {
 // Este put modifica el producto al que se apunta por parámetro
 server.put("/:id", (req, res) => {
   const product = req.params.id;
-  const { name, description, price, stock, image, active } = req.body;
+  const { name, description, price, stock, image, active, categories } = req.body;
   Product.findOne({
     where: {
       id: product,
@@ -110,12 +125,27 @@ server.put("/:id", (req, res) => {
   })
     .then((product) => {
       if (product) {
-        product.update({ name, description, price, stock, image, active });
-        res.status(200).send(product);
+        product.update({ name, description, price, stock, image, active })
+        .then((productUpdated) => {
+          //elimina las categorias para luego setear el nuevo set
+          productUpdated.setCategories()
+          //recorre las categorias que llegan por body
+          categories.map((category)=>{
+            //buscar categoria a la que tengo que agregar el producto
+            Category.findAll({ where: { name: category } })
+            .then((res) =>
+            productUpdated.addCategories(res)
+            );
+          })
+
+        })
+        .then(res.status(200).send(product)) 
+        
       } else {
         res.status(400).send("No se encontró producto con ese ID");
       }
     })
+  
     .catch((err) => {
       res.status(400).send("Los campos enviados no son correctos" + err);
     });
@@ -145,15 +175,6 @@ server.delete("/:productID", (req, res) => {
     });
 });
 
-//Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
-server.get("/products/:id", (req, res, next) => {
-  //const { id, name, description, category, image } = req.body;
-  Product.findOne({ where: { id: req.params.id } })
-    .then((product) => {
-      res.status(201).send(product);
-    })
-    .catch(next);
-});
 
 server.get("/:id", (req, res, next) => {
   Product.findAll({
@@ -167,22 +188,37 @@ server.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
-// RUTA PARA TRAER LOS PRODUCTOS CORRESPONDIENTES A UNA CATEGORIA EN PARTICULAR
-server.get("/search/:category", (req, res) => {
-  Product.findAll({
+//Devuelve las categorias de un producto
+server.get("/:id/categories", (req, res, next) => {
+  Product.findOne({
     where: {
-      description: req.params.category,
+      id: req.params.id,
     },
   })
-    .then((r) => {
-      console.log("entre acá");
-      res.send(r);
+    .then((product) => {
+      product.getCategories()
+      .then((categories)=>res.send(categories))
     })
+    .catch(next);
+});
+
+// RUTA PARA TRAER LOS PRODUCTOS CORRESPONDIENTES A UNA CATEGORIA EN PARTICULAR
+server.get("/search/:category", (req, res) => {
+  var categoryName = capitalize(req.params.category);
+  Category.findOne({
+    where: {
+      name: categoryName,
+    }
+  }).then((category) => {
+    category.getProducts().then((products) => {
+      console.log("entre acá");
+      res.send(products);
+    });
+  })
     .catch((err) => {
-		console.log("entre acá" + err)
-		send.status(404)
-	}
-	);
+      console.log("entre acá" + err);
+      res.sendStatus(404);
+    });
 });
 
 module.exports = server;

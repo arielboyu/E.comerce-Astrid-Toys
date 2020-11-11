@@ -12,22 +12,43 @@ function UpdateProduct() {
   const { id } = useParams();
   useEffect(() => {
     axios.get(`http://localhost:3002/products/${id}`).then((res) => {
-
-      setProduct(res.data[0]);//esto es porque devuelve un array y adentro el obj product
+      let initialState = res.data[0];
       setLoad(true);
-      console.log('useEffect:',productUpdate);
+      axios
+        .get(`http://localhost:3002/products/${id}/categories`)
+        .then((res) => {
+          initialState.categories = [];
+          res.data.forEach((category) =>
+            initialState.categories.push(category.name)
+          );
+          setProduct(initialState);
+        });
     });
+
     getCategory.then((res) => {
       setCategory(res.data);
     });
   }, [load]);
 
   const handlerChange = (e) => {
-    console.log("entra al handlerChange");
+    console.log("entra al handlerChange: ", e.target.name, "-", e.target.value);
     setProduct({ ...productUpdate, [e.target.name]: e.target.value });
   };
+
+  const handlerCategories = (e) => {
+    let categoriesAct = productUpdate.categories
+    if(categoriesAct && categoriesAct.includes(e.target.value)){
+      let index = categoriesAct.indexOf(e.target.value)
+      if (index > -1) {
+        categoriesAct.splice(index, 1);
+      }
+    }else{
+      categoriesAct.push(e.target.value);
+    }
+    setProduct({ ...productUpdate, categories: categoriesAct });
+  }; 
+
   const handlerSubmit = (e) => {
-    console.log("entra al handlerSubmit");
     axios
       .put(`http://localhost:3002/products/${id}`, productUpdate)
       .then((r) => {
@@ -40,8 +61,8 @@ function UpdateProduct() {
   };
 
   return (
-    <div className="container">
-      <h2>Update Product</h2>
+    <div className="container d-flex flex-column mx-auto my-5">
+      <h2 className="display-3">Update Product</h2>
       <form onSubmit={handlerSubmit}>
         <div className="form-group">
           <label htmlFor="productName">Product Name</label>
@@ -55,19 +76,42 @@ function UpdateProduct() {
           />
         </div>
         <div className="form-row">
-          <div className="form-group col-md-6">
-            <label htmlFor="productCategory">Category</label>
-            <select
-              className="form-control"
-              name="category"
-              value={productUpdate.category}
-              onChange={handlerChange}
-            >
-              <option></option>
-              {category.map((c) => (
-                <option>{c.name}</option>
-              ))}
-            </select>
+          <div className="form-group col-md-6 ">
+            <label htmlFor="productCategory">Categories</label>
+            {category.map((c) =>
+              productUpdate.categories && productUpdate.categories.includes(c.name) ? (
+                <div className="d-flex flex-column ml-4">
+                {/* Si encuentra que el producto esta en esa categoria, la checkea por default */}
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    checked="checked"
+                    value={c.name}
+                    id={c.name}
+                    name="category"
+                    onChange={handlerCategories}
+                  />
+                  <label className="form-check-label" for={c.name}>
+                    {c.name}
+                  </label>
+                </div>
+              ) : (
+                <div className="d-flex flex-column ml-4">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    // checked="false"
+                    value={c.name}
+                    id={c.name}
+                    name="category"
+                    onChange={handlerCategories}
+                  />
+                  <label className="form-check-label" for={c.name}>
+                    {c.name}
+                  </label>
+                </div>
+              )
+            )}
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="productCategory">Sub-Category</label>
@@ -173,7 +217,7 @@ function UpdateProduct() {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">Confirmated.</div>
+              <div class="modal-body">Confirmed.</div>
               <div class="modal-footer">
                 <button
                   type="button"

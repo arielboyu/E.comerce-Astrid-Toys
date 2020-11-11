@@ -28,7 +28,12 @@ function DashboardLoadProduct() {
 
   //seteo el estado producto mediante voy cambiando los valores del input
   const handlerChange = (e) => {
-    setProduct({ ...productLoad, [e.target.name]: e.target.value });
+    if(e.target.name === "active"){
+      setProduct({ ...productLoad, [e.target.name]: e.target.checked });
+    } else {
+      setProduct({ ...productLoad, [e.target.name]: e.target.value });
+    }
+    console.log(e.target.name+" > " +productLoad.active)
   };
   //el submit hace un post con axio y le paso el req.body como segundo parametro
   const handlerSubmit = (e) => {
@@ -44,8 +49,8 @@ function DashboardLoadProduct() {
   };
 
   return (
-    <div className="container">
-      <h2>Load Product</h2>
+    <div className="container d-flex flex-column mx-auto my-5 ">
+      <h2 className="display-3">Load Product</h2>
       <form onSubmit={handlerSubmit}>
         <div className="form-group">
           <label htmlFor="productName">Product Name</label>
@@ -111,7 +116,7 @@ function DashboardLoadProduct() {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="productDescription">Example textarea</label>
+          <label htmlFor="productDescription">Description</label>
           <textarea
             className="form-control"
             name="description"
@@ -133,8 +138,9 @@ function DashboardLoadProduct() {
             <input
               className="form-check-input"
               type="checkbox"
-              value="productCheck"
-              name="productCheck"
+              value={productLoad.active}
+              name="active"
+              onChange={handlerChange}
             />
             <label className="form-check-label" htmlFor="productCheck">
             activate product in store?
