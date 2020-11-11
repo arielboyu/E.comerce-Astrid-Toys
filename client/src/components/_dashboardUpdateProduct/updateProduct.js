@@ -77,42 +77,44 @@ function UpdateProduct() {
           />
         </div>
         <div className="form-row">
-          <div className="form-group col-md-6 ">
+          <div className="form-group col-md-12 ">
             <label htmlFor="productCategory">Categories</label>
-            {category.map((c) =>
-              productUpdate.categories && productUpdate.categories.includes(c.name) ? (
-                <div className="d-flex flex-column ml-4">
-                {/* Si encuentra que el producto esta en esa categoria, la checkea por default */}
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    checked="checked"
-                    value={c.name}
-                    id={c.name}
-                    name="category"
-                    onChange={handlerCategories}
-                  />
-                  <label className="form-check-label" for={c.name}>
-                    {c.name}
-                  </label>
-                </div>
-              ) : (
-                <div className="d-flex flex-column ml-4">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    // checked="false"
-                    value={c.name}
-                    id={c.name}
-                    name="category"
-                    onChange={handlerCategories}
-                  />
-                  <label className="form-check-label" for={c.name}>
-                    {c.name}
-                  </label>
-                </div>
-              )
-            )}
+            <div className="custom-control custom-switch d-flex">
+              {category.map((c) =>
+                productUpdate.categories && productUpdate.categories.includes(c.name) ? (
+                  <div className="col-sm-4 col-md-3 col-lg-2">
+                  {/* Si encuentra que el producto esta en esa categoria, la checkea por default */}
+                    <input
+                      className="custom-control-input"
+                      type="checkbox"
+                      checked="checked"
+                      value={c.name}
+                      id={c.name}
+                      name="category"
+                      onChange={handlerCategories}
+                    />
+                    <label className="custom-control-label" for={c.name}>
+                      {c.name}
+                    </label>
+                  </div>
+                ) : (
+                  <div className="col-sm-4 col-md-3 col-lg-2">
+                    <input
+                      className="custom-control-input"
+                      type="checkbox"
+                      // checked="false"
+                      value={c.name}
+                      id={c.name}
+                      name="category"
+                      onChange={handlerCategories}
+                    />
+                    <label className="custom-control-label" for={c.name}>
+                      {c.name}
+                    </label>
+                  </div>
+                )
+              )}
+            </div>
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="productCategory">Sub-Category</label>
