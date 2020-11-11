@@ -122,4 +122,17 @@ server.post("/:idUser/cart/", (req, res) => {
 
 //fulanito.getOrders()
 
+// S45 : Crear Ruta que retorne todas las Ordenes de los usuarios
+server.get("/orders/:id", (req, res) => {
+  const id = req.params.id;
+  Order.findAll({
+    where: {
+      userId: id,
+    },
+  })
+    .then((r) => res
+    .status(200).json(r))
+})
+
+
 module.exports = server;

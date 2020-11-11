@@ -10,42 +10,94 @@ function DashboardLoadProduct() {
   //Seteo un estado general
   const [productLoad, setProduct] = useState({
     name: "",
-    category: "",
-    subCategory: "",
     stock: 0,
     price: 0,
     description: "",
     active: false,
-    image: "/asdas/asd",
+    image: "",
+    categories: [],
   });
-  const getCategory = axios.get("http://localhost:3002/categories");
-  //ejecuto la primesa cuando se hace el pre render
+
+  const [msg, setMsg] = useState("");
+
+  const validateDates = () => {
+    let stockParse = parseInt(productLoad.stock);
+    let priceParse = parseFloat(productLoad.price);
+    if (productLoad.name === "") {
+      setMsg(msg + ">Name empty. ");
+      return false;
+    }
+    if (stockParse > 9999 || stockParse <= 0) {
+      setMsg(msg + ">Stock invalid. ");
+      return false;
+    }
+    if (priceParse > 99999 || priceParse <= 0) {
+      setMsg(msg + ">Price invalid. ");
+      return false;
+    }
+    if (
+      productLoad.description === "" ||
+      productLoad.description.length > 400
+    ) {
+      setMsg(msg + ">Descriptio empty or invalid. ");
+      return false;
+    }
+    if (productLoad.categories.length === 0) {
+      setMsg(msg + ">Uncategorized product. ");
+      return false;
+    }
+    setMsg("Product valid");
+    return true;
+  };
+
   useEffect(() => {
     getCategory.then((res) => {
       setCategory(res.data);
     });
   }, []);
 
-  //seteo el estado producto mediante voy cambiando los valores del input
   const handlerChange = (e) => {
-    if(e.target.name === "active"){
+    e.preventDefault();
+    if (e.target.name === "active") {
       setProduct({ ...productLoad, [e.target.name]: e.target.checked });
     } else {
       setProduct({ ...productLoad, [e.target.name]: e.target.value });
     }
-    console.log(e.target.name+" > " +productLoad.active)
+    console.log(productLoad[e.target.name]);
   };
-  //el submit hace un post con axio y le paso el req.body como segundo parametro
+
   const handlerSubmit = (e) => {
-    axios
-      .post("http://localhost:3002/products", productLoad)
-      .then((r) => {
-        console.log(r);
-      })
-      .catch((er) => {
-        console.log(er);
-      });
+    console.log(productLoad);
+    if (validateDates()) {
+      axios
+        .post("http://localhost:3002/products", productLoad)
+        .then((r) => {
+          console.log(r);
+        })
+        .catch((er) => {
+          console.log(er);
+        });
+    }
     e.preventDefault();
+  };
+
+  const handlerKey = (e) => {
+    let arr = ["0", "1", "2", "3", "4", "5", "7", "8", "9"];
+    if (arr.indexOf(e.key) == -1) {
+      e.preventDefault();
+    }
+  };
+
+  const handlerChangeCategory = (e) => {
+    if (e.target.checked) {
+      let addCategory = productLoad.categories.concat(e.target.id);
+      setProduct({ ...productLoad, categories: addCategory });
+    } else {
+      let arr = productLoad.categories;
+      let index = productLoad.categories.indexOf(e.target.id);
+      let removeCategory = arr.splice(index, 1);
+      setProduct({ ...productLoad, categories: arr });
+    }
   };
 
   return (
@@ -63,34 +115,26 @@ function DashboardLoadProduct() {
             onChange={handlerChange}
           />
         </div>
+
         <div className="form-row">
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-12">
             <label htmlFor="productCategory">Category</label>
-            <select
-              className="form-control"
-              name="category"
-              value={productLoad.category}
-              onChange={handlerChange}
-            >
-              <option></option>
+            <div className="custom-control custom-switch d-flex">
               {category.map((c) => (
-                <option>{c.name}</option>
+                <div className="col-sm-4 col-md-3 col-lg-2">
+                  <input
+                    name={c.name}
+                    type="checkbox"
+                    className="custom-control-input"
+                    id={c.id}
+                    onChange={handlerChangeCategory}
+                  />
+                  <label className="custom-control-label" htmlFor={c.id}>
+                    {c.name}
+                  </label>
+                </div>
               ))}
-            </select>
-          </div>
-          <div className="form-group col-md-6">
-            <label htmlFor="productCategory">Sub-Category</label>
-            <select
-              className="form-control"
-              name="subCategory"
-              onChange={handlerChange}
-              value={productLoad.subCategory}
-            >
-              <option></option>
-              <option>Sub-Category 1</option>
-              <option>Sub-Category 2</option>
-              <option>Sub-Category 3</option>
-            </select>
+            </div>
           </div>
         </div>
         <div className="form-row">
@@ -100,6 +144,7 @@ function DashboardLoadProduct() {
               type="text"
               className="form-control"
               name="stock"
+              onKeyPress={handlerKey}
               value={productLoad.stock}
               onChange={handlerChange}
             />
@@ -110,6 +155,7 @@ function DashboardLoadProduct() {
               type="text"
               className="form-control"
               name="price"
+              onKeyPress={handlerKey}
               value={productLoad.price}
               onChange={handlerChange}
             />
@@ -143,7 +189,7 @@ function DashboardLoadProduct() {
               onChange={handlerChange}
             />
             <label className="form-check-label" htmlFor="productCheck">
-            activate product in store?
+              activate product in store?
             </label>
           </div>
         </div>
@@ -156,9 +202,7 @@ function DashboardLoadProduct() {
           Submit
         </button>
         <Link to="/dashboard/product/update">
-        <button className="btn btn-danger ml-2">
-          Back
-        </button>
+          <button className="btn btn-danger ml-2">Back</button>
         </Link>
         {/* <!-- Modal --> */}
         <div
@@ -185,7 +229,7 @@ function DashboardLoadProduct() {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">Added product</div>
+              <div class="modal-body">{msg}</div>
               <div class="modal-footer">
                 <button
                   type="button"
