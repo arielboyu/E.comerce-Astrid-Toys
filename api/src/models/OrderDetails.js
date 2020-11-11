@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   sequelize.define('orderdetails', {
     quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     price:{
         type : DataTypes.INTEGER,

@@ -18,11 +18,18 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Product, Category, Order,OrderDetails, User } = require("./src/db.js");
+const {
+  conn,
+  Product,
+  Category,
+  Order,
+  OrderDetails,
+  User,
+} = require("./src/db.js");
 const DataProducts = require("./dataProducts.js"); //importo este modulo para cargar las tablas.
 const DataCategories = require("./dataCategories.js");
-const DataUsers = require("./dataUser.js")
-const DataOrders = require("./dataOrders.js")
+const DataUsers = require("./dataUser.js");
+const DataOrders = require("./dataOrders.js");
 const { reset } = require("nodemon");
 
 // Syncing all the models at once.
@@ -35,8 +42,13 @@ conn.sync({ force: true }).then(() => {
     /* ------------------------------------------------------- */
     //INSTANCIAMOS MODELOS DE LA TABLA Y SALVAMOS DATOS
     //Hacer un Create es lo mismo que hacer un Build y luego Save de Sequelize.
-    
+
     // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE USUARIOS
+    //// returns a random integer from 0 to limit
+    function randomNum(limit) {
+      return Math.floor(Math.random() * limit);
+    }
+
     var usuarios = [];
     async function cargarUsuarios() {
       for (let i = 0; i < DataUsers.length; i++) {
@@ -44,9 +56,9 @@ conn.sync({ force: true }).then(() => {
           name: DataUsers[i].name,
           lastname: DataUsers[i].lastname,
           email: DataUsers[i].email,
-          password : DataUsers[i].password
+          password: DataUsers[i].password,
         });
-        usuarios.push(user)
+        usuarios.push(user);
       }
     }
     cargarUsuarios();
@@ -59,20 +71,20 @@ conn.sync({ force: true }).then(() => {
           name: DataCategories[i].name,
           description: DataCategories[i].description,
         });
-        categories.push(category)
+        categories.push(category);
       }
     }
-     cargarCategories();
-    
+    cargarCategories();
+
     console.log("Categorias cargadas");
 
     //para testear subcategorias mas adelante
     //esta funcion retorna una subcategoria random
     function getSubCategory() {
       const subCategories = ["Harry Potter", "Avengers"];
-      return subCategories[Math.floor(Math.random() * subCategories.length)];
+      return subCategories[randomNum(subCategories.length)];
     }
-
+    var productsArray = [];
     async function cargarTablaProduct() {
       for (let i = 0; i < DataProducts.length; i++) {
         var product = await Product.create({
@@ -83,8 +95,8 @@ conn.sync({ force: true }).then(() => {
         });
         //la siguiente linea relaciona el producto que acabo de crear
         //con una categoria random
-        product.addCategories(categories[Math.floor(Math.random() * categories.length)])
-          
+        product.addCategories(categories[randomNum(categories.length)]);
+        productsArray.push(product);
       }
       //Las siguientes lineas HACEN LO MISMO:
       //Para relacionar un producto con una categoria
@@ -94,25 +106,27 @@ conn.sync({ force: true }).then(() => {
     }
     cargarTablaProduct();
     console.log("tablas product cargada");
-    
+
     //products[Math.floor(Math.random() * products.length)].addCategories(categories[Math.floor(Math.random() * categories.length)])
-    
 
     //CARGAR ORDENES
     //las ordenes tienen varios productos
-    var Orders = []
+    var Orders = [];
     async function cargarTablaOrder() {
       for (let i = 0; i < DataOrders.length; i++) {
-        console.log(DataOrders[i].state)
+        console.log(DataOrders[i].state);
         var order = await Order.create({
-          state: DataOrders[i].state
-        })
-        order.setUser(usuarios[Math.floor(Math.random() * usuarios.length)])
+          state: DataOrders[i].state,
+        });
+        order.setUser(usuarios[Math.floor(Math.random() * usuarios.length)]);
+        order.addProduct(productsArray[randomNum(productsArray.length)], {
+          through: { price: randomNum(100),
+                      quantity: randomNum(100) },
+        });
       }
-      
     }
-    cargarTablaOrder()
-    console.log ("ordenes Cargadas")
+    cargarTablaOrder();
+    console.log("ordenes Cargadas");
     /* ------------------------------------------------------- */
   });
 });
