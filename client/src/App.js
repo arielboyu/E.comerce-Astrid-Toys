@@ -21,7 +21,7 @@ import Product from "./components/_product/product";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
-import UpdateProduct from "./components/_dashboardTableOrders/orderTable"
+import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
 import OrderList from "./components/_dashboardTableOrders/orderTable"
 function App() {
   return (
