@@ -84,6 +84,7 @@ server.get("/search", (req, res, next) => {
 // Este post agrega un nuevo producto
 server.post("/", (req, res) => {
   const { name, description, price, stock, image, categories, active } = req.body;
+  
   //const categoryId = 0;
   // Category.findAll({where: {name:category}}).then((res)=>
   //{categoryId = res.id} )
@@ -97,9 +98,16 @@ server.post("/", (req, res) => {
     })
       .then((productCreated) => {
         //buscar categoria a la que tengo que agregar el producto
-        Category.findAll({ where: { name: category } }).then((res) =>
-          productCreated.addCategories(res)
-        );
+        categories.map((cat)=>{
+          let catId= parseInt(cat)
+          Category.findAll({ where: { id: catId } })
+          .then((res) =>
+          productCreated.addCategories(res))
+          .catch(err => console.log("Error con las categorias "+err))
+        })
+        // Category.findAll({ where: { id: catId } }).then((res) =>
+        //   productCreated.addCategories(res)
+        // );
       })
       .catch((err) => {
         console.log("Error en POST" + err);
