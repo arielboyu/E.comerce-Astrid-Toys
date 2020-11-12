@@ -15,7 +15,7 @@ export default function Product() {
       console.log(fuko);
     });
   }, [load]);
-
+  
   const card = {
     margin: "10px",
     textAlign: "center",

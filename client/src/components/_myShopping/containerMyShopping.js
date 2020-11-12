@@ -1,37 +1,35 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from "../_productCard/productCard";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import Buys from "./buys.js";
 //Este componente se mostrara en una solapa "Mis Compras" de un determinado usuario
 
-
-const ContainerMyShopping = ({ idUser }) => {
-  const [shopping,setShopping] = useState([]);
+const ContainerMyShopping = () => {
+  const [shopping, setShopping] = useState([]);
   //obtener todas las compras (shopping) de el idUser
   //mappear las "shopping" que no estan pendientes (las que no estan en el carrito)
   //mostrar esas shopping en una lista
-/*  function getAllShopping(){
-    axios.get(`http://localhost:3002/users/shopping/${idUser}`)
-    .then((orders)=>{
-      setShopping(orders)
-    })
-  } 
+  const { idUser } = useParams();
 
-useEffect(() => {
-    if (logged_in) {
-        getUserOrders();
-    } else {
-        window.location.href = "/login";
-    }
-}, []) */
-
-
- 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3002/users/shopping/${idUser}`)
+      .then((orders) => {
+        console.log(orders);
+        setShopping(orders.data);
+      });
+  }, []);
 
   return (
-    <div>
-      <div className="d-flex flex-wrap ml-2 justify-content-center justify-content-md-start text-center">
-        {product.map((p) => (p.active && <ProductCard product={p} />))}
-      </div>
+    <div className="container-fluid p-5">
+      <ul>
+        {shopping.map((order) => (
+          <li style={{listStyle:"none"}}>
+            <Buys orderId={order.id} />
+          </li>
+        ))}
+      </ul>
+      {/* shopping.map((compras) => (p.active && <ProductCard product={p} />)) */}
     </div>
   );
 };
