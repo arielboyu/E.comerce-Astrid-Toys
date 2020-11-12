@@ -23,6 +23,7 @@ import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLo
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
 import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
 import OrderList from "./components/_dashboardTableOrders/orderTable"
+import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js"
 function App() {
   return (
     <Router>
@@ -66,6 +67,8 @@ function App() {
         </Route>
         <Route path="/cart">
           <Cart />
+        </Route> <Route path="/myshop/:idUser">
+          <ContainerMyShopping />
         </Route>
         <Route path="/addToCart">
           <AddToCart />

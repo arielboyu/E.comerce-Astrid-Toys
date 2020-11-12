@@ -1,6 +1,8 @@
 const server = require("express").Router();
-const { User, Order, OrderDetails, Product } = require("../db.js");
-//const Product = require("../models/Product.js");
+
+const { User,Order,Product } = require("../db.js");
+const { Op } = require('sequelize');
+
 
 server.get("/", (req, res) => {
   User.findAll()
@@ -178,6 +180,22 @@ server.get("/orders/:id", (req, res) => {
       res.status(400).json({ message: "ups" });
     });
 });*/
+
+ 
+//EXTRA: Crear una ruta que retorne el historial de compras (canceladas y completadas)
+ server.get("/shopping/:id", (req, res) => {
+
+  const id = req.params.id;
+  Order.findAll({
+    where: {
+      userId: id,
+      [Op.or]: [{state : "CANCELLED"},{state: "COMPLETE"}]
+    },
+  })
+    .then((orders) => res
+    .status(200).json(orders))
+}) 
+
 
 
 module.exports = server;

@@ -14,7 +14,7 @@ export default function Product() {
       setLoad(true);
     });
   }, [load]);
-
+  
   const card = {
     margin: "10px",
     textAlign: "center",
