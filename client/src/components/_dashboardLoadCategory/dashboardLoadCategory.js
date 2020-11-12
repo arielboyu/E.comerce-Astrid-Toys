@@ -26,8 +26,8 @@ function DashboardLoadCategory() {
   }
 
   return (
-    <div className="container d-flex flex-column mx-auto my-5 col-sm-12 col-md-8 col-lg-6">
-      <h2 class="display-3 mb-4">New Category</h2>
+    <div className="container d-flex flex-column mx-auto my-5 col-sm-12 col-md-8 col-lg-6 p-5 border shadow">
+      <h2 class="display-3 mb-4 text-center">New Category</h2>
       <form onSubmit={handlerFormSubmit}>
         <div className="form-group">
           <label htmlFor="categoryName" className="">
