@@ -13,7 +13,7 @@ function DashboardLoadProduct() {
     stock: 0,
     price: 0,
     description: "",
-    active: false,
+    active: true,
     image: "",
     categories: [],
   });
@@ -138,7 +138,7 @@ function DashboardLoadProduct() {
           </div>
         </div>
         <div className="form-row">
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-3">
             <label htmlFor="productStock">Stock</label>
             <input
               type="text"
@@ -149,7 +149,19 @@ function DashboardLoadProduct() {
               onChange={handlerChange}
             />
           </div>
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-3">
+                  <input
+                    name="active"
+                    type="checkbox"
+                    className="custom-control-input"
+                    id={productLoad.active}
+                    onChange={handlerChangeCategory}
+                  />
+                  <label className="custom-control-label" htmlFor={productLoad.active}>
+                    Active
+                  </label>
+                </div>
+          <div className="form-group col-md-3">
             <label htmlFor="productPrice">Price</label>
             <input
               type="text"

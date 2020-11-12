@@ -19,7 +19,7 @@ function FormProduct() {
             //   onChange={handlerChange}
             />
           </div>
-
+   
           <div className="form-row">
             <div className="form-group col-md-12">
               <label htmlFor="productCategory">Category</label>
