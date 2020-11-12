@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
-import axios from "axios";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  useParams,
+  Switch
 } from "react-router-dom";
 import CategoryList from "./components/_dashboardCategoriesList/categoriesList";
 /*Importaciones de componentes*/

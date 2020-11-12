@@ -12,7 +12,6 @@ export default function Product() {
     axios.get(`http://localhost:3002/products/${index}`).then((res) => {
       setFuko(res.data);
       setLoad(true);
-      console.log(fuko);
     });
   }, [load]);
 

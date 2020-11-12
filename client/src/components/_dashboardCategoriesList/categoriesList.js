@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const getCategory = axios.get("http://localhost:3002/categories");
 export default function CategoriesList() {
-  const getCategory = axios.get("http://localhost:3002/categories");
   const [category, setCategory] = useState([]);
   const [deleted, setDeleted] = useState(null);
   useEffect(() => {

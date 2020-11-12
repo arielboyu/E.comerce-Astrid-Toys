@@ -27,7 +27,7 @@ const Catalogue = () => {
     });
   }, [cat]);
 
-  console.log("Nombre de categoria "+cat)
+
   
   const handlerSearch = (search) => {
     axios
