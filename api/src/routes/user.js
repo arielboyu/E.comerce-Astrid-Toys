@@ -129,10 +129,32 @@ server.get("/orders/:id", (req, res) => {
     where: {
       userId: id,
     },
-  })
-    .then((r) => res
-    .status(200).json(r))
-})
+  }).then((r) => res.status(200).json(r));
+});
 
+//S41: Crear ruta para editar las cantidades del carrito.
+/*server.put("/:idUser/cart", (req, res) => {
+  const product = req.params.id;
+  var { quantity, idProduct } = req.body;
+  product
+    .findByPk({
+      state: "PENDING",
+      through: { price: product.price, quantity: quantity },
+    })
+    .then((product) => {
+      product.findOne({ where: { id: idProduct } });
+      if (product !== null) {
+        res.json({
+          message: "product modified",
+          product,
+        });
+      } else {
+        res.status(400).json({ message: "no se encontro ningun producto" });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({ message: "ups" });
+    });
+});*/
 
 module.exports = server;
