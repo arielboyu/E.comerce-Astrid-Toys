@@ -12,6 +12,7 @@ import CategoryList from "./components/_categoriesList/categoriesList";
 import Home from "./components/_home/home.js";
 import Cart from "./components/_cart/cart.js";
 import Login from "./components/_login/login.js";
+import Register from "./components/_login/register.js"
 import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
@@ -30,6 +31,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
+        <Route path="/register" component={Register}/>
         <Route path="/products/category/nav/:cat">
           <Catalogue />
         </Route>
