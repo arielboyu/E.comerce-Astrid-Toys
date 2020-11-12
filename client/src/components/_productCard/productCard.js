@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function ProductCard({ product }) {
@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
     backgroundColor: "white",
     height: "150px",
   };
-  const { index } = useParams();
+  // const { index } = useParams();
   return (
     <Link className="text-decoration-none" to={`/products/id/${product.id}`}>
       <div style={carta} className="card mx-1 my-1 p-2 shadow">

@@ -13,7 +13,7 @@ function DashboardLoadProduct() {
     stock: 0,
     price: 0,
     description: "",
-    active: true,
+    active: false,
     image: "",
     categories: [],
   });
@@ -54,16 +54,16 @@ function DashboardLoadProduct() {
     getCategory.then((res) => {
       setCategory(res.data);
     });
-  }, []);
+    
+  },[]);
 
   const handlerChange = (e) => {
-    e.preventDefault();
     if (e.target.name === "active") {
       setProduct({ ...productLoad, [e.target.name]: e.target.checked });
     } else {
       setProduct({ ...productLoad, [e.target.name]: e.target.value });
     }
-    console.log(productLoad[e.target.name]);
+    // e.preventDefault();
   };
 
   const handlerSubmit = (e) => {
@@ -116,7 +116,7 @@ function DashboardLoadProduct() {
           />
         </div>
 
-        <div className="form-row">
+        <div className="form-row border-top pt-2">
           <div className="form-group col-md-12">
             <label htmlFor="productCategory">Category</label>
             <div className="custom-control custom-switch d-flex">
@@ -137,7 +137,22 @@ function DashboardLoadProduct() {
             </div>
           </div>
         </div>
-        <div className="form-row">
+        <div className="form-row border-top pt-2">
+          <div className="form-group col-md-6">
+            <p>Show product in store</p>
+            <div className="pl-4" style={{backgroundColor:"#bedbbb",border: "1px solid grey",padding:"1px",borderRadius: "7px", width:"55px"}}>
+              <input
+                onChange={handlerChange}
+                className="form-check-input"
+                type="checkbox"
+                value="active"
+                name="active"
+              />
+              <label className="form-check-label" htmlFor="active">
+                {productLoad.active ? "Yes" : "No"}
+              </label>
+            </div>
+          </div>
           <div className="form-group col-md-3">
             <label htmlFor="productStock">Stock</label>
             <input
@@ -150,18 +165,6 @@ function DashboardLoadProduct() {
             />
           </div>
           <div className="form-group col-md-3">
-                  <input
-                    name="active"
-                    type="checkbox"
-                    className="custom-control-input"
-                    id={productLoad.active}
-                    onChange={handlerChangeCategory}
-                  />
-                  <label className="custom-control-label" htmlFor={productLoad.active}>
-                    Active
-                  </label>
-                </div>
-          <div className="form-group col-md-3">
             <label htmlFor="productPrice">Price</label>
             <input
               type="text"
@@ -173,7 +176,7 @@ function DashboardLoadProduct() {
             />
           </div>
         </div>
-        <div className="form-group">
+        <div className="form-group border-top pt-2 mt-2">
           <label htmlFor="productDescription">Description</label>
           <textarea
             className="form-control"
@@ -191,18 +194,6 @@ function DashboardLoadProduct() {
               class="form-control-file"
               id="productImage"
             ></input>
-          </div>
-          <div className="form-group col-md-6">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value={productLoad.active}
-              name="active"
-              onChange={handlerChange}
-            />
-            <label className="form-check-label" htmlFor="productCheck">
-              activate product in store?
-            </label>
           </div>
         </div>
         <button
@@ -238,7 +229,7 @@ function DashboardLoadProduct() {
                   aria-label="Close"
                   onClick={() => window.location.reload()}
                 >
-                  <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true">x</span>
                 </button>
               </div>
               <div class="modal-body">{msg}</div>
