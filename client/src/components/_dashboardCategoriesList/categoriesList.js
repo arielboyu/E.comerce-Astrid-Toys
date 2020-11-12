@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const getCategory = axios.get("http://localhost:3002/categories");
 export default function CategoriesList() {
-  const getCategory = axios.get("http://localhost:3002/categories");
   const [category, setCategory] = useState([]);
   const [deleted, setDeleted] = useState(null);
   useEffect(() => {
@@ -29,9 +29,9 @@ export default function CategoriesList() {
     setDeleted(c);
   };
   return (
-    <div className="d-flex flex-column text-center mx-auto mt-5 ">
+    <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
       <div className="">
-        <h1 className="display-3 d-none d-sm-block">CRUD Categories</h1>
+        <h1 className="display-3 text-center">CRUD Categories</h1>
         <p className="lead d-none d-sm-block">
         In this section the administrator can update the list of categories
         </p>

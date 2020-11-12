@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import axios from "axios";
 
 const AddToCart = ({productId}) => {
@@ -17,8 +18,5 @@ const handlerClick = () => {
       onClick = {() => handlerClick()}>Add to cart</button>
       <button className="btn btn-danger m-2" >back</button>
   </div>
-
-  );
-};
 
 export default AddToCart;

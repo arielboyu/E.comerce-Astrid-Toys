@@ -7,7 +7,7 @@ export default function Category({ name, description /* image */ }) {
   return (
     <div>
       <div>
-        <img>{/* OPCIONAL UNA IMAGEN, para debatir */}</img>
+        <img src="" alt="a">{/* OPCIONAL UNA IMAGEN, para debatir */}</img>
       </div>
       <div>
         <h3>{name}</h3>
