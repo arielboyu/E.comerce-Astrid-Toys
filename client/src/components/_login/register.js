@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
+import { FormGroup, Button, Row, Col } from "reactstrap";
 
 const formSchema = Yup.object().shape({
   Name: Yup.string()

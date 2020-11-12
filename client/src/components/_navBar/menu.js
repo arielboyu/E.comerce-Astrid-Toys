@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Menu({categories}) {
-    const {cat} = useParams();
+    // const {cat} = useParams();
     
   return (
     <ul className="d-flex col-sm-12 col-md-12 col-lg-5 justify-content-center justify-content-lg-start">

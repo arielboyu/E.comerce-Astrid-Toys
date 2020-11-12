@@ -1,5 +1,5 @@
 import React from "react";
-import Category from "../_category/category.js";
+// import Category from "../_category/category.js";
 import { Link } from "react-router-dom";
 import SearchBar from "../_searchBar/searchBar.js";
 
