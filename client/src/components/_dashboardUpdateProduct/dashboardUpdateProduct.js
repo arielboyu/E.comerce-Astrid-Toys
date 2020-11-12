@@ -27,8 +27,8 @@ const DashboardUpdateProduct = () => {
   };
 
   return (
-    <div className="d-flex flex-column text-center mx-auto mt-5 ">
-      <div class="">
+    <div className="d-flex flex-column text-center col-12 col-md-12 col-lg-10 col-xl-8 mx-auto my-5 p-5 border shadow">
+      <div>
         <h1 class="display-3 d-none d-sm-block">CRUD Products</h1>
         <p class="lead d-none d-sm-block">
         In this section the administrator can modify the products
