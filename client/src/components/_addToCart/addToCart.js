@@ -7,6 +7,7 @@ const AddToCart = ({productId}) => {
 const handlerClick = () => {
   axios.get(`http://localhost:3002/products/1`).then((res) => {
     console.log(res.data)
+   // axios.post(``)
     });
   }
 
