@@ -33,6 +33,7 @@ const Register = () => {
           Password: "",
         }}
         validationSchema={formSchema}
+        onSubmit={values => console.log(values)}
       >
         <Form>
           <FormGroup>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 //cart -product cart o pedido
 const Cart = () => {
   return (
-    <div className="d-flex flex-column text-center w-75 w-m-50 mx-auto mt-5">
+    <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
       <div class="">
         <h1 class="display-3">My cart</h1>
         <p class="lead">

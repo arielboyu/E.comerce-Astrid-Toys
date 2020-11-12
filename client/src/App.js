@@ -7,7 +7,7 @@ import {
   Switch,
   useParams,
 } from "react-router-dom";
-import CategoryList from "./components/_categoriesList/categoriesList";
+import CategoryList from "./components/_dashboardCategoriesList/categoriesList";
 /*Importaciones de componentes*/
 import Home from "./components/_home/home.js";
 import Cart from "./components/_cart/cart.js";
