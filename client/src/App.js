@@ -11,6 +11,7 @@ import CategoryList from "./components/_categoriesList/categoriesList";
 /*Importaciones de componentes*/
 import Home from "./components/_home/home.js";
 import Cart from "./components/_cart/cart.js";
+import AddToCart from "./components/_addToCart/addToCart.js";
 import Login from "./components/_login/login.js";
 import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
@@ -64,6 +65,9 @@ function App() {
         </Route>
         <Route path="/cart">
           <Cart />
+        </Route>
+        <Route path="/addToCart">
+          <AddToCart />
         </Route>
       </Switch>
       <Footer />
