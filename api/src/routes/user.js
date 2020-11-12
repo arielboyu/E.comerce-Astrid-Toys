@@ -77,6 +77,28 @@ server.get("/:idUser/cart", (req, res) => {
   });
 });
 
+//S40 : Crear Ruta para vaciar el carrito
+server.delete("/:idUser/cart", (req, res) => {
+  const idUsuario = req.params.idUser;
+  User.findOne({ where: { id: idUsuario } })
+    .then((user) => {
+      if (user === null) {
+        res.status(404);
+        res.send("No se encontró el usuario");
+      } else {
+        user
+          .getOrders({ where: { state: "PENDING" } })
+          .then((orders) =>
+            orders.map((order) => {
+              order.update({ state: "CANCELLED" });
+            })
+          )
+          .then((r) => res.send(r));
+      }
+    })
+    .catch((e) => res.send("Hubo un error: ", e));
+});
+
 //ruta para agregar un producto al carrito
 //testeada
 //maneja errores
@@ -129,10 +151,7 @@ server.get("/orders/:id", (req, res) => {
     where: {
       userId: id,
     },
-  })
-    .then((r) => res
-    .status(200).json(r))
-})
-
+  }).then((r) => res.status(200).json(r));
+});
 
 module.exports = server;
