@@ -92,6 +92,7 @@ conn.sync({ force: true }).then(() => {
           description: DataProducts[i].description,
           price: DataProducts[i].price,
           stock: DataProducts[i].stock,
+          image: DataProducts[i].image
         });
         //la siguiente linea relaciona el producto que acabo de crear
         //con una categoria random
