@@ -6,11 +6,14 @@ const Cart = () => {
   return (
     <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
       <div class="">
-        <h1 class="display-3">My cart</h1>
+        <h1 class="display-3 mb-3">My cart</h1>
         <p class="lead">
-          Aun no tienes productos agregados, visita nuestro sección de productos
-          para empezar a comprar
+          Aun no tienes productos agregados.
         </p>
+        <p class="lead">
+        Visita nuestro sección de productos
+          para empezar a comprar
+          </p>
         <hr class="my-2" />
         <p class="lead">
           <Link to="/products" className="text-decoration-none">

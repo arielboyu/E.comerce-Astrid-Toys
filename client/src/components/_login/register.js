@@ -4,24 +4,28 @@ import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
 
-const alerta = (mensaje, color="danger") => {
-  return <Alert className="mt-2" color={color}>{mensaje}</Alert>
-}
+const alerta = (mensaje, color = "danger") => {
+  return (
+    <Alert className="mt-2" color={color}>
+      {mensaje}
+    </Alert>
+  );
+};
 
 const formSchema = Yup.object().shape({
   Name: Yup.string()
-    .required( alerta("Campo requerido"))
+    .required(alerta("Campo requerido"))
     .max(30, alerta("Máximo 30 caracteres", "warning")),
   Email: Yup.string()
-    .required( alerta("Campo requerido"))
-    .email( alerta("Correo electrónico inválido", "warning"))
+    .required(alerta("Campo requerido"))
+    .email(alerta("Correo electrónico inválido", "warning"))
     .max(255, alerta("Máximo 255 caracteres", "info")),
   Username: Yup.string()
     .min(5, alerta("Mínimo 5 caracteres", "warning"))
     .max(25, alerta("Máximo 25 caracteres", "info"))
-    .required( alerta("Campo requerido")),
+    .required(alerta("Campo requerido")),
   Password: Yup.string()
-    .required( alerta("Campo requerido"))
+    .required(alerta("Campo requerido"))
     .min(5, alerta("Mínimo 5 caracteres", "warning")),
 });
 
@@ -37,7 +41,7 @@ const Register = () => {
           Password: "",
         }}
         validationSchema={formSchema}
-        onSubmit={values => console.log(values)}
+        onSubmit={(values) => console.log(values)}
       >
         <Form>
           <FormGroup>
@@ -100,7 +104,7 @@ const Register = () => {
             <Col lg={12} md={12}>
               <Button
                 color="dark"
-                className="mr-1 mb-1 btn-block"
+                className="mr-2 mb-2 btn-block"
                 type="submit"
               >
                 Create new user
@@ -110,7 +114,7 @@ const Register = () => {
               <Link to="/login">
                 <Button
                   color="danger"
-                  className="mr-1 mb-1 btn-block"
+                  className="mr-2 mb-2 btn-block"
                   type="submit"
                 >
                   Go back

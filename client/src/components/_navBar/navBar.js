@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLocation} from "react";
 
 import Login from "./login";
 import Cart from "./cart";
@@ -9,7 +9,7 @@ import Menu from "./menu";
 
 const getCategory = axios.get("http://localhost:3002/categories");
 
-export default function NavBar() {
+export default function NavBar({match}) {
   const [categories, setCategories] = useState([]);
 
   const link = {
@@ -27,7 +27,9 @@ export default function NavBar() {
   },[])
 
   return (
+    !match.isExact ?
     <nav className="bg-warning d-flex flex-direction-column navbar navbar-dark">
+      
       <h1 id="title" className={`col-12 text-center px-5 pt-5 pb-3`}>Astrid Toys</h1>
       <Menu categories={categories}/>
       <div className="d-flex col-12 col-lg-7 justify-content-center justify-content-lg-end">
@@ -35,6 +37,7 @@ export default function NavBar() {
         <Cart />
       
       </div>
-    </nav>
+    </nav> :
+    <></>
   );
 }

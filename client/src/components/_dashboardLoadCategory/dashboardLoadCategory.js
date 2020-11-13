@@ -54,7 +54,7 @@ function DashboardLoadCategory() {
         </div>
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-dark"
           data-toggle="modal"
           data-target="#modalCreateCat"
         >
@@ -92,7 +92,7 @@ function DashboardLoadCategory() {
             <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  class="btn btn-danger"
                   data-dismiss="modal"
                   onClick={()=>window.location.reload()}
                 >

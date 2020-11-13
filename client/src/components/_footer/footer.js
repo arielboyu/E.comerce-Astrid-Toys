@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./footer.module.css"
 
-const Footer = () => {
+const Footer = ({match}) => {
   return (
+    !match.isExact ?
     <footer class="pt-3 pb-2">
     <div className={`${style.footer} container col-12 text-center p-5`}>
       <div class={`d-flex justify-content-between align-items-center flex-column flex-md-row pb-2 ${style.borderFooter}`}>
@@ -23,7 +24,8 @@ const Footer = () => {
         </div>
       </div>
     </div>
-  </footer>
+  </footer> :
+  <></>
   );
 };
 

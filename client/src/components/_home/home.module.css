@@ -1,0 +1,12 @@
+#title{
+    animation: animate__rollOut;
+    animation-duration: 3s;
+}
+
+.btnIndex{
+    transition: transform 0.15s;
+}
+
+.btnIndex:hover {
+    transform: scale(1.50);
+}
