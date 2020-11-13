@@ -5,7 +5,7 @@ export default function Menu({categories}) {
     const {cat} = useParams();
     
   return (
-    <ul className="d-flex col-sm-12 col-md-12 col-lg-5 justify-content-center justify-content-lg-start">
+    <ul className="d-flex col-sm-12 col-md-10 col-lg-4 justify-content-center justify-content-lg-start ml-md-4">
       <Link to="/">
         <div className="dropdown">
           <button className="dropbtn bg-dark">Home</button>

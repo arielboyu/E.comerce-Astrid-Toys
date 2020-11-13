@@ -4,21 +4,25 @@ import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
 
+const alerta = (mensaje, color="danger") => {
+  return <Alert className="mt-2" color={color}>{mensaje}</Alert>
+}
+
 const formSchema = Yup.object().shape({
   Name: Yup.string()
-    .required("Campo requerido")
-    .max(30, "Máximo 30 caracteres"),
+    .required( alerta("Campo requerido"))
+    .max(30, alerta("Máximo 30 caracteres", "warning")),
   Email: Yup.string()
-    .required("Campo requerido")
-    .email("Correo electrónico inválido")
-    .max(255, "Máximo 255 caracteres"),
+    .required( alerta("Campo requerido"))
+    .email( alerta("Correo electrónico inválido", "warning"))
+    .max(255, alerta("Máximo 255 caracteres", "info")),
   Username: Yup.string()
-    .min(5, "Mínimo 5 caracteres")
-    .max(25, "Máximo 25 caracteres")
-    .required("Campo requerido"),
+    .min(5, alerta("Mínimo 5 caracteres", "warning"))
+    .max(25, alerta("Máximo 25 caracteres", "info"))
+    .required( alerta("Campo requerido")),
   Password: Yup.string()
-    .required("Campo requerido")
-    .min(5, "Mínimo 5 caracteres"),
+    .required( alerta("Campo requerido"))
+    .min(5, alerta("Mínimo 5 caracteres", "warning")),
 });
 
 const Register = () => {

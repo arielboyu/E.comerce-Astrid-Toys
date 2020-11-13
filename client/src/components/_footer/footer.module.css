@@ -1,4 +1,21 @@
 .footer{
-    background-color: black;
-    color: white;
+    background-color: rgb(31, 31, 31);
+    color: rgba(255, 255, 255, 0.76);
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.76);
+    font-family: 'Staatliches', cursive;
+}
+
+.footer a:hover{
+    color: goldenrod;
+}
+
+.textFooter{
+    color: rgba(218, 165, 32, 0.425)
+}
+
+.borderFooter{
+    border-bottom: 1px solid rgba(218, 165, 32, 0.425);
 }

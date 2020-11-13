@@ -9,7 +9,7 @@ const ProductList = ({ product }) => {
 
   return (
     <div>
-      <div className="d-flex flex-wrap ml-md-2 justify-content-center justify-content-md-start text-center">
+      <div className="d-flex flex-wrap justify-content-center justify-content-md-start text-center">
         {product.map((p) => (p.active && <ProductCard product={p} />))}
       </div>
     </div>

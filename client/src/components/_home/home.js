@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
-const Home = () => {
+const Home = ({navShow}) => {
     const styleImg = {
         height : "613px",
     }
+
     return (
         <div className="d-flex flex-column justify-content-center align-items-center">
         <div id="carouselExampleIndicators" className="carousel slide p-5" data-ride="carousel">
@@ -33,7 +34,7 @@ const Home = () => {
                 <span className="sr-only">Next</span>
             </a>
         </div>
-        <Link to ="/products"><button className="btn btn-outline-dark btn-lg mb-5">INGRESAR A LA TIENDA</button></Link>
+        <Link to ="/products"><button className="btn btn-outline-dark btn-lg mb-5"> INGRESAR A LA TIENDA</button></Link>
         </div>
     ) 
 }
