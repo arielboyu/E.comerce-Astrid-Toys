@@ -15,11 +15,12 @@ server.get("/", (req, res) => {
 });
 
 server.post("/create", (req, res) => {
-  const { name, lastname, email, password } = req.body;
-  if (name && lastname && email && password) {
+  const { name, username, email, password } = req.body;
+  console.log(req.body)
+  if (name && username && email && password) {
     User.create({
       name,
-      lastname,
+      username,
       email,
       password,
     })

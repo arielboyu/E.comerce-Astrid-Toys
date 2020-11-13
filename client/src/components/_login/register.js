@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
+import axios from "axios";
 
 const alerta = (mensaje, color = "danger") => {
   return (
@@ -13,21 +14,23 @@ const alerta = (mensaje, color = "danger") => {
 };
 
 const formSchema = Yup.object().shape({
-  Name: Yup.string()
+  name: Yup.string()
     .required(alerta("Campo requerido"))
     .max(30, alerta("Máximo 30 caracteres", "warning")),
-  Email: Yup.string()
+  email: Yup.string()
     .required(alerta("Campo requerido"))
     .email(alerta("Correo electrónico inválido", "warning"))
     .max(255, alerta("Máximo 255 caracteres", "info")),
-  Username: Yup.string()
+  username: Yup.string()
     .min(5, alerta("Mínimo 5 caracteres", "warning"))
     .max(25, alerta("Máximo 25 caracteres", "info"))
     .required(alerta("Campo requerido")),
-  Password: Yup.string()
+  password: Yup.string()
     .required(alerta("Campo requerido"))
     .min(5, alerta("Mínimo 5 caracteres", "warning")),
 });
+
+const register = axios.post("http://localhost:3002/users/create")
 
 const Register = () => {
   return (
@@ -35,34 +38,37 @@ const Register = () => {
       <h2 className="display-3 text-center">Register</h2>
       <Formik
         initialValues={{
-          Name: "",
-          Email: "",
-          Username: "",
-          Password: "",
+          name: "",
+          email: "",
+          username: "",
+          password: "",
         }}
         validationSchema={formSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => { console.log(values);
+          axios.post("http://localhost:3002/users/create", values)
+          .then(r => console.log("creado") )
+          .catch( e => console.log("fallo") )      }}
       >
         <Form>
           <FormGroup>
-            <label htmlFor="Name">Name</label>
+            <label htmlFor="name">Name</label>
             <Field
               className="form-control"
-              name="Name"
+              name="name"
               placeholder="Enter your name"
               type="text"
             />
             <ErrorMessage
-              name="Name"
+              name="name"
               component="div"
               className="field-error text-danger"
             />
           </FormGroup>
           <FormGroup>
-            <label htmlFor="Username">Username</label>
+            <label htmlFor="username">Username</label>
             <Field
               className="form-control"
-              name="Username"
+              name="username"
               placeholder="Create your username"
               type="text"
             />
@@ -76,26 +82,26 @@ const Register = () => {
             <label htmlFor="Email">E-mail</label>
             <Field
               className="form-control"
-              name="Email"
+              name="email"
               placeholder="Enter your e-mail"
               type="email"
             />
             <ErrorMessage
-              name="Email"
+              name="email"
               component="div"
               className="field-error text-danger"
             />
           </FormGroup>
           <FormGroup>
-            <label htmlFor="Password">Password</label>
+            <label htmlFor="password">Password</label>
             <Field
               className="form-control"
-              name="Password"
+              name="password"
               placeholder="Create your Password"
               type="password"
             />
             <ErrorMessage
-              name="Password"
+              name="password"
               component="div"
               className="field-error text-danger"
             />

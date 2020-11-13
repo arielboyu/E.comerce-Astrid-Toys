@@ -54,7 +54,7 @@ conn.sync({ force: true }).then(() => {
       for (let i = 0; i < DataUsers.length; i++) {
         var user = await User.create({
           name: DataUsers[i].name,
-          lastname: DataUsers[i].lastname,
+          username: DataUsers[i].username,
           email: DataUsers[i].email,
           password: DataUsers[i].password,
         });
