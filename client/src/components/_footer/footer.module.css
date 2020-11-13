@@ -5,9 +5,9 @@
 
 .footer a {
     color: rgba(255, 255, 255, 0.76);
-    font-family: 'Staatliches', cursive;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
 }
-
 .footer a:hover{
     color: goldenrod;
 }
@@ -18,4 +18,8 @@
 
 .borderFooter{
     border-bottom: 1px solid rgba(218, 165, 32, 0.425);
+}
+
+.title {
+    font-family: 'Rancho', cursive; 
 }
