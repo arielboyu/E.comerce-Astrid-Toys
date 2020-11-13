@@ -1,35 +1,28 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import style from './productCard.module.css'
 
 export default function ProductCard({ product }) {
-  const carta = {
-    width: "200px",
-    height: "300px",
-  };
   const imagen = {
     backgroundColor: "white",
-    height: "150px",
   };
-  // const { index } = useParams();
   return (
     <Link className="text-decoration-none" to={`/products/id/${product.id}`}>
-      <div style={carta} className="card mx-1 my-1 p-2 shadow">
-        <div style={imagen}>
+      <div className={`${style.card} card mr-3 mt-1 mb-3 pt-5 pb-3 px-4`}>
           <img
             style={imagen}
-            src="https://www.cellshop.com/342978-large_default/boneca-harley-quinn-dc-super-heroes-funko-pop-301.jpg"
+            src={product.image}
           ></img>
-        </div>
-        <div className="card-body">
-          <h3 className="m-0 text-dark">{product.name}</h3>
-          <p className="mb-3 text-info">${product.price}</p>
+        <div className="card-body text-center">
+          <h5 className={`${style.text} m-0 mb-1 text-dark text-uppercase `}>{product.name}</h5>
+          <h1 className={`pt-2 ${style.price}`}>${product.price}</h1>
         </div>
         {product.stock > 0 ? (
-          <button className="btn btn-danger mx-3 mb-1 ">
-            ADD TO CART
+          <button className={`btn btn-danger mx-3 mb-1 ${style.cart}`}>
+           <i class="fas fa-cart-plus"></i> ADD TO CART
           </button>
         ) : (
-          <button className="btn btn-outline-secondary mx-3 mb-1 ">
+          <button className={`btn btn-danger mx-3 mb-1 ${style.cart}`}>
             OUT OF STOCK
           </button>
         )}

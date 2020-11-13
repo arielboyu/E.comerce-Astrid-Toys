@@ -1,9 +1,8 @@
 import React from "react";
-import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
 } from "react-router-dom";
 import CategoryList from "./components/_dashboardCategoriesList/categoriesList";
 /*Importaciones de componentes*/
@@ -27,9 +26,9 @@ import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Route path="/" render={({match}) => <Navbar match={match} />} />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Home}/>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register}/>
         <Route path="/products/category/nav/:cat">
@@ -74,7 +73,8 @@ function App() {
           <AddToCart />
         </Route>
       </Switch>
-      <Footer />
+      <Route path="/" render={({match}) => <Footer match={match} />} />
+      
     </Router>
   );
 }

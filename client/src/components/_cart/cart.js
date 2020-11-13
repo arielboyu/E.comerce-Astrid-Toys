@@ -18,6 +18,7 @@ const Cart = () => {
   }, []);
 
   return (
+
     <>
       <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
         <div class="">

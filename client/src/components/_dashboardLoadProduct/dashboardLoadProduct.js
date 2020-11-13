@@ -140,7 +140,7 @@ function DashboardLoadProduct() {
         <div className="form-row border-top pt-2">
           <div className="form-group col-md-6">
             <p>Show product in store</p>
-            <div className="pl-4" style={{backgroundColor:"#bedbbb",border: "1px solid grey",padding:"1px",borderRadius: "7px", width:"55px"}}>
+            <div className="pl-4" style={{backgroundColor:"rgba(3, 122, 19, 0.2)",border: "1px solid grey",padding:"1px",borderRadius: "7px", width:"55px"}}>
               <input
                 onChange={handlerChange}
                 className="form-check-input"
@@ -198,7 +198,7 @@ function DashboardLoadProduct() {
         </div>
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-dark"
           data-toggle="modal"
           data-target="#exampleModal"
         >
@@ -236,7 +236,7 @@ function DashboardLoadProduct() {
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  class="btn btn-danger"
                   data-dismiss="modal"
                   onClick={() => window.location.reload()}
                 >

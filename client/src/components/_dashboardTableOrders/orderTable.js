@@ -11,7 +11,6 @@ export default function OrderTable() {
       getOrder.then((res) => {
         setOrder(res.data);
         console.log(res)
-        console.log("use")
       });
     }, [])
     return (
@@ -38,9 +37,9 @@ export default function OrderTable() {
             <td>{o.createdAt}</td>
             <td>{o.user.name}</td>
             <td>{o.user.lastname}</td>
-            <td>Funkopop</td>
-            <td>$ 3.5000</td>
-            <td>75</td>
+            <td>{o.products[0].name}</td>
+            <td>{o.products[0].price}</td>
+           <td>{o.products[0].stock}</td>
             </tr>
            ))}
         </tbody>

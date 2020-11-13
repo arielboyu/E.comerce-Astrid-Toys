@@ -7,10 +7,9 @@
   font-family: 'Spicy Rice', cursive;
 }*/
 
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 #title{
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Rancho', cursive;
+  font-size: 110px;
 }
 
 .dropbtn {
@@ -25,8 +24,7 @@
 
 .dropdown {
   position: relative;
-  display: inline-block;
-  
+  display: inline-block;  
 }
 
 .dropdown-content {
@@ -52,4 +50,5 @@
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {background-color: white;}
+
