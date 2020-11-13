@@ -49,7 +49,7 @@ export default function Product() {
               <p className="pt-3">Stock: {f.stock}</p>
               <p> ⭐⭐⭐⭐⭐ </p>
               {f.stock > 0 ? (
-               <AddToCart productId= {f.id} /> 
+               <AddToCart productId= {f.id} />
               ) : (
                 <button className="btn btn-outline-secondary">
                   OUT OF STOCK
