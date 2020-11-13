@@ -163,14 +163,21 @@ server.put("/:order/:id", (req, res) => {
   const orderId = req.params.order;
   var { quantity  } = req.body;
 
-  Orderdetails.findOne({
-    where: { [Op.and]: [ {productId: productId }, {orderId: orderId } ] } 
-  }).then(order => {
-    order.increment('quantity', { by: quantity }).then(r => {
-      res.send(r);
-    })
-  })
-  
+  Order.findOne({where: {id : orderId}})
+    .then(order => {
+      console.log(order.state)
+      if(order.state === "PENDING") {
+        Orderdetails.findOne({
+          where: { [Op.and]: [ {productId: productId }, {orderId: orderId } ] } 
+        }).then(order => {
+          order.increment('quantity', { by: quantity }).then(r => {
+            res.send(r);
+        })
+      })
+    } else {
+      res.send("No se puede modificar la orden");
+    }
+  }) 
 })
 
  
