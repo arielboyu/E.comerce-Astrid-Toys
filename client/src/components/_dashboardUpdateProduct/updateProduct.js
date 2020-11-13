@@ -63,7 +63,7 @@ function UpdateProduct() {
   };
   const handlerKey = (e) => {
     let arr = ["0", "1", "2", "3", "4", "5", "7", "8", "9"];
-    if (arr.indexOf(e.key) == -1) {
+    if (arr.indexOf(e.key) === -1) {
       e.preventDefault();
     }
   };

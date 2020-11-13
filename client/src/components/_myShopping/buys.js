@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from "../_productCard/productCard";
 import axios from "axios";
 //Este componente se mostrara en una solapa "Mis Compras" de un determinado usuario
 
@@ -14,7 +13,7 @@ const Buys = ({ orderId }) => {
   }
   useEffect(() => {
     inicialState();
-  }, []);
+  });
 
   return (
     <div className="container border shadow m-3 p-5">
