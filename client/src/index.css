@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Fredoka+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Fredoka+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Fredoka+One&display=swap');
+/* titulo */
+@import url('https://fonts.googleapis.com/css2?family=Rancho&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Xanh+Mono&display=swap');
 
 *{
   box-sizing: border-box;
 }
 body{
     font-family: 'Fredoka One', cursive;
-    
 }
 
 a{

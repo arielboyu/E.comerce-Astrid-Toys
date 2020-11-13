@@ -1,0 +1,15 @@
+.title{
+    font-size: 130px;
+    font-family: 'Rancho', cursive; 
+}
+
+.btnIndex{
+    transition: transform 0.15s;
+    color: rgba(206, 154, 24, 0.863)
+}
+
+.btnIndex:hover {
+    transform: scale(1.50);
+    color: black;
+    border: 1px rgba(206, 154, 24, 0.863);
+}

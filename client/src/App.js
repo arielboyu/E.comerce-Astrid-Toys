@@ -26,7 +26,7 @@ import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Route path="/" render={({match}) => <Navbar match={match} />} />
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/login" component={Login} />
@@ -73,7 +73,8 @@ function App() {
           <AddToCart />
         </Route>
       </Switch>
-      <Footer />
+      <Route path="/" render={({match}) => <Footer match={match} />} />
+      
     </Router>
   );
 }

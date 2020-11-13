@@ -36,7 +36,7 @@ const DashboardUpdateProduct = () => {
         <hr class="my-2" />
         <p class="lead">
           <Link to="/dashboard/product/create">
-            <button class="btn btn-primary btn-lg d-flex align-items-center mx-auto mt-3">
+            <button class="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
             <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Product 
             </button>
           </Link>
@@ -66,14 +66,14 @@ const DashboardUpdateProduct = () => {
               <td>{prod.active.toString()}</td>
               <td>
                 <Link to={`/dashboard/product/update/${prod.id}`}>
-                  <button className="btn btn-primary">
+                  <button className="btn btn-danger">
                     Update
                   </button>
                 </Link>
               </td>
               <td>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-dark"
                   onClick={() => {
                     changeStateActive(prod);
                     window.location.reload();

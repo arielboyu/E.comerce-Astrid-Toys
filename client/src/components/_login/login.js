@@ -66,7 +66,7 @@ const Login = () => {
             <Col lg={12} md={12}>
               <Button
                 color="dark"
-                className="mr-1 mb-1 btn-block"
+                className="mr-1 mb-2 btn-block"
                 type="submit"
               >
                 Iniciar sesión
@@ -76,7 +76,7 @@ const Login = () => {
               <Link to="/register">
                 <Button
                   color="primary"
-                  className="mr-1 mb-1 btn-block"
+                  className="mr-1 mb-2 btn-block"
                   type="submit"
                 >
                   Registrarse
