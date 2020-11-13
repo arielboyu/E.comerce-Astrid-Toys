@@ -23,7 +23,7 @@ export default function OrderTable() {
       <th>State</th>
       <th>createdAt</th>
       <th>User</th>
-      <th>LastName</th>
+      <th>UserName</th>
       <th>ProductName</th>
       <th>Price</th>
       <th>Stock</th>
@@ -36,7 +36,7 @@ export default function OrderTable() {
             <td>{o.state}</td>
             <td>{o.createdAt}</td>
             <td>{o.user.name}</td>
-            <td>{o.user.lastname}</td>
+            <td>{o.user.username}</td>
             <td>{o.products[0].name}</td>
             <td>{o.products[0].price}</td>
            <td>{o.products[0].stock}</td>
