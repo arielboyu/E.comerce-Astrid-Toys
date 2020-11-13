@@ -1,15 +1,3 @@
-//
-
-/*import {
-  ADD_PRODUCT_CART,
-  GET_PRODUCT_CART,
-  EDIT_PRODUCT_CART,
-  DELETE_PRODUCT_CART,
-  GET_PRODUCT_DETAILS,
-} from "./actions.js";*/
-
-//shopingCart donde coloco o exporto mi carrito vacio? store o en la funcion o componente carrito?
-// cart: []
 const initialState = {};
 
 function rootReducer(state = initialState, action) {
