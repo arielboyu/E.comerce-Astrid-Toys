@@ -16,7 +16,7 @@ server.get('/', (req, res) => {
                 {
                     model: User,
                     as:"user",
-                    attributes: ["name" , "lastname"]
+                    attributes: ["name" , "username"]
                 }
               ],
     })
@@ -38,7 +38,7 @@ server.get('/search', (req, res) => {
                 {
                     model: User,
                     as:"user",
-                    attributes: ["name" , "lastname"]
+                    attributes: ["name" , "username"]
                 }
               ],
     })
