@@ -54,7 +54,7 @@ const Catalogue = () => {
   return (
     <>
       <div className="mx-auto text-center w-75 mt-5">
-        <h1 className="display-4 d-none d-md-block text-dark">Catalogo de funkos</h1>
+        <h1 className="display-4 d-none d-md-block text-dark">Catalogo</h1>
       </div>
       <div className="container-fluid p-5 ">
         <div className="row">
