@@ -54,7 +54,7 @@ conn.sync({ force: true }).then(() => {
       for (let i = 0; i < DataUsers.length; i++) {
         var user = await User.create({
           name: DataUsers[i].name,
-          lastname: DataUsers[i].lastname,
+          username: DataUsers[i].username,
           email: DataUsers[i].email,
           password: DataUsers[i].password,
         });
@@ -92,6 +92,7 @@ conn.sync({ force: true }).then(() => {
           description: DataProducts[i].description,
           price: DataProducts[i].price,
           stock: DataProducts[i].stock,
+          image: DataProducts[i].image
         });
         //la siguiente linea relaciona el producto que acabo de crear
         //con una categoria random

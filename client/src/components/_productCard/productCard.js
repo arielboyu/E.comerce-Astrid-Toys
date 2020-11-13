@@ -11,7 +11,7 @@ export default function ProductCard({ product }) {
       <div className={`${style.card} card mr-3 mt-1 mb-3 pt-5 pb-3 px-4`}>
           <img
             style={imagen}
-            src="https://www.cellshop.com/342978-large_default/boneca-harley-quinn-dc-super-heroes-funko-pop-301.jpg"
+            src={product.image}
           ></img>
         <div className="card-body text-center">
           <h5 className={`${style.text} m-0 mb-1 text-dark text-uppercase `}>{product.name}</h5>
