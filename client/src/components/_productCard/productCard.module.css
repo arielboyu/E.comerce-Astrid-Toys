@@ -20,7 +20,7 @@
 .text{
   font-family: 'Fredoka One', cursive;
   transition: transform 0.2s;
-  border: 1px dashed rgba(143, 143, 143, 0.9);
+  border: 1px dashed rgba(218, 165, 32, 0.582);
   padding: 10px;
 }
 

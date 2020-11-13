@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ProductCard from "../_productCard/productCard";
-import axios from "axios";
+
 
 
 

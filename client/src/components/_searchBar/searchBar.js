@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, useParams, NavLink, Redirect } from "react-router-dom";
-import ProductList from "../_productList/productList";
-import axios from "axios";
+import {  Redirect } from "react-router-dom";
+
+
 
 //Searchbar
 export default function SearchBar({ onSearch, onClear }) {

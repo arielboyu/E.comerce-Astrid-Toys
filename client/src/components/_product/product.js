@@ -12,7 +12,6 @@ export default function Product() {
     axios.get(`http://localhost:3002/products/${index}`).then((res) => {
       setFuko(res.data);
       setLoad(true);
-      console.log(fuko);
     });
   }, [load]);
 
@@ -24,17 +23,23 @@ export default function Product() {
     height: "350px",
   };
   const imagen = {
-    
     height: "90%",
     margin: "20px auto",
   };
   if (fuko) {
     return (
-      <div style={card} className="border d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded shadow">
+      <div
+        style={card}
+        className="border d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded shadow"
+      >
         {fuko.map((f) => (
           <>
             <div style={imagen}>
-            <img style={imagen} className="border-right mr-4" src="https://www.cellshop.com/342978-large_default/boneca-harley-quinn-dc-super-heroes-funko-pop-301.jpg"></img>
+              <img
+                style={imagen}
+                className="border-right mr-4"
+                src="https://www.cellshop.com/342978-large_default/boneca-harley-quinn-dc-super-heroes-funko-pop-301.jpg"
+              ></img>
             </div>
             <div className="m-5 p-3 col-4">
               <h1>{f.name}</h1>
@@ -42,7 +47,15 @@ export default function Product() {
               <h5 className="p-1 font-weight-bold"> ${f.price}</h5>
               <p className="pt-3">Stock: {f.stock}</p>
               <p> ⭐⭐⭐⭐⭐ </p>
-              <button className="btn btn-danger">Add to Cart</button>
+              {f.stock > 0 ? (
+                <button className="btn btn-danger">
+                  ADD TO CART
+                </button>
+              ) : (
+                <button className="btn btn-outline-secondary">
+                  OUT OF STOCK
+                </button>
+              )}
             </div>
           </>
         ))}

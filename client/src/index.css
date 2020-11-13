@@ -12,9 +12,9 @@ body{
 }
 
 a{
-  color: goldenrod;
+  color: rgba(206, 154, 24, 0.863)
 }
 a:hover{
-  color: black;
+  color: rgba(0, 0, 0, 0.795);
   text-decoration:none;
 }

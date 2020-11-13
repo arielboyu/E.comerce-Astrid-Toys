@@ -185,6 +185,12 @@ server.delete("/:productID", (req, res) => {
 
 
 server.get("/:id", (req, res, next) => {
+  //query
+  /* select * from product where idProduct = req.params.id*/
+
+  
+
+
   Product.findAll({
     where: {
       id: req.params.id,

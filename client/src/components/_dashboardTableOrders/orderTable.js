@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useParams } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 // Tabla que muestra una lista de ordenes.
 // Esta tabla es para el admin.
