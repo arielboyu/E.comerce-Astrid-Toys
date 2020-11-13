@@ -4,6 +4,7 @@ const { Order,Product,User, } = require('../db.js');
 //Ruta que incluye los modelos en la lista del 
 // Frontend con direccion en componente orderTables.js
 // con path en http://localhost:3000/dashboard/users/list
+// Se actualizaron los modelos 
 server.get('/', (req, res) => {
     Order.findAll({
         include: [
