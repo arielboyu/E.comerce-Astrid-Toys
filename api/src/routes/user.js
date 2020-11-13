@@ -1,6 +1,6 @@
 const server = require("express").Router();
 
-const { User,Order,Product } = require("../db.js");
+const { User,Order,Product,Orderdetails } = require("../db.js");
 const { Op } = require('sequelize');
 
 
@@ -157,29 +157,21 @@ server.get("/orders/:id", (req, res) => {
 });
 
 //S41: Crear ruta para editar las cantidades del carrito.
-/*server.put("/:idUser/cart", (req, res) => {
-  const product = req.params.id;
-  var { quantity, idProduct } = req.body;
-  product
-    .findByPk({
-      state: "PENDING",
-      through: { price: product.price, quantity: quantity },
+//Esta ruta le suma o resta lo que pase de quantity a la orden.
+server.put("/:order/:id", (req, res) => {
+  const productId = req.params.id;
+  const orderId = req.params.order;
+  var { quantity  } = req.body;
+
+  Orderdetails.findOne({
+    where: { [Op.and]: [ {productId: productId }, {orderId: orderId } ] } 
+  }).then(order => {
+    order.increment('quantity', { by: quantity }).then(r => {
+      res.send(r);
     })
-    .then((product) => {
-      product.findOne({ where: { id: idProduct } });
-      if (product !== null) {
-        res.json({
-          message: "product modified",
-          product,
-        });
-      } else {
-        res.status(400).json({ message: "no se encontro ningun producto" });
-      }
-    })
-    .catch((err) => {
-      res.status(400).json({ message: "ups" });
-    });
-});*/
+  })
+  
+})
 
  
 //EXTRA: Crear una ruta que retorne el historial de compras (canceladas y completadas)
