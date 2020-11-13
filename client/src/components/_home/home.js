@@ -9,11 +9,11 @@ const Home = ({ navShow }) => {
     const fondo = {backgroundImage: `url(${LogoImage})`, height: height, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center"}
   return (
     <div style={fondo} className="d-flex flex-column justify-content-center align-items-center">
-        <h1 className={`${style.title} display-1 text-center px-5 pt-5 pb-3 animate__animated animate__swing text-white`}>Astrid Toys</h1>
+        <h1 className={`${style.title} display-1 text-center px-5 animate__animated animate__swing text-white`}>Astrid Toys</h1>
         <Link to="/products">
-            <button className={`${style.btnIndex} btn btn-light rounded btn-lg my-5`}>
+            <button className={`${style.btnIndex}  btn btn-light rounded btn-lg my-5 p-4`}>
             {" "}
-            INGRESAR A LA TIENDA
+            <h2>ENTER TO THE STORE</h2>
             </button>
       </Link>
     </div>

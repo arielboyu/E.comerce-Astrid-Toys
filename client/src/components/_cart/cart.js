@@ -33,14 +33,14 @@ const Cart = () => {
                 <th>DeleteItem</th>
               </tr>
               {console.log(cart)}
-              {cart.map((f, i) => {
+              {/* {cart.map((f) => {
                   <tr>
                     <td>{f.name}</td>
                     <td>{f.price}</td>
                     <td>{f.cant}</td>
                     <td>{f.description}</td>
                   </tr>
-              })}
+              })} */}
             </table>
           ) : (
             <p class="lead">
