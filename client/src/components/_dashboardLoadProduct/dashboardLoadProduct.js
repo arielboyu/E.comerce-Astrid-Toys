@@ -54,16 +54,16 @@ function DashboardLoadProduct() {
     getCategory.then((res) => {
       setCategory(res.data);
     });
-  }, []);
+    
+  },[]);
 
   const handlerChange = (e) => {
-    e.preventDefault();
     if (e.target.name === "active") {
       setProduct({ ...productLoad, [e.target.name]: e.target.checked });
     } else {
       setProduct({ ...productLoad, [e.target.name]: e.target.value });
     }
-    console.log(productLoad[e.target.name]);
+    // e.preventDefault();
   };
 
   const handlerSubmit = (e) => {
@@ -83,7 +83,7 @@ function DashboardLoadProduct() {
 
   const handlerKey = (e) => {
     let arr = ["0", "1", "2", "3", "4", "5", "7", "8", "9"];
-    if (arr.indexOf(e.key) == -1) {
+    if (arr.indexOf(e.key) === -1) {
       e.preventDefault();
     }
   };
@@ -101,8 +101,8 @@ function DashboardLoadProduct() {
   };
 
   return (
-    <div className="container d-flex flex-column mx-auto my-5 ">
-      <h2 className="display-3">Load Product</h2>
+    <div className="container d-flex flex-column mx-auto my-5 p-5 border shadow">
+      <h2 className="display-3 text-center">Load Product</h2>
       <form onSubmit={handlerSubmit}>
         <div className="form-group">
           <label htmlFor="productName">Product Name</label>
@@ -116,7 +116,7 @@ function DashboardLoadProduct() {
           />
         </div>
 
-        <div className="form-row">
+        <div className="form-row border-top pt-2">
           <div className="form-group col-md-12">
             <label htmlFor="productCategory">Category</label>
             <div className="custom-control custom-switch d-flex">
@@ -137,8 +137,23 @@ function DashboardLoadProduct() {
             </div>
           </div>
         </div>
-        <div className="form-row">
+        <div className="form-row border-top pt-2">
           <div className="form-group col-md-6">
+            <p>Show product in store</p>
+            <div className="pl-4" style={{backgroundColor:"#bedbbb",border: "1px solid grey",padding:"1px",borderRadius: "7px", width:"55px"}}>
+              <input
+                onChange={handlerChange}
+                className="form-check-input"
+                type="checkbox"
+                value="active"
+                name="active"
+              />
+              <label className="form-check-label" htmlFor="active">
+                {productLoad.active ? "Yes" : "No"}
+              </label>
+            </div>
+          </div>
+          <div className="form-group col-md-3">
             <label htmlFor="productStock">Stock</label>
             <input
               type="text"
@@ -149,7 +164,7 @@ function DashboardLoadProduct() {
               onChange={handlerChange}
             />
           </div>
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-3">
             <label htmlFor="productPrice">Price</label>
             <input
               type="text"
@@ -161,7 +176,7 @@ function DashboardLoadProduct() {
             />
           </div>
         </div>
-        <div className="form-group">
+        <div className="form-group border-top pt-2 mt-2">
           <label htmlFor="productDescription">Description</label>
           <textarea
             className="form-control"
@@ -179,18 +194,6 @@ function DashboardLoadProduct() {
               class="form-control-file"
               id="productImage"
             ></input>
-          </div>
-          <div className="form-group col-md-6">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value={productLoad.active}
-              name="active"
-              onChange={handlerChange}
-            />
-            <label className="form-check-label" htmlFor="productCheck">
-              activate product in store?
-            </label>
           </div>
         </div>
         <button
@@ -226,7 +229,7 @@ function DashboardLoadProduct() {
                   aria-label="Close"
                   onClick={() => window.location.reload()}
                 >
-                  <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true">x</span>
                 </button>
               </div>
               <div class="modal-body">{msg}</div>

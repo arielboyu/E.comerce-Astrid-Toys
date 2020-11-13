@@ -61,5 +61,50 @@ server.get('/:id',(req, res)=>{
 });
 
 
+// S47 : Crear Ruta para modificar una Orden
+//esta ruta recibe una orden por params y en base al id setea su estado a complete
+//testeadas con postman, funcionando  
+server.put('/modify/complete/:id', (req, res) => {
+    Order.findOne({
+            where: {
+                id: req.params.id,
+            }
+        }).then(orden => {
+            orden.update({
+                state: 'COMPLETE',
+            })
+        })
+        .then(() => {
+            return res.send("se asigna  la orden a  Complete")
+                   
+        })
+        .catch(() => {
+            return res.status(400).send("Error No se ha podido Completar La orden ");
+        })
+});
+
+
+//Esta ruta setea el estado de una orden en base a su id  a canelado 
+
+server.put('/modify/cancel/:id', (req, res) => {
+    Order.findOne({
+            where: {
+                id: req.params.id,
+            }
+        }).then(orden => {
+            orden.update({
+                state: 'CANCELLED',
+            })
+        })
+        .then(() => {
+            return res.send("se Cancela La Orden")
+                   
+        })
+        .catch(() => {
+            return res.status(400).send("Error No se ha podido Cancelar  La orden ");
+        })
+});
+
+
 
 module.exports = server;

@@ -114,7 +114,6 @@ conn.sync({ force: true }).then(() => {
     var Orders = [];
     async function cargarTablaOrder() {
       for (let i = 0; i < DataOrders.length; i++) {
-        console.log(DataOrders[i].state);
         var order = await Order.create({
           state: DataOrders[i].state,
         });

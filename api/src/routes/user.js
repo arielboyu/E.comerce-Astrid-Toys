@@ -1,6 +1,8 @@
 const server = require("express").Router();
-const { User, Order, OrderDetails, Product } = require("../db.js");
-//const Product = require("../models/Product.js");
+
+const { User,Order,Product } = require("../db.js");
+const { Op } = require('sequelize');
+
 
 server.get("/", (req, res) => {
   User.findAll()
@@ -75,6 +77,28 @@ server.get("/:idUser/cart", (req, res) => {
       .getOrders({ where: { state: "PENDING" } })
       .then((orders) => res.send(orders));
   });
+});
+
+//S40 : Crear Ruta para vaciar el carrito
+server.delete("/:idUser/cart", (req, res) => {
+  const idUsuario = req.params.idUser;
+  User.findOne({ where: { id: idUsuario } })
+    .then((user) => {
+      if (user === null) {
+        res.status(404);
+        res.send("No se encontró el usuario");
+      } else {
+        user
+          .getOrders({ where: { state: "PENDING" } })
+          .then((orders) =>
+            orders.map((order) => {
+              order.update({ state: "CANCELLED" });
+            })
+          )
+          .then((r) => res.send(r));
+      }
+    })
+    .catch((e) => res.send("Hubo un error: ", e));
 });
 
 //ruta para agregar un producto al carrito
@@ -156,5 +180,22 @@ server.get("/orders/:id", (req, res) => {
       res.status(400).json({ message: "ups" });
     });
 });*/
+
+ 
+//EXTRA: Crear una ruta que retorne el historial de compras (canceladas y completadas)
+ server.get("/shopping/:id", (req, res) => {
+
+  const id = req.params.id;
+  Order.findAll({
+    where: {
+      userId: id,
+      [Op.or]: [{state : "CANCELLED"},{state: "COMPLETE"}]
+    },
+  })
+    .then((orders) => res
+    .status(200).json(orders))
+}) 
+
+
 
 module.exports = server;

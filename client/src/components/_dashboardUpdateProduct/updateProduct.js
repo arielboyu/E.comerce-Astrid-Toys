@@ -13,6 +13,7 @@ function UpdateProduct() {
   
   useEffect(() => {
     axios.get(`http://localhost:3002/products/${id}`).then((res) => {
+      console.log(res)
       let initialState = res.data[0];
       setLoad(true);
       axios
@@ -60,10 +61,16 @@ function UpdateProduct() {
       });
     e.preventDefault();
   };
+  const handlerKey = (e) => {
+    let arr = ["0", "1", "2", "3", "4", "5", "7", "8", "9"];
+    if (arr.indexOf(e.key) === -1) {
+      e.preventDefault();
+    }
+  };
 
   return (
-    <div className="container d-flex flex-column mx-auto my-5">
-      <h2 className="display-3">Update Product</h2>
+    <div className="container d-flex flex-column mx-auto my-5 p-5 border shadow">
+      <h2 className="display-3 text-center">Update Product</h2>
       <form onSubmit={handlerSubmit}>
         <div className="form-group">
           <label htmlFor="productName">Product Name</label>
@@ -116,22 +123,50 @@ function UpdateProduct() {
               )}
             </div>
           </div>
+        </div>
+        {/* Agregado Rodri */}
+        <div className="form-row border-top pt-2">
           <div className="form-group col-md-6">
-            <label htmlFor="productCategory">Sub-Category</label>
-            <select
+            <p>Show product in store</p>
+            <div className="pl-4" style={{backgroundColor:"#bedbbb",border: "1px solid grey",padding:"1px",borderRadius: "7px", width:"55px"}}>
+              <input
+                onChange={handlerChange}
+                className="form-check-input"
+                type="checkbox"
+                value="active"
+                name="active"
+                checked={productUpdate.active}
+              />
+              <label className="form-check-label" htmlFor="active">
+                {productUpdate.active ? "Yes" : "No"}
+              </label>
+            </div>
+          </div>
+          <div className="form-group col-md-3">
+            <label htmlFor="productStock">Stock</label>
+            <input
+              type="text"
               className="form-control"
-              name="subCategory"
+              name="stock"
+              onKeyPress={handlerKey}
+              value={productUpdate.stock}
               onChange={handlerChange}
-              value={productUpdate.subCategory}
-            >
-              <option></option>
-              <option>Sub-Category 1</option>
-              <option>Sub-Category 2</option>
-              <option>Sub-Category 3</option>
-            </select>
+            />
+          </div>
+          <div className="form-group col-md-3">
+            <label htmlFor="productPrice">Price</label>
+            <input
+              type="text"
+              className="form-control"
+              name="price"
+              onKeyPress={handlerKey}
+              value={productUpdate.price}
+              onChange={handlerChange}
+            />
           </div>
         </div>
-        <div className="form-row">
+         {/* Aca termina */}
+        {/* <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="productStock">Stock</label>
             <input
@@ -152,7 +187,7 @@ function UpdateProduct() {
               onChange={handlerChange}
             />
           </div>
-        </div>
+        </div> */}
         <div className="form-group">
           <label htmlFor="productDescription">Example textarea</label>
           <textarea
@@ -172,7 +207,7 @@ function UpdateProduct() {
               id="productImage"
             ></input>
           </div>
-          <div className="form-group col-md-6">
+          {/* <div className="form-group col-md-6">
             <input
               className="form-check-input"
               type="checkbox"
@@ -182,7 +217,7 @@ function UpdateProduct() {
             <label className="form-check-label" htmlFor="productCheck">
               activate product in store ?
             </label>
-          </div>
+          </div> */}
         </div>
         <button
           type="submit"
