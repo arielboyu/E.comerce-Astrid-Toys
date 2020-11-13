@@ -5,7 +5,7 @@ import axios from "axios";
 
 const AddToCart = ({ productId }) => {
   const handlerClick = () => {
-    axios.get(`http://localhost:3002/products/1`).then((res) => {
+    axios.get(`http://localhost:3002/products/${productId}`).then((res) => {
       console.log(res.data);
     });
   };
@@ -24,5 +24,8 @@ const AddToCart = ({ productId }) => {
     </div>
   );
 };
+
+/* Mi pedido
+producto cantidad precio total*/
 
 export default AddToCart;

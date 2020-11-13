@@ -20,8 +20,8 @@ server.get('/', (req, res) => {
                 }
               ],
     })
-    .then((r) => res
-    .status(200).json(r))
+    .then((r) => 
+    res.status(200).send(r))
 });
 
 //S44- agrega filtro por state si es enviado por query
