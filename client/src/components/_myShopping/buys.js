@@ -13,7 +13,7 @@ const Buys = ({ orderId }) => {
   }
   useEffect(() => {
     inicialState();
-  },);
+  });
 
   return (
     <div className="container border shadow m-3 p-5">
