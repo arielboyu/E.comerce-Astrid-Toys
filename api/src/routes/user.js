@@ -72,12 +72,27 @@ server.put("/:id", (req, res) => {
 
 server.get("/:idUser/cart", (req, res) => {
   const idUsuario = req.params.idUser;
-  User.findOne({ where: { id: idUsuario } }).then((user) => {
-    user
-      .getOrders({ where: { state: "PENDING" } })
-      .then((orders) => res.send(orders));
-  });
+  User.findOne({
+    include:[
+      {
+        model:Order,
+        include:[{
+          model:Product,
+        }],
+        where:{ state : "PENDING"}
+      }
+    ],
+    where:{id : idUsuario}
+  }).then((user) => {
+    res.send(user)
+  })
 });
+
+
+
+
+
+
 
 //S40 : Crear Ruta para vaciar el carrito
 server.delete("/:idUser/cart", (req, res) => {

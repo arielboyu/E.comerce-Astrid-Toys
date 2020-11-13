@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import AddToCart from "../_addToCart/addToCart";
 //Product
 
 export default function Product() {
@@ -48,9 +49,7 @@ export default function Product() {
               <p className="pt-3">Stock: {f.stock}</p>
               <p> ⭐⭐⭐⭐⭐ </p>
               {f.stock > 0 ? (
-                <button className="btn btn-danger">
-                  ADD TO CART
-                </button>
+               <AddToCart productId= {f.id} /> 
               ) : (
                 <button className="btn btn-outline-secondary">
                   OUT OF STOCK
