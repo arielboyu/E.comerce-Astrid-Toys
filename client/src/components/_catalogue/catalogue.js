@@ -54,14 +54,14 @@ const Catalogue = () => {
   return (
     <>
       <div className="mx-auto text-center w-75 mt-5">
-        <h1 className="display-3 d-none d-md-block">Titulo</h1>
+        <h1 className="display-4 d-none d-md-block text-dark">Catalogo de funkos</h1>
       </div>
       <div className="container-fluid p-5 ">
         <div className="row">
-          <div className="border shadow d-sm-flex col-10 col-s-5 col-md-5 col-lg-4 col-xl-3  flex-column pt-3 mx-auto mt-1 mb-4 rounded ">
+          <div className="border shadow d-sm-flex flex-column pt-3 mt-1 mb-4 rounded mx-auto mr-sm-0 ml-sm-4">
             <CategoryList category={category} filter={handlerFilter} onSearch={handlerSearch} onClear={handlerClear}/>
           </div>
-          <div className="d-flex col-s-5 col-md-5 col-lg-6 col-xl-8 pb-3 mb-1 rounded ">
+          <div className="d-flex col-sm-3 col-md-6 col-lg-6 col-xl-8 pb-3 mb-1 ml-5 mx-auto rounded ">
             <ProductList product={product}/>
           </div>
         </div>

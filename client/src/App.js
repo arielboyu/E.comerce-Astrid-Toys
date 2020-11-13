@@ -1,9 +1,8 @@
 import React from "react";
-import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
 } from "react-router-dom";
 import CategoryList from "./components/_dashboardCategoriesList/categoriesList";
 /*Importaciones de componentes*/
@@ -29,7 +28,7 @@ function App() {
     <Router>
       <Navbar />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Home}/>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register}/>
         <Route path="/products/category/nav/:cat">
