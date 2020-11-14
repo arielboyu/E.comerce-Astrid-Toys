@@ -43,15 +43,20 @@ const Cart = () => {
               })} */}
             </table>
           ) : (
-            <p class="lead">
-              Aun no tienes productos agregados, visita nuestro sección de
-              productos para empezar a comprar
+            <div>
+            <p className="lead pt-3">
+              Aun no tienes productos agregados.
             </p>
+            <p className="lead">
+            Visita nuestro sección de
+            productos para empezar a comprar.
+          </p>
+          </div>
           )}
           <hr class="my-2" />
           <p class="lead">
             <Link to="/products" className="text-decoration-none">
-              <button class="btn btn-primary btn-lg my-5">
+              <button class="btn btn-danger btn-lg my-5">
                 CONTINUE SHOPPING{" "}
               </button>
             </Link>

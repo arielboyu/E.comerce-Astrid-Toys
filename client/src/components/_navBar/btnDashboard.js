@@ -5,7 +5,7 @@ const BtnDashboard = ({location}) => {
     return (
         ( location.pathname.slice(0, 10) === "/dashboard") ?
         <>
-        <div className="dropdown d-none d-lg-block mr-lg-5">
+        <div className="dropdown d-none d-lg-block">
         <button className="dropbtn bg-dark">Dashboard</button>
         <div className="dropdown-content">
           <Link to="/dashboard/product/update">Products</Link>
