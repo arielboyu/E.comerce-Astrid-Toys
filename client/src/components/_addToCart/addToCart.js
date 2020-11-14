@@ -1,34 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import style from "../_productCard/productCard.module.css";
 
-const AddToCart = ({ productId }) => {
+import {useDispatch} from 'react-redux'
+import {addToCart} from '../../redux/actions/actions'
+
+//Sabado 02:45 cambie la prop por "product", antes estaba como "productId"
+const AddToCart = ({ product }) => {
+  const [productoParaAgregar, setProducto] = useState()
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    setProducto({...product, cant:1})
+  },[])
+ 
+  //Codigo comentado 02:45
   //*const [product, setProduct] = useState({});*
-
-  const handlerClick = () => {
-    const userId = 1
-    const quantity = 1
-    const data = { quantity,productId }
-    axios.post(`http://localhost:3002/users/${userId}/cart`,data)
-    .then((res) => {
-      console.log("se agregó producto: ", productId, "al usuario: ", userId );
-    })
-    .catch(e=>console.log("nose agrego: ", e))
-  };
+  // const handlerClick = () => {
+  //   const userId = 1
+  //   const quantity = 1
+  //   const data = { quantity,productId }
+  //   axios.post(`http://localhost:3002/users/${userId}/cart`,data)
+  //   .then((res) => {
+  //     console.log("se agregó producto: ", productId, "al usuario: ", userId );
+  //   })
+  //   .catch(e=>console.log("nose agrego: ", e))
+  // };
 
   return (
-    <div className="border shadow m-3">
-      <div className="border d-flex justify-content-center">
         <button
           id="boton-agregar"
-          className="btn btn-danger m-2"
+          className={`btn btn-danger mx-3 mb-1 ${style.cart}`}
           data-toggle="modal"
           data-target="#exampleModal"
           type="button"
-          onClick={() => handlerClick()}
+          // onClick={() => handlerClick()}
+          onClick={()=>dispatch(addToCart(productoParaAgregar))}
         >
-          Add to cart
-        </button>
-        {/* <!-- Modal --> */}
+          <i class="fas fa-cart-plus"></i> ADD TO CART
+        </button>)
         {/* <div
           class="modal"
           id="exampleModal"
@@ -67,9 +77,6 @@ const AddToCart = ({ productId }) => {
             </div>
           </div>
         </div>         */}
-      </div>
-    </div>
-  );
 };
 
 

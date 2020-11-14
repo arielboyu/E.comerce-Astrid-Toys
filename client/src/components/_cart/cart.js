@@ -1,62 +1,95 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { removeProductToCart , removeAllProductsToCart } from "../../redux/actions/actions";
 
 import { Link } from "react-router-dom";
 
 //cart -product cart o pedido
 const Cart = () => {
   const [cart, setCart] = useState([]);
-  var userId = 2;
+  // var userId = 2;
 
-  const getCart = axios.get(`http://localhost:3002/users/${userId}/cart`);
+  // const getCart = axios.get(`http://localhost:3002/users/${userId}/cart`);
+
+  // useEffect(() => {
+  //   getCart.then((res) => {
+  //     setCart(res.data);
+  //   });
+  //   console.log(cart);
+  // }, []);
+
+  // Lineas agregadas por Rodri 02:45
+  const [isUpdateList, setList] = useState(false);
+  const cartStore = useSelector((state) => state.carrito);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getCart.then((res) => {
-      setCart(res.data);
-    });
-    console.log(cart);
-  }, []);
+    setCart(cartStore);
+  }, [isUpdateList]);
 
-  const handlerDelete = (producId)=> {
+  const handlerRemove = (f) => {
+    dispatch(removeProductToCart(f));
+    setList(!isUpdateList);
+  };
 
-  const deleteItem = axios.delete(`http://localhost:3002/users/${userId}/cart/${producId}`);
-  }
+  const handlerRemoveAll = (f) => {
+    dispatch(removeAllProductsToCart());
+    setList(!isUpdateList);
+  };
 
   return (
-
     <>
       <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
         <div class="">
           <h1 class="display-3">My cart</h1>
-          { cart.length > 0 ? (
-            <table>
-              <tr>
-                <th className="m-2">Name</th>
-                <th>Price</th>
-                <th className="m-2">Quantity</th>
-                <th>Description</th>
-                <th>Delete Item</th>
-              </tr>
-              {cart.map((cart, i) => (
+          {cart.length > 0 ? (
+            <>
+              <table class="table">
+                <thead>
                   <tr>
-                    <td>{cart.products[i].name}</td>
-                    <td>{cart.products[i].orderdetails.price}</td>
-                    <td>{cart.products[i].orderdetails.quantity}</td>
-                    <td>{cart.products[i].description}</td>
-                    <td><button onClick={(handlerDelete)}>x</button> </td>
+                    <th className="m-2">Name</th>
+                    <th>Price</th>
+                    <th className="m-2">Cant</th>
+                    <th>Description</th>
+                    <th>Delete Item</th>
                   </tr>
-              ))} 
-            </table>
+                </thead>
+                <tbody>
+                  {/* {console.log(cart)} */}
+                  {cart.map((f) => (
+                    <tr>
+                      <td>{f.name}</td>
+                      <td>{f.price}</td>
+                      <td>{f.cant}</td>
+                      <td>{f.description}</td>
+                      <td>
+                        <button onClick={() => handlerRemove(f)} type="button">
+                          <ion-icon name="close-outline"></ion-icon>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p class="lead">
+                <button onClick={() => handlerRemoveAll()} class="btn btn-danger btn-lg my-5"><ion-icon name="trash-outline" style={{fontSize:"24px"}}/>  CLEAN CART</button>
+              </p>
+            </>
           ) : (
-            <p class="lead">
-              Aun no tienes productos agregados, visita nuestro sección de
-              productos para empezar a comprar
-            </p>
+            <div className="my-4">
+              <div>
+                <p className="lead">Aun no tienes productos agregados.</p>
+                <p className="lead">
+                  Visita nuestro sección de productos para empezar a comprar.
+                </p>
+              </div>
+            </div>
           )}
           <hr class="my-2" />
           <p class="lead">
             <Link to="/products" className="text-decoration-none">
-              <button class="btn btn-primary btn-lg my-5">
+              <button class="btn btn-danger btn-lg my-5">
                 CONTINUE SHOPPING{" "}
               </button>
               <p class="text-right">Total: ,00<span id="total"></span>$</p>

@@ -18,28 +18,28 @@ const DataProducts = [{
     image: "https://www.cellshop.com/342978-large_default/boneca-harley-quinn-dc-super-heroes-funko-pop-301.jpg"
   },
   {
-    name: 'Tony stark',
+    name: 'Tony Stark',
     description: 'Serie',
     price: returnRandom(),
     stock: returnRandom(),
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTWYSTJRd3raeRLk-Fv-dlYe1E40mSkI45esg&usqp=CAU'
   },
   {
-    name: 'Rio',
+    name: 'Río',
     description: 'Game',
     price: returnRandom(),
     stock: returnRandom(),
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQtmse3Es4QgLpxSrH6awGtRMfM1RJUWiI5jw&usqp=CAU'
   },
   {
-    name: 'arrow',
+    name: 'Arrow',
     description: 'Movie',
     price: returnRandom(),
     stock: returnRandom(),
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpdMnuMuAqOhteA_f4cN3tV6QQjt9vVBVg_A&usqp=CAU'
   },  
   {
-    name: 'Capitan',
+    name: 'Capitán',
     description: 'Serie',
     price: returnRandom(),
     stock: returnRandom(),
@@ -74,7 +74,7 @@ const DataProducts = [{
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF4IjcRJ4mpoh-ScyCQSmfKsINzsLfARI_Fw&usqp=CAU'
   },
   {
-    name: 'Cap marvel',
+    name: 'Cap. Marvel',
     description: 'Movie',
     price: returnRandom(),
     stock: returnRandom(),
@@ -116,7 +116,7 @@ const DataProducts = [{
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT6SC7PBfw8rE7Uia-Hu-DtHZ3nvndN2_vW6A&usqp=CAU'
   },
   {
-    name: 'ant',
+    name: 'Ant',
     description: 'Game',
     price: returnRandom(),
     stock: returnRandom(),

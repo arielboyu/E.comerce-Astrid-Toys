@@ -56,7 +56,7 @@ const Catalogue = () => {
       <div className="mx-auto text-center w-75 mt-5">
         <h1 className="display-4 d-none d-md-block text-dark">Catalogue</h1>
       </div>
-      <div className="container-fluid p-5 ">
+      <div className="container-fluid p-5">
         <div className="row">
           <div className="border shadow d-sm-flex flex-column pt-3 mt-1 mb-4 rounded mx-auto mr-sm-0 ml-sm-4">
             <CategoryList category={category} filter={handlerFilter} onSearch={handlerSearch} onClear={handlerClear}/>
