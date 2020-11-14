@@ -21,6 +21,7 @@ import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboa
 import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
 import OrderList from "./components/_dashboardTableOrders/orderTable"
 import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js"
+import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
 
 function App() {
   return (
@@ -61,8 +62,11 @@ function App() {
         <Route path="/dashboard/category/list">
           <CategoryList />
         </Route>
-        <Route path="/dashboard/users/list">
+        <Route path="/dashboard/orders/list">
           <OrderList />
+        </Route>
+        <Route path="/dashboard/orders/detail/:idorden">
+          <OrderDetail />
         </Route>
         <Route path="/cart">
           <Cart />
