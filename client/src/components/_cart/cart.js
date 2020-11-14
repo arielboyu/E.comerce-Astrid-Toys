@@ -43,14 +43,16 @@ const Cart = () => {
               })} */}
             </table>
           ) : (
+            <div className="my-4">
             <div>
-            <p className="lead pt-3">
+            <p className="lead">
               Aun no tienes productos agregados.
             </p>
             <p className="lead">
             Visita nuestro sección de
             productos para empezar a comprar.
           </p>
+          </div>
           </div>
           )}
           <hr class="my-2" />
