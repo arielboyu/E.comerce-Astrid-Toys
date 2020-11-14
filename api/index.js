@@ -122,7 +122,7 @@ conn.sync({ force: true }).then(() => {
         order.addProduct(myProduct, {
           through: { price: myProduct.price,
                       quantity: randomNum(100) },
-        });
+        })
       }
     }
     cargarTablaOrder();

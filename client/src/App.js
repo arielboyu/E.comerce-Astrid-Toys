@@ -1,16 +1,12 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CategoryList from "./components/_dashboardCategoriesList/categoriesList";
 /*Importaciones de componentes*/
 import Home from "./components/_home/home.js";
 import Cart from "./components/_cart/cart.js";
 import AddToCart from "./components/_addToCart/addToCart.js";
 import Login from "./components/_login/login.js";
-import Register from "./components/_login/register.js"
+import Register from "./components/_login/register.js";
 import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
@@ -20,17 +16,17 @@ import Product from "./components/_product/product";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
-import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
-import OrderList from "./components/_dashboardTableOrders/orderTable"
-import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js"
+import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct";
+import OrderList from "./components/_dashboardTableOrders/orderTable";
+import ContainerShop from "./components/_myShopping/containerShop.js";
 function App() {
   return (
     <Router>
       <Navbar />
       <Switch>
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
-        <Route path="/register" component={Register}/>
+        <Route path="/register" component={Register} />
         <Route path="/products/category/nav/:cat">
           <Catalogue />
         </Route>
@@ -66,8 +62,9 @@ function App() {
         </Route>
         <Route path="/cart">
           <Cart />
-        </Route> <Route path="/myshop/:idUser">
-          <ContainerMyShopping />
+        </Route>{" "}
+        <Route path="/myshop/:idUser">
+          <ContainerShop />
         </Route>
         <Route path="/addToCart">
           <AddToCart />
