@@ -1,20 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Login from "./btnLogin";
+import Cart from "./btnCart";
 
 export default function Menu({categories}) {
     // const {cat} = useParams();
     
   return (
-    <ul className="d-flex col-sm-12 col-md-10 col-lg-4 justify-content-center justify-content-lg-start ml-md-4">
-      <Link to="/">
-        <div className="dropdown">
-          <button className="dropbtn bg-dark">Home</button>
-        </div>
-      </Link>
-
+    <ul className="d-flex col-sm-12 col-md-10 col-lg-6 justify-content-center justify-content-lg-start ml-md-4">
       <Link to="/products">
         <div className="dropdown">
-          <button className="dropbtn bg-dark">Products</button>
+          <button className="dropbtn bg-dark">Catalogue</button>
         </div>
       </Link>
       <div className="dropdown">
@@ -26,13 +22,11 @@ export default function Menu({categories}) {
         </div>
       </div>
       <div className="dropdown">
-        <button className="dropbtn bg-dark">Dashboard</button>
-        <div className="dropdown-content">
-          <Link to="/dashboard/product/update">Products</Link>
-          <Link to="/dashboard/category/list">Categories</Link>
-          <Link to="/dashboard/users/list">Orders</Link>
-        </div>
+      <Login />
       </div>
+      <div className="dropdown">
+        <Cart />
+        </div>
     </ul>
   );
 }

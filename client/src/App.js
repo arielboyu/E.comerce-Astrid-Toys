@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, } from "react-router-dom";
 import CategoryList from "./components/_dashboardCategoriesList/categoriesList";
 /*Importaciones de componentes*/
 import Home from "./components/_home/home.js";
@@ -14,19 +10,22 @@ import Register from "./components/_login/register.js"
 import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
+import Product from "./components/_product/product";
 /*Componente Navbar*/
 import Navbar from "./components/_navBar/navBar";
-import Product from "./components/_product/product";
+/*Seccion Dashboard*/
+import Dashboard from "./components/dashboard/dashboard";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
 import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
 import OrderList from "./components/_dashboardTableOrders/orderTable"
 import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js"
+
 function App() {
   return (
     <Router>
-      <Route path="/" render={({match}) => <Navbar match={match} />} />
+      <Route path="/" render={({match, location}) => <Navbar match={match} location={location} />} />
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/login" component={Login} />
@@ -46,6 +45,7 @@ function App() {
         <Route path="/products">
           <Catalogue />
         </Route>
+        <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/dashboard/category/create">
           <DashboardLoadCategory />
         </Route>
@@ -74,7 +74,6 @@ function App() {
         </Route>
       </Switch>
       <Route path="/" render={({match}) => <Footer match={match} />} />
-      
     </Router>
   );
 }
