@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import style from "../_productCard/productCard.module.css";
 
 const AddToCart = ({ productId }) => {
   //*const [product, setProduct] = useState({});*
@@ -16,19 +17,16 @@ const AddToCart = ({ productId }) => {
   };
 
   return (
-    <div className="border shadow m-3">
-      <div className="border d-flex justify-content-center">
         <button
           id="boton-agregar"
-          className="btn btn-danger m-2"
+          className={`btn btn-danger mx-3 mb-1 ${style.cart}`}
           data-toggle="modal"
           data-target="#exampleModal"
           type="button"
           onClick={() => handlerClick()}
         >
-          Add to cart
-        </button>
-        {/* <!-- Modal --> */}
+          <i class="fas fa-cart-plus"></i> ADD TO CART
+        </button>)
         {/* <div
           class="modal"
           id="exampleModal"
@@ -67,9 +65,6 @@ const AddToCart = ({ productId }) => {
             </div>
           </div>
         </div>         */}
-      </div>
-    </div>
-  );
 };
 
 
