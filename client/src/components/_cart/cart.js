@@ -17,30 +17,35 @@ const Cart = () => {
     console.log(cart);
   }, []);
 
+  const handlerDelete = (producId)=> {
+
+  const deleteItem = axios.delete(`http://localhost:3002/users/${userId}/cart/${producId}`);
+  }
+
   return (
 
     <>
       <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
         <div class="">
           <h1 class="display-3">My cart</h1>
-          {cart.length > 0 ? (
+          { cart.length > 0 ? (
             <table>
               <tr>
                 <th className="m-2">Name</th>
                 <th>Price</th>
-                <th className="m-2">Cant</th>
+                <th className="m-2">Quantity</th>
                 <th>Description</th>
-                <th>DeleteItem</th>
+                <th>Delete Item</th>
               </tr>
-              {console.log(cart)}
-              {/* {cart.map((f) => {
+              {cart.map((cart, i) => (
                   <tr>
-                    <td>{f.name}</td>
-                    <td>{f.price}</td>
-                    <td>{f.cant}</td>
-                    <td>{f.description}</td>
+                    <td>{cart.products[i].name}</td>
+                    <td>{cart.products[i].orderdetails.price}</td>
+                    <td>{cart.products[i].orderdetails.quantity}</td>
+                    <td>{cart.products[i].description}</td>
+                    <td><button onClick={(handlerDelete)}>x</button> </td>
                   </tr>
-              })} */}
+              ))} 
             </table>
           ) : (
             <p class="lead">
@@ -54,6 +59,8 @@ const Cart = () => {
               <button class="btn btn-primary btn-lg my-5">
                 CONTINUE SHOPPING{" "}
               </button>
+              <p class="text-right">Total: ,00<span id="total"></span>$</p>
+                <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
             </Link>
           </p>
         </div>
