@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+
+
 
 const Purchase = ({ orderId }) => {
   const [order, setOrder] = useState({});
-  let history = useHistory();
-  const redirect = () => {
-    history.push(`/myshop/details/${orderId}`)
+  const [redirect,setRedirect] = useState(false)
+ /*  let history = useHistory(); */
+
+  const handlerRedirect = () => {
+    setRedirect(true);
   }
 
-  function inicialState() {
-    axios.get(`http://localhost:3002/orders/${orderId}`).then((order) => {
-      console.log(order.data);
-      setOrder(order.data);
-    });
-  }
+
   useEffect(() => {
-    inicialState();
-  });
+    if (orderId) {
+      axios.get(`http://localhost:3002/orders/${orderId}`).then((order) => {
+        console.log(order.data)
+        setOrder(order.data); 
+      });
+    } else {
+      console.log("cargando orden papu")
+    }
+  },[]);
+
+
+   
+/*   
+    const redirectfunction = () => {
+      history.push('/myshop/details/1')
+    } */
 
   return (
+    <>{redirect ? <Redirect to={`/myshop/details/1`} /> : <></>}
     <div className="container border shadow m-3 p-5">
       <div className="row border d-flex justify-content-between p-5">
         <div className="col-3 bg-warning p-5">fecha: {order.createdAt}</div>
@@ -36,13 +50,16 @@ const Purchase = ({ orderId }) => {
         <div className="col-3 bg-warning p-5 m-2">
           <button
             className="btn btn-outline-info"
-            onClick={()=>redirect()}
+            onClick={()=>handlerRedirect()}
           >
             Details
           </button>
         </div>
+
       </div>
+      
     </div>
+    </>
   );
 };
 

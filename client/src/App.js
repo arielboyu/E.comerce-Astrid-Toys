@@ -67,7 +67,7 @@ function App() {
         <Route path="/cart">
           <Cart />
         </Route>{" "}
-        <Route path="/myshop/:idUser">
+        <Route exact path="/myshop/:idUser">
           <ContainerMyShopping />
         </Route>
         <Route path="/addToCart">

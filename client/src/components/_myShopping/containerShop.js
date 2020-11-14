@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import OrderDetails from "./orderDetails.js";
+import Order from "./orderDetails.js";
 import ShoppingHistory from "./shoppingHistory.js";
 //Este componente se mostrara en una solapa "Mis Compras" de un determinado usuario
 
@@ -15,11 +15,11 @@ const ContainerShop = () => {
   return (
     <Router>
       <Switch>
+        <Route path="/myshop/details/:idOrder">
+          <Order />
+        </Route>
         <Route path="/">
           <ShoppingHistory idUser={idUser} />
-        </Route>
-        <Route path="/details/:idOrder">
-          <OrderDetails userId={idUser}/>
         </Route>
       </Switch>
     </Router>
