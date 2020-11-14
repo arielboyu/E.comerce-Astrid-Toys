@@ -23,6 +23,11 @@ import OrderList from "./components/_dashboardTableOrders/orderTable"
 import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js"
 import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
 
+//****Import de prueba */
+import Reduxxx from './components/pruebaRedux'
+
+
+
 function App() {
   return (
     <Router>
@@ -31,6 +36,9 @@ function App() {
         <Route exact path="/" component={Home}/>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register}/>
+        <Route path="/esta/es/la/ruta/de/rodri">
+          <Reduxxx />
+        </Route>
         <Route path="/products/category/nav/:cat">
           <Catalogue />
         </Route>

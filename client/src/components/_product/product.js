@@ -51,8 +51,9 @@ export default function Product() {
               <h1 className="p-1 font-weight-bold mt-4"> ${f.price}</h1>
               <p className="pt-3">Stock: {f.stock}</p>
               <p> ⭐⭐⭐⭐⭐ </p>
+              {/* AddToCart productId= {f.id} />  */}
               {f.stock > 0 ? (
-               <AddToCart productId= {f.id} /> 
+               <AddToCart product= {f} /> 
               ) : (
                 <button className="btn btn-outline-secondary">
                   OUT OF STOCK

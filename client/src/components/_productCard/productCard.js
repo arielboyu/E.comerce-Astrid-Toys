@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
       </Link>
 
       {product.stock > 0 ? (
-        <AddToCart />
+        <AddToCart product={product}/>
       ) : (
         <button className={`btn mx-3 mb-1 ${style.btnTtc}`}>
           OUT OF STOCK
