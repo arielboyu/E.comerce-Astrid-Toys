@@ -6,6 +6,12 @@ export function addToCart(payload){
         payload
     }
 }
+export function removeProductToCart(payload){
+    return {
+        type: "REMOVE_CART",
+        payload
+    }
+}
 // export function getMovieDetail (payload){
 //     return {
 //         type: "GET_MOVIE_DETAIL",

@@ -8,8 +8,8 @@ const DataCategories = [
         description: 'Funkos de peliculas',
     },
     {
-    name: 'Games',
-    description: 'Funkos de juegos'
+        name: 'Games',
+        description: 'Funkos de juegos'
     }
 ]
 

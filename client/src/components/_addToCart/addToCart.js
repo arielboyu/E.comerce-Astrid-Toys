@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import style from "../_productCard/productCard.module.css";
 
-const AddToCart = ({ productId }) => {
-  //*const [product, setProduct] = useState({});*
+import {useDispatch} from 'react-redux'
+import {addToCart} from '../../redux/actions/actions'
 
-  const handlerClick = () => {
-    const userId = 1
-    const quantity = 1
-    const data = { quantity,productId }
-    axios.post(`http://localhost:3002/users/${userId}/cart`,data)
-    .then((res) => {
-      console.log("se agregó producto: ", productId, "al usuario: ", userId );
-    })
-    .catch(e=>console.log("nose agrego: ", e))
-  };
+//Sabado 02:45 cambie la prop por "product", antes estaba como "productId"
+const AddToCart = ({ product }) => {
+  const [productoParaAgregar, setProducto] = useState()
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    setProducto({...product, cant:1})
+  },[])
+ 
+  //Codigo comentado 02:45
+  //*const [product, setProduct] = useState({});*
+  // const handlerClick = () => {
+  //   const userId = 1
+  //   const quantity = 1
+  //   const data = { quantity,productId }
+  //   axios.post(`http://localhost:3002/users/${userId}/cart`,data)
+  //   .then((res) => {
+  //     console.log("se agregó producto: ", productId, "al usuario: ", userId );
+  //   })
+  //   .catch(e=>console.log("nose agrego: ", e))
+  // };
 
   return (
         <button
@@ -23,7 +34,8 @@ const AddToCart = ({ productId }) => {
           data-toggle="modal"
           data-target="#exampleModal"
           type="button"
-          onClick={() => handlerClick()}
+          // onClick={() => handlerClick()}
+          onClick={()=>dispatch(addToCart(productoParaAgregar))}
         >
           <i class="fas fa-cart-plus"></i> ADD TO CART
         </button>)

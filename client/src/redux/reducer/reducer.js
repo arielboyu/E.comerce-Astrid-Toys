@@ -1,5 +1,5 @@
 const initialState = {
-    carrito:["harry","hulk", "ironMan"],
+    carrito:[],
     user: {
         id: 1,
     }
@@ -7,9 +7,23 @@ const initialState = {
 
 function rootReducer (state = initialState, action){
     if (action.type === "ADD_CART") {
-        return {
-          ...state,
-          carrito: state.carrito.concat(action.payload)
+        let esta = false;
+        state.carrito.forEach((p)=>{
+            if(p.id === action.payload.id){
+                esta = true;
+            }
+        })
+        if(!esta){
+            return {
+              ...state,
+              carrito: state.carrito.concat(action.payload)
+            }
+        }
+    }
+    if (action.type === "REMOVE_CART"){
+        return{
+            ...state,
+            carrito: state.carrito.filter((e) => e.id !== action.payload.id)
         }
     }
   
