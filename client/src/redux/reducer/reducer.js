@@ -26,6 +26,12 @@ function rootReducer (state = initialState, action){
             carrito: state.carrito.filter((e) => e.id !== action.payload.id)
         }
     }
+    if(action.type === "REMOVE_ALL_CART"){
+        return{
+            ...state,
+            carrito: []
+        }
+    }
   
     return state
 }
