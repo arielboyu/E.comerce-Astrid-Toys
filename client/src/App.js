@@ -16,13 +16,14 @@ import Product from "./components/_product/product";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
-import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct";
-import OrderList from "./components/_dashboardTableOrders/orderTable";
-import ContainerShop from "./components/_myShopping/containerShop.js";
+import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
+import OrderList from "./components/_dashboardTableOrders/orderTable"
+import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js"
+import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Route path="/" render={({match}) => <Navbar match={match} />} />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
@@ -57,8 +58,11 @@ function App() {
         <Route path="/dashboard/category/list">
           <CategoryList />
         </Route>
-        <Route path="/dashboard/users/list">
+        <Route path="/dashboard/orders/list">
           <OrderList />
+        </Route>
+        <Route path="/dashboard/orders/detail/:idorden">
+          <OrderDetail />
         </Route>
         <Route path="/cart">
           <Cart />
@@ -70,7 +74,8 @@ function App() {
           <AddToCart />
         </Route>
       </Switch>
-      <Footer />
+      <Route path="/" render={({match}) => <Footer match={match} />} />
+      
     </Router>
   );
 }

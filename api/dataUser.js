@@ -1,19 +1,25 @@
 const DataProducts = [{
-    name: 'Maxi',
-    lastname: 'De Filippis',
+    name: 'Maxi De Filippis',
+    username: 'maxidefilippis',
     email: 'maxi@henry.com',
     password : '1234'
   },
   {
-    name: 'Nico',
-    lastname: 'Acevedo',
+    name: 'Nico Acevedo',
+    username: 'nicoelmaskpo',
     email: 'nico@henry.com',
     password : '1234'
   },
   {
-    name: 'Franco',
-    lastname: 'Etcheverri',
+    name: 'Franco Etcheverri',
+    username: 'franverri',
     email: 'franco@henry.com',
+    password : '1234'
+  },
+  {
+    name: 'Rodri Penela',
+    username: 'rodrinela',
+    email: 'Rodri@henry.com',
     password : '1234'
   },
   

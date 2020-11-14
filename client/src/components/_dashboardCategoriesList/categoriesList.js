@@ -38,7 +38,7 @@ export default function CategoriesList() {
         <hr className="my-2" />
         <p className="lead ">
           <Link to="/dashboard/category/create">
-            <button className="btn btn-primary btn-lg d-flex align-items-center mx-auto mt-3">
+            <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
             <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Category 
             </button>
           </Link>
@@ -61,7 +61,7 @@ export default function CategoriesList() {
               <button
                 onClick={() => handleSubmit(c)}
                 type="submit"
-                className="btn btn-primary"
+                className="btn btn-danger"
                 data-toggle="modal"
                 data-target="#exampleModal"
               >
@@ -104,7 +104,7 @@ export default function CategoriesList() {
                   window.location.reload();
                 }}
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-danger"
                 data-dismiss="modal"
               >
                 Yes

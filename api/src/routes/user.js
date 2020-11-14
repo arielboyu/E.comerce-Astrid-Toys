@@ -14,11 +14,12 @@ server.get("/", (req, res) => {
 });
 
 server.post("/create", (req, res) => {
-  const { name, lastname, email, password } = req.body;
-  if (name && lastname && email && password) {
+  const { name, username, email, password } = req.body;
+  console.log(req.body)
+  if (name && username && email && password) {
     User.create({
       name,
-      lastname,
+      username,
       email,
       password,
     })
@@ -71,12 +72,27 @@ server.put("/:id", (req, res) => {
 
 server.get("/:idUser/cart", (req, res) => {
   const idUsuario = req.params.idUser;
-  User.findOne({ where: { id: idUsuario } }).then((user) => {
-    user
-      .getOrders({ where: { state: "PENDING" } })
-      .then((orders) => res.send(orders));
-  });
+  User.findOne({
+    include:[
+      {
+        model:Order,
+        include:[{
+          model:Product,
+        }],
+        where:{ state : "PENDING"}
+      }
+    ],
+    where:{id : idUsuario}
+  }).then((user) => {
+    res.send(user)
+  })
 });
+
+
+
+
+
+
 
 //S40 : Crear Ruta para vaciar el carrito
 server.delete("/:idUser/cart", (req, res) => {
@@ -105,7 +121,7 @@ server.delete("/:idUser/cart", (req, res) => {
 //maneja errores
 server.post("/:idUser/cart/", (req, res) => {
   const idUser = req.params.idUser;
-  var { quantity, idProduct } = req.body;
+  var { quantity, productId } = req.body;
   Order.create({ state: "PENDING" })
     .then((orden) => {
       User.findOne({ where: { id: idUser } }).then((user) => {
@@ -113,7 +129,7 @@ server.post("/:idUser/cart/", (req, res) => {
           res.send("no se encontro usuario");
         } else {
           orden.setUser(user).then((order) => {
-            Product.findOne({ where: { id: idProduct } }).then((myProduct) => {
+            Product.findOne({ where: { id: productId } }).then((myProduct) => {
               if (myProduct == null) {
                 res.send("no se encontro producto");
               } else {

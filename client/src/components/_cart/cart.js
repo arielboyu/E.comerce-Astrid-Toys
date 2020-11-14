@@ -1,26 +1,64 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+
 import { Link } from "react-router-dom";
 
 //cart -product cart o pedido
 const Cart = () => {
+  const [cart, setCart] = useState([]);
+  var userId = 2;
+
+  const getCart = axios.get(`http://localhost:3002/users/${userId}/cart`);
+
+  useEffect(() => {
+    getCart.then((res) => {
+      setCart(res.data);
+    });
+    console.log(cart);
+  }, []);
+
   return (
-    <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
-      <div class="">
-        <h1 class="display-3">My cart</h1>
-        <p class="lead">
-          Aun no tienes productos agregados, visita nuestro sección de productos
-          para empezar a comprar
-        </p>
-        <hr class="my-2" />
-        <p class="lead">
-          <Link to="/products" className="text-decoration-none">
-            <button class="btn btn-primary btn-lg my-5">
-              CONTINUE SHOPPING{" "}
-            </button>
-          </Link>
-        </p>
+
+    <>
+      <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
+        <div class="">
+          <h1 class="display-3">My cart</h1>
+          {cart.length > 0 ? (
+            <table>
+              <tr>
+                <th className="m-2">Name</th>
+                <th>Price</th>
+                <th className="m-2">Cant</th>
+                <th>Description</th>
+                <th>DeleteItem</th>
+              </tr>
+              {console.log(cart)}
+              {/* {cart.map((f) => {
+                  <tr>
+                    <td>{f.name}</td>
+                    <td>{f.price}</td>
+                    <td>{f.cant}</td>
+                    <td>{f.description}</td>
+                  </tr>
+              })} */}
+            </table>
+          ) : (
+            <p class="lead">
+              Aun no tienes productos agregados, visita nuestro sección de
+              productos para empezar a comprar
+            </p>
+          )}
+          <hr class="my-2" />
+          <p class="lead">
+            <Link to="/products" className="text-decoration-none">
+              <button class="btn btn-primary btn-lg my-5">
+                CONTINUE SHOPPING{" "}
+              </button>
+            </Link>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
