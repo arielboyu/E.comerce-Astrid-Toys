@@ -22,7 +22,7 @@ export default function Menu({categories}) {
         </div>
       </div>
       <div className="dropdown">
-      <Login />
+      <Login /
       </div>
       <div className="dropdown">
         <Cart />
