@@ -30,8 +30,6 @@ const formSchema = Yup.object().shape({
     .min(5, alerta("Mínimo 5 caracteres", "warning")),
 });
 
-const register = axios.post("http://localhost:3002/users/create")
-
 const Register = () => {
   return (
     <div className="container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
@@ -47,7 +45,7 @@ const Register = () => {
         onSubmit={(values) => { console.log(values);
           axios.post("http://localhost:3002/users/create", values)
           .then(r => console.log("creado") )
-          .catch( e => console.log("fallo") )      }}
+          .catch( e => console.log("fallo") )}}
       >
         <Form>
           <FormGroup>
@@ -113,7 +111,7 @@ const Register = () => {
                 className="mr-2 mb-2 btn-block"
                 type="submit"
               >
-                Create new user
+                Create
               </Button>
             </Col>
             <Col lg={12} md={12}>

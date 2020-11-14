@@ -69,7 +69,7 @@ const Login = () => {
                 className="mr-1 mb-2 btn-block"
                 type="submit"
               >
-                Iniciar sesión
+                Log in
               </Button>
             </Col>
             <Col lg={12} md={12}>
@@ -79,7 +79,7 @@ const Login = () => {
                   className="mr-1 mb-2 btn-block"
                   type="submit"
                 >
-                  Registrarse
+                  Register
                 </Button>
               </Link>
             </Col>

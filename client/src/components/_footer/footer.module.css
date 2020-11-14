@@ -4,7 +4,7 @@
 }
 
 .footer a {
-    color: rgba(255, 255, 255, 0.76);
+    color: rgba(255, 255, 255, 0.658);
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
 }
@@ -13,11 +13,11 @@
 }
 
 .textFooter{
-    color: rgba(218, 165, 32, 0.425)
+    color: rgba(218, 165, 32, 0.671)
 }
 
 .borderFooter{
-    border-bottom: 1px solid rgba(218, 165, 32, 0.425);
+    border-bottom: 1px solid rgba(218, 165, 32, 0.671);
 }
 
 .title {
