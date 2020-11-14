@@ -18,7 +18,7 @@ import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLo
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
 import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
 import OrderList from "./components/_dashboardTableOrders/orderTable"
-import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js"
+import ContainerMyShopping from "./components/_myShopping/containerShop.js"
 import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
 function App() {
   return (
@@ -68,7 +68,7 @@ function App() {
           <Cart />
         </Route>{" "}
         <Route path="/myshop/:idUser">
-          <ContainerShop />
+          <ContainerMyShopping />
         </Route>
         <Route path="/addToCart">
           <AddToCart />
