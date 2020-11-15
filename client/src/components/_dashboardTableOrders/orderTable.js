@@ -24,7 +24,6 @@ export default function OrderTable() {
         })
         .catch((err) => console.log(err));
     };
-  
     return (
      <div>
          <h1>USERS ORDER LIST</h1>
@@ -45,13 +44,14 @@ export default function OrderTable() {
             <td>{o.state}</td>
             <td>{o.user.username}</td>
             <td>{o.createdAt}</td>
-            <td> $ {o.products[0].orderdetails.price * o.products[0].orderdetails.quantity}</td>
+            <td> $ { o.products.length  &&   o.products[0].orderdetails.price * o.products[0].orderdetails.quantity}</td>
             <td><Link to={`/dashboard/orders/detail/${o.id}`}>
              {/* para poder incluir los backticks debo colocar el path dentro de llaves */}
-          <button >Detail</button>
-        </Link></td>
+            <button className="btn btn-danger ml-2">Detail</button>
+            </Link></td>
             <td><button
-            onClick={() => {handlerCancel(o.id); window.location.reload();  }}
+            className="btn btn-danger ml-2"
+            onClick={() => {handlerCancel(o.id); window.location.reload();}}
             >Cancel</button>
             </td>
             </tr>    
@@ -60,6 +60,4 @@ export default function OrderTable() {
      </table>
     </div>   
     );
-  
-   
 } 

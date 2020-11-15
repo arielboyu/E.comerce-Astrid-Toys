@@ -91,21 +91,27 @@ server.delete('/delete/:id', (req,res)=>{
 
 // S20 : Crear ruta para Modificar Categoria
 // PUT /products/category/:id
-// se crea el modelo de ruta modificar categoria, se actualizan los valores y retorna en la data la category  
-server.put('update/:id',(req,res) =>{
-    const { name, description} = req.body;
-    Category.findByPk(req.params.idCategory)
-    .then((data) => {
-      if (name) data.name = name;
-      if (description) data.description = description;
-      data.save();
-      res
-        .status(200)
-        .send( "Se ha actualizado la categoria correctamente" );
-    })
-    .catch((err) => {
-      res.status(400).send(err);
-    });
+// se crea el modelo de ruta modificar categoria, se actualizan los valores  
+// se utiliza en el componente updateCategories, para modificar una categoria.
+server.put('/update/:id', (req, res) => {
+  const {name,description} = req.body
+  Category.findOne({
+          where: {
+              id: req.params.id,
+          }
+      }).then(c => {
+          c.update({
+              name:name,
+              description:description
+          })
+      })
+      .then(() => {
+          return res.send("se modifico categoria")
+                 
+      })
+      .catch(() => {
+          return res.status(400).send("Error No se ha podido modificar ");
+      })
 });
 
 

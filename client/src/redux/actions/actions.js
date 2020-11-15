@@ -18,3 +18,9 @@ export function removeAllProductsToCart(){
         type: "REMOVE_ALL_CART"
     }
 }
+
+/*export function calculeAllCart(){
+    return {
+        type: "CALCULE_ALL_CART"
+    }
+}*/

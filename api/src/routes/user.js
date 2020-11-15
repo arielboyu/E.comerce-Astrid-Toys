@@ -1,8 +1,7 @@
 const server = require("express").Router();
 
-const { User,Order,Product,Orderdetails } = require("../db.js");
-const { Op } = require('sequelize');
-
+const { User, Order, Product, Orderdetails } = require("../db.js");
+const { Op } = require("sequelize");
 
 server.get("/", (req, res) => {
   User.findAll()
@@ -16,7 +15,7 @@ server.get("/", (req, res) => {
 
 server.post("/create", (req, res) => {
   const { name, username, email, password } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   if (name && username && email && password) {
     User.create({
       name,
@@ -74,26 +73,22 @@ server.put("/:id", (req, res) => {
 server.get("/:idUser/cart", (req, res) => {
   const idUsuario = req.params.idUser;
   User.findOne({
-    include:[
+    include: [
       {
-        model:Order,
-        include:[{
-          model:Product,
-        }],
-        where:{ state : "PENDING"}
-      }
+        model: Order,
+        include: [
+          {
+            model: Product,
+          },
+        ],
+        where: { state: "PENDING" },
+      },
     ],
-    where:{id : idUsuario}
+    where: { id: idUsuario },
   }).then((user) => {
-    res.send(user)
-  })
+    res.send(user);
+  });
 });
-
-
-
-
-
-
 
 //S40 : Crear Ruta para vaciar el carrito
 server.delete("/:idUser/cart", (req, res) => {
@@ -117,7 +112,30 @@ server.delete("/:idUser/cart", (req, res) => {
     .catch((e) => res.send("Hubo un error: ", e));
 });
 
-//ruta para agregar un producto al carrito
+//Eliminar un solo item del carrito
+server.delete("/:idUser/cart/:productId", (req, res) => {
+  const idUsuario = req.params.idUser;
+  const productId = req.params.productId;
+  User.findOne({ where: { id: idUsuario } })
+    .then((user) => {
+      if (user === null) {
+        res.status(404);
+        res.send("No se encontró el usuario");
+      } else {
+        user
+          .getOrders({ where: { productId: productId } })
+          .then((orders) =>
+            orders.map((order) => {
+              order.update({ state: "CANCELLED" });
+            })
+          )
+          .then((r) => res.send(r));
+      }
+    })
+    .catch((e) => res.send("Hubo un error: ", e));
+});
+
+//ruta para agregar CREAR EL CARRITO
 //testeada
 //maneja errores
 server.post("/:idUser/cart/", (req, res) => {
@@ -152,6 +170,39 @@ server.post("/:idUser/cart/", (req, res) => {
     });
 });
 
+//ruta para agregar un producto al carrito
+//testeada
+//maneja errores
+server.put("/:idUser/cart/", (req, res) => {
+  const idUser = req.params.idUser;
+  var { quantity, productId, orderId } = req.body;
+  Order.findOne({ where: { id: orderId } })
+    .then((order) => {
+      User.findOne({ where: { id: idUser } }).then((user) => {
+        if (user == null) {
+          res.send("no se encontro usuario");
+        } else {
+          Product.findOne({ where: { id: productId } }).then((myProduct) => {
+            if (myProduct == null) {
+              res.send("no se encontro producto");
+            } else {
+              order
+                .addProduct(myProduct, {
+                  through: { price: myProduct.price, quantity: quantity },
+                })
+                .then((ord) => {
+                  res.send(ord);
+                });
+            }
+          });
+        }
+      });
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
 /* through: { price: myProduct.price,
   quantity: randomNum(100) }, */
 //funciones de modelos
@@ -177,40 +228,36 @@ server.get("/orders/:id", (req, res) => {
 server.put("/:order/:id", (req, res) => {
   const productId = req.params.id;
   const orderId = req.params.order;
-  var { quantity  } = req.body;
+  var { quantity } = req.body;
 
-  Order.findOne({where: {id : orderId}})
-    .then(order => {
-      console.log(order.state)
-      if(order.state === "PENDING") {
-        Orderdetails.findOne({
-          where: { [Op.and]: [ {productId: productId }, {orderId: orderId } ] } 
-        }).then(order => {
-          order.increment('quantity', { by: quantity }).then(r => {
+  Order.findOne({ where: { id: orderId } }).then((order) => {
+    if (order.state === "PENDING") {
+      Orderdetails.findOne({
+        where: { [Op.and]: [{ productId: productId }, { orderId: orderId }] },
+      }).then((order) => {
+        if (order == null) {
+          res.send("no existe el producto en la orden");
+        } else {
+          order.increment("quantity", { by: quantity }).then((r) => {
             res.send(r);
-        })
-      })
+          });
+        }
+      });
     } else {
       res.send("No se puede modificar la orden");
     }
-  }) 
-})
+  });
+});
 
- 
 //EXTRA: Crear una ruta que retorne el historial de compras (canceladas y completadas)
- server.get("/shopping/:id", (req, res) => {
-
+server.get("/shopping/:id", (req, res) => {
   const id = req.params.id;
   Order.findAll({
     where: {
       userId: id,
-      [Op.or]: [{state : "CANCELLED"},{state: "COMPLETE"}]
+      [Op.or]: [{ state: "CANCELLED" }, { state: "COMPLETE" }],
     },
-  })
-    .then((orders) => res
-    .status(200).json(orders))
-}) 
-
-
+  }).then((orders) => res.status(200).json(orders));
+});
 
 module.exports = server;

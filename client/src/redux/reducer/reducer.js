@@ -32,7 +32,12 @@ function rootReducer (state = initialState, action){
             carrito: []
         }
     }
-  
+  /*if(action.type === "CALCULE_ALL_CART") {  
+    return {
+        ...state,
+
+    }
+}*/
     return state
 }
 
