@@ -10,7 +10,7 @@ const BtnDashboard = ({location}) => {
         <div className="dropdown-content">
           <Link to="/dashboard/product/update">Products</Link>
           <Link to="/dashboard/category/list">Categories</Link>
-          <Link to="/dashboard/users/list">Orders</Link>
+          <Link to="/dashboard/orders/list">Orders</Link>
         </div>
       </div>
       </> :
