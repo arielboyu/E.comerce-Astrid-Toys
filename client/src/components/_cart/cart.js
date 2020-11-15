@@ -72,7 +72,7 @@ const Cart = () => {
          
                       <td>
                         <button onClick={() => handlerRemove(f)} type="button"> 
-                        <ion-icon class="glyphicon glyphicon-trash">  </ion-icon>
+                        <ion-icon class="fa fa-trash-o" aria-hidden="true"></ion-icon>
                        </button>
                       </td>
                       <td>
