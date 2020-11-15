@@ -1,8 +1,7 @@
 const server = require("express").Router();
 
-const { User,Order,Product,Orderdetails } = require("../db.js");
-const { Op } = require('sequelize');
-
+const { User, Order, Product, Orderdetails } = require("../db.js");
+const { Op } = require("sequelize");
 
 server.get("/", (req, res) => {
   User.findAll()
@@ -195,40 +194,36 @@ server.get("/orders/:id", (req, res) => {
 server.put("/:order/:id", (req, res) => {
   const productId = req.params.id;
   const orderId = req.params.order;
-  var { quantity  } = req.body;
+  var { quantity } = req.body;
 
-  Order.findOne({where: {id : orderId}})
-    .then(order => {
-      console.log(order.state)
-      if(order.state === "PENDING") {
-        Orderdetails.findOne({
-          where: { [Op.and]: [ {productId: productId }, {orderId: orderId } ] } 
-        }).then(order => {
-          order.increment('quantity', { by: quantity }).then(r => {
+  Order.findOne({ where: { id: orderId } }).then((order) => {
+    if (order.state === "PENDING") {
+      Orderdetails.findOne({
+        where: { [Op.and]: [{ productId: productId }, { orderId: orderId }] },
+      }).then((order) => {
+        if (order == null) {
+          res.send("no existe el producto en la orden");
+        } else {
+          order.increment("quantity", { by: quantity }).then((r) => {
             res.send(r);
-        })
-      })
+          });
+        }
+      });
     } else {
       res.send("No se puede modificar la orden");
     }
-  }) 
-})
+  });
+});
 
- 
 //EXTRA: Crear una ruta que retorne el historial de compras (canceladas y completadas)
- server.get("/shopping/:id", (req, res) => {
-
+server.get("/shopping/:id", (req, res) => {
   const id = req.params.id;
   Order.findAll({
     where: {
       userId: id,
-      [Op.or]: [{state : "CANCELLED"},{state: "COMPLETE"}]
+      [Op.or]: [{ state: "CANCELLED" }, { state: "COMPLETE" }],
     },
-  })
-    .then((orders) => res
-    .status(200).json(orders))
-}) 
-
-
+  }).then((orders) => res.status(200).json(orders));
+});
 
 module.exports = server;

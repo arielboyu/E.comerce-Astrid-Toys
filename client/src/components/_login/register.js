@@ -121,7 +121,7 @@ const Register = () => {
                   className="mr-2 mb-2 btn-block"
                   type="submit"
                 >
-                  Go back
+                  Back
                 </Button>
               </Link>
             </Col>
