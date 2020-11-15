@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeProductToCart , removeAllProductsToCart } from "../../redux/actions/actions";
+import { removeProductToCart , removeAllProductsToCart, calculeAllCart } from "../../redux/actions/actions";
 
 import { Link } from "react-router-dom";
 
@@ -46,6 +46,10 @@ const Cart = () => {
       console.log("plus")
     }
   }
+  /*const handlerCalculeAll = (f) => {
+    dispatch(calculeAllCart());
+    setList(!isUpdateList);
+  };*/
 
   return (
     <>
@@ -61,7 +65,8 @@ const Cart = () => {
                     <th>Price</th>
                     <th className="m-2">Cant</th>
                     <th>Description</th>
-                    <th>DeleteItem</th>
+                    <th>Delete Item</th>
+                    <th>Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -87,10 +92,14 @@ const Cart = () => {
                       </td>      
                       {/* <td>{f.cant}</td> */}
                       <td>{f.description}</td>
+         
                       <td>
-                        <button onClick={() => handlerRemove(f)} type="button">
-                          <ion-icon name="close-outline"></ion-icon>
-                        </button>
+                        <button onClick={() => handlerRemove(f)} type="button"> 
+                        <ion-icon class="glyphicon glyphicon-trash">  </ion-icon>
+                       </button>
+                      </td>
+                      <td>
+                      <div class="total"> ${f.cant * f.price},00</div>
                       </td>
                     </tr>
                   ))}
@@ -125,24 +134,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-/*------
-
-   <button id="boton-vaciar" class="btn btn-danger m-2">
-          Empty Cart
-        </button>
-        
-     Carrito --> get. para traer datos. Se llena con una tabla de pedidos.
-    (get = query = ir a la tabla = obtener datosTabla) SELECT * FROM ('pedidos') --> me traigo toda la tabla (BD)
-    listaadoProductos = setear el estado con lo que traigo del get. 
-    mapear =setear estado local = el get devuelve array y este useState. useffect (is behind th scene /set my state local)
- 
-    render( mapear pedidos --> 
-        mostrarlos por pantalla como tabla
-        productos --> tabla button onClick()=> { } eliminarProducto(x) 
-    )
-
-    boton Vaciar carrito --> elimina contenido de la tabla. deleteItems  (devuelve el stock)
-    boton comprar -->  vaciar tabla pedidos (resta productos del stock)
- 
-    pedidos -->*/
