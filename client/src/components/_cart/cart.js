@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeProductToCart , removeAllProductsToCart } from "../../redux/actions/actions";
+import { removeProductToCart , removeAllProductsToCart, calculeAllCart } from "../../redux/actions/actions";
 
 import { Link } from "react-router-dom";
 
@@ -38,6 +38,11 @@ const Cart = () => {
     setList(!isUpdateList);
   };
 
+  /*const handlerCalculeAll = (f) => {
+    dispatch(calculeAllCart());
+    setList(!isUpdateList);
+  };*/
+
   return (
     <>
       <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
@@ -52,7 +57,8 @@ const Cart = () => {
                     <th>Price</th>
                     <th className="m-2">Cant</th>
                     <th>Description</th>
-                    <th>DeleteItem</th>
+                    <th>Delete Item</th>
+                    <th>Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -63,11 +69,14 @@ const Cart = () => {
                       <td>{f.price}</td>
                       <td>{f.cant}</td>
                       <td>{f.description}</td>
+         
                       <td>
                         <button onClick={() => handlerRemove(f)} type="button"> 
-                        <ion-icon class="glyphicon glyphicon-trash"></ion-icon>
+                        <ion-icon class="glyphicon glyphicon-trash">  </ion-icon>
                        </button>
- 
+                      </td>
+                      <td>
+                      <div class="total"> ${f.cant * f.price},00</div>
                       </td>
                     </tr>
                   ))}
