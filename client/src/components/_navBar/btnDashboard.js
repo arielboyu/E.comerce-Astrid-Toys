@@ -5,14 +5,18 @@ const BtnDashboard = ({location}) => {
     return (
         ( location.pathname.slice(0, 10) === "/dashboard") ?
         <>
-        <div className="dropdown d-none d-lg-block">
-        <button className="dropbtn bg-dark">Dashboard</button>
-        <div className="dropdown-content">
-          <Link to="/dashboard/product/update">Products</Link>
-          <Link to="/dashboard/category/list">Categories</Link>
-          <Link to="/dashboard/orders/list">Orders</Link>
+        <Link to="/dashboard" className="d-flex nav-link">
+        <div className="mr-1">
+        <i class="far fa-calendar-alt"></i>
         </div>
-      </div>
+        <div className="">
+          Dashboard
+        </div>
+        </Link>
+        {/* <Link to="/dashboard/product/update">Products</Link>
+        <Link to="/dashboard/category/list">Categories</Link>
+        <Link to="/dashboard/users/list">Orders</Link> */}
+
       </> :
       <></>
     )

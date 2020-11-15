@@ -14,7 +14,7 @@ import Product from "./components/_product/product";
 /*Componente Navbar*/
 import Navbar from "./components/_navBar/navBar";
 /*Seccion Dashboard*/
-import Dashboard from "./components/dashboard/dashboard";
+import Dashboard from "./components/_dashboard/dashboard";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
 import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
