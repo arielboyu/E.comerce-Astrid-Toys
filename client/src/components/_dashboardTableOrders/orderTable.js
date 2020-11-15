@@ -45,7 +45,7 @@ export default function OrderTable() {
             <td>{o.state}</td>
             <td>{o.user.username}</td>
             <td>{o.createdAt}</td>
-            <td> $ {o.products[0].orderdetails.price * o.products[0].orderdetails.quantity}</td>
+            <td> $ { o.products.length &&   o.products[0].orderdetails.price * o.products[0].orderdetails.quantity}</td>
             <td><Link to={`/dashboard/orders/detail/${o.id}`}>
              {/* para poder incluir los backticks debo colocar el path dentro de llaves */}
           <button >Detail</button>
