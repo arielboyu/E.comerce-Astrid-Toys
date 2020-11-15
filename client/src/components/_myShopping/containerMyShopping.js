@@ -13,7 +13,7 @@ const ContainerMyShopping = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3002/users/shopping/${idUser}`)
+      .get(`${process.env.REACT_APP_API_URL}/users/shopping/${idUser}`)
       .then((orders) => {
         console.log(orders);
         setShopping(orders.data);

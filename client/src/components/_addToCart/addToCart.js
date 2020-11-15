@@ -20,7 +20,7 @@ const AddToCart = ({ product }) => {
   //   const userId = 1
   //   const quantity = 1
   //   const data = { quantity,productId }
-  //   axios.post(`http://localhost:3002/users/${userId}/cart`,data)
+  //   axios.post(`${process.env.REACT_APP_API_URL}/users/${userId}/cart`,data)
   //   .then((res) => {
   //     console.log("se agregó producto: ", productId, "al usuario: ", userId );
   //   })

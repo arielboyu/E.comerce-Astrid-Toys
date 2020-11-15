@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // Tiene que mostrar todas las ordenes de todos los usuarios
 
 export default function OrderTable() {
-    const getOrder = axios.get("http://localhost:3002/orders");
+    const getOrder = axios.get(`${process.env.REACT_APP_API_URL}/orders`);
     const [order, setOrder] = useState([]);
     useEffect(() => {
       getOrder.then((res) => {
@@ -18,7 +18,7 @@ export default function OrderTable() {
     const handlerCancel = (orderid) => {
       console.log(orderid)
       axios
-        .put(`http://localhost:3002/orders/modify/cancel/${orderid}`)
+        .put(`${process.env.REACT_APP_API_URL}/orders/modify/cancel/${orderid}`)
         .then((res) => {
           console.log(res);
         })

@@ -6,7 +6,7 @@ const Buys = ({ orderId }) => {
   const [order, setOrder] = useState({});
 
   function inicialState() {
-    axios.get(`http://localhost:3002/orders/${orderId}`).then((order) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/orders/${orderId}`).then((order) => {
         console.log(order.data)
       setOrder(order.data);
     });

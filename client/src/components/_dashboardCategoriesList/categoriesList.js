@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const getCategory = axios.get("http://localhost:3002/categories");
+const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 export default function CategoriesList() {
   const [category, setCategory] = useState([]);
   const [deleted, setDeleted] = useState(null);
@@ -17,7 +17,7 @@ export default function CategoriesList() {
   // esta funcion elimina la categoria seteada en el estado local
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:3002/categories/delete/${deleted.id}`, deleted)
+      .delete(`${process.env.REACT_APP_API_URL}/categories/delete/${deleted.id}`, deleted)
       .then((res) => {
         console.log(res);
       })

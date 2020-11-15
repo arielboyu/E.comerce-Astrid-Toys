@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 export default function OrderDetail() {
     const {idorden}  = useParams()
-    const getDetail = axios.get(`http://localhost:3002/orders/${idorden}`);
+    const getDetail = axios.get(`${process.env.REACT_APP_API_URL}/orders/${idorden}`);
     const [detail, setDetail] = useState([]);
     useEffect(() => {
       getDetail.then((res) => {
