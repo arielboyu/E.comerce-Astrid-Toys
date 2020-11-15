@@ -10,7 +10,7 @@ const Footer = ({match}) => {
       <div class={`d-flex justify-content-between align-items-center flex-column flex-md-row pb-2 ${style.borderFooter}`}>
         <h2 class={`${style.title} ml-0 ml-md-3 mb-4 mb-sm-2`}>Astrid Toys</h2>
       </div>
-      <div class="d-flex justify-content-center align-items-center justify-content-md-between flex-column flex-md-row mx-3 mt-2">
+      <div class="d-flex justify-content-center align-items-center justify-content-md-between flex-column flex-md-row mx-3 mt-4">
         <div class="d-flex"><p class={`mb-0 small ${style.textFooter}`}>© 2020. All right reserved .</p></div>
         <div class="d-flex mt-3 mt-md-0">
         <ul class="nav justify-content-center">

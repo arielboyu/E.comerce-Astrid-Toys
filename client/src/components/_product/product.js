@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import AddToCart from "../_addToCart/addToCart";
+import { Link } from "react-router-dom";
 //Product
 
 export default function Product() {
@@ -21,14 +22,16 @@ export default function Product() {
     textAlign: "center",
     padding: "10px",
     width: "700px",
-    height: "350px",
+    height: "400px",
   };
   const imagen = {
-    height: "90%",
     margin: "20px auto",
+    maxWidth: "100%",
+    objectFit: "contain"
   };
   if (fuko) {
     return (
+      <>
       <div
         style={card}
         className="border d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded shadow"
@@ -38,18 +41,19 @@ export default function Product() {
             <div style={imagen}>
               <img
                 style={imagen}
-                className="border-right mr-4"
-                src="https://www.cellshop.com/342978-large_default/boneca-harley-quinn-dc-super-heroes-funko-pop-301.jpg"
+                className="border-right px-4"
+                src={f.image}
               ></img>
             </div>
-            <div className="m-5 p-3 col-4">
+            <div className="mx-auto p-2 col-6">
               <h1>{f.name}</h1>
-              <h4 className="text-info">{f.description}</h4>
-              <h5 className="p-1 font-weight-bold"> ${f.price}</h5>
+              <h4 className="text-danger mt-3">{f.description}</h4>
+              <h1 className="p-1 font-weight-bold mt-4"> ${f.price}</h1>
               <p className="pt-3">Stock: {f.stock}</p>
               <p> ⭐⭐⭐⭐⭐ </p>
+              {/* AddToCart productId= {f.id} />  */}
               {f.stock > 0 ? (
-               <AddToCart productId= {f.id} />
+               <AddToCart product= {f} /> 
               ) : (
                 <button className="btn btn-outline-secondary">
                   OUT OF STOCK
@@ -59,6 +63,14 @@ export default function Product() {
           </>
         ))}
       </div>
+      <div className="d-flex col-12 mx-auto justify-content-center m-5">
+        <Link to="/products">
+        <button className="btn btn-outline-dark btn-lg ">
+                  BACK
+        </button>
+        </Link>
+      </div>
+      </>
     );
   }
   return <p>404</p>;
