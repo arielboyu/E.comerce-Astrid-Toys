@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import BtnDashboard from "../_navBar/btnDashboard";
 
 const getProduct = axios.get("http://localhost:3002/products");
 

@@ -122,7 +122,7 @@ server.delete("/:idUser/cart", (req, res) => {
 //maneja errores
 server.post("/:idUser/cart/", (req, res) => {
   const idUser = req.params.idUser;
-  var { quantity, idProduct } = req.body;
+  var { quantity, productId } = req.body;
   Order.create({ state: "PENDING" })
     .then((orden) => {
       User.findOne({ where: { id: idUser } }).then((user) => {
@@ -130,7 +130,7 @@ server.post("/:idUser/cart/", (req, res) => {
           res.send("no se encontro usuario");
         } else {
           orden.setUser(user).then((order) => {
-            Product.findOne({ where: { id: idProduct } }).then((myProduct) => {
+            Product.findOne({ where: { id: productId } }).then((myProduct) => {
               if (myProduct == null) {
                 res.send("no se encontro producto");
               } else {
