@@ -15,7 +15,7 @@ server.get("/", (req, res) => {
 
 server.post("/create", (req, res) => {
   const { name, username, email, password } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   if (name && username && email && password) {
     User.create({
       name,
@@ -73,19 +73,21 @@ server.put("/:id", (req, res) => {
 server.get("/:idUser/cart", (req, res) => {
   const idUsuario = req.params.idUser;
   User.findOne({
-    include:[
+    include: [
       {
-        model:Order,
-        include:[{
-          model:Product,
-        }],
-        where:{ state : "PENDING"}
-      }
+        model: Order,
+        include: [
+          {
+            model: Product,
+          },
+        ],
+        where: { state: "PENDING" },
+      },
     ],
-    where:{id : idUsuario}
+    where: { id: idUsuario },
   }).then((user) => {
-    res.send(user)
-  })
+    res.send(user);
+  });
 });
 
 //S40 : Crear Ruta para vaciar el carrito
@@ -133,8 +135,7 @@ server.delete("/:idUser/cart/:productId", (req, res) => {
     .catch((e) => res.send("Hubo un error: ", e));
 });
 
-
-//ruta para agregar un producto al carrito
+//ruta para agregar CREAR EL CARRITO
 //testeada
 //maneja errores
 server.post("/:idUser/cart/", (req, res) => {
@@ -160,6 +161,39 @@ server.post("/:idUser/cart/", (req, res) => {
                   });
               }
             });
+          });
+        }
+      });
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
+//ruta para agregar un producto al carrito
+//testeada
+//maneja errores
+server.put("/:idUser/cart/", (req, res) => {
+  const idUser = req.params.idUser;
+  var { quantity, productId, orderId } = req.body;
+  Order.findOne({ where: { id: orderId } })
+    .then((order) => {
+      User.findOne({ where: { id: idUser } }).then((user) => {
+        if (user == null) {
+          res.send("no se encontro usuario");
+        } else {
+          Product.findOne({ where: { id: productId } }).then((myProduct) => {
+            if (myProduct == null) {
+              res.send("no se encontro producto");
+            } else {
+              order
+                .addProduct(myProduct, {
+                  through: { price: myProduct.price, quantity: quantity },
+                })
+                .then((ord) => {
+                  res.send(ord);
+                });
+            }
           });
         }
       });
