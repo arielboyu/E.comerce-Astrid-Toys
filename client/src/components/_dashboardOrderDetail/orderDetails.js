@@ -38,10 +38,10 @@ export default function OrderDetail() {
             <td>{d.state}</td>
             <td>{d.createdAt}</td>
             <td>{d.user.username}</td>
-            <td>{d.products[0].name}</td>
-            <td>$ {d.products[0].orderdetails.price}</td>
-            <td>{d.products[0].orderdetails.quantity}</td>
-            <td>$ {d.products[0].orderdetails.quantity  *  d.products[0].orderdetails.price  }</td>
+            <td>{ d.products.length  &&  d.products[0].name}</td>
+            <td>$ { d.products.length  &&  d.products[0].orderdetails.price}</td>
+            <td>{ d.products.length  &&  d.products[0].orderdetails.quantity}</td>
+            <td>$ { d.products.length  &&  d.products[0].orderdetails.quantity  *  d.products[0].orderdetails.price  }</td>
             <td>  
             </td>
             </tr>
