@@ -22,7 +22,7 @@ import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
 import OrderList from "./components/_dashboardTableOrders/orderTable"
 import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js"
 import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
-
+import UpdateCategories from "./components/_dashboardUpdateCategories/updateCategories"
 //****Import de prueba */
 import Reduxxx from './components/pruebaRedux'
 
@@ -69,6 +69,9 @@ function App() {
         </Route>
         <Route path="/dashboard/category/list">
           <CategoryList />
+        </Route>
+        <Route path="/dashboard/category/update/:idcategory">
+          <UpdateCategories />
         </Route>
         <Route path="/dashboard/orders/list">
           <OrderList />

@@ -58,7 +58,12 @@ export default function CategoriesList() {
               <td>{c.id}</td>
               <td>{c.name}</td>
               <td>{c.description}</td>
+              <td><Link to={`/dashboard/category/update/${c.id}`}>
               <button
+              className="btn btn-danger"
+              >Update</button>
+              </Link></td>
+              <td><button
                 onClick={() => handleSubmit(c)}
                 type="submit"
                 className="btn btn-danger"
@@ -67,6 +72,7 @@ export default function CategoriesList() {
               >
                 Delete
               </button>
+              </td>
             </tr>
           ))}
         </tbody>
