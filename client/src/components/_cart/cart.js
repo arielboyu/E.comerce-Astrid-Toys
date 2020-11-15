@@ -52,7 +52,7 @@ const Cart = () => {
                     <th>Price</th>
                     <th className="m-2">Cant</th>
                     <th>Description</th>
-                    <th>Delete Item</th>
+                    <th>DeleteItem</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,9 +64,10 @@ const Cart = () => {
                       <td>{f.cant}</td>
                       <td>{f.description}</td>
                       <td>
-                        <button onClick={() => handlerRemove(f)} type="button">
-                          <ion-icon name="close-outline"></ion-icon>
-                        </button>
+                        <button onClick={() => handlerRemove(f)} type="button"> 
+                        <ion-icon class="glyphicon glyphicon-trash"></ion-icon>
+                       </button>
+ 
                       </td>
                     </tr>
                   ))}
@@ -92,8 +93,6 @@ const Cart = () => {
               <button class="btn btn-danger btn-lg my-5">
                 CONTINUE SHOPPING{" "}
               </button>
-              <p class="text-right">Total: ,00<span id="total"></span>$</p>
-                <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
             </Link>
           </p>
         </div>
@@ -103,24 +102,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-/*------
-
-   <button id="boton-vaciar" class="btn btn-danger m-2">
-          Empty Cart
-        </button>
-        
-     Carrito --> get. para traer datos. Se llena con una tabla de pedidos.
-    (get = query = ir a la tabla = obtener datosTabla) SELECT * FROM ('pedidos') --> me traigo toda la tabla (BD)
-    listaadoProductos = setear el estado con lo que traigo del get. 
-    mapear =setear estado local = el get devuelve array y este useState. useffect (is behind th scene /set my state local)
- 
-    render( mapear pedidos --> 
-        mostrarlos por pantalla como tabla
-        productos --> tabla button onClick()=> { } eliminarProducto(x) 
-    )
-
-    boton Vaciar carrito --> elimina contenido de la tabla. deleteItems  (devuelve el stock)
-    boton comprar -->  vaciar tabla pedidos (resta productos del stock)
- 
-    pedidos -->*/
