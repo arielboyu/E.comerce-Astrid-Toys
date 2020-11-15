@@ -6,7 +6,7 @@ import Home from "./components/_home/home.js";
 import Cart from "./components/_cart/cart.js";
 import AddToCart from "./components/_addToCart/addToCart.js";
 import Login from "./components/_login/login.js";
-import Register from "./components/_login/register.js"
+import Register from "./components/_login/register.js";
 import Footer from "./components/_footer/footer.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
@@ -20,7 +20,7 @@ import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLo
 import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
 import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
 import OrderList from "./components/_dashboardTableOrders/orderTable"
-import ContainerMyShopping from "./components/_myShopping/containerMyShopping.js"
+import ContainerMyShopping from "./components/_myShopping/containerShop.js"
 import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
 import UpdateCategories from "./components/_dashboardUpdateCategories/updateCategories"
 //****Import de prueba */
@@ -33,7 +33,7 @@ function App() {
     <Router>
       <Route path="/" render={({match, location}) => <Navbar match={match} location={location} />} />
       <Switch>
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register}/>
         <Route path="/esta/es/la/ruta/de/rodri">
@@ -81,7 +81,8 @@ function App() {
         </Route>
         <Route path="/cart">
           <Cart />
-        </Route> <Route path="/myshop/:idUser">
+        </Route>{" "}
+        <Route exact path="/myshop/:idUser">
           <ContainerMyShopping />
         </Route>
         <Route path="/addToCart">
