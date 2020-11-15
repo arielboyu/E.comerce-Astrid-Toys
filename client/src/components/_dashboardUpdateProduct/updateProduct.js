@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
-const getCategory = axios.get("http://localhost:3002/categories");
+const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
 function UpdateProduct() {
   const [category, setCategory] = useState([]);
@@ -12,12 +12,12 @@ function UpdateProduct() {
   const { id } = useParams();
   
   useEffect(() => {
-    axios.get(`http://localhost:3002/products/${id}`).then((res) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/products/${id}`).then((res) => {
       console.log(res)
       let initialState = res.data[0];
       setLoad(true);
       axios
-        .get(`http://localhost:3002/products/${id}/categories`)
+        .get(`${process.env.REACT_APP_API_URL}/products/${id}/categories`)
         .then((res) => {
           initialState.categories = [];
           res.data.forEach((category) =>
@@ -52,7 +52,7 @@ function UpdateProduct() {
 
   const handlerSubmit = (e) => {
     axios
-      .put(`http://localhost:3002/products/${id}`, productUpdate)
+      .put(`${process.env.REACT_APP_API_URL}/products/${id}`, productUpdate)
       .then((r) => {
         console.log(r);
       })

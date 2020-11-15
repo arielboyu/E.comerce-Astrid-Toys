@@ -4,8 +4,8 @@ import CategoryList from "../_productList/categoryList";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
 
-const getProduct = axios.get("http://localhost:3002/products");
-const getCategory = axios.get("http://localhost:3002/categories");
+const getProduct = axios.get(`${process.env.REACT_APP_API_URL}/products`);
+const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
 const Catalogue = () => {
   const [product, setProduct] = useState([]);
@@ -13,7 +13,7 @@ const Catalogue = () => {
   const {cat} = useParams();
   useEffect(() => {
     if(cat){
-      axios.get(`http://localhost:3002/products/search/${cat}`)
+      axios.get(`${process.env.REACT_APP_API_URL}/products/search/${cat}`)
       .then((productCategory)=>{
         setProduct(productCategory.data);
       })
@@ -31,7 +31,7 @@ const Catalogue = () => {
   
   const handlerSearch = (search) => {
     axios
-      .get(`http://localhost:3002/products/search?data=${search}`)
+      .get(`${process.env.REACT_APP_API_URL}/products/search?data=${search}`)
       .then((res) => {
         setProduct(res.data);
         console.log(res.data);
@@ -39,7 +39,7 @@ const Catalogue = () => {
   }
 
   const handlerFilter = (categoria)=>{
-    axios.get(`http://localhost:3002/products/search/${categoria}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/products/search/${categoria}`)
     .then((res) => {
       setProduct(res.data);
     })

@@ -7,7 +7,7 @@ import Dashboard from "./btnDashboard";
 import Login from "./btnLogin";
 import Cart from "./btnCart";
 
-const getCategory = axios.get("http://localhost:3002/categories");
+const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
 export default function NavBar({ match, location }) {
   const [categories, setCategories] = useState([]);

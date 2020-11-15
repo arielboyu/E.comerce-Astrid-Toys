@@ -11,7 +11,7 @@ export default function Product() {
 
   const { index } = useParams();
   useEffect(() => {
-    axios.get(`http://localhost:3002/products/${index}`).then((res) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/products/${index}`).then((res) => {
       setFuko(res.data);
       setLoad(true);
     });
