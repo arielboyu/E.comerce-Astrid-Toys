@@ -36,8 +36,8 @@ const { reset } = require("nodemon");
 //force = true RESETEA DB force = false NO RESETEA DB
 //var resetDB = true;
 conn.sync({ force: true }).then(() => {
-  server.listen(3002, () => {
-    console.log("%s listening at 3002"); // eslint-disable-line no-console
+  server.listen(process.env.PORT || 3002, () => {
+    console.log("%s listening at ", process.env.PORT ); // eslint-disable-line no-console
 
     /* ------------------------------------------------------- */
     //INSTANCIAMOS MODELOS DE LA TABLA Y SALVAMOS DATOS
