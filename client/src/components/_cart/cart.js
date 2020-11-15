@@ -38,6 +38,15 @@ const Cart = () => {
     setList(!isUpdateList);
   };
 
+  const handlerQantity = (e) => {
+    if (e.target.id==='minus'){
+      console.log("minus")
+    }
+    if (e.target.id==='plus'){
+      console.log("plus")
+    }
+  }
+
   return (
     <>
       <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
@@ -61,7 +70,22 @@ const Cart = () => {
                     <tr>
                       <td>{f.name}</td>
                       <td>{f.price}</td>
-                      <td>{f.cant}</td>
+                      <td>
+                          <div className="input-group d-flex p-3">
+                                <span className="input-group-btn">
+                                    <button onClick={handlerQantity} id='minus' type="button" className="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                      <span className="glyphicon glyphicon-minus">-</span>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" className="col-md-auto form-control input-number" value={f.cant} min="1" max="100"/>
+                                <span className="input-group-btn">
+                                    <button onClick={handlerQantity} id='plus' type="button" className="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                        <span className="glyphicon glyphicon-plus">+</span>
+                                    </button>
+                                </span>
+                          </div>
+                      </td>      
+                      {/* <td>{f.cant}</td> */}
                       <td>{f.description}</td>
                       <td>
                         <button onClick={() => handlerRemove(f)} type="button">
