@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 export default function OrderDetail() {
     const {idorden}  = useParams()
-    const getDetail = axios.get(`http://localhost:3002/orders/${idorden}`);
+    const getDetail = axios.get(`${process.env.REACT_APP_API_URL}/orders/${idorden}`);
     const [detail, setDetail] = useState([]);
     useEffect(() => {
       getDetail.then((res) => {
@@ -38,10 +38,10 @@ export default function OrderDetail() {
             <td>{d.state}</td>
             <td>{d.createdAt}</td>
             <td>{d.user.username}</td>
-            <td>{d.products[0].name}</td>
-            <td>$ {d.products[0].orderdetails.price}</td>
-            <td>{d.products[0].orderdetails.quantity}</td>
-            <td>$ {d.products[0].orderdetails.quantity  *  d.products[0].orderdetails.price  }</td>
+            <td>{ d.products.length  &&  d.products[0].name}</td>
+            <td>$ { d.products.length  &&  d.products[0].orderdetails.price}</td>
+            <td>{ d.products.length  &&  d.products[0].orderdetails.quantity}</td>
+            <td>$ { d.products.length  &&  d.products[0].orderdetails.quantity  *  d.products[0].orderdetails.price  }</td>
             <td>  
             </td>
             </tr>

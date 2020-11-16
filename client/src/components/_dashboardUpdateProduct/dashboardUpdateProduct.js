@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import BtnDashboard from "../_navBar/btnDashboard";
 
-const getProduct = axios.get("http://localhost:3002/products");
+const getProduct = axios.get(`${process.env.REACT_APP_API_URL}/products`);
 
 const DashboardUpdateProduct = () => {
   const [product, setProduct] = useState([]);
@@ -16,7 +16,7 @@ const DashboardUpdateProduct = () => {
 
   const changeStateActive = (prod) => {
     axios
-      .put(`http://localhost:3002/products/${prod.id}`, {
+      .put(`${process.env.REACT_APP_API_URL}/products/${prod.id}`, {
         active: !prod.active,
       })
       .then((r) => {

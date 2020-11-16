@@ -10,7 +10,7 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   // var userId = 2;
 
-  // const getCart = axios.get(`http://localhost:3002/users/${userId}/cart`);
+  // const getCart = axios.get(`${process.env.REACT_APP_API_URL}/users/${userId}/cart`);
 
   // useEffect(() => {
   //   getCart.then((res) => {
@@ -54,6 +54,7 @@ const Cart = () => {
 
   return (
     <>
+    
       <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
         <div class="">
           <h1 class="display-3">My cart</h1>
@@ -96,7 +97,7 @@ const Cart = () => {
          
                       <td>
                         <button onClick={() => handlerRemove(f)} type="button"> 
-                        <ion-icon class="glyphicon glyphicon-trash">  </ion-icon>
+                        <ion-icon class="fa fa-trash-o" aria-hidden="true"></ion-icon>
                        </button>
                       </td>
                       <td>

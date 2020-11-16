@@ -15,7 +15,7 @@ function DashboardLoadCategory() {
 
   function handlerFormSubmit(e) {
     axios
-      .post("http://localhost:3002/categories/create", categoryLoad)
+      .post(`${process.env.REACT_APP_API_URL}/categories/create`, categoryLoad)
       .then((response) => {
         console.log("Categoria Cargada");
       })

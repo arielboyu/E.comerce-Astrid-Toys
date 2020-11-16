@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const getCategory = axios.get("http://localhost:3002/categories");
+const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
 function DashboardLoadProduct() {
   //Seteo un estado general para mostrar las categorias en las listas desplegrables
@@ -70,7 +70,7 @@ function DashboardLoadProduct() {
     console.log(productLoad);
     if (validateDates()) {
       axios
-        .post("http://localhost:3002/products", productLoad)
+        .post(`${process.env.REACT_APP_API_URL}/products`, productLoad)
         .then((r) => {
           console.log(r);
         })
