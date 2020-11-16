@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeProductToCart , removeAllProductsToCart, calculeAllCart } from "../../redux/actions/actions";
+import { removeProductToCart , removeAllProductsToCart, calculeAllCart, addQantity, subQantity } from "../../redux/actions/actions";
 
 import { Link } from "react-router-dom";
 
@@ -38,13 +38,14 @@ const Cart = () => {
     setList(!isUpdateList);
   };
 
-  const handlerQantity = (e) => {
-    if (e.target.id==='minus'){
-      console.log("minus")
-    }
-    if (e.target.id==='plus'){
-      console.log("plus")
-    }
+  const handlerAddQantity = (f) => {
+    dispatch(addQantity(f));
+    setList(!isUpdateList);
+  }
+  
+  const handlerSubQantity = (f) => {
+    dispatch(subQantity(f));
+    setList(!isUpdateList);
   }
   /*const handlerCalculeAll = (f) => {
     dispatch(calculeAllCart());
@@ -76,15 +77,15 @@ const Cart = () => {
                       <td>{f.name}</td>
                       <td>{f.price}</td>
                       <td>
-                          <div className="input-group d-flex p-3">
+                          <div className="input-group d-flex">
                                 <span className="input-group-btn">
-                                    <button onClick={handlerQantity} id='minus' type="button" className="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                    <button onClick={()=>handlerSubQantity(f)} id='minus' type="button" className="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
                                       <span className="glyphicon glyphicon-minus">-</span>
                                     </button>
                                 </span>
-                                <input type="text" id="quantity" name="quantity" className="col-md-auto form-control input-number" value={f.cant} min="1" max="100"/>
+                                <input type="text" id="quantity" name="quantity" className="form-control input-number" value={f.cant} min="1" max="100"/>
                                 <span className="input-group-btn">
-                                    <button onClick={handlerQantity} id='plus' type="button" className="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                    <button onClick={()=>handlerAddQantity(f)} id='plus' type="button" className="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                         <span className="glyphicon glyphicon-plus">+</span>
                                     </button>
                                 </span>
