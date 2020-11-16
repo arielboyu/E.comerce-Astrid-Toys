@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeProductToCart , removeAllProductsToCart, calculeAllCart } from "../../redux/actions/actions";
+import { removeProductToCart , removeAllProductsToCart, calculeAllCart, addQuantity, subQuantity } from "../../redux/actions/actions";
 
 import { Link } from "react-router-dom";
 
@@ -38,6 +38,15 @@ const Cart = () => {
     setList(!isUpdateList);
   };
 
+  const handlerAddQuantity = (f) => {
+    dispatch(addQuantity(f));
+    setList(!isUpdateList);
+  }
+  
+  const handlerSubQuantity = (f) => {
+    dispatch(subQuantity(f));
+    setList(!isUpdateList);
+  }
   /*const handlerCalculeAll = (f) => {
     dispatch(calculeAllCart());
     setList(!isUpdateList);
@@ -68,7 +77,22 @@ const Cart = () => {
                     <tr>
                       <td>{f.name}</td>
                       <td>{f.price}</td>
-                      <td>{f.cant}</td>
+                      <td>
+                          <div className="input-group d-flex">
+                                <span className="input-group-btn">
+                                    <button onClick={()=>handlerSubQuantity(f)} id='minus' type="button" className="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                      <span className="glyphicon glyphicon-minus">-</span>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" className="form-control input-number" value={f.cant} min="1" max="100"/>
+                                <span className="input-group-btn">
+                                    <button onClick={()=>handlerAddQuantity(f)} id='plus' type="button" className="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                        <span className="glyphicon glyphicon-plus">+</span>
+                                    </button>
+                                </span>
+                          </div>
+                      </td>      
+                      {/* <td>{f.cant}</td> */}
                       <td>{f.description}</td>
          
                       <td>

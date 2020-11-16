@@ -24,3 +24,17 @@ export function removeAllProductsToCart(){
         type: "CALCULE_ALL_CART"
     }
 }*/
+
+export function addQuantity(payload){
+    return{
+        type:'ADD_QUANTITY',
+        payload
+    }
+}
+
+export function subQuantity(payload){
+    return{
+        type:'SUB_QUANTITY',
+        payload
+    }
+}
