@@ -25,16 +25,16 @@ export function removeAllProductsToCart(){
     }
 }*/
 
-export function addQantity(payload){
+export function addQuantity(payload){
     return{
-        type:'ADD_QANTITY',
+        type:'ADD_QUANTITY',
         payload
     }
 }
 
-export function subQantity(payload){
+export function subQuantity(payload){
     return{
-        type:'SUB_QANTITY',
+        type:'SUB_QUANTITY',
         payload
     }
 }
