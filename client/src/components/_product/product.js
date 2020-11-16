@@ -49,7 +49,12 @@ export default function Product() {
               <h1>{f.name}</h1>
               <h4 className="text-danger mt-3">{f.description}</h4>
               <h1 className="p-1 font-weight-bold mt-4"> ${f.price}</h1>
-              <p className="pt-3">Stock: {f.stock}</p>
+              <p className="pt-3">
+                {f.stock > 11 ? `Stock available` : <></>}
+                {f.stock < 10 && f.stock > 1  ? `Only ${f.stock} units left, hurry up!` : <></>}
+                {f.stock === 1  ? `Only ${f.stock} unit left, last chance!` : <></>}
+                {f.stock === 0  ? <></> : <></> }
+              </p>
               <p> ⭐⭐⭐⭐⭐ </p>
               {/* AddToCart productId= {f.id} />  */}
               {f.stock > 0 ? (
