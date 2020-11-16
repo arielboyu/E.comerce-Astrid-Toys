@@ -38,6 +38,41 @@ function rootReducer (state = initialState, action){
 
     }
 }*/
+    if(action.type === "ADD_QUANTITY"){
+        let array= state.carrito
+        array.forEach((p)=>{
+            if(p.id === action.payload.id){
+             p.cant = p.cant + 1;   
+            }
+        })        
+        return{
+            ...state,
+            carrito: array
+        }
+    }
+
+    if(action.type === "SUB_QUANTITY"){
+        let array= state.carrito
+        let zero=false
+        array.forEach((p)=>{
+            if(p.id === action.payload.id){
+             p.cant = p.cant - 1; 
+             if (p.cant===0){zero=true}  
+            }
+        })
+        if (zero){
+            return{
+                ...state,
+                carrito: state.carrito.filter((e) => e.id !== action.payload.id)
+            }
+        }else{
+            return{
+                ...state,
+                carrito: array
+            }
+        }
+
+    }    
     return state
 }
 
