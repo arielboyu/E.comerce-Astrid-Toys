@@ -25,7 +25,7 @@ const Cart = () => {
   //   });
   //   console.log(cart);
   // }, []);
-
+  
   // Lineas agregadas por Rodri 02:45
   const [isUpdateList, setList] = useState(false);
   const cartStore = useSelector((state) => state.carrito);
@@ -51,8 +51,10 @@ const Cart = () => {
   };
 
   const handlerSubQuantity = (f) => {
-    dispatch(subQuantity(f));
-    setList(!isUpdateList);
+    if (f.cant >1){
+      dispatch(subQuantity(f));
+      setList(!isUpdateList);
+    }
   };
   /*const handlerCalculeAll = (f) => {
     dispatch(calculeAllCart());
