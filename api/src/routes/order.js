@@ -57,7 +57,7 @@ server.get('/search', (req, res) => {
 server.get('/:id', (req, res) => {
     let id = req.params.id
     //ANTES
-    // Order.findAll({where:{id:id},
+    // Order.findAll({where:{id:id}, 
     Order.findOne({where:{id:id},
         include: [
 

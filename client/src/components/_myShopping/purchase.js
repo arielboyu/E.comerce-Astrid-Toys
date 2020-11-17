@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Product from "../_product/product";
 
 const Purchase = ({ orderId }) => {
-  const [order, setOrder] = useState([]);
+  const [order, setOrder] = useState({});
   const [products, setProducts] = useState([])
   const [redirect, setRedirect] = useState(false);
   /*  let history = useHistory(); */
@@ -22,10 +22,10 @@ const Purchase = ({ orderId }) => {
     if (orderId) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/orders/${orderId}`)
-        .then((order) => {
-          setOrder(order.data);
-          setProducts(order.data.products)
-          console.log(order.data);
+        .then((res) => {
+          setOrder(res.data);
+          setProducts(res.data.products)
+          
         });
     } else {
       console.log("cargando orden papu");
@@ -35,6 +35,7 @@ const Purchase = ({ orderId }) => {
 
   return (
     <>
+    {console.log(order)}
       {redirect ? <Redirect to={`/myshop/details/1`} /> : <></>}
       <div className="container border shadow m-3 p-5">
         <div className="row border d-flex justify-content-between p-5">
