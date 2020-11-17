@@ -48,7 +48,7 @@ const Purchase = ({ orderId }) => {
         </div>
 
         <div className="row border p-5">
-          <div className="col-5 bg-primary p-2 m-2">{"Product ID: " + products[0].id}</div>
+          <div className="col-5 bg-primary p-2 m-2"></div>
           <div className="col-3 bg-danger p-3 m-2">vendedor</div>
         </div>
         <div className="col-3 bg-warning p-5 m-2">
