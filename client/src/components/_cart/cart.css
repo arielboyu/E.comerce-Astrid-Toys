@@ -1,3 +1,71 @@
+.headCont{
+    margin: 20px 5px;
+    padding: .75rem;
+    border-bottom: 1px solid black ;
+}
+
+.pillContainer{
+    background: #f3f3f7;
+    font-size: 1rem;
+    display: inline-flex;
+    border-radius: 1.25rem;
+}
+
+.btnTrash{
+    background-color: white;
+    padding: .75rem 1rem;
+    outline: none;
+    border: none;
+    border-radius: 100%;
+    transition: all 0.1s ease-in-out;
+}
+
+.btnTrash:hover{
+    box-shadow: 0 0 0 2px
+}
+
+
+.btnMin{
+    background-color: #f3f3f7;
+    border-radius: 1.25rem 0 0 1.25rem;
+    margin: .125rem;
+    padding: .75rem;
+    box-shadow: none;
+    font-size: .5rem;
+    border: none;
+    color: rgba(0,0,250);
+    outline: none
+}
+
+.btnMax{
+    background-color: #f3f3f7;
+    border-radius: 0 1rem 1rem 0;
+    margin: .125rem;
+    padding: .75rem;
+    box-shadow: none;
+    font-size: .5rem;
+    border: none;
+    color: rgba(250,0,0);
+    outline: none;
+}
+
+.priceCeld{
+    padding: .50rem;
+}
+
+
+.cant{
+    margin: .125rem 0;
+    background: #f3f3f7;
+    display: inline-block;
+    padding: .5rem 0;
+    min-width: 2rem;
+    text-align: center;
+}
+
+
+
+
 /* .cart ion-icon {
     vertical-align: bottom;
     font-size: 20px;
