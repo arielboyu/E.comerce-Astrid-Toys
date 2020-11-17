@@ -1,5 +1,4 @@
 const server = require("express").Router();
-
 const { User, Order, Product, Orderdetails } = require("../db.js");
 const { Op } = require("sequelize");
 
