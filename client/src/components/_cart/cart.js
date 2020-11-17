@@ -88,6 +88,7 @@ const Cart = () => {
             </div>
             <div className="col-4 col-md-2">
               <button
+                style={{outline: "none"}}
                 className="btnTrash"
                 onClick={() => handlerRemove(f)}
                 type="button"
@@ -98,6 +99,7 @@ const Cart = () => {
             <div className="col-4 col-md-2">
               <div className="pillContainer">
                 <button
+                  style={{outline: "none"}}
                   className="btnMin"
                   onClick={() => handlerSubQuantity(f)}
                 >
@@ -106,6 +108,7 @@ const Cart = () => {
                 <span className="cant">{f.cant}</span>
                 <button
                   className="btnMax"
+                  style={{outline: "none"}}
                   onClick={() => handlerAddQuantity(f)}
                 >
                   <i className="fas fa-plus"></i>
