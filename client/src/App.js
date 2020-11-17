@@ -73,7 +73,7 @@ function App() {
         <Route path="/dashboard/category/update/:idcategory">
           <UpdateCategories />
         </Route>
-        <Route path="/dashboard/orders/list">
+        <Route path="/dashboard/users/list">
           <OrderList />
         </Route>
         <Route path="/dashboard/orders/detail/:idorden">

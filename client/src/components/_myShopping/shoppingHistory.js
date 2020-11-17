@@ -11,7 +11,7 @@ const ShoppingHistory = ({ idUser }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3002/users/shopping/${idUser}`)
+      .get(`${process.env.REACT_APP_API_URL}/users/shopping/${idUser}`)
       .then((orders) => {
         setShopping(orders.data);
       });

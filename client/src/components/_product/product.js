@@ -11,7 +11,7 @@ export default function Product() {
 
   const { index } = useParams();
   useEffect(() => {
-    axios.get(`http://localhost:3002/products/${index}`).then((res) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/products/${index}`).then((res) => {
       setFuko(res.data);
       setLoad(true);
     });
@@ -49,7 +49,12 @@ export default function Product() {
               <h1>{f.name}</h1>
               <h4 className="text-danger mt-3">{f.description}</h4>
               <h1 className="p-1 font-weight-bold mt-4"> ${f.price}</h1>
-              <p className="pt-3">Stock: {f.stock}</p>
+              <p className="pt-3">
+                {f.stock > 11 ? `Stock available :)` : <></>}
+                {f.stock < 10 && f.stock > 1  ? `Only ${f.stock} units left, hurry up!` : <></>}
+                {f.stock === 1  ? `Only ${f.stock} unit left, last chance!` : <></>}
+                {f.stock === 0  ? `Not available :(` : <></> }
+              </p>
               <p> ⭐⭐⭐⭐⭐ </p>
               {/* AddToCart productId= {f.id} />  */}
               {f.stock > 0 ? (
