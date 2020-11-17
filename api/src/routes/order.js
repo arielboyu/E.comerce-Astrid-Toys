@@ -56,7 +56,9 @@ server.get('/search', (req, res) => {
 // Se le agrega Catch
 server.get('/:id', (req, res) => {
     let id = req.params.id
-    Order.findAll({where:{id:id},
+    //ANTES
+    // Order.findAll({where:{id:id},
+    Order.findOne({where:{id:id},
         include: [
 
                 {
