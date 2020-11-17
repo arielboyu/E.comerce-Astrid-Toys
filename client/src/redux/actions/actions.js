@@ -38,3 +38,11 @@ export function subQuantity(payload){
         payload
     }
 }
+
+//ACTIONS DE LOGGIN
+export function userLogin(payload){
+    return {
+        type: "USER_LOGIN",
+        payload
+    }
+}

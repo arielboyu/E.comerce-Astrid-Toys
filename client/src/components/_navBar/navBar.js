@@ -6,17 +6,32 @@ import { Navbar } from "reactstrap";
 import Dashboard from "./btnDashboard";
 import Login from "./btnLogin";
 import Cart from "./btnCart";
+import {useDispatch, useSelector} from 'react-redux'
+import {userLogin} from '../../redux/actions/actions'
+
 
 const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
 export default function NavBar({ match, location }) {
   const [categories, setCategories] = useState([]);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch()
+
+
 
   useEffect(() => {
     getCategory.then((r) => {
       setCategories(r.data);
     });
   }, []);
+
+  const handleLogOut = () => {
+    axios.get(`${process.env.REACT_APP_API_URL}/auth/logout`)
+            .then(r => {
+              dispatch(userLogin(null))}
+            )
+            .catch( error => console.log(error) )
+    }
 
   return !match.isExact ? (
     <nav className="navbar navbar-expand-lg navbar-light bg-warning pt-2 pb-0 d-flex justify-content-between">
@@ -46,6 +61,7 @@ export default function NavBar({ match, location }) {
               </Link>
             </li>
 
+           
             <li className="nav-item d-none d-lg-block">
               <Link to="/products" className="nav-link">
                 Catalogue
@@ -75,9 +91,21 @@ export default function NavBar({ match, location }) {
             <li className="nav-item d-none d-lg-block">
               <Dashboard match={match} location={location} />
             </li>
+            
+            {/* LOG IN */}
+            {user.id ? 
+            <>
+              <li className="nav-item d-flex">
+                <Link to='#'><span className="nav-link mr-n2"><i className="fas fa-user"> </i> {user.name} </span></Link>
+                <Link onClick={handleLogOut} className="nav-link ml-n1">(X)</Link>
+              </li>
+            </> : 
             <li className="nav-item d-none d-lg-block">
               <Login></Login>
-            </li>
+            </li>}
+
+           
+            
             <li className="nav-item d-none d-lg-block">
               <Cart></Cart>
             </li>

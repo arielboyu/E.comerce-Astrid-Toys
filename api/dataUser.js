@@ -1,26 +1,52 @@
-const DataProducts = [{
-    name: 'Maxi De Filippis',
-    username: 'maxidefilippis',
-    email: 'maxi@henry.com',
-    password : '1234'
-  },
+const DataProducts = [
   {
     name: 'Nico Acevedo',
-    username: 'nicoelmaskpo',
+    username: 'nico',
     email: 'nico@henry.com',
-    password : '1234'
+    password : '1234',
+    isAdmin: true
   },
   {
-    name: 'Franco Etcheverri',
-    username: 'franverri',
-    email: 'franco@henry.com',
-    password : '1234'
+    name: 'Nahuel Caputto',
+    username: 'nahue',
+    email: 'nahue@henry.com',
+    password : '1234',
+    isAdmin: true
   },
   {
     name: 'Rodri Penela',
-    username: 'rodrinela',
-    email: 'Rodri@henry.com',
-    password : '1234'
+    username: 'rodri',
+    email: 'rodri@henry.com',
+    password : '1234',
+    isAdmin: true
+  },
+  {
+    name: 'Ariel Salcedo',
+    username: 'ariel',
+    email: 'ariel@henry.com',
+    password : '1234',
+    isAdmin: true
+  },
+  {
+    name: 'Astrid Medina',
+    username: 'astrid',
+    email: 'astrid@henry.com',
+    password : '1234',
+    isAdmin: true
+  },
+  {
+    name: 'Maxi De Filippis',
+    username: 'maxi',
+    email: 'maxi@henry.com',
+    password : '1234',
+    isAdmin: true
+  },
+  {
+    name: 'Invitado',
+    username: 'invi',
+    email: 'invitado@henry.com',
+    password : '1234',
+    isAdmin: false
   },
   
 ];
