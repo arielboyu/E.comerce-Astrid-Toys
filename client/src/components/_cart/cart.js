@@ -56,9 +56,38 @@ const Cart = () => {
     <>
     
       <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
-        <div class="">
-          <h1 class="display-3">My cart</h1>
-          {cart.length > 0 ? (
+
+          <h1 className="display-3">My cart</h1>
+          {cart.map((f) => (
+            <div className="row">
+              <div className="col-sm-4">
+                <img src={f.image} alt={`Picture of ${f.name}`}/>
+                
+              </div>
+            </div>
+          ))}
+
+
+          {/* esta el ex code abajo */}
+          <hr className="my-2" />
+          <p className="lead">
+            <Link to="/products" className="text-decoration-none">
+              <button className="btn btn-danger btn-lg my-5">
+                CONTINUE SHOPPING{" "}
+              </button>
+            </Link>
+          </p>
+
+      </div>
+    </>
+  );
+};
+
+export default Cart;
+
+
+/*
+{cart.length > 0 ? (
             <>
               <table className="table">
                 <thead>
@@ -72,7 +101,7 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {console.log(cart)} */}
+                   {console.log(cart)} 
                   {cart.map((f) => (
                     <tr>
                       <td>{f.name}</td>
@@ -94,7 +123,7 @@ const Cart = () => {
                                 </span>
                           </div>
                       </td>      
-                      {/* <td>{f.cant}</td> */}
+                   <td>{f.cant}</td> 
                       <td>{f.description}</td>
          
                       <td>
@@ -123,18 +152,4 @@ const Cart = () => {
               </div>
             </div>
           )}
-          <hr class="my-2" />
-          <p class="lead">
-            <Link to="/products" className="text-decoration-none">
-              <button class="btn btn-danger btn-lg my-5">
-                CONTINUE SHOPPING{" "}
-              </button>
-            </Link>
-          </p>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default Cart;
+        */
