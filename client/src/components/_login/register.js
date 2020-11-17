@@ -71,7 +71,7 @@ const Register = () => {
               type="text"
             />
             <ErrorMessage
-              name="Username"
+              name="username"
               component="div"
               className="field-error text-danger"
             />

@@ -1,84 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
+import axios from "axios"
+import {useDispatch, useSelector} from 'react-redux'
+import {userLogin} from '../../redux/actions/actions'
 
 const alerta = (mensaje, color="danger") => {
   return <Alert className="mt-2" color={color}>{mensaje}</Alert>
 }
 
 const formSchema = Yup.object().shape({
-  Username: Yup.string()
-    .min(5, alerta("Mínimo 5 caracteres", "warning"))
-    .max(25, alerta("Máximo 25 caracteres", "warning"))
+  username: Yup.string()
     .required( alerta("Campo requerido")),
-  Password: Yup.string()
+  password: Yup.string()
     .required( alerta("Campo requerido"))
-    .min(5, alerta("Mínimo 5 caracteres", "warning")),
 });
 
+
+
 const Login = () => {
+  const [user, setUser] = useState()
+  const dispatch = useDispatch()
+
+  const handleSubmit = (values) => {
+    console.log(values); 
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, values)
+            .then(user => {
+              setUser(user.data)
+              dispatch(userLogin(user.data))}
+            )
+            .catch( e => console.log("Log failure") )
+    }
+
   return (
     <div className="container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
       <h2 className="display-3 text-center">Login</h2>
-
-      <Formik
-        initialValues={{
-          Username: "",
-          Password: "",
-        }}
-        validationSchema={formSchema}
-        onSubmit={(values) => console.log(values)}
-      >
+      <Formik initialValues={{ username: "", password: "" }} onSubmit={(values) => {handleSubmit(values)}} validationSchema={formSchema} >
         <Form>
           <FormGroup>
-            <label htmlFor="Username">Username</label>
-            <Field
-              className="form-control"
-              name="Username"
-              placeholder="Enter your username"
-              type="text"
-            />
-            
-              <ErrorMessage
-                name="Username"
-                component="div"
-                className="field-error text-danger"
-              />
-            
+            <label htmlFor="username">Username</label>
+            <Field name="username" type="text" placeholder="Enter your username" className="form-control"/>
+            <ErrorMessage name="username" component="div" className="field-error text-danger"/>
           </FormGroup>
           <FormGroup>
-            <label htmlFor="Password">Password</label>
-            <Field
-              className="form-control"
-              name="Password"
-              placeholder="Enter your password"
-              type="password"
-            />
-            <ErrorMessage
-              name="Password"
-              component="div"
-              className="field-error text-danger"
-            />
+            <label htmlFor="password">Password</label>
+            <Field name="password" placeholder="Enter your password" type="password" className="form-control" />
+            <ErrorMessage name="password" component="div" className="field-error text-danger"/>
           </FormGroup>
           <Row>
             <Col lg={12} md={12}>
-              <Button
-                color="dark"
-                className="mr-1 mb-2 btn-block"
-                type="submit"
-              >
+              <Button type="submit" value="Log In" color="dark" className="mr-1 mb-2 btn-block">
                 Log in
               </Button>
             </Col>
             <Col lg={12} md={12}>
               <Link to="/register">
-                <Button
-                  color="primary"
-                  className="mr-1 mb-2 btn-block"
-                  type="submit"
-                >
+                <Button type="submit" color="primary" className="mr-1 mb-2 btn-block">
                   Register
                 </Button>
               </Link>

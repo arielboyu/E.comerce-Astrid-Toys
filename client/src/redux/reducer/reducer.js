@@ -1,7 +1,9 @@
 const initialState = {
     carrito:[],
     user: {
-        id: 1,
+        id: null,
+        isAdmin: false,
+        name: ""
     }
 };
 
@@ -73,6 +75,19 @@ function rootReducer (state = initialState, action){
         }
 
     }    
+    if(action.type === "USER_LOGIN"){
+        if(action.payload){
+            return{
+                ...state,
+                user : { id : action.payload.id, isAdmin : action.payload.isAdmin, name: action.payload.name }
+            }
+        } else {
+            return {
+                ...state,
+                user: { id : null, isAdmin : false, name: ""}
+            }
+        }
+    }
     return state
 }
 
