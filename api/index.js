@@ -47,7 +47,7 @@ conn.sync({ force: true }).then(() => {
     //// returns a random integer from 0 to limit
     function randomNum(limit) {
       return Math.floor(Math.random() * limit);
-      
+
     }
 
     var usuarios = [];
@@ -120,11 +120,19 @@ conn.sync({ force: true }).then(() => {
           state: DataOrders[i].state,
         });
         order.setUser(usuarios[Math.floor(Math.random() * usuarios.length)]);
-        var myProduct = productsArray[randomNum(productsArray.length)];
-        order.addProduct(myProduct, {
-          through: { price: myProduct.price,
+        var myProduct1 = productsArray[randomNum(productsArray.length)];
+        var myProduct2 = productsArray[randomNum(productsArray.length)];
+        order.addProduct(myProduct1, {
+          through: { price: myProduct1.price,
                       quantity: randomNum(100) },
         })
+        if( myProduct1.id !== myProduct2.id){
+          order.addProduct(myProduct2, {
+            through: { price: myProduct2.price,
+                        quantity: randomNum(100) },
+          })
+        }
+
       }
     }
     cargarTablaOrder();
