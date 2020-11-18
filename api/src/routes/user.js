@@ -3,6 +3,7 @@ const { User, Order, Product, Orderdetails } = require("../db.js");
 const { Op } = require("sequelize");
 
 server.get("/", (req, res) => {
+  console.log(req.user)
   User.findAll()
     .then((users) => {
       res.send(users);

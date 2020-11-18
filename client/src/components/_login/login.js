@@ -18,8 +18,6 @@ const formSchema = Yup.object().shape({
     .required( alerta("Campo requerido"))
 });
 
-
-
 const Login = () => {
   const [user, setUser] = useState()
   const dispatch = useDispatch()
@@ -28,6 +26,7 @@ const Login = () => {
     console.log(values); 
     axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, values)
             .then(user => {
+              console.log(user.data)
               setUser(user.data)
               dispatch(userLogin(user.data))}
             )
