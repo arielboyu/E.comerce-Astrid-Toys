@@ -111,7 +111,7 @@ conn.sync({ force: true }).then(() => {
     //products[Math.floor(Math.random() * products.length)].addCategories(categories[Math.floor(Math.random() * categories.length)])
 
     //CARGAR ORDENES
-    //las ordenes tienen varios productos
+    //las ordenes tienen varios productosgit status
     var Orders = [];
     async function cargarTablaOrder() {
       for (let i = 0; i < DataOrders.length; i++) {
