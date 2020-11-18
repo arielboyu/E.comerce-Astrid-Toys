@@ -56,15 +56,13 @@ server.get('/search', (req, res) => {
 // Se le agrega Catch
 server.get('/:id', (req, res) => {
     let id = req.params.id
-    //ANTES
-    // Order.findAll({where:{id:id}, 
     Order.findOne({where:{id:id},
         include: [
 
                 {
                   model: Product,
                   as: "products",
-                  attributes: [ "name", "description", "stock", "price"],
+                  attributes: [ "name", "description", "stock", "price","id"],
                 },
                 {
                     model: User,
@@ -104,6 +102,33 @@ server.put('/modify/cancel/:id', (req, res) => {
             return res.status(400).send("Error No se ha podido Cancelar  La orden ");
         })
 });
+
+
+server.get("/pending/all", (req, res) => {
+    Order.findAll({
+      where: { state: "PENDING"},
+      include: [
+
+        {
+          model: Product,
+          as: "products",
+          attributes: [ "name", "description", "stock", "price"],
+        },
+        {
+            model: User,
+            as:"user",
+            attributes: ["name" , "username"]
+        }
+      ],
+    })
+    .then((orders) => res.status(200).json(orders))
+    .catch(() => {
+        return res.status(400).send("Error No se encontraron ordenes Pendientes")
+    })
+  });
+  
+  
+  
 
 
 
