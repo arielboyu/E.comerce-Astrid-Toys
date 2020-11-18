@@ -132,7 +132,6 @@ conn.sync({ force: true }).then(() => {
           })
         }
 
-      }
     }
     cargarTablaOrder();
     console.log("ordenes Cargadas");
