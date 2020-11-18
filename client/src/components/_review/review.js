@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {faStar} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Review = () => {
+  return (
     <div>
-        <FontAwesomeIcon icon = {faStar}/>
+     Renderizar las reviews
     </div>
-}
+  );
+};
 
 export default Review;
