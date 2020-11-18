@@ -1,4 +1,6 @@
 require('dotenv').config();
+const crypto = require("crypto");
+const bcrypt = require('bcrypt');
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
@@ -40,6 +42,73 @@ Order.belongsToMany(Product, { through: "orderdetails" });
 Product.belongsToMany(Order, { through: "orderdetails" });
 User.hasMany(Order)
 Order.belongsTo(User)
+
+
+
+    User.generateHash = function (password) {
+      return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    }
+
+    User.validPassword = function (password) {
+      return bcrypt.compareSync(password, this.password);
+    }
+
+
+
+/* User.generateSalt = function() {
+  return crypto.randomBytes(16).toString('base64')
+}
+User.encryptPassword = function(plainText, salt) {
+  return crypto
+      .createHash('RSA-SHA256')
+      .update(plainText)
+      .update(salt)
+      .digest('hex')
+}
+
+const setSaltAndPassword = user => {
+  if (user.changed('password')) {
+      user.salt = User.generateSalt()
+      user.password = User.encryptPassword(user.password(), user.salt())
+  }
+}
+User.beforeCreate(function(user){
+  if (user.changed('password')) {
+      user.salt = User.generateSalt()
+      user.password = User.encryptPassword(user.password(), user.salt())
+  }
+})
+User.beforeUpdate(function(user){
+  if (user.changed('password')) {
+      user.salt = User.generateSalt()
+      user.password = User.encryptPassword(user.password(), user.salt())
+  }
+}) */
+
+/* User.generateSalt = function() {
+  return crypto.randomBytes(16).toString('base64')
+}
+User.encryptPassword = function(plainText, salt) {
+  return crypto
+      .createHash('RSA-SHA256')
+      .update(plainText)
+      .update(salt)
+      .digest('hex')
+}
+const setSaltAndPassword = user => {
+  if (user.changed('password')) {
+      user.salt = User.generateSalt()
+      user.password = User.encryptPassword(user.password(), user.salt())
+  }
+}
+
+User.beforeCreate(setSaltAndPassword)
+User.beforeUpdate(setSaltAndPassword) */
+
+
+
+
+
 
 
 

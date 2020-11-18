@@ -47,6 +47,7 @@ conn.sync({ force: true }).then(() => {
     //// returns a random integer from 0 to limit
     function randomNum(limit) {
       return Math.floor(Math.random() * limit);
+      
     }
 
     var usuarios = [];

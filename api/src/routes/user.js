@@ -15,13 +15,14 @@ server.get("/", (req, res) => {
 
 server.post("/create", (req, res) => {
   const { name, username, email, password } = req.body;
+  var passwordhasheada = User.generateHash(password)
   console.log(req.body);
   if (name && username && email && password) {
     User.create({
       name,
       username,
       email,
-      password,
+      password: passwordhasheada
     })
       .then((userCreated) => {
         console.log("Usuario creado OK ", userCreated);
