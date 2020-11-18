@@ -36,7 +36,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Product, Category, User, Order, OrderDetails } = sequelize.models;
+const { Product, Category, User, Order, OrderDetails, Review } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -44,14 +44,19 @@ Product.belongsToMany(Category, { through: "ProductCategory" });
 Category.belongsToMany(Product, { through: "ProductCategory" });
 Order.belongsToMany(Product, { through: "orderdetails" });
 Product.belongsToMany(Order, { through: "orderdetails" });
-User.hasMany(Order);
-Order.belongsTo(User);
+User.hasMany(Order)
+Order.belongsTo(User)
+Review.belongsTo(Product)
+Product.hasMany(Review)
+Review.belongsTo(User)
+User.hasMany(Review)
+
+
 
 //Seteo funciones de hash en User
 User.generateHash = function (password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
-
 User.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };

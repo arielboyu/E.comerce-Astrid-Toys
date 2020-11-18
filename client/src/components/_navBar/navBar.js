@@ -6,11 +6,18 @@ import { Navbar } from "reactstrap";
 import Dashboard from "./btnDashboard";
 import Login from "./btnLogin";
 import Cart from "./btnCart";
+import {useDispatch, useSelector} from 'react-redux'
+import {userLogin} from '../../redux/actions/actions'
+
 
 const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
 export default function NavBar({ match, location }) {
   const [categories, setCategories] = useState([]);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch()
+
+
 
   useEffect(() => {
     getCategory.then((r) => {
@@ -18,17 +25,27 @@ export default function NavBar({ match, location }) {
     });
   }, []);
 
+  const handleLogOut = () => {
+    axios.get(`${process.env.REACT_APP_API_URL}/auth/logout`)
+            .then(r => {
+              dispatch(userLogin(null))}
+            )
+            .catch( error => console.log(error) )
+    }
+
   return !match.isExact ? (
-    <nav className="navbar navbar-expand-lg navbar-light bg-warning pt-2 pb-0">
+    <nav className="navbar navbar-expand-lg navbar-light bg-warning pt-2 pb-0 d-flex justify-content-between">
+        <h1 id="title" className="col-10 col-lg-3 d-flex justify-content-center pl-5 ml-3 pl-lg-4 ml-lg-1 justify-content-lg-start py-4"> 
+        <Link className="text-dark" to="/">Astrid Toys</Link>
+        </h1>
+        
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-        <h1 id="title" className="col-8 col-lg-6 d-flex justify-content-start justify-content-lg-start ml-0 pl-0 ml-lg-5 pl-lg-5 pb-4 pt-4 pb-lg-0 pt-lg-0"> 
-        <Link className="text-dark" to="/">Astrid Toys</Link>
-        </h1>
+        
 
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+          <ul className="navbar-nav ml-auto mr-4 pr-1 pt-3 mt-2 mt-lg-0">
             <li className="nav-item d-block d-lg-none ml-1">
               <Login></Login>
             </li>
@@ -38,12 +55,13 @@ export default function NavBar({ match, location }) {
             <li className="nav-item d-block d-lg-none">
               <Cart></Cart>
             </li>
-            <li className="nav-item d-block d-lg-none border-top pt-3 mt-3 border-dark">
+            <li className="nav-item d-block d-lg-none border-top pt-3 mt-3 border-dark ml-1">
               <Link to="/products" className="nav-link">
-              <i class="fas fa-tshirt"></i> Catalogue
+              <i class="fas fa-bahai"></i> Catalogue
               </Link>
             </li>
 
+           
             <li className="nav-item d-none d-lg-block">
               <Link to="/products" className="nav-link">
                 Catalogue
@@ -57,6 +75,7 @@ export default function NavBar({ match, location }) {
               <p className="nav-link mb-0 d-block d-lg-none">
               <i class="fas fa-list ml-1"></i> Categories</p>
             </li>
+           
             
             {categories.map((cat) => (
             <li className="nav-item">
@@ -72,9 +91,21 @@ export default function NavBar({ match, location }) {
             <li className="nav-item d-none d-lg-block">
               <Dashboard match={match} location={location} />
             </li>
+            
+            {/* LOG IN */}
+            {user.id ? 
+            <>
+              <li className="nav-item d-flex">
+                <Link to='#'><span className="nav-link mr-n2"><i className="fas fa-user"> </i> {user.name} </span></Link>
+                <Link onClick={handleLogOut} className="nav-link ml-n1">(X)</Link>
+              </li>
+            </> : 
             <li className="nav-item d-none d-lg-block">
               <Login></Login>
-            </li>
+            </li>}
+
+           
+            
             <li className="nav-item d-none d-lg-block">
               <Cart></Cart>
             </li>

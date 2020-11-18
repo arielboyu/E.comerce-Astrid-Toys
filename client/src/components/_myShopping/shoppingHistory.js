@@ -15,7 +15,7 @@ const ShoppingHistory = ({ idUser }) => {
       .then((orders) => {
         setShopping(orders.data);
       });
-  }, []);
+  },[]);
 
   return (
     <div className="container-fluid p-5">
