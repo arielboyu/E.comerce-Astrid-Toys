@@ -25,7 +25,7 @@ import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
 import UpdateCategories from "./components/_dashboardUpdateCategories/updateCategories"
 //****Import de prueba */
 import Reduxxx from './components/pruebaRedux'
-
+import OrderListPending from "./components/_dashboardTableOrders/OrderTablePending"
 
 
 function App() {
@@ -78,6 +78,9 @@ function App() {
         </Route>
         <Route path="/dashboard/orders/detail/:idorden">
           <OrderDetail />
+        </Route>
+        <Route path="/dashboard/orders/list/pending">
+          <OrderListPending />
         </Route>
         <Route path="/cart">
           <Cart />
