@@ -1,6 +1,7 @@
 const server = require("express").Router();
-const { Product, Category } = require("../db.js");
+const { Product, Category, Review } = require("../db.js");
 const { Op } = require("sequelize");
+const sequelize = require("sequelize");
 
 //esta funcion pasa la primer letra de un word a mayus
 function capitalize(word) {
@@ -116,6 +117,37 @@ server.post("/", (req, res) => {
     res.status(400).send("ERROR: Campos sin completar");
   }
 });
+
+//S54 : Crear ruta para crear/agregar Review
+//POST /product/:id/review
+server.post("/:id/review", (req, res) => {
+  const productId = req.params.id;
+  const userId = 1 //HARCODEADO, sacar cuando tengamos lo de la sesion
+  const { score, description } = req.body; //objeto review pasado por body
+  if (score && description && productId && userId){
+    Review.create({score,description,productId,userId})
+    .then(()=>Review.count({where: {productId: productId}}))
+    .then(count=>{
+      Review.sum('score',{ where: {productId: productId}})
+      .then((sum)=>{
+        let averageScore = sum /count;
+        Product.update({averageScore:averageScore},{ where: {id: productId}})
+        .then(r=>console.log(r))
+      })
+      .then(r=>res.send(r))
+    })
+    //    let rating =Review.sum({where:{productId:productId}})
+    //   Product.update({rating},{where:{id:productId}}))
+    .catch((err) => {
+      console.log("Error en POST review" + err);
+    });
+  }else{
+    res.status(400).send("ERROR: Campos sin completar");  
+  }
+
+});
+
+
 
 // S26 : Crear ruta para Modificar Producto
 // PUT /products/:id
