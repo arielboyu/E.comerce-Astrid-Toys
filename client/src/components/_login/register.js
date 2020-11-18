@@ -43,7 +43,7 @@ const Register = () => {
         }}
         validationSchema={formSchema}
         onSubmit={(values) => { console.log(values);
-          axios.post(`${process.env.REACT_APP_API_URL}/users/create`, values)
+          axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, values)
           .then(r => console.log("creado") )
           .catch( e => console.log("fallo") )}}
       >

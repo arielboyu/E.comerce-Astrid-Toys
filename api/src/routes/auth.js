@@ -1,15 +1,36 @@
 const server = require("express").Router();
-var passport = require('passport');
+const passport = require('passport');
+const express = require('express');
 
+const { User } = require("../db.js");
 
-server.post('/login', 
-    passport.authenticate('local', { failureRedirect: '/' }),
-      (req, res) => { 
-        console.log(req.session)
-        res.cookie('id', req.user.id, { maxAge: 259200000000000000000 }); 
-        res.send(req.user)
-      } 
-)
+server.post( '/signup', ( req, res, next ) => {
+	if ( req.isAuthenticated( ) ) {
+		return res.status( 400 ).send( { message: 'User is already logged in' } );
+	}
+  const { name, username, email, password } = req.body;
+  if (name && username && email && password) {
+    User.create({
+      name,
+      username,
+      email,
+      password,
+    })
+      .then((userCreated) => {
+        console.log("Usuario creado OK ", userCreated);
+        res.send(userCreated);
+      })
+      .catch((err) => {
+        res.status(400).send("Error al crear usuario ", err);
+      });
+  } else {
+    res.status(400).send("Error! campos sin completar");
+  }
+} );
+
+server.post( '/login', passport.authenticate('local'),(req,res,next)=>{
+  res.send(req.user)
+});
 
 server.get('/logout', (req, res) => {
     console.log(req.user)
@@ -18,23 +39,5 @@ server.get('/logout', (req, res) => {
     res.send("Deslogueado");
 })
 
-//utilizar esta funcion como middleware para validar si hay logueo
-isAuthenticated = (req, res, next) => {
-    if(req.isAuthenticated()) {
-      console.log("Autenticación OK")
-      next();
-    } else {
-      console.log("No está autenticado")
-      // res.redirect("/")
-      next();
-    }
-  }
-
-server.get('/me', isAuthenticated, (req, res) => {  
-    console.log("Este es el usuario logueado")
-    console.log(req.user)
-    console.log(req.session)
-    res.send(req.user);
-});
 
 module.exports = server;
