@@ -25,12 +25,15 @@ const Login = () => {
   const dispatch = useDispatch()
 
   const handleSubmit = (values) => {
-    console.log(values); 
-    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, values)
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, values,{
+			withCredentials: true
+		})
             .then(user => {
-              setUser(user.data)
-              dispatch(userLogin(user.data))}
-            )
+              console.log(user.data);
+              // setUser(user.data)
+              // dispatch(userLogin(user.data))
+              console.log('logueado');
+            })
             .catch( e => console.log("Log failure") )
     }
 

@@ -39,16 +39,9 @@ function authSetUp(server) {
 			return done( error );
 		} );
 	} );
-
-	server.use(
-    cookieSession({
-      maxAge: 24 * 60 * 60 * 1000,
-      keys: ['supersecrettops3cr3t'],
-    }),
-  );
-
-	server.use((req, res, next) => {
-	  // console.log(req.session);
+	
+	 server.use((req, res, next) => {
+	  console.log(req.session);
 	  console.log(req.user);
 	  next();
 	});

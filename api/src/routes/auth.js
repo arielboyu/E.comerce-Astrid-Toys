@@ -28,7 +28,7 @@ server.post( '/signup', ( req, res, next ) => {
   }
 } );
 
-server.post( '/login', passport.authenticate('local'),(req,res,next)=>{
+server.post( '/login', passport.authenticate('local', {succesRedirect:'http://localhost:3000/funca', failureRedirect:'http://localhost:3000/'}),(req,res,next)=>{
   res.send(req.user)
 });
 
