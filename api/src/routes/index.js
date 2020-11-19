@@ -7,8 +7,6 @@ const userRouter = require('./user.js');
 const noticeRouter = require('./notice.js');
 const authRouter = require('./auth.js')
 
-
-
 const router = Router();
 
 // load each router on a route

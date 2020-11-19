@@ -17,8 +17,6 @@ export default function NavBar({ match, location }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch()
 
-
-
   useEffect(() => {
     getCategory.then((r) => {
       setCategories(r.data);
@@ -27,9 +25,9 @@ export default function NavBar({ match, location }) {
 
   const handleLogOut = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/auth/logout`)
-            .then(r => {
-              dispatch(userLogin(null))}
-            )
+            .then(r => { dispatch(userLogin(null));
+                          console.log(r.data)
+                        } )
             .catch( error => console.log(error) )
     }
 
@@ -42,8 +40,7 @@ export default function NavBar({ match, location }) {
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-        
-
+  
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul className="navbar-nav ml-auto mr-4 pr-1 pt-3 mt-2 mt-lg-0">
             <li className="nav-item d-block d-lg-none ml-1">
@@ -60,7 +57,6 @@ export default function NavBar({ match, location }) {
               <i class="fas fa-bahai"></i> Catalogue
               </Link>
             </li>
-
            
             <li className="nav-item d-none d-lg-block">
               <Link to="/products" className="nav-link">
@@ -75,7 +71,6 @@ export default function NavBar({ match, location }) {
               <p className="nav-link mb-0 d-block d-lg-none">
               <i class="fas fa-list ml-1"></i> Categories</p>
             </li>
-           
             
             {categories.map((cat) => (
             <li className="nav-item">
@@ -87,39 +82,28 @@ export default function NavBar({ match, location }) {
             <li className="nav-item text-decoration-none">
               <p className="nav-link d-none d-lg-block"> | </p>
             </li>
-            
+
             <li className="nav-item d-none d-lg-block">
               <Dashboard match={match} location={location} />
             </li>
-            
+        
             {/* LOG IN */}
             {user.id ? 
             <>
               <li className="nav-item d-flex">
-                <Link to='#'><span className="nav-link mr-n2"><i className="fas fa-user"> </i> {user.name} </span></Link>
-                <Link onClick={handleLogOut} className="nav-link ml-n1">(X)</Link>
+                <Link to='/cart'><span className="nav-link mr-n2"><i className="fas fa-user"> </i> {user.name} </span></Link>
+                <Link onClick={handleLogOut} className="nav-link ml-n1" to="#">(X)</Link>
               </li>
             </> : 
             <li className="nav-item d-none d-lg-block">
               <Login></Login>
             </li>}
-
-           
-            
             <li className="nav-item d-none d-lg-block">
               <Cart></Cart>
             </li>
           </ul>
         </div>
-
-      
       </nav>
-    
-    //     
-    //     <Login />
-    //     <Cart />
-    //   </div>
-    // </nav>
   ) : (
     <></>
   );
