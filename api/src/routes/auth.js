@@ -2,7 +2,13 @@ const server = require("express").Router();
 const passport = require('passport');
 const express = require('express');
 const { User } = require("../db.js");
-const isAuthenticated = require('../controllers/isAuthenticated')
+const isAuthenticated = require('../controllers/isAuthenticated.js')
+
+
+// server.get('/prueba', isAuthenticated ,(req,res,next)=>{
+// 	res.send('estas logueado de una')
+// })
+
 
 server.post( '/signup', ( req, res, next ) => {
 	if ( req.isAuthenticated( ) ) {
@@ -28,7 +34,7 @@ server.post( '/signup', ( req, res, next ) => {
   }
 } );
 
-server.post( '/login', passport.authenticate('local', {succesRedirect:'http://localhost:3000/funca', failureRedirect:'http://localhost:3000/'}),(req,res,next)=>{
+server.post( '/login', passport.authenticate('local', {succesRedirect:'/funca', failureRedirect:'/fallo'}),(req,res,next)=>{
   res.send(req.user)
 });
 

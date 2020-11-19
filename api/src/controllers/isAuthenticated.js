@@ -1,4 +1,4 @@
-const isAuthenticated = (req , res, next) => {
+function isAuthenticated (req , res, next) {
     if(req.isAuthenticated()){
         console.log("Estás logueado OK")
         next();
