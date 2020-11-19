@@ -23,12 +23,6 @@ export default function NavBar({ match, location }) {
     });
   }, []);
 
-  const handleQ = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/auth/me`)
-            .then(r => { console.log(r.data) } )
-            .catch( error => console.log(error) )
-    }
-
   const handleLogOut = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/auth/logout`)
             .then(r => { dispatch(userLogin(null));
@@ -42,8 +36,6 @@ export default function NavBar({ match, location }) {
         <h1 id="title" className="col-10 col-lg-3 d-flex justify-content-center pl-5 ml-3 pl-lg-4 ml-lg-1 justify-content-lg-start py-4"> 
         <Link className="text-dark" to="/">Astrid Toys</Link>
         </h1>
-
-        <button onClick={handleQ}>QUIEN SE LOGUEO</button>
         
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -100,7 +92,7 @@ export default function NavBar({ match, location }) {
             <>
               <li className="nav-item d-flex">
                 <Link to='/cart'><span className="nav-link mr-n2"><i className="fas fa-user"> </i> {user.name} </span></Link>
-                <Link onClick={handleLogOut} className="nav-link ml-n1">(X)</Link>
+                <Link onClick={handleLogOut} className="nav-link ml-n1" to="#">(X)</Link>
               </li>
             </> : 
             <li className="nav-item d-none d-lg-block">

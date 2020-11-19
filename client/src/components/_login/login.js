@@ -26,6 +26,8 @@ const Login = () => {
     console.log(values); 
     axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, values)
             .then(user => {
+              console.log(user)
+              console.log(user.username)
               console.log(user.data)
               setUser(user.data)
               dispatch(userLogin(user.data))}

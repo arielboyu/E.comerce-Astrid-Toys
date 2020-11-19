@@ -1,8 +1,8 @@
 const server = require("express").Router();
 const passport = require('passport');
 const express = require('express');
-
 const { User } = require("../db.js");
+const isAuthenticated = require('../controllers/isAuthenticated')
 
 server.post( '/signup', ( req, res, next ) => {
 	if ( req.isAuthenticated( ) ) {
@@ -28,7 +28,9 @@ server.post( '/signup', ( req, res, next ) => {
   }
 } );
 
-server.post( '/login', passport.authenticate('local'),(req,res,next)=>{
+server.post('/login', passport.authenticate('local'),(req,res,next)=>{
+  console.log("Logued in")
+  console.log(req.session)
   res.send(req.user)
 });
 
@@ -39,5 +41,10 @@ server.get('/logout', (req, res) => {
     res.send("Deslogueado");
 })
 
+server.get('/me', isAuthenticated, (req, res) => {
+  console.log("Esta es la session")
+  console.log(req.user)
+  res.send(req.user)
+})
 
 module.exports = server;

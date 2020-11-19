@@ -1,6 +1,6 @@
-const passport 		= require( 'passport' );
+const passport = require( 'passport' );
 const Strategy = require( 'passport-local' ).Strategy;
-const { User } 		= require( './db.js' );
+const { User } = require( './db.js' );
 const cookieParser = require("cookie-parser");
 const cookieSession = require('cookie-session');
 
