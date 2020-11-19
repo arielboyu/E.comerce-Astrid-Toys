@@ -118,35 +118,6 @@ server.post("/", (req, res) => {
   }
 });
 
-//S54 : Crear ruta para crear/agregar Review
-//POST /product/:id/review
-server.post("/:id/review", (req, res) => {
-  const productId = req.params.id;
-  const userId = 1 //HARCODEADO, sacar cuando tengamos lo de la sesion
-  const { score, description } = req.body; //objeto review pasado por body
-  if (score && description && productId && userId){
-    Review.create({score,description,productId,userId})
-    .then(()=>Review.count({where: {productId: productId}}))
-    .then(count=>{
-      Review.sum('score',{ where: {productId: productId}})
-      .then((sum)=>{
-        let averageScore = sum /count;
-        Product.update({averageScore:averageScore},{ where: {id: productId}})
-        .then(r=>console.log(r))
-      })
-      .then(r=>res.send(r))
-    })
-    //    let rating =Review.sum({where:{productId:productId}})
-    //   Product.update({rating},{where:{id:productId}}))
-    .catch((err) => {
-      console.log("Error en POST review" + err);
-    });
-  }else{
-    res.status(400).send("ERROR: Campos sin completar");  
-  }
-
-});
-
 
 
 // S26 : Crear ruta para Modificar Producto
@@ -266,5 +237,61 @@ server.get("/search/:category", (req, res) => {
       res.sendStatus(404);
     });
 });
+
+//-----------REVIEWS------------
+
+//S54 : Crear ruta para crear/agregar Review
+//POST /product/:id/review
+server.post("/:id/review", (req, res) => {
+  const productId = req.params.id;
+  const userId = 1 //HARCODEADO, sacar cuando tengamos lo de la sesion
+  const { score, description } = req.body; //objeto review pasado por body
+  if (score && description && productId && userId){
+    Review.create({score,description,productId,userId})
+    .then(()=>Review.count({where: {productId: productId}}))
+    .then(count=>{
+      Review.sum('score',{ where: {productId: productId}})
+      .then((sum)=>{
+        let averageScore = sum /count;
+        Product.update({averageScore:averageScore},{ where: {id: productId}})
+        .then(r=>console.log(r))
+      })
+      .then(r=>res.send(r))
+    })
+    //    let rating =Review.sum({where:{productId:productId}})
+    //   Product.update({rating},{where:{id:productId}}))
+    .catch((err) => {
+      console.log("Error en POST review: " + err);
+    });
+  }else{
+    res.status(400).send("ERROR: Campos sin completar");  
+  }
+
+});
+
+//S56 : Crear Ruta para eliminar Review
+//DELETE /product/:id/review/:idReview
+
+server.delete('/:id/review/:idReview',(req,res)=>{
+  const productId = req.params.id; //HARCODEADO, sacar cuando tengamos lo de la sesion
+  const reviewId = req.params.idReview;
+  Review.destroy({where:{id:reviewId}})
+  .then(()=>Review.count({where: {productId: productId}}))
+    .then(count=>{
+      Review.sum('score',{ where: {productId: productId}})
+      .then((sum)=>{
+        let averageScore = sum /count;
+        Product.update({averageScore:averageScore},{ where: {id: productId}})
+        .then(r=>console.log(r))
+      })
+  })
+  .then(r=>res.send(r))
+  .catch((err) => {
+    console.log("Error en DELETE review: " + err);
+  });
+});
+
+
+
 
 module.exports = server;
