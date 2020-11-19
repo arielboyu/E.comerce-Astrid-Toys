@@ -34,7 +34,11 @@ function UpdateProduct() {
 
   const handlerChange = (e) => {
     console.log("entra al handlerChange: ", e.target.name, "-", e.target.value);
-    setProduct({ ...productUpdate, [e.target.name]: e.target.value });
+    if(e.target.name === 'active'){
+      setProduct({ ...productUpdate, [e.target.name]: e.target.checked });
+    } else {
+      setProduct({ ...productUpdate, [e.target.name]: e.target.value });
+    }
   };
 
   const handlerCategories = (e) => {
@@ -133,7 +137,7 @@ function UpdateProduct() {
                 onChange={handlerChange}
                 className="form-check-input"
                 type="checkbox"
-                value="active"
+                value={productUpdate.active}
                 name="active"
                 checked={productUpdate.active}
               />

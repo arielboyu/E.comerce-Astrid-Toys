@@ -18,8 +18,6 @@ const formSchema = Yup.object().shape({
     .required( alerta("Campo requerido"))
 });
 
-
-
 const Login = () => {
   const [user, setUser] = useState()
   const dispatch = useDispatch()
@@ -29,11 +27,12 @@ const Login = () => {
 			withCredentials: true
 		})
             .then(user => {
-              console.log(user.data);
-              // setUser(user.data)
-              // dispatch(userLogin(user.data))
-              console.log('logueado');
-            })
+              console.log(user)
+              console.log(user.username)
+              console.log(user.data)
+              setUser(user.data)
+              dispatch(userLogin(user.data))}
+            )
             .catch( e => console.log("Log failure") )
     }
 

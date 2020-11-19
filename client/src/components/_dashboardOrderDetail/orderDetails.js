@@ -6,14 +6,24 @@ import { useParams } from "react-router-dom";
 
 export default function OrderDetail() {
   const { idorden } = useParams();
-  const getDetail = axios.get(
+  const getProduct = axios.get(
     `${process.env.REACT_APP_API_URL}/orders/${idorden}`
   );
-  const [detail, setDetail] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [order, setOrder] = useState([]);
   useEffect(() => {
-    getDetail.then((res) => {
-      setDetail(res.data);
-      console.log(res);
+    getProduct.then((res) => {
+      setProduct(res.data.products);
+      // console.log(res);
+    });
+  }, []);
+  const getOrder = axios.get(
+    `${process.env.REACT_APP_API_URL}/orders/${idorden}`
+  );
+  useEffect(() => {
+    getOrder.then((res) => {
+      setOrder(res.data);
+      // console.log(res);
     });
   }, []);
 
@@ -21,45 +31,37 @@ export default function OrderDetail() {
     <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
       <div>
         <h1 className="display-3 text-center">ORDER DETAILS</h1>
+      <h7> ORDER ID: {"  "} {order.id}</h7>
+      <h6>STATE: {"  "}{order.state}</h6>
+      <h7>DISCHARGE DATE:  {"  "} {order.createdAt}</h7>
         <table class="table table-borderless">
           <thead>
             <tr>
               <th>ID#</th>
-              <th>State</th>
-              <th>Discharge Date</th>
-              <th>User Name</th>
               <th>Products</th>
               <th>Price</th>
               <th>Quantity</th>
-              <th>Total</th>
+              <th>SubTotal</th>
             </tr>
           </thead>
           <tbody>
-            {detail.map((d) => (
-              <tr key={d.id}>
-                <td>{d.id}</td>
-                <td>{d.state}</td>
-                <td>{d.createdAt}</td>
-                <td>{d.user.username}</td>
-                <td>{d.products.length && d.products[0].name}</td>
-                <td>
-                  $ {d.products.length && d.products[0].orderdetails.price}
-                </td>
-                <td>
-                  {d.products.length && d.products[0].orderdetails.quantity}
-                </td>
-                <td>
-                  ${" "}
-                  {d.products.length &&
-                    d.products[0].orderdetails.quantity *
-                      d.products[0].orderdetails.price}
-                </td>
-                <td></td>
+            { product && product.map((p) => (
+              <tr key={p.id}>
+               <td>{p.id}</td>
+               <td>{p.name}</td>
+               <td>${" "}  {p.price}</td>
+               <td>{p.orderdetails.quantity}</td>
+               <td> ${" "} {p.orderdetails.quantity * p.orderdetails.price}</td>
               </tr>
             ))}
           </tbody>
         </table>
+            <h5>{}</h5>
       </div>
     </div>
   );
 }
+
+
+
+  
