@@ -73,6 +73,12 @@ export default function NavBar({ match, location }) {
           </li>
 
           <li className="nav-item d-none d-lg-block">
+            <Link to="/myshop/1" className="nav-link">
+              My Shop
+            </Link>
+          </li>
+
+          <li className="nav-item d-none d-lg-block">
             <Link to="/products" className="nav-link">
               Catalogue
             </Link>
@@ -95,24 +101,23 @@ export default function NavBar({ match, location }) {
             </li> )) */}
           <li>
             <div class="btn-group">
-              <button
-                type="button"
-                class="btn btn-warning dropdown-toggle"
+              <span
+                class="nav-link btn btn-warning dropdown-toggle"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
                 Categorias
-              </button>
+              </span>
               <div className="dropdown-menu">
                 {categories.map((cat) => (
                   <Link
                     className="nav-link ml-4 ml-lg-0"
                     to={`/products/category/nav/${cat.name.toLowerCase()}`}
                   >
-                    <a className="dropdown-item nav-item d-none d-lg-block" href="#">
+                    <p className="dropdown-item nav-item d-none d-lg-block">
                       {cat.name}
-                    </a>
+                    </p>
                   </Link>
                 ))}
               </div>
