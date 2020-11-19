@@ -1,8 +1,11 @@
 const passport = require( 'passport' );
 const Strategy = require( 'passport-local' ).Strategy;
 const { User } = require( './db.js' );
-const cookieParser = require("cookie-parser");
 const cookieSession = require('cookie-session');
+
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+
 
 function authSetUp(server) {
 	const localStrategy = new Strategy({
@@ -27,34 +30,43 @@ function authSetUp(server) {
 	passport.use(localStrategy)
 
 	passport.serializeUser((user, done) => {
-	  done(null, user.id);
+		console.log('serializing user: ');
+	  	done(null, user.id);
 	});
 
 	passport.deserializeUser( function( id, done ) {
 	User.findByPk( id )
 		.then( ( user ) => {
+			console.log('deserializing user');
 			done( null, user );
 		} )
 		.catch( ( error ) => {
+			console.log('error in deserializeUser');
 			return done( error );
 		} );
 	} );
 
-	server.use(
-    cookieSession({
-      maxAge: 24 * 60 * 60 * 1000,
-      keys: ['supersecrettops3cr3t'],
-    }),
-  );
-
-	server.use((req, res, next) => {
-	  // console.log(req.session);
-	  console.log(req.user);
-	  next();
-	});
-
+	
+	server.use(session({
+		secret: 'keyboard cat',
+		resave: false,
+		saveUninitialized: true
+	}))
+// 	server.use(
+//     cookieSession({
+//       maxAge: 24 * 60 * 60 * 1000,
+//       keys: ['supersecrettops3cr3t'],
+//     }),
+//   );
+	server.use(cookieParser());
 	server.use(passport.initialize());
 	server.use(passport.session());
+
+	server.use((req, res, next) => {
+		console.log(req.session);
+		console.log(req.user);
+		next();
+	  });
 
 }
 

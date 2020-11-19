@@ -1,6 +1,5 @@
 const server = require("express").Router();
 const passport = require('passport');
-const express = require('express');
 const { User } = require("../db.js");
 const isAuthenticated = require('../controllers/isAuthenticated')
 
@@ -38,13 +37,13 @@ server.get('/logout', (req, res) => {
     console.log(req.user)
     req.logout();
     res.clearCookie('id'); 
-    res.send("Deslogueado");
+    res.send(req.session);
 })
 
 server.get('/me', isAuthenticated, (req, res) => {
-  console.log("Esta es la session")
+  console.log("Este es el usuario logueado: ")
   console.log(req.user)
-  res.send(req.user)
+  res.send(req.session)
 })
 
 module.exports = server;

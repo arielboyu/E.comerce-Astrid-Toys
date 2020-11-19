@@ -9,7 +9,6 @@ import Cart from "./btnCart";
 import {useDispatch, useSelector} from 'react-redux'
 import {userLogin} from '../../redux/actions/actions'
 
-
 const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
 export default function NavBar({ match, location }) {
@@ -43,9 +42,17 @@ export default function NavBar({ match, location }) {
   
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul className="navbar-nav ml-auto mr-4 pr-1 pt-3 mt-2 mt-lg-0">
+
+          {user.id ? 
+            <>
+              <li className="nav-item d-flex d-lg-none ml-1">
+                <Link to='/cart'><span className="nav-link mr-1 mr-lg-n2"><i className="fas fa-user"> </i> {user.name} </span></Link>
+                <Link onClick={handleLogOut} className="nav-link ml-0 ml-lg-n1" to="#">( X )</Link>
+              </li>
+            </> : 
             <li className="nav-item d-block d-lg-none ml-1">
               <Login></Login>
-            </li>
+            </li>}
             <li className="nav-item d-block d-lg-none ml-1">
               <Dashboard match={match} location={location} />
             </li>
@@ -90,9 +97,9 @@ export default function NavBar({ match, location }) {
             {/* LOG IN */}
             {user.id ? 
             <>
-              <li className="nav-item d-flex">
-                <Link to='/cart'><span className="nav-link mr-n2"><i className="fas fa-user"> </i> {user.name} </span></Link>
-                <Link onClick={handleLogOut} className="nav-link ml-n1" to="#">(X)</Link>
+              <li className="nav-item d-none d-lg-flex">
+                <Link to='/cart'><span className="nav-link mr-1 mr-lg-n2"><i className="fas fa-user"> </i> {user.name} </span></Link>
+                <Link onClick={handleLogOut} className="nav-link ml-0 ml-lg-n1" to="#">(X)</Link>
               </li>
             </> : 
             <li className="nav-item d-none d-lg-block">
