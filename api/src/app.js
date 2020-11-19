@@ -6,6 +6,7 @@ const morgan = require( 'morgan' );
 const passport = require( 'passport' );
 const routes = require( './routes/index.js' );
 const cors = require ('cors');
+const fileUpload = require('express-fileupload');
 
 require( 'dotenv' ).config( );
 require( './db.js' );
@@ -32,6 +33,7 @@ server.use(
     saveUninitialized: true,
   })
 );
+server.use(fileUpload({ useTempFiles: true }));
 server.use(morgan("dev"));
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", FRONT_URL); // update to match the domain you will make the request from

@@ -9,6 +9,11 @@ const isAuthenticated = require('../controllers/isAuthenticated.js')
 // 	res.send('estas logueado de una')
 // })
 
+server.post('/prueba', (req,res,next)=>{
+	console.log(req.files);
+	res.send(req.files.image.tempFilePath)
+})
+
 
 server.post( '/signup', ( req, res, next ) => {
 	if ( req.isAuthenticated( ) ) {
