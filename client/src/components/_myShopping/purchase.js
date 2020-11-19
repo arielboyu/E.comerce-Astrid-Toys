@@ -1,64 +1,86 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
-
-
+import Product from "../_product/product";
 
 const Purchase = ({ orderId }) => {
-  const [order, setOrder] = useState({});
-  const [redirect,setRedirect] = useState(false)
- /*  let history = useHistory(); */
+  const [order, setOrder] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [user, setUser] = useState({});
+  const [redirect, setRedirect] = useState(false);
 
   const handlerRedirect = () => {
     setRedirect(true);
-  }
-
-
+  };
   useEffect(() => {
     if (orderId) {
-      axios.get(`http://localhost:3002/orders/${orderId}`).then((order) => {
-        console.log(order.data)
-        setOrder(order.data); 
-      });
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/orders/${orderId}`)
+        .then((res) => {
+          //console.log(res.data.products)
+          setOrder(res.data);
+          setProduct(res.data.products);
+          setUser(res.data.user);
+        });
     } else {
-      console.log("cargando orden papu")
+      console.log("cargando orden papu");
     }
-  },[]);
-
-
-   
-/*   
-    const redirectfunction = () => {
-      history.push('/myshop/details/1')
-    } */
+  }, []);
 
   return (
-    <>{redirect ? <Redirect to={`/myshop/details/1`} /> : <></>}
-    <div className="container border shadow m-3 p-5">
-      <div className="row border d-flex justify-content-between p-5">
-        <div className="col-3 bg-warning p-5">fecha: {order.createdAt}</div>
-        <div className="col-3 bg-info d-flex justify-content-end p-1">
-          <button className="btn btn-danger mb-5 px-5">Buy</button>
-        </div>
-      </div>
-      <div className="row border p-5">
-        <div className="col-5 bg-primary p-2 m-2">
-          {"Product ID: " + order.id}
-        </div>
-        <div className="col-3 bg-danger p-3 m-2">vendedor</div>
-        <div className="col-3 bg-warning p-5 m-2">
-          <button
-            className="btn btn-outline-info"
-            onClick={()=>handlerRedirect()}
-          >
-            Details
-          </button>
+    <>
+      {redirect ? <Redirect to={`/myshop/details/1`} /> : <></>}
+      <div className="container border shadow ">
+        <div className="row border ">
+          <div className="col-sm-12 col-md-4 bg-warning ">
+            <p>{"Order Number: " + order.id}</p>
+            <p>{"State: " + order.state}</p>
+          </div>
+          <div className="col-sm-12  col-md-4 bg-info d-flex justify-content-end ">
+            <p>{"Client: " + user.name}</p>
+            <p>{console.log(order)}</p>
+            <p>{"Client Number: " + order.userId}</p>
+          </div>
+          <div className="col-sm-12 col-md-4 bg-primary  ">
+            Date: {order.createdAt}
+          </div>
         </div>
 
-      </div>
       
-    </div>
+          {product.map((prod) => (
+            <>
+              <div className="row border ">
+                {/* CABECERA */}
+                <div className="col-sm-12 col-md-2 bg-white ">
+                  <p className="border">Product</p>
+                  <p>{prod.name}</p>
+                </div>
+                <div className="col-sm-12 col-md-2  bg-white ">image</div>
+                <div className="col-sm-4 col-md-2 bg-white">
+                  <p className="mb-0">Qty</p>
+                  <p>{prod.orderdetails.quantity}</p>
+                </div>
+                <div className="col-sm-4 col-md-2 bg-white ">
+                  <p className="mb-0">U/Price</p>
+                  <p>{prod.orderdetails.price}</p>
+                </div>
+                <div className="col-sm-4 col-md-2 bg-white ">
+                  <p className="">Sub-Total</p>
+                  <p>{prod.orderdetails.quantity * prod.orderdetails.price}</p>
+                </div>
+              </div>
+              <div className="row">
+                <button
+                  className="btn btn-outline-info col-2"
+                  onClick={() => handlerRedirect()}
+                >
+                  View Product
+                </button>
+              </div>
+              </>
+          ))}
+       
+      </div>
     </>
   );
 };

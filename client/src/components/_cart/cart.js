@@ -25,7 +25,7 @@ const Cart = () => {
   //   });
   //   console.log(cart);
   // }, []);
-
+  
   // Lineas agregadas por Rodri 02:45
   const [isUpdateList, setList] = useState(false);
   const cartStore = useSelector((state) => state.carrito);
@@ -51,8 +51,10 @@ const Cart = () => {
   };
 
   const handlerSubQuantity = (f) => {
-    dispatch(subQuantity(f));
-    setList(!isUpdateList);
+    if (f.cant >1){
+      dispatch(subQuantity(f));
+      setList(!isUpdateList);
+    }
   };
   /*const handlerCalculeAll = (f) => {
     dispatch(calculeAllCart());
@@ -62,9 +64,9 @@ const Cart = () => {
   return (
     <>
       <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
-        <h1 className="display-3">My cart</h1>
+        <h1 className="display-3 mb-4">My cart</h1>
         {cart.length === 0 ? (
-          <h2>Cart empty</h2>
+          <p>Your cart is empty!</p>
         ) : (
           <div className="row headCont">
             <div className="col-4 col-md-8">

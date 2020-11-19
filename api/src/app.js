@@ -1,37 +1,49 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const routes = require('./routes/index.js');
-var cors = require('cors')
+const express	= require( 'express' );
+const session = require( 'express-session' );
+const cookieParser = require( 'cookie-parser' );
+const bodyParser = require( 'body-parser' );
+const morgan = require( 'morgan' );
+const passport = require( 'passport' );
+const routes = require( './routes/index.js' );
+const cors = require ('cors');
 
-require('./db.js');
+require( 'dotenv' ).config( );
+require( './db.js' );
+const authSetUp = require( './passport.js' );
 
-const server = express();
+const { FRONT_URL } = process.env;
+
+const server = express( );
 
 server.name = 'API';
 
-server.use(express.static("public"));
-server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-server.use(bodyParser.json({ limit: '50mb' }));
+server.use(cors())
+server.use( express.static( 'public' ) );
 server.use(cookieParser());
-server.use(morgan('dev'));
-server.use(cors()) // Use this after the variable declaration
-server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', process.env.FRONT_URL); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+server.use( bodyParser.urlencoded( { extended: true, limit: '50mb' } ) );
+server.use( bodyParser.json( { limit: '50mb' } ) );
+server.use( morgan( 'dev' ) );
 
-server.use('/', routes);
+server.use( ( request, response, next ) => {
+	response.header( 'Access-Control-Allow-Origin', FRONT_URL );
+	response.header( 'Access-Control-Allow-Credentials', 'true' );
+	response.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept' );
+	response.header( 'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE' );
 
-// Error catching endware.
-server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-  const status = err.status || 500;
-  const message = err.message || err;
-  console.error(err);
-  res.status(status).send(message);
-});
+	next( );
+} );
+
+authSetUp(server);
+
+server.use( '/', routes );
+
+server.use( ( error, request, response, next ) => {
+	const status = error.status || 500;
+	const message = error.message || error;
+
+	console.error( error );
+
+	response.status( status ).send( message );
+} );
 
 module.exports = server;

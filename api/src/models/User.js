@@ -1,11 +1,11 @@
 const { DataTypes } = require("sequelize");
-
+const bcrypt = require("bcryptjs");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define("user", {
+  const user = sequelize.define("user", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -30,6 +30,27 @@ module.exports = (sequelize) => {
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    }
+  },
+  {
+    hooks: {
+      beforeUpdate: (user) =>
+        (user.password = bcrypt.hashSync(
+          user.password,
+          bcrypt.genSaltSync(10),
+          null
+        )),
+      beforeCreate: (user) =>
+        (user.password = bcrypt.hashSync(
+          user.password,
+          bcrypt.genSaltSync(10),
+          null
+        )),
     },
-  });
+  }
+);
+user.prototype.validPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
+return user
 };
