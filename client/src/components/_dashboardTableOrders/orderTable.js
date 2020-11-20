@@ -14,21 +14,13 @@ export default function OrderTable() {
         console.log(res)
       });
     }, [])
-  
-    // const handlerCancel = (orderid) => {
-    //   console.log(orderid)
-    //   axios
-    //     .put(`${process.env.REACT_APP_API_URL}/orders/modify/cancel/${orderid}`)
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((err) => console.log(err));
-    // };
     return (
       <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-        <div>
-          <h1 className="display-3 text-center">USERS ORDER LIST</h1>
-         <Link to={"/dashboard/orders/list/pending"} ><button  className="btn btn-danger ml-2" >filter only by pending</button></Link> 
+        <div >
+          <div  style={{backgroundImage: "url(https://lh3.googleusercontent.com/proxy/oeisQYB4L0Kmy6vkWAX6xC3hcCKuXGPMjy9ZxZ-C35a8C1ep8YY2Wx-IDclYM4cn-Zk_0uKlmnlSlCoxX_AMRwrk6dlN5q0iAocTZI1ccd2au0V8WqaNqvPqFp0cGUP8uG5konopWqEgg7MVe1WnxH7YDfWXvZkNVBJ8PN_YHP135GTJu9Ip0y-dOTxI5Q5v5zwV23R_n_aApp3qaDXFGJo-BoYNL6FmSEW3)",  width: "100%",
+           height: "280px",}}   >
+          <h1 style={{background:"white"}}   className="display-3 text-center">USERS ORDER LIST</h1>
+         </div>
             <table class="table table-borderless">
             <thead>
               <tr>
@@ -36,6 +28,7 @@ export default function OrderTable() {
                 <th>State</th>
                 <th>User Name</th>
                 <th>Discharge Date</th>
+                <th><Link to={"/dashboard/orders/list/pending"} ><button  className="btn btn-danger ml-2" >filter only by pending</button></Link></th>
               </tr>
             </thead>
             <tbody>
@@ -49,7 +42,6 @@ export default function OrderTable() {
               {/* para poder incluir los backticks debo colocar el path dentro de llaves */}
                 <button  className="btn btn-danger ml-2">Detail</button>
               </Link></td>
-            {/* <td><button className="btn btn-danger ml-2" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel</button></td> */}
             </tr>    
            ))}
             </tbody>
