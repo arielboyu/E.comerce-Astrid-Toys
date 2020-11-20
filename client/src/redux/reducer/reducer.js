@@ -1,3 +1,5 @@
+import Axios from "axios";
+
 const initialState = {
     carrito:[],
     user: {
@@ -40,11 +42,16 @@ function rootReducer (state = initialState, action){
 
     }
 }*/
+ 
+
+
     if(action.type === "ADD_QUANTITY"){
         let array= state.carrito
         array.forEach((p)=>{
             if(p.id === action.payload.id){
-             p.cant = p.cant + 1;   
+             p.price = p.price + (p.price / p.cant)
+             p.cant += 1;
+             p.stock -= 1
             }
         })        
         return{
@@ -58,7 +65,10 @@ function rootReducer (state = initialState, action){
         let zero=false
         array.forEach((p)=>{
             if(p.id === action.payload.id){
-             p.cant = p.cant - 1; 
+                p.price = p.price - (p.price / p.cant)
+                p.cant -= 1;
+                p.stock += 1
+              
              if (p.cant===0){zero=true}  
             }
         })
