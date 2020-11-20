@@ -203,6 +203,13 @@ server.put("/:idUser/cart/", (req, res) => {
     });
 });
 
+//Ruta para agregar mas de un articulo a la orden
+
+server.put("/cart/products", (req, res) => {
+  console.log(req.body)
+  res.sendStatus(200)
+});
+
 /* through: { price: myProduct.price,
   quantity: randomNum(100) }, */
 //funciones de modelos
