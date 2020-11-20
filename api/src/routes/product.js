@@ -2,10 +2,32 @@ const server = require("express").Router();
 const { Product, Category, Review } = require("../db.js");
 const { Op } = require("sequelize");
 const sequelize = require("sequelize");
+const multer = require("multer");
+
+
+
+const upload = multer({dest: 'public/image'}) 
+
+
+/* let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({storage}) */
+
+
 
 //esta funcion pasa la primer letra de un word a mayus
 function capitalize(word) {
-  word = word.toLowerCase()
+  word = word.toLowerCase();
   return word[0].toUpperCase() + word.slice(1);
 }
 
@@ -78,14 +100,24 @@ server.get("/search", (req, res, next) => {
 });
 
 // s25 : Crear ruta para crear/agregar Producto
-// POST /products
+// POST /products 
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
-
+server.post('/upload', upload.single("image"), function(req, res) {
+  console.log(req.file)
+  res.send("uploaded"); // the uploaded file object
+});
 // Este post agrega un nuevo producto
-server.post("/", (req, res) => {
-  const { name, description, price, stock, image, categories, active } = req.body;
-  
+server.post("/",  (req, res) => {
+  const {
+    name,
+    description,
+    price,
+    stock,
+    image,
+    categories,
+    active,
+  } = req.body;
   //const categoryId = 0;
   // Category.findAll({where: {name:category}}).then((res)=>
   //{categoryId = res.id} )
@@ -99,16 +131,16 @@ server.post("/", (req, res) => {
     })
       .then((productCreated) => {
         //buscar categoria a la que tengo que agregar el producto
-        categories.map((cat)=>{
-          let catId= parseInt(cat)
+        categories.map((cat) => {
+          let catId = parseInt(cat);
           Category.findAll({ where: { id: catId } })
-          .then((res) =>
-          productCreated.addCategories(res))
-          .catch(err => console.log("Error con las categorias "+err))
-        })
+            .then((res) => productCreated.addCategories(res))
+            .catch((err) => console.log("Error con las categorias " + err));
+        });
         // Category.findAll({ where: { id: catId } }).then((res) =>
         //   productCreated.addCategories(res)
         // );
+        //Cargo la imagen
       })
       .catch((err) => {
         console.log("Error en POST" + err);
@@ -122,32 +154,31 @@ server.post("/", (req, res) => {
 //POST /product/:id/review
 server.post("/:id/review", (req, res) => {
   const productId = req.params.id;
-  const userId = 1 //HARCODEADO, sacar cuando tengamos lo de la sesion
+  const userId = 1; //HARCODEADO, sacar cuando tengamos lo de la sesion
   const { score, description } = req.body; //objeto review pasado por body
-  if (score && description && productId && userId){
-    Review.create({score,description,productId,userId})
-    .then(()=>Review.count({where: {productId: productId}}))
-    .then(count=>{
-      Review.sum('score',{ where: {productId: productId}})
-      .then((sum)=>{
-        let averageScore = sum /count;
-        Product.update({averageScore:averageScore},{ where: {id: productId}})
-        .then(r=>console.log(r))
+  if (score && description && productId && userId) {
+    Review.create({ score, description, productId, userId })
+      .then(() => Review.count({ where: { productId: productId } }))
+      .then((count) => {
+        Review.sum("score", { where: { productId: productId } })
+          .then((sum) => {
+            let averageScore = sum / count;
+            Product.update(
+              { averageScore: averageScore },
+              { where: { id: productId } }
+            ).then((r) => console.log(r));
+          })
+          .then((r) => res.send(r));
       })
-      .then(r=>res.send(r))
-    })
-    //    let rating =Review.sum({where:{productId:productId}})
-    //   Product.update({rating},{where:{id:productId}}))
-    .catch((err) => {
-      console.log("Error en POST review" + err);
-    });
-  }else{
-    res.status(400).send("ERROR: Campos sin completar");  
+      //    let rating =Review.sum({where:{productId:productId}})
+      //   Product.update({rating},{where:{id:productId}}))
+      .catch((err) => {
+        console.log("Error en POST review" + err);
+      });
+  } else {
+    res.status(400).send("ERROR: Campos sin completar");
   }
-
 });
-
-
 
 // S26 : Crear ruta para Modificar Producto
 // PUT /products/:id
@@ -157,7 +188,15 @@ server.post("/:id/review", (req, res) => {
 // Este put modifica el producto al que se apunta por parámetro
 server.put("/:id", (req, res) => {
   const product = req.params.id;
-  const { name, description, price, stock, image, active, categories } = req.body;
+  const {
+    name,
+    description,
+    price,
+    stock,
+    image,
+    active,
+    categories,
+  } = req.body;
   Product.findOne({
     where: {
       id: product,
@@ -165,27 +204,25 @@ server.put("/:id", (req, res) => {
   })
     .then((product) => {
       if (product) {
-        product.update({ name, description, price, stock, image, active })
-        .then((productUpdated) => {
-          //elimina las categorias para luego setear el nuevo set
-          productUpdated.setCategories()
-          //recorre las categorias que llegan por body
-          categories.map((category)=>{
-            //buscar categoria a la que tengo que agregar el producto
-            Category.findAll({ where: { name: category } })
-            .then((res) =>
-            productUpdated.addCategories(res)
-            );
+        product
+          .update({ name, description, price, stock, image, active })
+          .then((productUpdated) => {
+            //elimina las categorias para luego setear el nuevo set
+            productUpdated.setCategories();
+            //recorre las categorias que llegan por body
+            categories.map((category) => {
+              //buscar categoria a la que tengo que agregar el producto
+              Category.findAll({ where: { name: category } }).then((res) =>
+                productUpdated.addCategories(res)
+              );
+            });
           })
-
-        })
-        .then(res.status(200).send(product)) 
-        
+          .then(res.status(200).send(product));
       } else {
         res.status(400).send("No se encontró producto con ese ID");
       }
     })
-  
+
     .catch((err) => {
       res.status(400).send("Los campos enviados no son correctos" + err);
     });
@@ -215,13 +252,9 @@ server.delete("/:productID", (req, res) => {
     });
 });
 
-
 server.get("/:id", (req, res, next) => {
   //query
   /* select * from product where idProduct = req.params.id*/
-
-  
-
 
   Product.findAll({
     where: {
@@ -242,8 +275,7 @@ server.get("/:id/categories", (req, res, next) => {
     },
   })
     .then((product) => {
-      product.getCategories()
-      .then((categories)=>res.send(categories))
+      product.getCategories().then((categories) => res.send(categories));
     })
     .catch(next);
 });
@@ -254,13 +286,14 @@ server.get("/search/:category", (req, res) => {
   Category.findOne({
     where: {
       name: categoryName,
-    }
-  }).then((category) => {
-    category.getProducts().then((products) => {
-      console.log("entre acá");
-      res.send(products);
-    });
+    },
   })
+    .then((category) => {
+      category.getProducts().then((products) => {
+        console.log("entre acá");
+        res.send(products);
+      });
+    })
     .catch((err) => {
       console.log("entre acá" + err);
       res.sendStatus(404);
