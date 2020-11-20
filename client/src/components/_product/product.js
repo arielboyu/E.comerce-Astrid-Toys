@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import AddToCart from "../_addToCart/addToCart";
 import { Link } from "react-router-dom";
+import Review from "../_review/review.js";
 //Product
 
 export default function Product() {
@@ -56,6 +57,7 @@ export default function Product() {
                 {f.stock === 0  ? `Not available :(` : <></> }
               </p>
               <p> ⭐⭐⭐⭐⭐ </p>
+
               {/* AddToCart productId= {f.id} />  */}
               {f.stock > 0 ? (
                <AddToCart product= {f} /> 
@@ -67,15 +69,11 @@ export default function Product() {
             </div>
           </>
         ))}
+      </div> 
+      <div>
+      <Review/>
       </div>
-      <div className="d-flex col-12 mx-auto justify-content-center m-5">
-        <Link to="/products">
-        <button className="btn btn-outline-dark btn-lg ">
-        <i class="far fa-arrow-alt-circle-left"></i> BACK
-        </button>
-        </Link>
-      </div>
-      </>
+    </>
     );
   }
   return <p>404</p>;

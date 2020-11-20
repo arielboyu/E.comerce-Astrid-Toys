@@ -6,40 +6,48 @@ const morgan = require( 'morgan' );
 const passport = require( 'passport' );
 const routes = require( './routes/index.js' );
 const cors = require ('cors');
-const multer = require("multer");
-const path = require("path");
 
 require( 'dotenv' ).config( );
 require( './db.js' );
 const authSetUp = require( './passport.js' );
-
 const { FRONT_URL } = process.env;
-
 const server = express( );
-
 
 
 server.name = 'API';
 
-server.use(cors())
-server.use( express.static( 'public' ) );
+server.use(cors({
+  origin: FRONT_URL,
+  credentials: true,
+}));
+
 server.use(cookieParser());
+
 server.use( bodyParser.urlencoded( { extended: true, limit: '50mb' } ) );
 server.use( bodyParser.json( { limit: '50mb' } ) );
 server.use( morgan( 'dev' ) );
-/* server.use(multer({
-	dest: path.join(__dirname,"public/uploads")
-}).fields([{name:'image',maxCount:1}])); */
 
 
-server.use( ( request, response, next ) => {
-	response.header( 'Access-Control-Allow-Origin', FRONT_URL );
-	response.header( 'Access-Control-Allow-Credentials', 'true' );
-	response.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept' );
-	response.header( 'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE' );
+server.use(express.static("public"));
+server.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+server.use(fileUpload({ useTempFiles: true }));
+server.use(morgan("dev"));
+server.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", FRONT_URL); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
-	next( );
-} );
 
 authSetUp(server);
 

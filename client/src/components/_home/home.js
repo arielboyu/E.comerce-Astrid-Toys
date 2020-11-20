@@ -5,7 +5,7 @@ import LogoImage from "./home.jpg"
 
 const Home = ({ navShow }) => {
     
-    const height = document.documentElement.clientHeight
+    const height = "100vh"
     const fondo = {backgroundImage: `url(${LogoImage})`, height: height, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center"}
   return (
     <div style={fondo} className="d-flex flex-column justify-content-center align-items-center">

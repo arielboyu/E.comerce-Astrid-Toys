@@ -1,11 +1,11 @@
-const isAuthenticated = (req , res, next) => {
+function isAuthenticated (req , res, next) {
     if(req.isAuthenticated()){
         console.log("Estás logueado OK")
         next();
     } else{
-        console.log("No tenés permisos para ingresar en esta sección")
-        res.redirect("/login"); // ¿La redirección se trabaja desde el front o back?
-    }
+        console.log("No hay ningún usuario logueado")
+        res.status(400).send(req.session);
+    }   
   }
 
 module.exports = isAuthenticated;
