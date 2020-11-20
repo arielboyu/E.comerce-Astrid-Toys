@@ -10,7 +10,7 @@ function ButtonPay(){
     const handlerClick = (e) =>{
         e.preventDefault()
         console.log(store)
-        Axios.post("http://localhost:3002/users/cart/products", {})
+        Axios.post("http://localhost:3002/users/cart/products", store)
         .then(r => console.log(r))
     }
 

@@ -205,10 +205,36 @@ server.put("/:idUser/cart/", (req, res) => {
 
 //Ruta para agregar mas de un articulo a la orden
 
-server.put("/cart/products", (req, res) => {
-  console.log(req.body)
-  res.sendStatus(200)
-});
+server.post("/cart/products", (req, res) => {
+  const user = req.body.user
+  const arrProducts = req.body.carrito
+  console.log(user+">>>"+arrProducts)
+  Order.create({ state: "COMPLETE" })
+  .then((orden) => {
+    User.findOne({
+      where: { id: user.id }
+     }
+     ).then((resUser) => { 
+        orden.setUser(resUser).then((order) => {
+          arrProducts.map((prod)=>{
+            Product.findOne({
+              where: { id : prod.id}
+            }).then((resProd)=>{
+              order.addProduct(resProd, {
+                through: {
+                  price: prod.price,
+                  quantity: prod.cant
+                }
+              }).then(ord => {
+                console.log("Entre al final de Product")
+                res.sendStatus(200)})
+            })
+          })
+        });
+      })
+    });
+  })
+
 
 /* through: { price: myProduct.price,
   quantity: randomNum(100) }, */
