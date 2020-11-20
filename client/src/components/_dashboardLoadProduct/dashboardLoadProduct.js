@@ -32,7 +32,8 @@ function DashboardLoadProduct() {
       .post(
         `${process.env.REACT_APP_API_URL}/products/upload`,
         formData,
-        config
+        config,
+        productLoad
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

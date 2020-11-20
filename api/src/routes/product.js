@@ -3,6 +3,7 @@ const { Product, Category, Review } = require("../db.js");
 const { Op } = require("sequelize");
 const sequelize = require("sequelize");
 const multer = require("multer");
+const fs = require('fs');
 
 
 
@@ -105,6 +106,8 @@ server.get("/search", (req, res, next) => {
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
 server.post('/upload', upload.single("image"), function(req, res) {
   console.log(req.file)
+  console.log("este es el name: ", req.body.name)
+  fs.renameSync(req.file.path, req.file.path + "." + req.file.mimetype.split("/")[1]);
   res.send("uploaded"); // the uploaded file object
 });
 // Este post agrega un nuevo producto
