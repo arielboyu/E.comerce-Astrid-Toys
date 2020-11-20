@@ -30,18 +30,11 @@ export default function CategoriesList() {
   };
   return (
     <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-      <div className="">
-        <h1 className="display-3 text-center">CRUD Categories</h1>
-        <p className="lead d-none d-sm-block">
-        In this section the administrator can update the list of categories
-        </p>
+      <div  style={{backgroundImage: "url(https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/FRDTR67UFNFYBJLZNIOWNMSUJQ.jpg)",  width: "100%",
+        height: "300px",}} className="">
+        <h1 style={{background:"white"}}   className="display-3 text-center">Categories</h1>
         <hr className="my-2" />
         <p className="lead ">
-          <Link to="/dashboard/category/create">
-            <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
-            <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Category 
-            </button>
-          </Link>
         </p>
       </div>
       <table className="table table-reflow w-75 mx-auto mb-5">
@@ -50,6 +43,11 @@ export default function CategoriesList() {
             <th>#</th>
             <th>Name</th>
             <th>Description</th>
+            <th><Link to="/dashboard/category/create">
+            <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
+            <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Category 
+            </button>
+          </Link></th>
           </tr>
         </thead>
         <tbody>
