@@ -45,7 +45,6 @@ function authSetUp(server) {
 			return done( error );
 		} );
 	} );
-
 	
 	server.use(session({
 		secret: 'keyboard cat',

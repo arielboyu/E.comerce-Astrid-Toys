@@ -9,7 +9,9 @@ import Cart from "./btnCart";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../redux/actions/actions";
 
-const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
+const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`,{
+  withCredentials: true
+});
 
 export default function NavBar({ match, location }) {
   const [categories, setCategories] = useState([]);

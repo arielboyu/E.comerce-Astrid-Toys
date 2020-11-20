@@ -25,9 +25,9 @@ const Login = () => {
   const dispatch = useDispatch()
 
   const handleSubmit = (values) => {
-    const { username, password } = values;
-    console.log(username, password)
-    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { username : username, password : password}, { withCredentials: 'true' } )
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, values,{
+			withCredentials: true
+		})
             .then(user => {
               setRedirect(true)
               console.log(user)

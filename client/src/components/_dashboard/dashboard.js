@@ -2,25 +2,31 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import Spinner from "../utils/spinner/spinner";
 
-
+const validation = axios.get(`${process.env.REACT_APP_API_URL}/auth/me`, { withCredentials: true })
 
 const Dashboard = () => {
     const [redirect, setRedirect] = useState(false)
+    const [load, setLoad] = useState(true)
 
     useEffect(() => {
-        const validation = () => {
-            axios.get(`${process.env.REACT_APP_API_URL}/auth/me`)
-                .then(r => {console.log("Estas logueado!"); console.log(r.data)})
-                .catch(err => { console.log("no podemos entrar"); setRedirect(true) } )
-        }
-        validation();
+        console.log(load)
+        
+        setTimeout(()=>{
+            validation
+            .then(r => { console.log("Estas logueado!"); console.log(r.data); setLoad(false)})
+            .catch(err => { console.log("No estas logueado"); setRedirect(true) } ) 
+        }, 500)
+
+        
       }, []);
-
-
+    
     return (
+        
         <>
         {redirect ? <Redirect to='/products'/> : null}
+        { load ? <Spinner />  : (
         <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
             <div className="">
                 <h1 className="display-3 text-center">Dashboard</h1>
@@ -45,7 +51,11 @@ const Dashboard = () => {
                 </div>
             </div>
         </div>
-        </>)
+        
+        )}
+
+        </>
+        )
 }
 
 export default Dashboard;
