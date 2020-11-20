@@ -28,15 +28,13 @@ const Login = () => {
     axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, values,{
 			withCredentials: true
 		})
-            .then(user => {
-              setRedirect(true)
-              console.log(user)
-              console.log(user.username)
-              console.log(user.data)
-              setUser(user.data)
-              dispatch(userLogin(user.data))}
-            )
-            .catch( e => console.log("Log failure") )
+      .then(user => {
+        setUser(user.data)
+        dispatch(userLogin(user.data))
+        console.log("aca estoy")
+        setTimeout(() => setRedirect(true) , 200) 
+      })
+      .catch( e => console.log("Log failure") )
     }
 
   return (

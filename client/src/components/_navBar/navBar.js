@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useLocation } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import style from "./navBar.css";
 import { Navbar } from "reactstrap";
 import Dashboard from "./btnDashboard";
@@ -13,12 +13,17 @@ const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`,{
   withCredentials: true
 });
 
+const getUser = axios.get(`${process.env.REACT_APP_API_URL}/auth/me`,{
+  withCredentials: true
+});
+
 export default function NavBar({ match, location }) {
   const [categories, setCategories] = useState([]);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    getUser.then(user => dispatch(userLogin(user.data)))
     getCategory.then((r) => {
       setCategories(r.data);
     });
@@ -26,10 +31,11 @@ export default function NavBar({ match, location }) {
 
   const handleLogOut = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/auth/logout`)
+      .get(`${process.env.REACT_APP_API_URL}/auth/logout`, {
+        withCredentials: true
+      })
       .then((r) => {
         dispatch(userLogin(null));
-        console.log(r.data);
       })
       .catch((error) => console.log(error));
   };

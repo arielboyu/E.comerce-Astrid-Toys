@@ -43,15 +43,15 @@ server.post( '/login', passport.authenticate('local', {succesRedirect:'/funca', 
 });
 
 server.get('/logout', (req, res) => {
-    console.log(req.user)
     req.logout();
     res.clearCookie('id'); 
-    res.send(req.session);
+    res.redirect('/');
 })
 
 server.get('/me', isAuthenticated, (req, res) => {
-  console.log(req.user)
-  res.send(req.session)
+  console.log("auth/me response:")
+  console.log(req.session)
+  res.send(req.user)
 })
 
 module.exports = server;

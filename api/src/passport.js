@@ -13,18 +13,12 @@ function authSetUp(server) {
 	      passwordField: "password",
 	},
 	function ( username, password, done ) {
-		User.findOne( {
-			where: { username }
-		} )
-		.then( ( user ) => {
-			if ( !user ) {
-				return done( null, false );
-			}
+		User.findOne({ where: { username } })
+		.then(( user ) => { 
+			if( !user ) { return done( null, false ) }
 			return done( null, user );
 		} )
-		.catch( ( error ) => {
-			return done( error );
-		} );
+		.catch( ( error ) => { return done( error ) });
 	})
 
 	passport.use(localStrategy)
@@ -45,18 +39,13 @@ function authSetUp(server) {
 			return done( error );
 		} );
 	} );
-	
+
 	server.use(session({
 		secret: 'keyboard cat',
-		resave: false,
+		resave: true,
 		saveUninitialized: true
 	}))
-// 	server.use(
-//     cookieSession({
-//       maxAge: 24 * 60 * 60 * 1000,
-//       keys: ['supersecrettops3cr3t'],
-//     }),
-//   );
+	
 	server.use(cookieParser());
 	server.use(passport.initialize());
 	server.use(passport.session());
