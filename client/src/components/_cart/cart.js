@@ -9,6 +9,7 @@ import {
   subQuantity,
 } from "../../redux/actions/actions";
 import Style from "./cart.css";
+import ButtonPay from '../_btnPay/btnPay'
 
 import { Link } from "react-router-dom";
 
@@ -122,7 +123,7 @@ const Cart = () => {
             </div>
           </div>
         ))}
-
+        {cart.length !== 0 ? <ButtonPay/> : <></>}
         {/* esta el ex code abajo */}
         <hr className="my-2" />
         <p className="lead">
