@@ -36,7 +36,7 @@ server.use(
     saveUninitialized: true,
   })
 );
-server.use(fileUpload({ useTempFiles: true }));
+
 server.use(morgan("dev"));
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", FRONT_URL); // update to match the domain you will make the request from
