@@ -17,8 +17,26 @@ function DashboardLoadProduct() {
     image: "",
     categories: [],
   });
-
+  const [image, setImage] = useState(null)
   const [msg, setMsg] = useState("");
+
+  const uploadAction =  (image) => {
+    const formData = new FormData();
+    formData.append('image', image);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+     axios.post(`${process.env.REACT_APP_API_URL}/products/upload`, formData, config)
+        .then(res => console.log(res))
+        .catch (err => console.log(err))
+  }
+
+  const handleImageUpload = (e) => {
+    console.log(e.target.files[0])
+    setImage(e.target.files[0])
+  }
 
   const validateDates = () => {
     let stockParse = parseInt(productLoad.stock);
@@ -68,15 +86,17 @@ function DashboardLoadProduct() {
 
   const handlerSubmit = (e) => {
     console.log(productLoad);
+    uploadAction(image)
     if (validateDates()) {
       axios
         .post(`${process.env.REACT_APP_API_URL}/products`, productLoad)
         .then((r) => {
           console.log(r);
+          
         })
         .catch((er) => {
           console.log(er);
-        });
+        }); 
     }
     e.preventDefault();
   };
@@ -103,7 +123,7 @@ function DashboardLoadProduct() {
   return (
     <div className="container d-flex flex-column mx-auto my-5 p-5 border shadow">
       <h2 className="display-3 text-center">Load Product</h2>
-      <form onSubmit={handlerSubmit}>
+      <form enctype="multipart/form-data" onSubmit={handlerSubmit}>
         <div className="form-group">
           <label htmlFor="productName">Product Name</label>
           <input
@@ -190,11 +210,18 @@ function DashboardLoadProduct() {
           <div className="form-group col-md-6">
             <label htmlFor="productImage">Upload Image</label>
             <input
+              name="image"
               type="file"
               class="form-control-file"
-              id="productImage"
+              onChange={handleImageUpload}
             ></input>
+          <form action="http://localhost:3002/products/upload" method="POST" enctype="multipart/form-data">
+          <label>imagen</label>
+          <input type="file" name="image"></input>
+          <input type="submit" value="enviar"></input>
+          </form>
           </div>
+
         </div>
         <button
           type="submit"
@@ -207,45 +234,7 @@ function DashboardLoadProduct() {
         <Link to="/dashboard/product/update">
           <button className="btn btn-danger ml-2">Back</button>
         </Link>
-        {/* <!-- Modal --> */}
-        <div
-          class="modal"
-          id="exampleModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Products
-                </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  onClick={() => window.location.reload()}
-                >
-                  <span aria-hidden="true">x</span>
-                </button>
-              </div>
-              <div class="modal-body">{msg}</div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                  onClick={() => window.location.reload()}
-                >
-                  Ok
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </form>
     </div>
   );
