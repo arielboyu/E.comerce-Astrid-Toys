@@ -20,7 +20,7 @@ function ButtonPay(){
             .then(r => {
                 console.log(r);
                 setBuyComplete(true)
-                // actions(removeAllProductsToCart())
+               actions(removeAllProductsToCart())
             })
             .catch(err => console.log("User not loggin!"))
         }
@@ -37,14 +37,14 @@ function ButtonPay(){
                 <div className="alert alert-danger my-3" role="alert">
                     You're not loggin, 
                     <Link to="/login">
-                        <span href="#" className="alert-link"> please sigup.</span>
+                        <span className="alert-link"> please sigup.</span>
                     </Link>  
                 </div>) : <></>}
             {buyComplete? (
                 <div className="alert alert-info my-3" role="alert">
                     Successful purchase, 
                     <Link to={`/myshop/${userLog}`}>
-                        <span href="#" className="alert-link"> My shop.</span>
+                        <span className="alert-link"> My shop.</span>
                     </Link>  
                 </div>) : <></>}
         </>
