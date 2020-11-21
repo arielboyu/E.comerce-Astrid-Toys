@@ -8,6 +8,7 @@ import AddToCart from "./components/_addToCart/addToCart.js";
 import Login from "./components/_login/login.js";
 import Register from "./components/_login/register.js";
 import Footer from "./components/_footer/footer.js";
+import About from "./components/_about/about.js";
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
 import Product from "./components/_product/product";
@@ -90,6 +91,9 @@ function App() {
         </Route>
         <Route path="/addToCart">
           <AddToCart />
+        </Route>
+        <Route path="/about">
+          <About />
         </Route>
       </Switch>
       <Route path="/" render={({match}) => <Footer match={match} />} />
