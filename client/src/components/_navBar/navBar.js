@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState, useLocation } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
@@ -145,12 +147,23 @@ export default function NavBar({ match, location }) {
             <>
               <li className="nav-item d-flex">
                 <Link to="/cart">
-                  <span className="nav-link mr-n2">
+                  <span className="nav-link mr-n2 dropdown"
+                  id="dropdownMenu2"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false" >
                     <i className="fas fa-user"> </i> {user.name}{" "}
-                  </span>
-                </Link>
-                <Link onClick={handleLogOut} className="nav-link ml-n1" to="#">
-                  (X)
+                   <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button onClick={handleLogOut} className="dropdown-item" type="button">
+                       Log out
+                   </button>
+                      <Link to={`/dashboard/users/myshop/${user.id}`}>
+                     <button className="dropdown-item" type="button">
+                     My Shop
+                   </button>
+                   </Link>
+                   </div>
+                </span>
                 </Link>
               </li>
             </>
