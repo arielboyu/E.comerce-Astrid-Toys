@@ -26,7 +26,7 @@ import UpdateCategories from "./components/_dashboardUpdateCategories/updateCate
 //****Import de prueba */
 import Reduxxx from './components/pruebaRedux'
 import OrderListPending from "./components/_dashboardTableOrders/OrderTablePending"
-
+import UsersList from "./components/_dashboardUsersTable/usersTable" 
 
 function App() {
   return (
@@ -73,8 +73,11 @@ function App() {
         <Route path="/dashboard/category/update/:idcategory">
           <UpdateCategories />
         </Route>
-        <Route path="/dashboard/users/list">
+        <Route path="/dashboard/orders/list">
           <OrderList />
+        </Route>
+        <Route path="/dashboard/users/list">
+          <UsersList />
         </Route>
         <Route path="/dashboard/orders/detail/:idorden">
           <OrderDetail />
