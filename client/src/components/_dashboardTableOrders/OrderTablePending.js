@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function OrderTablePending() {
     const getOrderpe = axios.get(`${process.env.REACT_APP_API_URL}/orders/pending/all`);
@@ -45,6 +46,9 @@ export default function OrderTablePending() {
            ))}
             </tbody>
             </table>
+            <Link to="/dashboard/orders/list" >
+            <button className="btn btn-danger ml-2" >Back</button>
+            </Link> 
         </div>   
       </div>
     );
