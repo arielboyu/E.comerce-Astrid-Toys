@@ -61,7 +61,7 @@ const Purchase = ({ orderId }) => {
                 {/* CABECERA */}
                 <div className="col-sm-12 col-md-2 bg-white ">
                   <p className="border">Product</p>
-                  <p>{prod.name}</p>
+                  <p>{prod.id}</p>
                 </div>
                 <div className="col-sm-12 col-md-2  bg-white ">image</div>
                 <div className="col-sm-4 col-md-2 bg-white">
