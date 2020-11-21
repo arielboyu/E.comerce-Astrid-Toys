@@ -1,34 +1,33 @@
 const passport = require( 'passport' );
 const Strategy = require( 'passport-local' ).Strategy;
 const { User } = require( './db.js' );
-const cookieSession = require('cookie-session');
-
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
 
 function authSetUp(server) {
 	const localStrategy = new Strategy({
-	      usernameField: "username",
-	      passwordField: "password",
-	},
-	function ( username, password, done ) {
-		User.findOne({ where: { username } })
+	    usernameField: "username",
+		passwordField: "password",
+},
+
+function ( username, password, done ) {
+	User.findOne({ where: { username } })
 		.then(( user ) => { 
 			if( !user ) { return done( null, false ) }
 			return done( null, user );
 		} )
 		.catch( ( error ) => { return done( error ) });
-	})
+})
 
-	passport.use(localStrategy)
+passport.use(localStrategy)
 
-	passport.serializeUser((user, done) => {
-		console.log('serializing user: ');
-	  	done(null, user.id);
-	});
+passport.serializeUser((user, done) => {
+	console.log('serializing user: ');
+  	done(null, user.id);
+});
 
-	passport.deserializeUser( function( id, done ) {
+passport.deserializeUser( function( id, done ) {
 	User.findByPk( id )
 		.then( ( user ) => {
 			console.log('deserializing user');
@@ -45,7 +44,7 @@ function authSetUp(server) {
 		resave: true,
 		saveUninitialized: true
 	}))
-	
+
 	server.use(cookieParser());
 	server.use(passport.initialize());
 	server.use(passport.session());
@@ -55,7 +54,6 @@ function authSetUp(server) {
 		console.log(req.user);
 		next();
 	  });
-
 }
 
 module.exports = authSetUp

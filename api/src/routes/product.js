@@ -2,12 +2,36 @@ const server = require("express").Router();
 const { Product, Category, Review } = require("../db.js");
 const { Op } = require("sequelize");
 const sequelize = require("sequelize");
+const multer = require('multer');
+const path = require('path')
 
 //esta funcion pasa la primer letra de un word a mayus
 function capitalize(word) {
   word = word.toLowerCase();
   return word[0].toUpperCase() + word.slice(1);
 }
+
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, path.join(__dirname, '/uploads'))
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, file.originalname)
+//   }
+// });
+
+// const upload = multer({storage});
+
+
+
+const upload = multer({dest: 'public/image'})
+
+server.post('/upload', upload.single("image"), function(req, res) {
+  console.log("ARCHIVO SUBIDO FILE :")
+  console.log(req.file)
+  console.log("imagen SUBIDAAAAAAA")
+  res.send({msg: 'Image successfully created'});
+});
 
 server.get("/actives", (req, res, next) => {
   Product.findAll({
@@ -84,19 +108,8 @@ server.get("/search", (req, res, next) => {
 
 // Este post agrega un nuevo producto
 server.post("/", (req, res) => {
-  const {
-    name,
-    description,
-    price,
-    stock,
-    image,
-    categories,
-    active,
-  } = req.body;
+  const { name, description, price, stock, image, categories, active } = req.body;
 
-  //const categoryId = 0;
-  // Category.findAll({where: {name:category}}).then((res)=>
-  //{categoryId = res.id} )
   if (name && description && price && stock) {
     Product.create({
       name,
@@ -104,6 +117,7 @@ server.post("/", (req, res) => {
       price,
       description,
       active,
+      image
     })
       .then((productCreated) => {
         //buscar categoria a la que tengo que agregar el producto
@@ -113,9 +127,6 @@ server.post("/", (req, res) => {
             .then((res) => productCreated.addCategories(res))
             .catch((err) => console.log("Error con las categorias " + err));
         });
-        // Category.findAll({ where: { id: catId } }).then((res) =>
-        //   productCreated.addCategories(res)
-        // );
       })
       .catch((err) => {
         console.log("Error en POST" + err);
