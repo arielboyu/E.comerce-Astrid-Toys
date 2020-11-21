@@ -103,13 +103,13 @@ server.get("/search", (req, res, next) => {
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
 server.post('/upload/:idProduct', upload.single("image"), function(req, res) {
-  console.log(req.file.path)
+  console.log(req.file)
   console.log("este es el idProduct: ", req.params.idProduct)
   let idProduct = req.params.idProduct
   fs.renameSync(req.file.path, req.file.path + "." + req.file.mimetype.split("/")[1]);
   Product.findOne({where:{id: idProduct}}).then((product)=>{
     console.log(product)
-    product.setDataValue("image", ""+req.file.path)
+    product.setDataValue("image", "http//localhost/3002/"+req.file.destination+"/"+req.file.originalname)
     product.save()
     console.log("-----------------------------------------------")
     console.log(product)
