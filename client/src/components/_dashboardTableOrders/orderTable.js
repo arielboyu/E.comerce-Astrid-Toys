@@ -28,7 +28,7 @@ export default function OrderTable() {
                 <th>State</th>
                 <th>User Name</th>
                 <th>Discharge Date</th>
-                <th><Link to={"/dashboard/orders/list/pending"} ><button  className="btn btn-danger ml-2" >filter only by pending</button></Link></th>
+                <th><Link to={"/dashboard/orders/pending"} ><button  className="btn btn-danger ml-2" >filter only by pending</button></Link></th>
               </tr>
             </thead>
             <tbody>
@@ -36,7 +36,7 @@ export default function OrderTable() {
               <tr key={o.id}>
               <td>{o.id}</td>
               <td>{o.state}</td>
-              <td>{ o.user.length && o.user.username}</td>
+              <td>{o.user.username}</td>
               <td>{o.createdAt}</td>
               <td><Link to={`/dashboard/orders/detail/${o.id}`}>
               {/* para poder incluir los backticks debo colocar el path dentro de llaves */}
@@ -46,6 +46,9 @@ export default function OrderTable() {
            ))}
             </tbody>
             </table>
+            <Link to="/dashboard" >
+            <button className="btn btn-danger ml-2" >Back</button>
+            </Link> 
         </div>   
       </div>
     );

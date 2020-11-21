@@ -82,7 +82,7 @@ function App() {
         <Route path="/dashboard/orders/detail/:idorden">
           <OrderDetail />
         </Route>
-        <Route path="/dashboard/orders/list/pending">
+        <Route path="/dashboard/orders/pending">
           <OrderListPending />
         </Route>
         <Route path="/cart">

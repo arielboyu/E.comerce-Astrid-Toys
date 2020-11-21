@@ -40,7 +40,10 @@ export default function UsersTable() {
             </tr>    
            ))}
             </tbody>
-            </table> 
+            </table>
+            <Link to="/dashboard" >
+            <button className="btn btn-danger ml-2" >Back</button>
+            </Link> 
       </div>
    </div>
     );

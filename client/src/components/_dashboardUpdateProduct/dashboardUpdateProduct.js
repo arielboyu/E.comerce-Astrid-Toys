@@ -84,6 +84,9 @@ const DashboardUpdateProduct = () => {
           ))}
         </tbody>
       </table>
+      <Link to="/dashboard" >
+      <button className="btn btn-danger ml-2" >Back</button>
+      </Link> 
     </div>
   );
 };
