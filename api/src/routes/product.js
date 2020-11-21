@@ -106,7 +106,7 @@ server.get("/search", (req, res, next) => {
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
 server.post('/upload', upload.single("image"), function(req, res) {
   console.log(req.file)
-  console.log("este es el name: ", req.body.name)
+  //console.log("este es el name: ", req.params.idProduct)
   fs.renameSync(req.file.path, req.file.path + "." + req.file.mimetype.split("/")[1]);
   res.send("uploaded"); // the uploaded file object
 });
@@ -136,14 +136,15 @@ server.post("/",  (req, res) => {
         //buscar categoria a la que tengo que agregar el producto
         categories.map((cat) => {
           let catId = parseInt(cat);
-          Category.findAll({ where: { id: catId } })
-            .then((res) => productCreated.addCategories(res))
+          Category.findOne({ where: { id: catId } })
+            .then((category) => productCreated.addCategory(category))
             .catch((err) => console.log("Error con las categorias " + err));
         });
         // Category.findAll({ where: { id: catId } }).then((res) =>
         //   productCreated.addCategories(res)
         // );
         //Cargo la imagen
+        res.send(productCreated)
       })
       .catch((err) => {
         console.log("Error en POST" + err);

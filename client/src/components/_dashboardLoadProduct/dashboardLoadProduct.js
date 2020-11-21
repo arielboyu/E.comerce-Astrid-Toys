@@ -20,7 +20,7 @@ function DashboardLoadProduct() {
   const [image, setImage] = useState(null);
   const [msg, setMsg] = useState("");
 
-  const uploadAction = (image) => {
+  const uploadAction = (image,productInDB) => {
     const formData = new FormData();
     formData.append("image", image);
     const config = {
@@ -32,8 +32,7 @@ function DashboardLoadProduct() {
       .post(
         `${process.env.REACT_APP_API_URL}/products/upload`,
         formData,
-        config,
-        productLoad
+        config
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -91,19 +90,18 @@ function DashboardLoadProduct() {
 
   const handlerSubmit = (e) => {
     console.log(productLoad);
-
     if (validateDates()) {
-      uploadAction(image);
       axios
         .post(`${process.env.REACT_APP_API_URL}/products`, productLoad)
-        .then((r) => {
-          console.log(r);
+        .then((productInDB) => {
+          uploadAction(image,productInDB);
+          console.log(productInDB);
         })
         .catch((er) => {
           console.log(er);
         });
     }
-
+    e.target.reset();
     //comente esto para que la pagina recargue cuando hacen submit (soy nico)
     //e.preventDefault();
     /*     
