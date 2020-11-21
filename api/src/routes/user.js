@@ -208,7 +208,9 @@ server.put("/:idUser/cart/", (req, res) => {
 server.post("/cart/products", (req, res) => {
   const user = req.body.user
   const arrProducts = req.body.carrito
-  console.log(user+">>>"+arrProducts)
+  if(user.id === null){
+    res.status(403).send(`User invalid ${user.id}`)
+  } else {
   Order.create({ state: "COMPLETE" })
   .then((orden) => {
     User.findOne({
@@ -233,7 +235,8 @@ server.post("/cart/products", (req, res) => {
         });
       })
     });
-  })
+  }
+})
 
 
 /* through: { price: myProduct.price,
