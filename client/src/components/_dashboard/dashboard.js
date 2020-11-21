@@ -32,9 +32,9 @@ const Dashboard = () => {
         {redirect ? <Redirect to='/products'/> : null}
         { load ? <Spinner />  : (
         <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-            <div className="">
-                <h1 className="display-3 text-center">Dashboard</h1>
-                <p className="lead d-none d-sm-block">The admin reservated section</p>
+                 <div style={{backgroundImage: "url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/480/public/media/image/2020/02/estantes-figuras-funko-pop-1861835.jpg?itok=Y9Oa9CMk)",  width: "100%",
+                 height: "280px",}} className="">
+                <h1 style={{background:"white"}}  className="display-3 text-center">Dashboard</h1>
                 <hr className="my-2" />
                 <div className="d-flex justify-content-around px-5 mt-5">
                 <Link to="/dashboard/product/update">

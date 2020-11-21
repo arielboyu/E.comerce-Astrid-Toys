@@ -9,6 +9,7 @@ import {
   subQuantity,
 } from "../../redux/actions/actions";
 import Style from "./cart.css";
+import ButtonPay from '../_btnPay/btnPay'
 
 import { Link } from "react-router-dom";
 
@@ -60,7 +61,7 @@ const Cart = () => {
     dispatch(calculeAllCart());
     setList(!isUpdateList);
   };*/
-
+  
   return (
     <>
       <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
@@ -118,11 +119,11 @@ const Cart = () => {
               </div>
             </div>
             <div className="priceCeld col-4 col-md-2">
-              <p>$ {f.cant * f.price},00</p>
+              <p>$ {f.price},00</p>
             </div>
           </div>
         ))}
-
+        {cart.length !== 0 ? <ButtonPay/> : <></>}
         {/* esta el ex code abajo */}
         <hr className="my-2" />
         <p className="lead">

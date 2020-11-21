@@ -203,6 +203,42 @@ server.put("/:idUser/cart/", (req, res) => {
     });
 });
 
+//Ruta para agregar mas de un articulo a la orden
+
+server.post("/cart/products", (req, res) => {
+  const user = req.body.user
+  const arrProducts = req.body.carrito
+  if(user.id === null){
+    res.status(403).send(`User invalid ${user.id}`)
+  } else {
+  Order.create({ state: "COMPLETE" })
+  .then((orden) => {
+    User.findOne({
+      where: { id: user.id }
+     }
+     ).then((resUser) => { 
+        orden.setUser(resUser).then((order) => {
+          arrProducts.map((prod)=>{
+            Product.findOne({
+              where: { id : prod.id}
+            }).then((resProd)=>{
+              order.addProduct(resProd, {
+                through: {
+                  price: prod.price,
+                  quantity: prod.cant
+                }
+              }).then(ord => {
+                console.log("Entre al final de Product")
+                res.sendStatus(200)})
+            })
+          })
+        });
+      })
+    });
+  }
+})
+
+
 /* through: { price: myProduct.price,
   quantity: randomNum(100) }, */
 //funciones de modelos
@@ -259,5 +295,7 @@ server.get("/shopping/:id", (req, res) => {
     },
   }).then((orders) => res.status(200).json(orders));
 });
+
+
 
 module.exports = server;

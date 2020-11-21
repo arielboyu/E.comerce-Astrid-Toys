@@ -2,8 +2,24 @@ const server = require("express").Router();
 const { Product, Category, Review } = require("../db.js");
 const { Op } = require("sequelize");
 const sequelize = require("sequelize");
-const multer = require('multer');
-const path = require('path')
+const multer = require("multer");
+const recalculateAverageScore = require("../controllers/recalculateAverageScore.js");
+
+const upload = multer({ dest: "public/image" });
+
+/* let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({storage}) */
 
 //esta funcion pasa la primer letra de un word a mayus
 function capitalize(word) {
@@ -105,8 +121,12 @@ server.get("/search", (req, res, next) => {
 // POST /products
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
-
+server.post("/upload", upload.single("image"), function (req, res) {
+  console.log(req.file);
+  res.send("uploaded"); // the uploaded file object
+});
 // Este post agrega un nuevo producto
+
 server.post("/", (req, res) => {
   const { name, description, price, stock, image, categories, active } = req.body;
 
@@ -266,24 +286,33 @@ server.post("/:id/review", (req, res) => {
   const { score, description } = req.body; //objeto review pasado por body
   if (score && description && productId && userId) {
     Review.create({ score, description, productId, userId })
-      .then(() => Review.count({ where: { productId: productId } }))
-      .then((count) => {
-        Review.sum("score", { where: { productId: productId } })
-          .then((sum) => {
-            let averageScore = sum / count;
-            Product.update(
-              { averageScore: averageScore },
-              { where: { id: productId } }
-            ).then((r) => console.log(r));
-          })
-          .then((r) => res.send(r));
-      })
+      .then(() => recalculateAverageScore(productId))
+      .then((r) => res.send(r))
       .catch((err) => {
         console.log("Error en POST review: " + err);
       });
   } else {
     res.status(400).send("ERROR: Campos sin completar");
   }
+});
+
+//S55 : Crear ruta para Modificar Review
+//PUT /product/:id/review/:idReview
+
+server.put('/:id/review/:idReview', (req, res) => {
+  const productId = req.params.id;
+  const reviewId = req.params.idReview;
+  const { score, description } = req.body;
+  Review.update(
+    { score: score, description: description },
+    { where: { id: reviewId } }
+  )
+    .then(() => recalculateAverageScore(productId))
+    .then((r) => res.send(r))
+    .catch((err) => {
+      console.log("Error en PUT review: " + err);
+      res.send(err);
+    });
 });
 
 //S56 : Crear Ruta para eliminar Review
@@ -293,16 +322,7 @@ server.delete("/:id/review/:idReview", (req, res) => {
   const productId = req.params.id;
   const reviewId = req.params.idReview;
   Review.destroy({ where: { id: reviewId } })
-    .then(() => Review.count({ where: { productId: productId } }))
-    .then((count) => {
-      Review.sum("score", { where: { productId: productId } }).then((sum) => {
-        let averageScore = sum / count;
-        Product.update(
-          { averageScore: averageScore },
-          { where: { id: productId } }
-        ).then((r) => console.log(r));
-      });
-    })
+    .then(() => recalculateAverageScore(productId))
     .then((r) => res.send(r))
     .catch((err) => {
       console.log("Error en DELETE review: " + err);
