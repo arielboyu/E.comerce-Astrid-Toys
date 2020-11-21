@@ -51,8 +51,6 @@ server.get("/", (req, res, next) => {
     order: [["id", "ASC"]],
   })
     .then((products) => {
-      console.log("Se tendrian que renderizar los productos");
-
       res.send(products);
     })
     .catch(next);
@@ -104,11 +102,20 @@ server.get("/search", (req, res, next) => {
 // POST /products 
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
-server.post('/upload', upload.single("image"), function(req, res) {
-  console.log(req.file)
-  //console.log("este es el name: ", req.params.idProduct)
+server.post('/upload/:idProduct', upload.single("image"), function(req, res) {
+  console.log(req.file.path)
+  console.log("este es el idProduct: ", req.params.idProduct)
+  let idProduct = req.params.idProduct
   fs.renameSync(req.file.path, req.file.path + "." + req.file.mimetype.split("/")[1]);
-  res.send("uploaded"); // the uploaded file object
+  Product.findOne({where:{id: idProduct}}).then((product)=>{
+    console.log(product)
+    product.setDataValue("image", ""+req.file.path)
+    product.save()
+    console.log("-----------------------------------------------")
+    console.log(product)
+    res.send("uploaded");
+  })
+   // the uploaded file object
 });
 // Este post agrega un nuevo producto
 server.post("/",  (req, res) => {

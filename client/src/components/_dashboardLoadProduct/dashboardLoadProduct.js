@@ -20,7 +20,9 @@ function DashboardLoadProduct() {
   const [image, setImage] = useState(null);
   const [msg, setMsg] = useState("");
 
-  const uploadAction = (image,productInDB) => {
+  const uploadAction = (image,idProduct) => {
+    console.log("Este es el productInDB")
+    console.log(idProduct);
     const formData = new FormData();
     formData.append("image", image);
     const config = {
@@ -30,7 +32,7 @@ function DashboardLoadProduct() {
     };
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/products/upload`,
+        `${process.env.REACT_APP_API_URL}/products/upload/${idProduct}`,
         formData,
         config
       )
@@ -39,7 +41,6 @@ function DashboardLoadProduct() {
   };
 
   const handleImageUpload = (e) => {
-    console.log(e.target.files[0]);
     setImage(e.target.files[0]);
   };
 
@@ -89,19 +90,23 @@ function DashboardLoadProduct() {
   };
 
   const handlerSubmit = (e) => {
-    console.log(productLoad);
+   
     if (validateDates()) {
       axios
         .post(`${process.env.REACT_APP_API_URL}/products`, productLoad)
         .then((productInDB) => {
-          uploadAction(image,productInDB);
-          console.log(productInDB);
+          uploadAction(image,productInDB.data.id);
         })
         .catch((er) => {
           console.log(er);
         });
     }
+    //para reiniciar el form:
     e.target.reset();
+    //para no reiniciar y poder leer la consola:
+    e.preventDefault()
+
+
     //comente esto para que la pagina recargue cuando hacen submit (soy nico)
     //e.preventDefault();
     /*     
