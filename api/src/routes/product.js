@@ -106,15 +106,18 @@ server.post('/upload/:idProduct', upload.single("image"), function(req, res) {
   console.log(req.file)
   console.log("este es el idProduct: ", req.params.idProduct)
   let idProduct = req.params.idProduct
-  fs.renameSync(req.file.path, req.file.path + "." + req.file.mimetype.split("/")[1]);
+  fs.renameSync(req.file.path, req.file.destination+"/"+idProduct.toString()+"." + req.file.mimetype.split("/")[1]);
+  console.log("NUEVA RUTA:")
+  //fs.rename(req.file.path + "." + req.file.mimetype.split("/")[1], req.file.destination+"/"+idProduct.toString()+"." + req.file.mimetype.split("/")[1])
   Product.findOne({where:{id: idProduct}}).then((product)=>{
     console.log(product)
-    product.setDataValue("image", "http//localhost/3002/"+req.file.destination+"/"+req.file.originalname)
+    product.setDataValue("image", "src/"+req.file.destination+"/"+idProduct)
     product.save()
     console.log("-----------------------------------------------")
     console.log(product)
     res.send("uploaded");
   })
+
    // the uploaded file object
 });
 // Este post agrega un nuevo producto
