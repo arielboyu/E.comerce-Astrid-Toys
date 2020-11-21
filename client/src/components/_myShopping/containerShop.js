@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import OrderDetails from "./orderDetails.js";
 import ShoppingHistory from "./shoppingHistory.js";
+import LoadReview from "../_review/loadReview.js";
 //Este componente se mostrara en una solapa "Mis Compras" de un determinado usuario
 
 const ContainerShop = () => {
@@ -17,6 +18,9 @@ const ContainerShop = () => {
       <Switch>
         <Route path="/myshop/details/:idOrder">
           <OrderDetails />
+        </Route>
+        <Route path="/myshop/loadReview">
+          <LoadReview />
         </Route>
         <Route path="/">
           <ShoppingHistory idUser={idUser} />

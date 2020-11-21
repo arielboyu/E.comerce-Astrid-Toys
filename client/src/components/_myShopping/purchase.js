@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Product from "../_product/product";
 
@@ -27,8 +28,15 @@ const Purchase = ({ orderId }) => {
     }
   }, []);
 
+  const [redirectLoadReview, setRedirectLoadReview] = useState(false);
+
+  const handlerRedirectLoadReview = () => {
+    setRedirectLoadReview(true);
+  };
+
   return (
     <>
+    {redirectLoadReview ? <Redirect to={`/myshop/loadReview`} /> : <></>}
       {redirect ? <Redirect to={`/myshop/details/1`} /> : <></>}
       <div className="container border shadow ">
         <div className="row border ">
@@ -76,7 +84,14 @@ const Purchase = ({ orderId }) => {
                 >
                   View Product
                 </button>
+                <button
+                  className="btn btn-outline-info col-2"
+                  onClick={() => handlerRedirectLoadReview()}
+                >
+                  Ratings
+                </button>
               </div>
+              
               </>
           ))}
        
