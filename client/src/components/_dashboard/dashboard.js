@@ -47,9 +47,14 @@ const Dashboard = () => {
                     <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Category 
                     </button>
                 </Link>
-                <Link to="/dashboard/users/list">
+                <Link to="/dashboard/orders/list">
                     <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
                     <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Orders 
+                    </button>
+                </Link>
+                <Link to="/dashboard/users/list">
+                    <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
+                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Users 
                     </button>
                 </Link>
                 </div>

@@ -62,11 +62,11 @@ const Purchase = ({ orderId }) => {
                 </div>
                 <div className="col-sm-4 col-md-2 bg-white ">
                   <p className="mb-0">U/Price</p>
-                  <p>{prod.orderdetails.price}</p>
+                  <p>{prod.orderdetails.price / prod.orderdetails.quantity}</p>
                 </div>
                 <div className="col-sm-4 col-md-2 bg-white ">
                   <p className="">Sub-Total</p>
-                  <p>{prod.orderdetails.quantity * prod.orderdetails.price}</p>
+                  <p>{prod.orderdetails.price}</p>
                 </div>
               </div>
               <div className="row">

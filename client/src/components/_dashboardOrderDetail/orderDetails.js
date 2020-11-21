@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 //Este componente muestra los detalles de la orden y el total
 // Falta hacer la prueba con varios productos que sumen el total a su orden !
 
@@ -57,6 +58,9 @@ export default function OrderDetail() {
           </tbody>
         </table>
             <h5>{}</h5>
+            <Link to="/dashboard/orders/list" >
+            <button className="btn btn-danger ml-2" >Back</button>
+            </Link> 
       </div>
     </div>
   );
