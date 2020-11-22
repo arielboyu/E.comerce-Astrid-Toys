@@ -132,7 +132,7 @@ export default function Nav({match}){
             <>
                 <span className={`${style.navItem} d-none d-md-flex my-auto mr-md-n3`}>Cart</span>
                 <NavItem link='/cart' icon={<ion-icon size='large' name="cart-outline"></ion-icon>} />
-                { cart.length && !locationCart && <CartAlert />}
+                { cart.length && <CartAlert />}
             </> }
         </Navbar>
     ) : <></>

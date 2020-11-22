@@ -12,7 +12,7 @@
   --speed: 500ms;
 }
 
-span, .dropdownUser .menu a{
+.navbar span, .dropdownUser .menu a{
   color: var(--text-color)
 }
 
