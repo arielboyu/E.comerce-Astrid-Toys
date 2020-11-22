@@ -1,10 +1,9 @@
 import { 
-    ADD_CART, REMOVE_CART, REMOVE_ALL_CART, ADD_QUANTITY, SUB_QUANTITY, SET_USER, CLEAR_USER, SET_CATEGORIES 
+    ADD_CART, REMOVE_CART, REMOVE_ALL_CART, ADD_QUANTITY, SUB_QUANTITY, SET_USER, CLEAR_USER
 } from '../constants';
 
 const initialState = {
-    carrito: [] ,
-    categories: [],
+    carrito: [],
     user: {
         id: null,
         isAdmin: false,
@@ -62,10 +61,6 @@ function rootReducer (state = initialState, action){
 
     if(action.type === CLEAR_USER){
         return { ...state, user: { id : null, isAdmin : false, name: ""} }
-    }
-
-    if(action.type === SET_CATEGORIES){
-        return { ...state, categories: action.payload }
     }
 
     return state
