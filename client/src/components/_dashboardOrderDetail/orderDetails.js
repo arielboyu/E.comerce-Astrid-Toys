@@ -1,38 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-//Este componente muestra los detalles de la orden y el total
-// Falta hacer la prueba con varios productos que sumen el total a su orden !
+import { Link } from "react-router-dom";
+
 
 export default function OrderDetail() {
   const { idorden } = useParams();
-  const getProduct = axios.get(
-    `${process.env.REACT_APP_API_URL}/orders/${idorden}`
-  );
+  const getOrder = axios.get(
+    `${process.env.REACT_APP_API_URL}/orders/${idorden}`);
   const [product, setProduct] = useState([]);
   const [order, setOrder] = useState([]);
-  useEffect(() => {
-    getProduct.then((res) => {
-      setProduct(res.data.products);
-      // console.log(res);
-    });
-  }, []);
-  const getOrder = axios.get(
-    `${process.env.REACT_APP_API_URL}/orders/${idorden}`
-  );
+  const [user,setUser] = useState({});
   useEffect(() => {
     getOrder.then((res) => {
+      setProduct(res.data.products);
       setOrder(res.data);
-      // console.log(res);
+      setUser(res.data.user)
     });
   }, []);
 
   return (
     <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
       <div>
-        <h1 className="display-3 text-center">ORDER DETAILS</h1>
+      <h1 className="display-3 text-center">ORDER DETAILS</h1>
       <h7> ORDER ID: {"  "} {order.id}</h7>
       <h6>STATE: {"  "}{order.state}</h6>
+      <h6>NAME: {"  "}{user.name}</h6>
       <h7>DISCHARGE DATE:  {"  "} {order.createdAt}</h7>
         <table class="table table-borderless">
           <thead>
@@ -51,17 +44,16 @@ export default function OrderDetail() {
                <td>{p.name}</td>
                <td>${" "}  {p.price}</td>
                <td>{p.orderdetails.quantity}</td>
-               <td> ${" "} {p.orderdetails.quantity * p.orderdetails.price}</td>
+               <td> ${" "} {p.orderdetails.price}</td>
               </tr>
             ))}
           </tbody>
         </table>
             <h5>{}</h5>
+            <Link to="/dashboard/orders/list" >
+            <button className="btn btn-danger ml-2" >Back</button>
+            </Link>
       </div>
     </div>
   );
 }
-
-
-
-  

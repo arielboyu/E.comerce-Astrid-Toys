@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Product from "../_product/product";
 
@@ -27,8 +28,15 @@ const Purchase = ({ orderId }) => {
     }
   }, []);
 
+  const [redirectLoadReview, setRedirectLoadReview] = useState(false);
+
+  const handlerRedirectLoadReview = () => {
+    setRedirectLoadReview(true);
+  };
+
   return (
     <>
+    {redirectLoadReview ? <Redirect to={`/myshop/loadReview`} /> : <></>}
       {redirect ? <Redirect to={`/myshop/details/1`} /> : <></>}
       <div className="container border shadow ">
         <div className="row border ">
@@ -53,7 +61,7 @@ const Purchase = ({ orderId }) => {
                 {/* CABECERA */}
                 <div className="col-sm-12 col-md-2 bg-white ">
                   <p className="border">Product</p>
-                  <p>{prod.name}</p>
+                  <p>{prod.id}</p>
                 </div>
                 <div className="col-sm-12 col-md-2  bg-white ">image</div>
                 <div className="col-sm-4 col-md-2 bg-white">
@@ -62,11 +70,11 @@ const Purchase = ({ orderId }) => {
                 </div>
                 <div className="col-sm-4 col-md-2 bg-white ">
                   <p className="mb-0">U/Price</p>
-                  <p>{prod.orderdetails.price}</p>
+                  <p>{prod.orderdetails.price / prod.orderdetails.quantity}</p>
                 </div>
                 <div className="col-sm-4 col-md-2 bg-white ">
                   <p className="">Sub-Total</p>
-                  <p>{prod.orderdetails.quantity * prod.orderdetails.price}</p>
+                  <p>{prod.orderdetails.price}</p>
                 </div>
               </div>
               <div className="row">
@@ -76,7 +84,14 @@ const Purchase = ({ orderId }) => {
                 >
                   View Product
                 </button>
+                <button
+                  className="btn btn-outline-info col-2"
+                  onClick={() => handlerRedirectLoadReview()}
+                >
+                  Ratings
+                </button>
               </div>
+              
               </>
           ))}
        

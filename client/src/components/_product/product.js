@@ -56,7 +56,6 @@ export default function Product() {
                 {f.stock === 1  ? `Only ${f.stock} unit left, last chance!` : <></>}
                 {f.stock === 0  ? `Not available :(` : <></> }
               </p>
-              <p> ⭐⭐⭐⭐⭐ </p>
 
               {/* AddToCart productId= {f.id} />  */}
               {f.stock > 0 ? (
@@ -78,7 +77,7 @@ export default function Product() {
         </Link>
       </div>
       <div>
-      <Review/>
+      <Review productId={index}/>
       </div>
     </>
     );

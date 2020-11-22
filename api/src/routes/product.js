@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Product, Category, Review } = require("../db.js");
+const { Product, Category, Review, User } = require("../db.js");
 const { Op } = require("sequelize");
 const sequelize = require("sequelize");
 const multer = require("multer");
@@ -257,8 +257,7 @@ server.get("/search/:category", (req, res) => {
 //POST /product/:id/review
 server.post("/:id/review", (req, res) => {
   const productId = req.params.id;
-  const userId = 1; //HARCODEADO, sacar cuando tengamos lo de la sesion
-  const { score, description } = req.body; //objeto review pasado por body
+  const { userId, score, description } = req.body; //objeto review pasado por body
   if (score && description && productId && userId) {
     Review.create({ score, description, productId, userId })
       .then(() => recalculateAverageScore(productId))
@@ -310,7 +309,7 @@ server.delete("/:id/review/:idReview", (req, res) => {
 
 server.get("/:id/review/", (req, res) => {
   const productId = req.params.id;
-  Review.findAll({ where: { productId: productId } })
+  Review.findAll({ where: { productId: productId }, include: User})
     .then((r) => res.send(r))
     .catch((err) => {
       console.log("Error en GET review: " + err);
