@@ -5,22 +5,6 @@ const sequelize = require("sequelize");
 const multer = require("multer");
 const recalculateAverageScore = require("../controllers/recalculateAverageScore.js");
 
-const upload = multer({ dest: "public/image" });
-
-/* let storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-
-const upload = multer({storage}) */
-
 //esta funcion pasa la primer letra de un word a mayus
 function capitalize(word) {
   word = word.toLowerCase();
@@ -37,17 +21,8 @@ function capitalize(word) {
 // });
 
 // const upload = multer({storage});
-
-
-
 const upload = multer({dest: 'public/image'})
 
-server.post('/upload', upload.single("image"), function(req, res) {
-  console.log("ARCHIVO SUBIDO FILE :")
-  console.log(req.file)
-  console.log("imagen SUBIDAAAAAAA")
-  res.send({msg: 'Image successfully created'});
-});
 
 server.get("/actives", (req, res, next) => {
   Product.findAll({
@@ -123,7 +98,7 @@ server.get("/search", (req, res, next) => {
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
 server.post("/upload", upload.single("image"), function (req, res) {
   console.log(req.file);
-  res.send("uploaded"); // the uploaded file object
+  res.send({msg: 'Image successfully created'}); // the uploaded file object
 });
 // Este post agrega un nuevo producto
 

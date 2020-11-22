@@ -1,10 +1,12 @@
 function isAuthenticated (req , res, next) {
+    console.log("isAuthentcated: req.user es: ")
+    console.log(req.user)
     if(req.isAuthenticated()){
         console.log("Estás logueado OK")
         next();
     } else{
         console.log("No hay ningún usuario logueado")
-        res.status(400).send(req.session);
+        res.status(400).send( req.session );
     }   
   }
 

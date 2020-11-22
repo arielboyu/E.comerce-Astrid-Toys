@@ -22,6 +22,8 @@ async function cargarUsuarios() {
       username: DataUsers[i].username,
       email: DataUsers[i].email,
       password: DataUsers[i].password,
+      isAdmin: DataUsers[i].isAdmin,
+      active: DataUsers[i].active
     });
     usuarios.push(user);
   }
