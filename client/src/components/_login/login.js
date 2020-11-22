@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
 import axios from "axios"
-import {useDispatch, useSelector} from 'react-redux'
-import {userLogin} from '../../redux/actions/actions'
+import { useDispatch, useSelector} from 'react-redux'
+import { userLogin } from '../../redux/actions/actions'
 import { Redirect } from 'react-router-dom'
 
 const alerta = (mensaje, color="danger") => {
@@ -21,7 +21,7 @@ const formSchema = Yup.object().shape({
 
 const Login = () => {
   const [redirect, setRedirect] = useState(false)
-  const [user, setUser] = useState()
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch()
 
   const handleSubmit = (values) => {
@@ -29,9 +29,7 @@ const Login = () => {
 			withCredentials: true
 		})
       .then(user => {
-        setUser(user.data)
         dispatch(userLogin(user.data))
-        console.log("aca estoy")
         setTimeout(() => setRedirect(true) , 200) 
       })
       .catch( e => console.log("Log failure") )
@@ -39,7 +37,7 @@ const Login = () => {
 
   return (
     <div className="container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
-      { redirect ? <Redirect to='/dashboard'/> : null }
+      { redirect ? <Redirect to='/products'/> : null }
       <h2 className="display-3 text-center">Login</h2>
       <Formik initialValues={{ username: "", password: "" }} onSubmit={(values) => {handleSubmit(values)}} validationSchema={formSchema} >
         <Form>

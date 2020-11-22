@@ -5,27 +5,24 @@ const sequelize = require("sequelize");
 const multer = require("multer");
 const recalculateAverageScore = require("../controllers/recalculateAverageScore.js");
 
-const upload = multer({ dest: "public/image" });
-
-/* let storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-
-const upload = multer({storage}) */
-
 //esta funcion pasa la primer letra de un word a mayus
 function capitalize(word) {
   word = word.toLowerCase();
   return word[0].toUpperCase() + word.slice(1);
 }
+
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, path.join(__dirname, '/uploads'))
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, file.originalname)
+//   }
+// });
+
+// const upload = multer({storage});
+const upload = multer({dest: 'public/image'})
+
 
 server.get("/actives", (req, res, next) => {
   Product.findAll({
@@ -101,24 +98,13 @@ server.get("/search", (req, res, next) => {
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
 server.post("/upload", upload.single("image"), function (req, res) {
   console.log(req.file);
-  res.send("uploaded"); // the uploaded file object
+  res.send({msg: 'Image successfully created'}); // the uploaded file object
 });
 // Este post agrega un nuevo producto
 
 server.post("/", (req, res) => {
-  const {
-    name,
-    description,
-    price,
-    stock,
-    image,
-    categories,
-    active,
-  } = req.body;
+  const { name, description, price, stock, image, categories, active } = req.body;
 
-  //const categoryId = 0;
-  // Category.findAll({where: {name:category}}).then((res)=>
-  //{categoryId = res.id} )
   if (name && description && price && stock) {
     Product.create({
       name,
@@ -126,6 +112,7 @@ server.post("/", (req, res) => {
       price,
       description,
       active,
+      image
     })
       .then((productCreated) => {
         //buscar categoria a la que tengo que agregar el producto
@@ -135,10 +122,6 @@ server.post("/", (req, res) => {
             .then((res) => productCreated.addCategories(res))
             .catch((err) => console.log("Error con las categorias " + err));
         });
-        // Category.findAll({ where: { id: catId } }).then((res) =>
-        //   productCreated.addCategories(res)
-        // );
-        //Cargo la imagen
       })
       .catch((err) => {
         console.log("Error en POST" + err);

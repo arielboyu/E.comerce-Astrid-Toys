@@ -69,6 +69,13 @@ export default function Product() {
           </>
         ))}
       </div> 
+      <div className="d-flex col-12 mx-auto justify-content-center m-5">
+        <Link to="/products">
+        <button className="btn btn-outline-dark btn-lg ">
+        <i class="far fa-arrow-alt-circle-left"></i> BACK
+        </button>
+        </Link>
+      </div>
       <div>
       <Review productId={index}/>
       </div>
