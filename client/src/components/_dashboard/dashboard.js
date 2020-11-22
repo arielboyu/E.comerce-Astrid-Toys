@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import Spinner from "../utils/spinner/spinner";
+import Spinner from "../_spinner/spinner";
 
 const validation = axios.get(`${process.env.REACT_APP_API_URL}/auth/me`, { withCredentials: true })
 
