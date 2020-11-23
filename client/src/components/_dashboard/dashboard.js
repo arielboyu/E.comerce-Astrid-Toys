@@ -20,7 +20,7 @@ const Dashboard = () => {
             validation
             .then(r => { console.log("Estas logueado!"); console.log(r.data); setLoad(false)})
             .catch(err => { console.log("No estas logueado"); setRedirect(true) } ) 
-        }, 3000)
+        }, 300)
 
         
       }, []);
