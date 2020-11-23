@@ -16,7 +16,7 @@ function randomNum(limit) {
 
 var usuarios = [];
 async function cargarUsuarios() {
-  for (let i = 0; i < DataUsers.length; i++) {
+  for (let i = 1; i < DataUsers.length; i++) {
     var user = await User.create({
       name: DataUsers[i].name,
       username: DataUsers[i].username,
@@ -72,7 +72,7 @@ async function cargarTablaOrder() {
     var order = await Order.create({
       state: DataOrders[i].state,
     });
-    order.setUser(usuarios[Math.floor(Math.random() * usuarios.length)]);
+    order.setUser(usuarios[Math.floor(Math.random()* usuarios.length)]);
     var myProduct1 = productsArray[randomNum(productsArray.length)];
     var myProduct2 = productsArray[randomNum(productsArray.length)];
     order.addProduct(myProduct1, {
