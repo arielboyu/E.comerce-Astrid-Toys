@@ -25,7 +25,6 @@ import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboa
 import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
 import OrderList from "./components/_dashboardTableOrders/orderTable"
 import ContainerMyShopping from "./components/_myShopping/containerShop.js"
-import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
 import UpdateCategories from "./components/_dashboardUpdateCategories/updateCategories"
 import UsersList from "./components/_dashboardUsersTable/usersTable"
 import OrderListPending from "./components/_dashboardTableOrders/OrderTablePending"
@@ -79,9 +78,6 @@ function App() {
           </Route>
           <Route exact path="/dashboard/users/list">
             <UsersList />
-          </Route>
-          <Route exact path="/dashboard/orders/detail/:idorden">
-            <OrderDetail />
           </Route>
           <Route exact path="/dashboard/orders/pending">
             <OrderListPending />

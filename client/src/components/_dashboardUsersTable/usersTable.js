@@ -33,7 +33,7 @@ export default function UsersTable() {
            height: "370px",}}  >
           <h1 style={{background:"white"}}   className="display-3 text-center">USERS  LIST</h1>
          </div>
-            <table class="table table-borderless">
+            <table className="table table-darkness">
             <thead>
               <tr>
                 <th>ID#</th>
