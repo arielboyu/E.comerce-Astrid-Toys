@@ -3,12 +3,20 @@ const { Product, Category, Review, User } = require("../db.js");
 const { Op } = require("sequelize");
 const sequelize = require("sequelize");
 const multer = require("multer");
-const fs = require('fs');
+const fs = require("fs");
+const path = require("path");
 
+const storage = multer.diskStorage({
+  destination: path.dirname(path.dirname(__dirname))+"/public/images",
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
-
-const upload = multer({dest: 'public/image'}) 
-
+const upload = multer({
+  storage: storage,
+  dest: path.dirname(__dirname) + "/" + "public/images",
+});
 
 /* let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -23,7 +31,6 @@ const upload = multer({dest: 'public/image'})
 });
 
 const upload = multer({storage}) */
-
 
 const recalculateAverageScore = require("../controllers/recalculateAverageScore.js");
 
@@ -43,7 +50,6 @@ function capitalize(word) {
 // });
 
 // const upload = multer({storage});
-
 
 server.get("/actives", (req, res, next) => {
   Product.findAll({
@@ -115,28 +121,43 @@ server.get("/search", (req, res, next) => {
 // POST /products
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
-server.post('/upload/:idProduct', upload.single("image"), function(req, res) {
-  console.log(req.file)
-  console.log("este es el idProduct: ", req.params.idProduct)
-  let idProduct = req.params.idProduct
-  fs.renameSync(req.file.path, req.file.destination+"/"+idProduct.toString()+"." + req.file.mimetype.split("/")[1]);
-  console.log("NUEVA RUTA:")
+server.post("/upload/:idProduct", upload.single("image"), function (req, res) {
+  console.log(req.file);
+  console.log("este es el idProduct: ", req.params.idProduct);
+  let idProduct = req.params.idProduct;
+  fs.renameSync(
+    req.file.path,
+    req.file.destination +
+      "/" +
+      idProduct.toString() +
+      "." +
+      req.file.mimetype.split("/")[1]
+  );
+  console.log("NUEVA RUTA:");
   //fs.rename(req.file.path + "." + req.file.mimetype.split("/")[1], req.file.destination+"/"+idProduct.toString()+"." + req.file.mimetype.split("/")[1])
-  Product.findOne({where:{id: idProduct}}).then((product)=>{
-    console.log(product)
-    product.setDataValue("image", "src/"+req.file.destination+"/"+idProduct)
-    product.save()
-    console.log("-----------------------------------------------")
-    console.log(product)
+  Product.findOne({ where: { id: idProduct } }).then((product) => {
+    console.log(product);
+    product.setDataValue("image", req.file.destination + "/" + idProduct);
+    product.save();
+    console.log("-----------------------------------------------");
+    console.log(product);
     res.send("uploaded");
-  })
+  });
 
-   // the uploaded file object
+  // the uploaded file object
 });
 // Este post agrega un nuevo producto
 
 server.post("/", (req, res) => {
-  const { name, description, price, stock, image, categories, active } = req.body;
+  const {
+    name,
+    description,
+    price,
+    stock,
+    image,
+    categories,
+    active,
+  } = req.body;
 
   if (name && description && price && stock) {
     Product.create({
@@ -145,7 +166,7 @@ server.post("/", (req, res) => {
       price,
       description,
       active,
-      image
+      image,
     })
       .then((productCreated) => {
         //buscar categoria a la que tengo que agregar el producto
@@ -159,7 +180,7 @@ server.post("/", (req, res) => {
         //   productCreated.addCategories(res)
         // );
         //Cargo la imagen
-        res.send(productCreated)
+        res.send(productCreated);
       })
       .catch((err) => {
         console.log("Error en POST" + err);
@@ -311,7 +332,7 @@ server.post("/:id/review", (req, res) => {
 //S55 : Crear ruta para Modificar Review
 //PUT /product/:id/review/:idReview
 
-server.put('/:id/review/:idReview', (req, res) => {
+server.put("/:id/review/:idReview", (req, res) => {
   const productId = req.params.id;
   const reviewId = req.params.idReview;
   const { score, description } = req.body;
@@ -347,7 +368,7 @@ server.delete("/:id/review/:idReview", (req, res) => {
 
 server.get("/:id/review/", (req, res) => {
   const productId = req.params.id;
-  Review.findAll({ where: { productId: productId }, include: User})
+  Review.findAll({ where: { productId: productId }, include: User })
     .then((r) => res.send(r))
     .catch((err) => {
       console.log("Error en GET review: " + err);
