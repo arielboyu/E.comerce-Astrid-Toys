@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import { Link, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
@@ -31,9 +31,28 @@ const formSchema = Yup.object().shape({
 });
 
 const Register = () => {
+  const history = useHistory()
+  const [regOk, setRegOk] = useState(false)
+  
+
+  const handlerRegister=(values)=>{
+    setRegOk(false)
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, values)
+    .then(r => {
+      setRegOk(true)
+      setTimeout(() => {
+        history.goBack()
+      }, 1000)
+    })
+    .catch( e => console.log(e))
+  }
   return (
     <div className="container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
       <h2 className="display-3 text-center">Register</h2>
+      { regOk ? (
+        <div className="alert alert-primary" role="alert">
+            Register success! Welcome :)
+        </div>) : <></> }
       <Formik
         initialValues={{
           name: "",
@@ -42,10 +61,7 @@ const Register = () => {
           password: "",
         }}
         validationSchema={formSchema}
-        onSubmit={(values) => { console.log(values);
-          axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, values)
-          .then(r => console.log("creado") )
-          .catch( e => console.log("fallo") )}}
+        onSubmit={(values) => handlerRegister(values)}
       >
         <Form>
           <FormGroup>
