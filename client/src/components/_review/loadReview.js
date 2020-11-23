@@ -1,66 +1,44 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link,useParams } from "react-router-dom";
 import Rating from "react-rating";
 import {useSelector} from 'react-redux'
 
 const LoadReview = ({idProduct}) => {
+  const user= useSelector(state => state.user)
   const [loadReview, setLoadReview] = useState({
     userId:0,
     score: 0,
     description: ""
   });
-  // const { idProduct } = useParams();
-  console.log("idProduct:",idProduct)
-  const user= useSelector(state => state.user)
+
   useEffect(()=>{
-    console.log("entrando a loadReview")
     setLoadReview({ ...loadReview, userId:user.id })
-  },[])
-  
- 
+  } , [ ] )
 
   function handlerChangeScore(e) {
     setLoadReview({ ...loadReview, score: e});
   }
+
   function handlerChangeDescription(e) {
     setLoadReview({ ...loadReview, description: e.target.value });
   }
 
   function handlerLoadReviewSubmit(e) {
     e.preventDefault()
-    console.log("user: ", user)
-    // setLoadReview({ userId:user.id })
-
-    console.log("loadReview: ",loadReview)
     axios
       .post(`${process.env.REACT_APP_API_URL}/products/${idProduct}/review`, loadReview)
-      .then((res) => {
-        console.log("Review loaded");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      .then((res) => { console.log("Review loaded") })
+      .catch((e) => { console.log(e) });
   }
 
   return (
     
-    <div className="container d-flex flex-column mx-auto my-5 col-sm-12 col-md-8 col-lg-6 p-5 border shadow">
-      <h2 class="display-5 mb-4 text-center">Did you like the product? Will you recommend it? Leave a review :) </h2>
+    <div className="d-flex flex-column mx-auto mb-3 col-12">
       <form onSubmit={handlerLoadReviewSubmit}>
-        <div className="form-group">
-          <label htmlFor="ReviewScore" className="">
-            How much?   :
-          </label>
-          {/* <input
-            type="text"
-            className="form-control"
-            name="star"
-            value={loadReview.score}
-            placeholder="Rate us..."
-            onChange={handlerChangeScore}
-          /> */}
-              <Rating
+        <div className="form-group w-75 mx-auto">
+          <p className="pb-0 mb-1" htmlFor="ReviewText">Did you like the product? Will you recommend it? Leave a review :) </p>
+          <div className="text-warning">
+          <Rating 
                 start={0}
                 stop={5}
                 fractions={1}
@@ -70,64 +48,19 @@ const LoadReview = ({idProduct}) => {
                 emptySymbol="fa fa-star-o"
                 onChange={handlerChangeScore} 
               />
-        </div>
-        <div className="form-group">
-          <label htmlFor="ReviewText">Leave us some comments!</label>
+          </div>
           <textarea
-            className="form-control"
+            className="form-control mt-3"
             name="description"
             // value={loadReview.description}
-            rows="3"
+            rows="2"
             onChange={handlerChangeDescription}
           ></textarea>
         </div>
-        <button
-          type="submit"
-          className="btn btn-dark"
-          // data-toggle="modal"
-          // data-target="#modalCreateReview"
-        >
+        <button type="submit" className="btn btn-dark" >
           Submit
         </button>
-        <Link to="/myShop/1">
-          <button className="btn btn-danger ml-2">Back</button>
-        </Link>
       </form>
-      {/* <!-- Modal --> */}
-      {/* <div
-        class="modal"
-        id="modalCreateReview"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="modalCreateReviewLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">Thank you so much!</div>
-            <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                  onClick={()=>window.location.reload()}
-                >
-                  OK
-                </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }

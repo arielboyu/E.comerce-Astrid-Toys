@@ -110,6 +110,11 @@ export default function Nav({match}){
                 <NavItem link='/products' icon={<ion-icon size='large' name="bag-outline"></ion-icon>} />
             </>
 
+            <>
+                <span className={`${style.navItem} d-none d-md-flex my-auto ml-2`}>Dashboard</span>
+                <span className="d-none d-md-flex"><NavItem link='/dashboard' icon={<ion-icon size='large' name="list"></ion-icon>} /></span>
+            </>  
+
             { user.id ? ( 
 
             <> 
@@ -122,22 +127,16 @@ export default function Nav({match}){
             <>
                 <span className={`${style.navItem} d-none d-md-flex my-auto mr-md-n3 `}>Log in</span>
                 <NavItem link='/login' icon={<ion-icon size='large' name="log-in-outline"></ion-icon>} /> 
-            </> ) }
-
-            { user.isAdmin ? 
-
-            <>
-                <span className={`${style.navItem} d-none d-md-flex my-auto ml-2`}>Dashboard</span>
-                <NavItem link='/dashboard' icon={<ion-icon size='large' name="list"></ion-icon>} /> 
-            </> :  
+            </> ) } 
             
             <>
-                <span className={`${style.navItem} d-none d-md-flex my-auto mr-md-n3`}>Cart</span>
+                <span className={`${style.navItem} d-none d-md-flex my-auto ml-md-n3 mr-md-n3`}>Cart</span>
                 <NavItem link='/cart' icon={<ion-icon size='large' name="cart-outline"></ion-icon>} />
                 { cart.length && <CartAlert />}
-            </> }{
+            </> 
 
-            }
+
+            
         </Navbar>
     ) : <></>
     )

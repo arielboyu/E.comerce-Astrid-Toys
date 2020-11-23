@@ -296,6 +296,17 @@ server.get("/shopping/:id", (req, res) => {
   }).then((orders) => res.status(200).json(orders));
 });
 
+//Cambiar User a Admin
+server.put("/change/rol/:id", (req, res)=>{
+  const id = req.params.id
+  User.findOne({where: { id: id}})
+  .then((userFind)=>{
+    userFind.update({ isAdmin : true})
+    .then(r => console.log("Rol change"))
+    .catch(err => console.log("Rol not change"))
+  })
+  .catch(err => console.log("User not found"))
+})
 
 
 module.exports = server;
