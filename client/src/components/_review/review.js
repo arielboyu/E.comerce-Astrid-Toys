@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -108,39 +109,40 @@ export default function Review() {
   );
 }
   /*
-  return (
-  
-      <>
-        <div className="container d-flex flex-column text-center my-5 p-5">
-          <h1 className="display-3">Ratings</h1>
-              <div className="row headCont">
-              <div className="col-4 col-md-8">
-                <span>name</span>
-              </div>
-              <div className="col-4 col-md-2">
-                <span>ratings</span>
-              </div>
-              <div className="col-4 col-md-2">
-                <span>comentarios</span>
-              </div> 
-              </div> 
-              </div>
-      
- 
-          <form>
-            <fieldset>
-              <span class="star-cb-group">
-                <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
-                <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
-                <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
-                <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
-                <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
-                <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
-              </span>
-            </fieldset>
-          </form>
-          <script> 
+=======
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import StarScore from './starScore';
 
+export default function Review({productId}) {
+  const [reviews, setReviews] = useState([]);
+  const [averageScore, setAverageScore] = useState("");
+  const [load, setLoad] = useState(false);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/products/${productId}`)
+      .then((res) => {
+        setAverageScore(res.data[0].averageScore);
+        axios.get(`${process.env.REACT_APP_API_URL}/products/${productId}/review`)
+        .then((res)=>{
+          console.log("get Review; ",res.data)
+          setReviews(res.data);
+        })
+        setLoad(true);
+      });
+  }, [load]);
+>>>>>>> b06595cb80638c80502bde653f09075974bc8676
+  return (
+    <>
+      <div className="d-flex flex-column mx-auto text-center mt-5 mt-lg-0">
+        <div className="mt-5 mt-lg-0">
+          {console.log(averageScore)}
+          <h1 className="display-3 mt-5 pt-5 pt-lg-0 mt-lg-0">{!averageScore ? "S/C" : averageScore}</h1>
+          <span className="text-warning"><StarScore score = {averageScore}/></span>
+        </div>
+        
+
+<<<<<<< HEAD
           </script>
           </>
       )}*/
@@ -149,3 +151,24 @@ export default function Review() {
 
 
     
+=======
+        <h3 className="mt-3 mt-lg-5">Reviews</h3>
+        {reviews.map(review=>(
+          <div className="d-flex headCont flex-column flex-lg-row w-75 mx-auto">
+            <div className="col-12 col-lg-3">
+              <span>{review.user.name}</span>
+            </div>
+            <div className="col-12 col-lg-3">
+              <span className="mr-2">{review.score}</span>
+              <span className="text-warning"><StarScore score = {review.score}/></span>
+            </div>
+            <div className="col-12 col-lg-6 text-center text-lg-left">
+              <p className="mt-2 mt-lg-0">" {review.description} "</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+>>>>>>> b06595cb80638c80502bde653f09075974bc8676

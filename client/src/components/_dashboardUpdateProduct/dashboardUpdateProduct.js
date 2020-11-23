@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import BtnDashboard from "../_navBar/btnDashboard";
 
 const getProduct = axios.get(`${process.env.REACT_APP_API_URL}/products`);
 
@@ -84,6 +83,9 @@ const DashboardUpdateProduct = () => {
           ))}
         </tbody>
       </table>
+      <Link to="/dashboard" >
+      <button className="btn btn-danger ml-2" >Back</button>
+      </Link> 
     </div>
   );
 };

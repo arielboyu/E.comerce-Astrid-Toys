@@ -4,7 +4,7 @@ const { User } = require("../db.js");
 const isAuthenticated = require('../controllers/isAuthenticated.js')
 
 
-server.get('/prueba', isAuthenticated ,(req,res,next)=>{
+server.get('/pruebaLogin', isAuthenticated, ( req, res ) => {
 	res.send('Estas logueado')
 })
 
@@ -14,7 +14,7 @@ server.post('/prueba', (req,res,next)=>{
 })
 
 
-server.post( '/signup', ( req, res, next ) => {
+server.post('/signup', ( req, res, next ) => {
 	if ( req.isAuthenticated( ) ) {
 		return res.status( 400 ).send( { message: 'User is already logged in' } );
 	}
@@ -38,20 +38,18 @@ server.post( '/signup', ( req, res, next ) => {
   }
 } );
 
-server.post( '/login', passport.authenticate('local', {succesRedirect:'/funca', failureRedirect:'/fallo'}),(req,res,next)=>{
-  res.send(req.user)
+server.post('/login', passport.authenticate('local'), (req, res) => {
+	res.send( req.user );
 });
 
 server.get('/logout', (req, res) => {
     req.logout();
     res.clearCookie('id'); 
-    res.redirect('/');
+    res.send( req.user );
 })
 
 server.get('/me', isAuthenticated, (req, res) => {
-  console.log("auth/me response:")
-  console.log(req.session)
-  res.send(req.user)
+  res.status(200).send( req.user );
 })
 
 module.exports = server;

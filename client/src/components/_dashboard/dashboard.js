@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import Spinner from "../utils/spinner/spinner";
+import Spinner from "../_spinner/spinner";
 
 const validation = axios.get(`${process.env.REACT_APP_API_URL}/auth/me`, { withCredentials: true })
 
@@ -20,7 +20,7 @@ const Dashboard = () => {
             validation
             .then(r => { console.log("Estas logueado!"); console.log(r.data); setLoad(false)})
             .catch(err => { console.log("No estas logueado"); setRedirect(true) } ) 
-        }, 300)
+        }, 3000)
 
         
       }, []);
@@ -47,9 +47,14 @@ const Dashboard = () => {
                     <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Category 
                     </button>
                 </Link>
-                <Link to="/dashboard/users/list">
+                <Link to="/dashboard/orders/list">
                     <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
                     <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Orders 
+                    </button>
+                </Link>
+                <Link to="/dashboard/users/list">
+                    <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
+                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Users 
                     </button>
                 </Link>
                 </div>

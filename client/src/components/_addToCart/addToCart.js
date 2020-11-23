@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import style from "../_productCard/productCard.module.css";
 
 import {useDispatch} from 'react-redux'
@@ -14,16 +13,11 @@ const AddToCart = ({ product }) => {
     setProducto({...product, cant:1})
   },[])
  
-
-
   return (
-        <button
+        <button 
           id="boton-agregar"
-          className={`btn btn-danger mx-3 mb-1 ${style.cart}`}
-          data-toggle="modal"
-          data-target="#exampleModal"
+          className={`btn btn-danger mb-1 ${style.cart}`}
           type="button"
-          // onClick={() => handlerClick()}
           onClick={()=>dispatch(addToCart(productoParaAgregar))}
         >
           <i class="fas fa-cart-plus"></i> ADD TO CART
