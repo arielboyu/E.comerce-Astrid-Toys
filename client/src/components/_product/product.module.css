@@ -40,11 +40,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 30ms;
+    transition: all 400ms;
+    box-shadow: 0 .5rem 3rem rgba(0, 0, 0, 0.0) !important;
 }
 
 .btnBack:hover{
-    background-color: white;
-    color:  #ce9a18dc;
+    color: white;
+    background-color: #b68407dc;
     border: 1px solid #ce9a18dc;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, 0.20) !important;
 }
