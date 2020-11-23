@@ -3,6 +3,28 @@ const { Product, Category, Review, User } = require("../db.js");
 const { Op } = require("sequelize");
 const sequelize = require("sequelize");
 const multer = require("multer");
+const fs = require('fs');
+
+
+
+const upload = multer({dest: 'public/image'}) 
+
+
+/* let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({storage}) */
+
+
 const recalculateAverageScore = require("../controllers/recalculateAverageScore.js");
 
 //esta funcion pasa la primer letra de un word a mayus
@@ -21,7 +43,6 @@ function capitalize(word) {
 // });
 
 // const upload = multer({storage});
-const upload = multer({dest: 'public/image'})
 
 
 server.get("/actives", (req, res, next) => {
@@ -43,8 +64,6 @@ server.get("/", (req, res, next) => {
     order: [["id", "ASC"]],
   })
     .then((products) => {
-      console.log("Se tendrian que renderizar los productos");
-
       res.send(products);
     })
     .catch(next);
@@ -96,9 +115,23 @@ server.get("/search", (req, res, next) => {
 // POST /products
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
-server.post("/upload", upload.single("image"), function (req, res) {
-  console.log(req.file);
-  res.send({msg: 'Image successfully created'}); // the uploaded file object
+server.post('/upload/:idProduct', upload.single("image"), function(req, res) {
+  console.log(req.file)
+  console.log("este es el idProduct: ", req.params.idProduct)
+  let idProduct = req.params.idProduct
+  fs.renameSync(req.file.path, req.file.destination+"/"+idProduct.toString()+"." + req.file.mimetype.split("/")[1]);
+  console.log("NUEVA RUTA:")
+  //fs.rename(req.file.path + "." + req.file.mimetype.split("/")[1], req.file.destination+"/"+idProduct.toString()+"." + req.file.mimetype.split("/")[1])
+  Product.findOne({where:{id: idProduct}}).then((product)=>{
+    console.log(product)
+    product.setDataValue("image", "src/"+req.file.destination+"/"+idProduct)
+    product.save()
+    console.log("-----------------------------------------------")
+    console.log(product)
+    res.send("uploaded");
+  })
+
+   // the uploaded file object
 });
 // Este post agrega un nuevo producto
 
@@ -118,10 +151,15 @@ server.post("/", (req, res) => {
         //buscar categoria a la que tengo que agregar el producto
         categories.map((cat) => {
           let catId = parseInt(cat);
-          Category.findAll({ where: { id: catId } })
-            .then((res) => productCreated.addCategories(res))
+          Category.findOne({ where: { id: catId } })
+            .then((category) => productCreated.addCategory(category))
             .catch((err) => console.log("Error con las categorias " + err));
         });
+        // Category.findAll({ where: { id: catId } }).then((res) =>
+        //   productCreated.addCategories(res)
+        // );
+        //Cargo la imagen
+        res.send(productCreated)
       })
       .catch((err) => {
         console.log("Error en POST" + err);
