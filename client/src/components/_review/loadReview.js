@@ -1,22 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
+import Rating from "react-rating";
+import {useSelector} from 'react-redux'
 
-const LoadReview = ({idProduct}) => {
+const LoadReview = () => {
   const [loadReview, setLoadReview] = useState({
-    score: 1,
+    userId:0,
+    score: 0,
     description: ""
   });
+  const { idProduct } = useParams();
+  console.log("idProduct:",idProduct)
+  const user= useSelector(state => state.user)
+  useEffect(()=>{
+    setLoadReview({ ...loadReview, userId:user.id })
+  },[])
+  
+ 
 
   function handlerChangeScore(e) {
-    setLoadReview({ ...loadReview, star: e.target.value });
+    setLoadReview({ ...loadReview, score: e});
   }
   function handlerChangeDescription(e) {
-    setLoadReview({ ...loadReview, text: e.target.value });
+    setLoadReview({ ...loadReview, description: e.target.value });
   }
 
-
   function handlerLoadReviewSubmit(e) {
+    e.preventDefault()
+    console.log("user: ", user)
+    // setLoadReview({ userId:user.id })
+
+    console.log("loadReview: ",loadReview)
     axios
       .post(`${process.env.REACT_APP_API_URL}/${idProduct}/review`, loadReview)
       .then((res) => {
@@ -25,33 +40,42 @@ const LoadReview = ({idProduct}) => {
       .catch((e) => {
         console.log(e);
       });
-    e.preventDefault();
   }
 
   return (
     
     <div className="container d-flex flex-column mx-auto my-5 col-sm-12 col-md-8 col-lg-6 p-5 border shadow">
-      <h2 class="display-5 mb-4 text-center">Let us your comment... :) </h2>
+      <h2 class="display-5 mb-4 text-center">Did you like the product? Will you recommend it? Leave a review :) </h2>
       <form onSubmit={handlerLoadReviewSubmit}>
         <div className="form-group">
           <label htmlFor="ReviewScore" className="">
-            score:
+            How much?   :
           </label>
-          <input
+          {/* <input
             type="text"
             className="form-control"
             name="star"
             value={loadReview.score}
             placeholder="Rate us..."
             onChange={handlerChangeScore}
-          />
+          /> */}
+              <Rating
+                start={0}
+                stop={5}
+                fractions={1}
+                initialRating={loadReview.score}
+                readonly={false}
+                fullSymbol="fa fa-star"
+                emptySymbol="fa fa-star-o"
+                onChange={handlerChangeScore} 
+              />
         </div>
         <div className="form-group">
-          <label htmlFor="ReviewText">Comment us your opinion:</label>
+          <label htmlFor="ReviewText">Leave us some comments!</label>
           <textarea
             className="form-control"
             name="description"
-            value={loadReview.description}
+            // value={loadReview.description}
             rows="3"
             onChange={handlerChangeDescription}
           ></textarea>
@@ -59,8 +83,8 @@ const LoadReview = ({idProduct}) => {
         <button
           type="submit"
           className="btn btn-dark"
-          data-toggle="modal"
-          data-target="#modalCreateCat"
+          // data-toggle="modal"
+          // data-target="#modalCreateReview"
         >
           Submit
         </button>
@@ -69,20 +93,17 @@ const LoadReview = ({idProduct}) => {
         </Link>
       </form>
       {/* <!-- Modal --> */}
-      <div
+      {/* <div
         class="modal"
-        id="modalCreateCat"
+        id="modalCreateReview"
         tabindex="-1"
         role="dialog"
-        aria-labelledby="modalCreateCatLabel"
+        aria-labelledby="modalCreateReviewLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="modalCreateCatLabel">
-              Ratings
-              </h5>
               <button
                 type="button"
                 class="close"
@@ -92,7 +113,7 @@ const LoadReview = ({idProduct}) => {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">Category created</div>
+            <div class="modal-body">Thank you so much!</div>
             <div class="modal-footer">
                 <button
                   type="button"
@@ -105,7 +126,7 @@ const LoadReview = ({idProduct}) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
