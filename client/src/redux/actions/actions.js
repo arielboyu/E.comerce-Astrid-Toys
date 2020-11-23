@@ -1,48 +1,32 @@
-import axios from 'axios'
+import { 
+    ADD_CART, REMOVE_CART, REMOVE_ALL_CART, ADD_QUANTITY, SUB_QUANTITY, SET_USER, CLEAR_USER 
+} from '../constants';
 
 export function addToCart(payload){
-    return {
-        type: "ADD_CART",
-        payload
-    }
+    return { type: ADD_CART, payload }
 }
+
 export function removeProductToCart(payload){
-    return {
-        type: "REMOVE_CART",
-        payload
-    }
+    return { type: REMOVE_CART, payload } 
 }
 
 export function removeAllProductsToCart(){
-    return {
-        type: "REMOVE_ALL_CART"
-    }
+    return { type: REMOVE_ALL_CART } 
 }
 
-/*export function calculeAllCart(){
-    return {
-        type: "CALCULE_ALL_CART"
-    }
-}*/
-
 export function addQuantity(payload){
-    return{
-        type:'ADD_QUANTITY',
-        payload
-    }
+    return { type: ADD_QUANTITY, payload }
 }
 
 export function subQuantity(payload){
-    return{
-        type:'SUB_QUANTITY',
-        payload
-    }
+    return { type: SUB_QUANTITY, payload }
 }
 
-//ACTIONS DE LOGGIN
 export function userLogin(payload){
-    return {
-        type: "USER_LOGIN",
-        payload
-    }
+    return { type: SET_USER, payload }
 }
+
+export function userLogOut(){
+    return { type: CLEAR_USER }
+}
+

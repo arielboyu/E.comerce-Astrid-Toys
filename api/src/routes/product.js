@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Product, Category, Review } = require("../db.js");
+const { Product, Category, Review, User } = require("../db.js");
 const { Op } = require("sequelize");
 const sequelize = require("sequelize");
 const multer = require("multer");
@@ -25,12 +25,25 @@ const upload = multer({dest: 'public/image'})
 const upload = multer({storage}) */
 
 
+const recalculateAverageScore = require("../controllers/recalculateAverageScore.js");
 
 //esta funcion pasa la primer letra de un word a mayus
 function capitalize(word) {
   word = word.toLowerCase();
   return word[0].toUpperCase() + word.slice(1);
 }
+
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, path.join(__dirname, '/uploads'))
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, file.originalname)
+//   }
+// });
+
+// const upload = multer({storage});
+
 
 server.get("/actives", (req, res, next) => {
   Product.findAll({
@@ -99,7 +112,7 @@ server.get("/search", (req, res, next) => {
 });
 
 // s25 : Crear ruta para crear/agregar Producto
-// POST /products 
+// POST /products
 // Controla que estén todos los campos requeridos, si no retorna un statos 400.
 // Si pudo crear el producto retorna el status 201 y retorna la información del producto.
 server.post('/upload/:idProduct', upload.single("image"), function(req, res) {
@@ -121,19 +134,10 @@ server.post('/upload/:idProduct', upload.single("image"), function(req, res) {
    // the uploaded file object
 });
 // Este post agrega un nuevo producto
-server.post("/",  (req, res) => {
-  const {
-    name,
-    description,
-    price,
-    stock,
-    image,
-    categories,
-    active,
-  } = req.body;
-  //const categoryId = 0;
-  // Category.findAll({where: {name:category}}).then((res)=>
-  //{categoryId = res.id} )
+
+server.post("/", (req, res) => {
+  const { name, description, price, stock, image, categories, active } = req.body;
+
   if (name && description && price && stock) {
     Product.create({
       name,
@@ -141,6 +145,7 @@ server.post("/",  (req, res) => {
       price,
       description,
       active,
+      image
     })
       .then((productCreated) => {
         //buscar categoria a la que tengo que agregar el producto
@@ -158,36 +163,6 @@ server.post("/",  (req, res) => {
       })
       .catch((err) => {
         console.log("Error en POST" + err);
-      });
-  } else {
-    res.status(400).send("ERROR: Campos sin completar");
-  }
-});
-
-//S54 : Crear ruta para crear/agregar Review
-//POST /product/:id/review
-server.post("/:id/review", (req, res) => {
-  const productId = req.params.id;
-  const userId = 1; //HARCODEADO, sacar cuando tengamos lo de la sesion
-  const { score, description } = req.body; //objeto review pasado por body
-  if (score && description && productId && userId) {
-    Review.create({ score, description, productId, userId })
-      .then(() => Review.count({ where: { productId: productId } }))
-      .then((count) => {
-        Review.sum("score", { where: { productId: productId } })
-          .then((sum) => {
-            let averageScore = sum / count;
-            Product.update(
-              { averageScore: averageScore },
-              { where: { id: productId } }
-            ).then((r) => console.log(r));
-          })
-          .then((r) => res.send(r));
-      })
-      //    let rating =Review.sum({where:{productId:productId}})
-      //   Product.update({rating},{where:{id:productId}}))
-      .catch((err) => {
-        console.log("Error en POST review" + err);
       });
   } else {
     res.status(400).send("ERROR: Campos sin completar");
@@ -311,6 +286,72 @@ server.get("/search/:category", (req, res) => {
     .catch((err) => {
       console.log("entre acá" + err);
       res.sendStatus(404);
+    });
+});
+
+//-----------REVIEWS------------
+
+//S54 : Crear ruta para crear/agregar Review
+//POST /product/:id/review
+server.post("/:id/review", (req, res) => {
+  const productId = req.params.id;
+  const { userId, score, description } = req.body; //objeto review pasado por body
+  if (score && description && productId && userId) {
+    Review.create({ score, description, productId, userId })
+      .then(() => recalculateAverageScore(productId))
+      .then((r) => res.send(r))
+      .catch((err) => {
+        console.log("Error en POST review: " + err);
+      });
+  } else {
+    res.status(400).send("ERROR: Campos sin completar");
+  }
+});
+
+//S55 : Crear ruta para Modificar Review
+//PUT /product/:id/review/:idReview
+
+server.put('/:id/review/:idReview', (req, res) => {
+  const productId = req.params.id;
+  const reviewId = req.params.idReview;
+  const { score, description } = req.body;
+  Review.update(
+    { score: score, description: description },
+    { where: { id: reviewId } }
+  )
+    .then(() => recalculateAverageScore(productId))
+    .then((r) => res.send(r))
+    .catch((err) => {
+      console.log("Error en PUT review: " + err);
+      res.send(err);
+    });
+});
+
+//S56 : Crear Ruta para eliminar Review
+//DELETE /product/:id/review/:idReview
+
+server.delete("/:id/review/:idReview", (req, res) => {
+  const productId = req.params.id;
+  const reviewId = req.params.idReview;
+  Review.destroy({ where: { id: reviewId } })
+    .then(() => recalculateAverageScore(productId))
+    .then((r) => res.send(r))
+    .catch((err) => {
+      console.log("Error en DELETE review: " + err);
+      res.send(err);
+    });
+});
+
+//S57 : Crear Ruta para obtener todas las reviews de un producto.
+//GET /product/:id/review/
+
+server.get("/:id/review/", (req, res) => {
+  const productId = req.params.id;
+  Review.findAll({ where: { productId: productId }, include: User})
+    .then((r) => res.send(r))
+    .catch((err) => {
+      console.log("Error en GET review: " + err);
+      res.send(err);
     });
 });
 

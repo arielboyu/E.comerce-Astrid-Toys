@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import AddToCart from "../_addToCart/addToCart";
 import { Link } from "react-router-dom";
+import Review from "../_review/review.js";
 //Product
 
 export default function Product() {
@@ -34,7 +35,7 @@ export default function Product() {
       <>
       <div
         style={card}
-        className="border d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded shadow"
+        className="container border d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded shadow"
       >
         {fuko.map((f) => (
           <>
@@ -55,7 +56,7 @@ export default function Product() {
                 {f.stock === 1  ? `Only ${f.stock} unit left, last chance!` : <></>}
                 {f.stock === 0  ? `Not available :(` : <></> }
               </p>
-              <p> ⭐⭐⭐⭐⭐ </p>
+
               {/* AddToCart productId= {f.id} />  */}
               {f.stock > 0 ? (
                <AddToCart product= {f} /> 
@@ -67,7 +68,7 @@ export default function Product() {
             </div>
           </>
         ))}
-      </div>
+      </div> 
       <div className="d-flex col-12 mx-auto justify-content-center m-5">
         <Link to="/products">
         <button className="btn btn-outline-dark btn-lg ">
@@ -75,7 +76,10 @@ export default function Product() {
         </button>
         </Link>
       </div>
-      </>
+      <div>
+      <Review productId={index}/>
+      </div>
+    </>
     );
   }
   return <p>404</p>;

@@ -6,14 +6,34 @@
 
 *{
   box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
 }
-body{
-    font-family: 'Fredoka One', cursive;
+
+body{  
+    font-family: 'Fredoka One', cursive; 
+    width: 100%;
 }
+
 a{
-  color: rgba(206, 154, 24, 0.863)
+  color: #ce9a18dc
 }
 a:hover{
-  color: rgba(0, 0, 0, 0.795);
+  color: #000000cb;
   text-decoration:none;
+}
+
+.container{
+  margin-top: 140px !important;
+  margin-bottom: 120px !important;
+
+}
+
+.appContainer{
+  margin-top: 100px;
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
