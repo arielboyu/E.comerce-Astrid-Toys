@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link,Redirect,useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 export default function OrderDetail() {
@@ -12,6 +12,7 @@ export default function OrderDetail() {
   const [order, setOrder] = useState([]);
   const [user,setUser] = useState({});
   const [total, setTotal] = useState(0)
+  const userAct = useSelector((state) => state.user);
   useEffect(() => {
     getOrder.then((res) => {
       totalpr(res.data.products);
@@ -29,6 +30,7 @@ export default function OrderDetail() {
   }
   return (
     <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+      {!userAct.isAdmin ? <Redirect to='/products'/> : null} 
       <div>
       <h1 className="display-3 text-center">ORDER DETAILS</h1>
       <h7> ORDER ID: {"  "} {order.id}</h7>
