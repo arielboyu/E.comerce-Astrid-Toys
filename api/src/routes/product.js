@@ -7,30 +7,17 @@ const fs = require("fs");
 const path = require("path");
 
 const storage = multer.diskStorage({
-  destination: path.dirname(path.dirname(__dirname))+"/public/images",
-  filename: (req, file, cb) => {
+  destination: path.dirname(path.dirname(__dirname))+"/public/images"
+/*   filename: (req, file, cb) => {
     cb(null, file.originalname);
-  },
+  }, */
 });
 
 const upload = multer({
   storage: storage,
-  dest: path.dirname(__dirname) + "/" + "public/images",
+  //dest: path.dirname(__dirname) + "/" + "public/images",
 });
 
-/* let storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-
-const upload = multer({storage}) */
 
 const recalculateAverageScore = require("../controllers/recalculateAverageScore.js");
 
@@ -40,16 +27,6 @@ function capitalize(word) {
   return word[0].toUpperCase() + word.slice(1);
 }
 
-// const storage = multer.diskStorage({
-//   destination: function(req, file, cb) {
-//     cb(null, path.join(__dirname, '/uploads'))
-//   },
-//   filename: function(req, file, cb) {
-//     cb(null, file.originalname)
-//   }
-// });
-
-// const upload = multer({storage});
 
 server.get("/actives", (req, res, next) => {
   Product.findAll({
