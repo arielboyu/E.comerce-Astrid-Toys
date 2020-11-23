@@ -99,7 +99,12 @@ const Purchase = ({ orderId }) => {
               </Link>
             </div>
           </div>
-            <LoadReview idProduct = {prod.id}/>
+            {order.state === 'COMPLETE'? (
+              <LoadReview idProduct = {prod.id}/>
+            ) : (<></>)}
+
+
+            
         </div>
         ))}
        
