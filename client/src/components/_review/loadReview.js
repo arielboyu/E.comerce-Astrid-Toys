@@ -1,46 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link,useParams } from "react-router-dom";
 import Rating from "react-rating";
 import {useSelector} from 'react-redux'
 
 const LoadReview = ({idProduct}) => {
+  const user= useSelector(state => state.user)
   const [loadReview, setLoadReview] = useState({
     userId:0,
     score: 0,
     description: ""
   });
-  // const { idProduct } = useParams();
-  console.log("idProduct:",idProduct)
-  const user= useSelector(state => state.user)
+
   useEffect(()=>{
-    console.log("entrando a loadReview")
     setLoadReview({ ...loadReview, userId:user.id })
-  },[])
-  
- 
+  } , [ ] )
 
   function handlerChangeScore(e) {
     setLoadReview({ ...loadReview, score: e});
   }
+
   function handlerChangeDescription(e) {
     setLoadReview({ ...loadReview, description: e.target.value });
   }
 
   function handlerLoadReviewSubmit(e) {
     e.preventDefault()
-    console.log("user: ", user)
-    // setLoadReview({ userId:user.id })
-
-    console.log("loadReview: ",loadReview)
     axios
       .post(`${process.env.REACT_APP_API_URL}/products/${idProduct}/review`, loadReview)
-      .then((res) => {
-        console.log("Review loaded");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      .then((res) => { console.log("Review loaded") })
+      .catch((e) => { console.log(e) });
   }
 
   return (
@@ -69,10 +57,7 @@ const LoadReview = ({idProduct}) => {
             onChange={handlerChangeDescription}
           ></textarea>
         </div>
-        <button
-          type="submit"
-          className="btn btn-dark"
-        >
+        <button type="submit" className="btn btn-dark" >
           Submit
         </button>
       </form>

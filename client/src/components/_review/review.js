@@ -21,29 +21,29 @@ export default function Review({productId}) {
   }, [load]);
   return (
     <>
-      <div className="container d-flex flex-column text-center my-5 p-5">
-        <div>
-          <h1 className="display-3">{averageScore}</h1>
-          <StarScore score = {averageScore}/>
+      <div className="d-flex flex-column mx-auto text-center mt-5 mt-lg-0">
+        <div className="mt-5 mt-lg-0">
+          {console.log(averageScore)}
+          <h1 className="display-3 mt-5 pt-5 pt-lg-0 mt-lg-0">{!averageScore ? "S/C" : averageScore}</h1>
+          <span className="text-warning"><StarScore score = {averageScore}/></span>
         </div>
         
 
-        <h3 >Reviews</h3>
+        <h3 className="mt-3 mt-lg-5">Reviews</h3>
         {reviews.map(review=>(
-          <div className="row headCont">
-            <div className="col-4 col-md-2">
+          <div className="d-flex headCont flex-column flex-lg-row w-75 mx-auto">
+            <div className="col-12 col-lg-3">
               <span>{review.user.name}</span>
             </div>
-            <div className="col-4 col-md-2">
-              <span>{review.score}<StarScore score = {review.score}/></span>
+            <div className="col-12 col-lg-3">
+              <span className="mr-2">{review.score}</span>
+              <span className="text-warning"><StarScore score = {review.score}/></span>
             </div>
-            <div className="col-4 col-md-8">
-              <span>{review.description}</span>
+            <div className="col-12 col-lg-6 text-center text-lg-left">
+              <p className="mt-2 mt-lg-0">" {review.description} "</p>
             </div>
           </div>
         ))}
-        
-
       </div>
     </>
   );
