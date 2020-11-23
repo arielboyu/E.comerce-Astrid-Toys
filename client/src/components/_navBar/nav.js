@@ -32,7 +32,7 @@ export default function Nav({match}){
 
     useEffect(() => {
         getUser()
-    }, [ ] );
+    }, [] );
 
     function Navbar( props ) {
         return(
@@ -112,13 +112,13 @@ export default function Nav({match}){
                 <NavItem link='/products' icon={<ion-icon size='large' name="bag-outline"></ion-icon>} />
             </>
 
-            { user.id ? ( 
+            {user.isAdmin ? (
                 
             <> 
                 <Link className="my-auto" to="/dashboard">
                     <span className={`${style.navItem} d-none d-md-flex my-auto ml-2`}>Dashboard</span>
                 </Link>
-                <span className="d-none d-md-flex"><NavItem link='/dashboard' icon={<ion-icon size='large' name="list"></ion-icon>} /></span>
+                <span className="d-md-flex my-auto"><NavItem link='/dashboard' icon={<ion-icon size='large' name="list"></ion-icon>} /></span>
                
                 <Link className="my-auto" to={`/profile/${user.id}`}>
                     <span className={`${style.navUser} d-none d-md-flex mr-n2`}>{user.name}</span>
@@ -142,10 +142,7 @@ export default function Nav({match}){
                 </Link>
                 <NavItem link='/cart' icon={<ion-icon size='large' name="cart-outline"></ion-icon>} />
                 { cart.length && <CartAlert />}
-            </> 
-
-
-            
+            </>        
         </Navbar>
     ) : <></>
     )

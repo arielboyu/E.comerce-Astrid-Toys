@@ -102,8 +102,9 @@ function DashboardLoadProduct() {
         });
     }
     //para reiniciar el form:
-    e.target.reset();
+    //e.target.reset();
     //para no reiniciar y poder leer la consola:
+
     e.preventDefault()
 
 

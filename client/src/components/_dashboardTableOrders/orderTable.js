@@ -36,7 +36,7 @@ export default function OrderTable() {
               <tr key={o.id}>
               <td>{o.id}</td>
               <td>{o.state}</td>
-              {/* <td>{o.user.username}</td> */}
+              <td>{o.user.username}</td>
               <td>{o.createdAt}</td>
               <td><Link to={`/dashboard/orders/detail/${o.id}`}>
               {/* para poder incluir los backticks debo colocar el path dentro de llaves */}
