@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import {  Redirect } from "react-router-dom";
+import React, { useState } from 'react';
+import {Link, useParams, NavLink, Redirect} from 'react-router-dom'
+import ProductList from '../_productList/productList'
+import axios from 'axios'
 
-
-
-//Searchbar
 export default function SearchBar({ onSearch, onClear }) {
   const [search, setSearch] = useState();
   const [flag, setFlag] = useState(false);
@@ -20,33 +19,23 @@ export default function SearchBar({ onSearch, onClear }) {
   };
 
   return (
-    <>
-      <form onSubmit={handlerSubmit} className="form-inline">
-        <div className="col-12">
-          <input
-            onChange={handlerInput}
-            className="form-control mr-2 mb-3 d-flex flex-row"
+      <form onSubmit={handlerSubmit} className="d-flex col-12 justify-content-center justify-content-lg-end">
+        <div>
+          <input onChange={handlerInput}
+            className="form-control mr-2"
             value={search}
             type="text"
             placeholder="Search . . "
             aria-label="Search"
           ></input>
         </div>
-        <div className="col-12">
-        <button className="btn btn-dark my-sm-0 mr-1 " type="submit">
-          Submit
-        </button>
-        
-        {flag ? <Redirect to={`/products/search?data=${search}`} /> : <></>}
-        <button
-          className="btn btn-dark my-sm-0"
-          type="button"
-          onClick={onClear}
-        >
-          Clear
-        </button>
+        <button className="btn btn-dark ml-2 mr-1 " type="submit"> Submit </button> 
+              {flag ? <Redirect to={`/products/search?data=${search}`} /> : <></>}
+        <button className="btn btn-dark my-sm-0" type="button" onClick={onClear} > Clear </button>
+        <div>
+      
         </div>
       </form>
-    </>
+
   );
 }
