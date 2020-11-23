@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 // Tabla que muestra una lista de ordenes.
 // Esta tabla es para el admin.
 // Tiene que mostrar todas las ordenes de todos los usuarios
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 export default function OrderTable() {
     const getOrder = axios.get(`${process.env.REACT_APP_API_URL}/orders`);
     const [order, setOrder] = useState([]);
+    const user = useSelector((state) => state.user);
     useEffect(() => {
       getOrder.then((res) => {
         setOrder(res.data);
@@ -16,6 +18,7 @@ export default function OrderTable() {
     }, [])
     return (
       <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+        {!user.isAdmin ? <Redirect to='/products'/> : null} 
         <div >
           <div  style={{backgroundImage:"url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2020/10/figuras-funko-pop-2089019.jpg?itok=soYTFCkB)",  width: "100%",
            height: "370px",}}   >
