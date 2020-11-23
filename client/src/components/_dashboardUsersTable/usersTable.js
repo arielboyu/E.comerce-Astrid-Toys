@@ -6,12 +6,26 @@ import { Link } from "react-router-dom";
 export default function UsersTable() {
     const getUsers = axios.get(`${process.env.REACT_APP_API_URL}/users`);
     const [user, setUser] = useState([]);
+    const [deleted, setDeleted] = useState(null);
     useEffect(() => {
       getUsers.then((res) => {
         setUser(res.data);
         console.log(res)
       });
     }, [])
+
+
+    const handleDelete = () => {
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/users/delete/${deleted.id}`, deleted)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    };
+    const handleSubmit = (u) => {
+      setDeleted(u);
+    };
     return (
       <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         <div>
@@ -24,11 +38,9 @@ export default function UsersTable() {
               <tr>
                 <th>ID#</th>
                 <th>Name</th>
-                <th>User Name</th>
                 <th>Email</th>
                 <th>Active</th>
                 <th>IsAdmin</th>
-                <th>Discharge Date</th>
               </tr>
             </thead>
             <tbody>
@@ -36,11 +48,19 @@ export default function UsersTable() {
               <tr key={u.id}>
               <td>{u.id}</td>
               <td>{u.name}</td>
-              <td>{ u.username}</td>
               <td>{u.email}</td>
               <td>{u.active.toString()}</td>
               <td>{u.isAdmin.toString()}</td>
-              <td>{u.createdAt}</td>
+              <td><button
+                onClick={() => handleSubmit(u)}
+                type="submit"
+                className="btn btn-danger"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                Delete
+              </button>
+              </td>
             </tr>
            ))}
             </tbody>
@@ -48,6 +68,50 @@ export default function UsersTable() {
             <Link to="/dashboard" >
             <button className="btn btn-danger ml-2" >Back</button>
             </Link>
+            <div
+              className="modal"
+              id="exampleModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Users
+                    </h5>
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                      onClick={() => window.location.reload()}
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">Are you sure to delete? </div>
+                  <div className="modal-footer">
+                    <button
+                      onClick={() => {
+                        handleDelete();
+                        window.location.reload();
+                      }}
+                      type="button"
+                      className="btn btn-danger"
+                      data-dismiss="modal"
+                    >
+                      Yes
+                    </button>
+                    <button type="button" className="btn btn-danger" data-dismiss="modal">
+                      No
+                    </button>
+                  </div>
+                </div>
+              </div>
+          </div>
       </div>
    </div>
     );

@@ -1,18 +1,13 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
-import Product from "../_product/product";
+import style from "./myShopping.module.css";
 
 const Purchase = ({ orderId }) => {
   const [order, setOrder] = useState([]);
   const [product, setProduct] = useState([]);
   const [user, setUser] = useState({});
-  const [redirect, setRedirect] = useState(false);
 
-  const handlerRedirect = () => {
-    setRedirect(true);
-  };
   useEffect(() => {
     if (orderId) {
       axios
@@ -28,28 +23,23 @@ const Purchase = ({ orderId }) => {
     }
   }, []);
 
-  const [redirectLoadReview, setRedirectLoadReview] = useState(false);
 
-  const handlerRedirectLoadReview = () => {
-    setRedirectLoadReview(true);
-  };
+
 
   return (
     <>
-    {redirectLoadReview ? <Redirect to={`/myshop/loadReview`} /> : <></>}
-      {redirect ? <Redirect to={`/myshop/details/1`} /> : <></>}
-      <div className="container border shadow ">
-        <div className="row border ">
-          <div className="col-sm-12 col-md-4 bg-warning ">
+      <div className={`${style.containerShop} text-center mb-0 pb-0`}>
+        <div className="row mb-3">
+          <div className={`${style.yellow1} col-sm-12 col-md-4 px-5 py-2 d-flex flex-column`}>
             <p>{"Order Number: " + order.id}</p>
             <p>{"State: " + order.state}</p>
           </div>
-          <div className="col-sm-12  col-md-4 bg-info d-flex justify-content-end ">
+          <div className={`${style.yellow2} col-sm-12 col-md-4 px-5 py-2 d-flex flex-column`}>
             <p>{"Client: " + user.name}</p>
             <p>{console.log(order)}</p>
             <p>{"Client Number: " + order.userId}</p>
           </div>
-          <div className="col-sm-12 col-md-4 bg-primary  ">
+          <div className={`${style.yellow3} col-sm-12 col-md-4 px-5 py-2 d-flex flex-column`}>
             Date: {order.createdAt}
           </div>
         </div>
@@ -57,26 +47,49 @@ const Purchase = ({ orderId }) => {
       
           {product.map((prod) => (
             <>
-              <div className="row border ">
+              <div className={`${style.shop} d-flex flex-row justify-content-center align-items-center p-5 mb-3`}>
                 {/* CABECERA */}
-                <div className="col-sm-12 col-md-2 bg-white ">
-                  <p className="border">Product</p>
-                  <p>{prod.id}</p>
+
+                <div className="d-md-flex flex-md-column col-md-2 m-3">
+                  <img src={prod.image} className={style.img}></img>
+                  <p className="pt-2">{prod.name}</p>
                 </div>
-                <div className="col-sm-12 col-md-2  bg-white ">image</div>
-                <div className="col-sm-4 col-md-2 bg-white">
-                  <p className="mb-0">Qty</p>
+
+                <div className="d-md-flex flex-column col-md-2 d-none">
+                  <p className={style.cabecera}>Product ID</p>
+                  <p> {prod.id} </p>
+                </div>
+                
+                <div className="d-flex flex-column col-md-2 ">
+                  <p className={style.cabecera}>Qty</p>
                   <p>{prod.orderdetails.quantity}</p>
                 </div>
-                <div className="col-sm-4 col-md-2 bg-white ">
-                  <p className="mb-0">U/Price</p>
-                  <p>{prod.orderdetails.price / prod.orderdetails.quantity}</p>
-                </div>
-                <div className="col-sm-4 col-md-2 bg-white ">
-                  <p className="">Sub-Total</p>
+
+                <div className="d-flex flex-column col-md-2">
+                  <p className={style.cabecera}>U/Price </p>
                   <p>{prod.orderdetails.price}</p>
                 </div>
+                
+                <div className="d-flex flex-column col-md-2">
+                  <p className={style.cabecera}>Sub-Total</p>
+                  <p>{prod.orderdetails.price * prod.orderdetails.quantity }</p>
+                </div>
+                
+                <div className="d-flex flex-md-column ">
+                  <Link to={`/products/id/${prod.id}`}>
+                    <button className={`${style.btnShop} btn btn-warning m-2 text-white`} >
+                      View
+                    </button>
+                  </Link>
+                  <Link to="/myshop/loadReview">
+                    <button className={`${style.btnShop} btn btn-warning m-2 text-white`} >
+                      Ratings
+                    </button>
+                  </Link>
+                </div>
+                
               </div>
+<<<<<<< HEAD
               <div className="row">
                 <button
                   className="btn btn-outline-info col-2"
@@ -91,6 +104,9 @@ const Purchase = ({ orderId }) => {
                   Leave a review!
                 </button>
               </div>
+=======
+              
+>>>>>>> c02778f40593c6e870ca2369e88635911872fb87
               
               </>
           ))}

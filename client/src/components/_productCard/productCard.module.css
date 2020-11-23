@@ -21,19 +21,15 @@
   z-index: 1;
   /* transform: translate(0, 2) */
 }
-
-
 .text{
   font-family: 'Fredoka One', cursive;
   transition: transform 0.2s;
   border: 1px dashed rgba(218, 165, 32, 0.582);
   padding: 10px;
-  
 }
 
 .text:hover {
   transform: scale(1.3);
-  
 }
 
 .price{

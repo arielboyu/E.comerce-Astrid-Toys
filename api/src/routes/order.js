@@ -60,7 +60,7 @@ server.get("/:id", (req, res) => {
       {
         model: Product,
         as: "products",
-        attributes: ["name", "description", "stock", "price", "id"],
+        attributes: ["name", "description", "stock", "price", "id", "image"],
       },
       {
         model: User,

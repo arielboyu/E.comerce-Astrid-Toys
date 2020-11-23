@@ -86,9 +86,11 @@ export default function Nav({match}){
 
     function PageTitle() {
         return(
-        <h1 className={`${style.title} mr-auto d-none d-md-block my-auto`}>
-            <Link to="/"> Astrid Toys </Link>
-        </h1>
+        <>
+            <h1 className={`${style.title} mr-auto my-auto`}>
+                <Link to="/"> Astrid Toys </Link>
+            </h1>
+        </>
     ) }
 
     function CartAlert() {
@@ -133,7 +135,9 @@ export default function Nav({match}){
                 <span className={`${style.navItem} d-none d-md-flex my-auto mr-md-n3`}>Cart</span>
                 <NavItem link='/cart' icon={<ion-icon size='large' name="cart-outline"></ion-icon>} />
                 { cart.length && <CartAlert />}
-            </> }
+            </> }{
+
+            }
         </Navbar>
     ) : <></>
     )

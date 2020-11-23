@@ -14,7 +14,6 @@ const ContainerShop = () => {
   const { idUser } = useParams();
 
   return (
-    <Router>
       <Switch>
         <Route path="/myshop/details/:idOrder">
           <OrderDetails />
@@ -26,7 +25,6 @@ const ContainerShop = () => {
           <ShoppingHistory idUser={idUser} />
         </Route>
       </Switch>
-    </Router>
   );
 };
 
