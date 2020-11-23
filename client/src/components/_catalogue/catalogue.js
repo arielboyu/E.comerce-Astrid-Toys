@@ -26,7 +26,7 @@ const Catalogue = () => {
   const handlerSearch = (search) => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/products/search?data=${search}`)
-      .then((res) => { setProduct(res.data) });
+      .then((res) => { setProduct(res.data) })
   }
 
   const handlerFilter = (categoria)=>{
