@@ -11,11 +11,7 @@ import AddToCart from "./components/_addToCart/addToCart.js";
 import Login from "./components/_login/login.js";
 import Register from "./components/_login/register.js";
 import Footer from "./components/_footer/footer.js";
-<<<<<<< HEAD
 import About from "./components/_about/about.js";
-=======
-import NotFound from "./components/_error/error"
->>>>>>> b06595cb80638c80502bde653f09075974bc8676
 /*Componente Catalogo*/
 import Catalogue from "./components/_catalogue/catalogue";
 import Product from "./components/_product/product";
@@ -39,71 +35,6 @@ function App() {
   return (
     <Router>
       <Route path="/" render={({match, location}) => <Navbar match={match} location={location} />} />
-<<<<<<< HEAD
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register}/>
-        <Route path="/esta/es/la/ruta/de/rodri">
-          <Reduxxx />
-        </Route>
-        <Route path="/products/category/nav/:cat">
-          <Catalogue />
-        </Route>
-        <Route exact path="/products/id/:index">
-          <Product />
-        </Route>
-        <Route path="/products/category/">
-          <Catalogue />
-        </Route>
-        <Route path="/products?search">
-          <Catalogue />
-        </Route>
-        <Route path="/products">
-          <Catalogue />
-        </Route>
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route path="/dashboard/category/create">
-          <DashboardLoadCategory />
-        </Route>
-        <Route path="/dashboard/product/create">
-          <DashboardLoadProduct />
-        </Route>
-        <Route path="/dashboard/product/update/:id">
-          <UpdateProduct />
-        </Route>
-        <Route path="/dashboard/product/update">
-          <DashboardUpdateProduct />
-        </Route>
-        <Route path="/dashboard/category/list">
-          <CategoryList />
-        </Route>
-        <Route path="/dashboard/category/update/:idcategory">
-          <UpdateCategories />
-        </Route>
-        <Route path="/dashboard/users/list">
-          <OrderList />
-        </Route>
-        <Route path="/dashboard/orders/detail/:idorden">
-          <OrderDetail />
-        </Route>
-        <Route path="/dashboard/orders/list/pending">
-          <OrderListPending />
-        </Route>
-        <Route path="/cart">
-          <Cart />
-        </Route>{" "}
-        <Route exact path="/myshop/:idUser">
-          <ContainerMyShopping />
-        </Route>
-        <Route path="/addToCart">
-          <AddToCart />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-      </Switch>
-=======
         <Switch >
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
@@ -160,8 +91,10 @@ function App() {
           <Route exact path="/addToCart">
             <AddToCart />
           </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
         </Switch>
->>>>>>> b06595cb80638c80502bde653f09075974bc8676
       <Route path="/" render={({match}) => <Footer match={match} />} />
     </Router>
   );
