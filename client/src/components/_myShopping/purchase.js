@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import style from "./myShopping.module.css";
+import LoadReview from "../../components/_review/loadReview"
 
 const Purchase = ({ orderId }) => {
   const [order, setOrder] = useState([]);
@@ -81,15 +82,17 @@ const Purchase = ({ orderId }) => {
                       View
                     </button>
                   </Link>
-                  <Link to="/myshop/loadReview">
+                  {/* <Link to={`/myshop/loadReview`}>
                     <button className={`${style.btnShop} btn btn-warning m-2 text-white`} >
-                      Ratings
+                      Leave a review!
                     </button>
-                  </Link>
+                  </Link> */}
+                  
+
                 </div>
                 
               </div>
-              
+              <LoadReview idProduct = {prod.id}/>
               
               </>
           ))}

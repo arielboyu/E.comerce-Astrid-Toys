@@ -15,11 +15,11 @@ const ContainerShop = () => {
 
   return (
       <Switch>
-        <Route path="/myshop/details/:idOrder">
-          <OrderDetails />
-        </Route>
         <Route path="/myshop/loadReview">
           <LoadReview />
+        </Route>        
+        <Route path="/myshop/details/:idOrder">
+          <OrderDetails />
         </Route>
         <Route path="/">
           <ShoppingHistory idUser={idUser} />
