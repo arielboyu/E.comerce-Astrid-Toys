@@ -18,6 +18,7 @@ import Catalogue from "./components/_catalogue/catalogue";
 import Product from "./components/_product/product";
 /*Componente Navbar*/
 import Navbar from "./components/_navBar/nav.js";
+import Profile from "./components/_navBar/profile.js"
 /*Seccion Dashboard*/
 import Dashboard from "./components/_dashboard/dashboard";
 import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
@@ -62,6 +63,9 @@ function App() {
           </Route>
           <Route exact path="/dashboard/product/create">
             <DashboardLoadProduct />
+          </Route>
+          <Route exact path="/profile/:id">
+            <Profile />
           </Route>
           <Route exact path="/dashboard/product/update/:id">
             <UpdateProduct />

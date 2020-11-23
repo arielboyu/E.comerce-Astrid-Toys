@@ -8,8 +8,9 @@ export default function CategoryList({ category, filter, onSearch, onClear }) {
       <>
       {/* DESKTOP VERSION */}
       <div className={`${style.categoryList} d-none d-lg-flex flex-row rounded justify-content-center justify-content-lg-start`}>
-        <p className="d-none d-lg-block my-auto ml-lg-3 mr-lg-4 ">Categories </p>
-        <div className="my-auto">
+        
+        <div className="my-auto d-flex">
+          <p className="d-none d-lg-block my-auto ml-lg-3 mr-lg-4 ">Categories </p>
           {category.map((cat) => (
             <Link to={`/products/category/${cat.name.toLowerCase()}`} onClick={() => filter(cat.name)} >
               <span className="mx-2 text-uppercase">{cat.name}</span>
