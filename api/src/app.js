@@ -6,12 +6,14 @@ const morgan = require( 'morgan' );
 const passport = require( 'passport' );
 const routes = require( './routes/index.js' );
 const cors = require ('cors');
+const path = require("path");
 
 require( 'dotenv' ).config( );
 require( './db.js' );
 const authSetUp = require( './passport.js' );
 const { FRONT_URL } = process.env;
 const server = express( );
+
 
 
 server.name = 'API';
@@ -27,6 +29,8 @@ server.use( bodyParser.urlencoded( { extended: true, limit: '50mb' } ) );
 server.use( bodyParser.json( { limit: '50mb' } ) );
 server.use( morgan( 'dev' ) );
 
+//static files
+server.use(express.static(path.join(__dirname,"public")))
 
 server.use(express.static("public"));
 server.use(
