@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function UpdateCategories() {
  const [newCategory, setNewCategory] = useState([]);
  const [category, setCategory] = useState([]);
  const getCategory = axios.get("http://localhost:3002/categories");
+ const user = useSelector((state) => state.user);
 
  useEffect(() => {
    getCategory.then((res) => {
@@ -30,6 +32,7 @@ const handlerSubmit = (e) => {
 
   return (
     <div className="container">
+      {!user.isAdmin ? <Redirect to='/products'/> : null} 
       <h2>Update Category</h2>
       <form onSubmit={handlerSubmit} >
         <div className="form-group">
