@@ -106,33 +106,40 @@ export default function Nav({match}){
             <PageTitle />
 
             <>
-                <span className={`${style.navItem} d-none d-md-flex my-auto`}>Products</span>
+                <Link className="my-auto" to="/products">
+                    <span className={`${style.navItem} d-none d-md-flex my-auto`}>Products</span>
+                </Link>
                 <NavItem link='/products' icon={<ion-icon size='large' name="bag-outline"></ion-icon>} />
             </>
 
-    
-            {user.isAdmin? (<>
-                <span className={`${style.navItem} d-none d-md-flex my-auto ml-2`}>Dashboard</span>
-                <span className="d-md-flex my-auto"><NavItem link='/dashboard' icon={<ion-icon size='large' name="list"></ion-icon>} /></span>
-            </>):<></>}
-        
-
-            { user.id ? ( 
-
+            {user.isAdmin ? (
+                
             <> 
-                <span className={`${style.navUser} d-none d-md-flex mr-n2`}>{user.name}</span>
+                <Link className="my-auto" to="/dashboard">
+                    <span className={`${style.navItem} d-none d-md-flex my-auto ml-2`}>Dashboard</span>
+                </Link>
+                <span className="d-md-flex my-auto"><NavItem link='/dashboard' icon={<ion-icon size='large' name="list"></ion-icon>} /></span>
+               
+                <Link className="my-auto" to={`/profile/${user.id}`}>
+                    <span className={`${style.navUser} d-none d-md-flex mr-n2`}>{user.name}</span>
+                </Link>
                 <NavItem link='#' icon={<ion-icon size='large' name="person-circle-outline"></ion-icon>}  active="true"  > 
                     <DropdownUser />
                 </NavItem>    
             </> ) : ( 
             
-            <>
-                <span className={`${style.navItem} d-none d-md-flex my-auto mr-md-n3 `}>Log in</span>
-                <NavItem link='/login' icon={<ion-icon size='large' name="log-in-outline"></ion-icon>} /> 
+            <>  
+                <Link className="my-auto" to="/login">
+                    <span className={`${style.navItem} d-none d-md-flex mr-md-n3`}>Log in</span>
+                </Link> 
+                <NavItem link='/login' icon={<ion-icon size='large' name="log-in-outline"></ion-icon>} />
+                
             </> ) } 
             
-            <>
-                <span className={`${style.navItem} d-none d-md-flex my-auto ml-md-n3 mr-md-n3`}>Cart</span>
+            <>  
+                <Link className="my-auto" to="/cart">
+                    <span className={`${style.navItem} d-none d-md-flex my-auto ml-md-n3 mr-md-n3`}>Cart</span>
+                </Link>
                 <NavItem link='/cart' icon={<ion-icon size='large' name="cart-outline"></ion-icon>} />
                 { cart.length && <CartAlert />}
             </>        

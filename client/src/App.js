@@ -48,10 +48,10 @@ function App() {
           <Route exact path="/products/id/:index">
             <Product />
           </Route>
-          <Route exact path="/products?search">
+          <Route path="/products/?search">
             <Catalogue />
           </Route>
-          <Route exact path="/products">
+          <Route path="/products">
             <Catalogue />
           </Route>
           <Route exact path="/dashboard" component={Dashboard} />
