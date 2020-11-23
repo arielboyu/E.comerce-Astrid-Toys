@@ -21,14 +21,16 @@ export default function Review({productId}) {
   }, [load]);
   return (
     <>
+      {averageScore ? (
+
       <div className="d-flex flex-column mx-auto text-center mt-5 mt-lg-0">
+    
         <div className="mt-5 mt-lg-0">
           <h3 className="mt-5 pt-5 pt-lg-0 mt-lg-2 mb-0">Popularity</h3>
           <h1 className="display-3 mt-5 pt-5 pt-lg-0 mt-lg-0">{!averageScore ? "S/C" : averageScore}</h1>
           <span className="text-warning display-4"><StarScore score = {averageScore}/></span>
         </div>
-        
-
+      
         <h3 className="mt-3 mt-lg-5">Reviews</h3>
         {reviews.map(review=>(
           <div className="d-flex headCont flex-column flex-lg-row w-75 mx-auto">
@@ -42,9 +44,13 @@ export default function Review({productId}) {
             <div className="col-12 col-lg-6 text-center text-lg-left">
               <p className="mt-2 mt-lg-0">" {review.description} "</p>
             </div>
+            
           </div>
         ))}
+      
       </div>
+
+        ) : <></> }
     </>
   );
 }
