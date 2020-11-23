@@ -25,7 +25,7 @@ export default function OrderDetail() {
       <h1 className="display-3 text-center">ORDER DETAILS</h1>
       <h7> ORDER ID: {"  "} {order.id}</h7>
       <h6>STATE: {"  "}{order.state}</h6>
-      <h6>NAME: {"  "}{user.name}</h6>
+      {/* <h6>NAME: {"  "}{user.name}</h6> */}
       <h7>DISCHARGE DATE:  {"  "} {order.createdAt}</h7>
         <table class="table table-borderless">
           <thead>

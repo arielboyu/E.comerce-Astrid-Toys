@@ -35,7 +35,7 @@ export default function Product() {
       <>
       <div
         style={card}
-        className="border d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded shadow"
+        className="container border d-flex flex-direction-row justify-content-center align-items-center my-5 mx-auto rounded shadow"
       >
         {fuko.map((f) => (
           <>
