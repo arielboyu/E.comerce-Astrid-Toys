@@ -19,7 +19,7 @@ const ContainerShop = () => {
         <Route path="/myshop/details/:idOrder">
           <OrderDetails />
         </Route>
-        <Route path="/myshop/loadReview">
+        <Route path="/myshop/loadReview/:idProduct">
           <LoadReview />
         </Route>
         <Route path="/">
