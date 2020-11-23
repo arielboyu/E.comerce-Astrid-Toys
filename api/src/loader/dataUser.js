@@ -1,4 +1,4 @@
-const DataProducts = [
+const DataUsers = [
   {
     name: 'Nico Acevedo',
     username: 'nico',
@@ -51,4 +51,4 @@ const DataProducts = [
   
 ];
 
-module.exports = DataProducts;
+module.exports = DataUsers;
