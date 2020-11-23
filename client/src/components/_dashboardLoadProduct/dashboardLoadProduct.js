@@ -17,26 +17,32 @@ function DashboardLoadProduct() {
     image: "",
     categories: [],
   });
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(null);
   const [msg, setMsg] = useState("");
 
-  const uploadAction =  (image) => {
+  const uploadAction = (image,idProduct) => {
+    console.log("Este es el productInDB")
+    console.log(idProduct);
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append("image", image);
     const config = {
       headers: {
-        'content-type': 'multipart/form-data'
-      }
-    }
-     axios.post(`${process.env.REACT_APP_API_URL}/products/upload`, formData, config)
-        .then(res => console.log(res))
-        .catch (err => console.log(err))
-  }
+        "content-type": "multipart/form-data",
+      },
+    };
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/products/upload/${idProduct}`,
+        formData,
+        config
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   const handleImageUpload = (e) => {
-    console.log(e.target.files[0])
-    setImage(e.target.files[0])
-  }
+    setImage(e.target.files[0]);
+  };
 
   const validateDates = () => {
     let stockParse = parseInt(productLoad.stock);
@@ -72,8 +78,7 @@ function DashboardLoadProduct() {
     getCategory.then((res) => {
       setCategory(res.data);
     });
-    
-  },[]);
+  }, []);
 
   const handlerChange = (e) => {
     if (e.target.name === "active") {
@@ -85,20 +90,32 @@ function DashboardLoadProduct() {
   };
 
   const handlerSubmit = (e) => {
-    console.log(productLoad);
-    uploadAction(image)
+   
     if (validateDates()) {
       axios
         .post(`${process.env.REACT_APP_API_URL}/products`, productLoad)
-        .then((r) => {
-          console.log(r);
-          
+        .then((productInDB) => {
+          uploadAction(image,productInDB.data.id);
         })
         .catch((er) => {
           console.log(er);
-        }); 
+        });
     }
-    e.preventDefault();
+    //para reiniciar el form:
+    e.target.reset();
+    //para no reiniciar y poder leer la consola:
+    e.preventDefault()
+
+
+    //comente esto para que la pagina recargue cuando hacen submit (soy nico)
+    //e.preventDefault();
+    /*     
+    otra forma podria ser 
+    setProduct({}) 
+    pero luego rompe*/
+    //o tambien
+    //e.target.reset();
+    //pero no resetea todo el form como deberia
   };
 
   const handlerKey = (e) => {
@@ -123,7 +140,11 @@ function DashboardLoadProduct() {
   return (
     <div className="container d-flex flex-column mx-auto my-5 p-5 border shadow">
       <h2 className="display-3 text-center">Load Product</h2>
-      <form enctype="multipart/form-data" onSubmit={handlerSubmit}>
+      <form
+        id="loadProductForm"
+        enctype="multipart/form-data"
+        onSubmit={handlerSubmit}
+      >
         <div className="form-group">
           <label htmlFor="productName">Product Name</label>
           <input
@@ -160,7 +181,16 @@ function DashboardLoadProduct() {
         <div className="form-row border-top pt-2">
           <div className="form-group col-md-6">
             <p>Show product in store</p>
-            <div className="pl-4" style={{backgroundColor:"rgba(3, 122, 19, 0.2)",border: "1px solid grey",padding:"1px",borderRadius: "7px", width:"55px"}}>
+            <div
+              className="pl-4"
+              style={{
+                backgroundColor: "rgba(3, 122, 19, 0.2)",
+                border: "1px solid grey",
+                padding: "1px",
+                borderRadius: "7px",
+                width: "55px",
+              }}
+            >
               <input
                 onChange={handlerChange}
                 className="form-check-input"
@@ -215,13 +245,7 @@ function DashboardLoadProduct() {
               class="form-control-file"
               onChange={handleImageUpload}
             ></input>
-          <form action="http://localhost:3002/products/upload" method="POST" enctype="multipart/form-data">
-          <label>imagen</label>
-          <input type="file" name="image"></input>
-          <input type="submit" value="enviar"></input>
-          </form>
           </div>
-
         </div>
         <button
           type="submit"
@@ -234,7 +258,6 @@ function DashboardLoadProduct() {
         <Link to="/dashboard/product/update">
           <button className="btn btn-danger ml-2">Back</button>
         </Link>
-
       </form>
     </div>
   );

@@ -1,23 +1,24 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
+const getUsers = axios.get(`${process.env.REACT_APP_API_URL}/users`);
 
 export default function UsersTable() {
-    const getUsers = axios.get(`${process.env.REACT_APP_API_URL}/users`);
     const [user, setUser] = useState([]);
     const [deleted, setDeleted] = useState(null);
+    const [changeRol, setChangeRol]= useState(false)
     useEffect(() => {
       getUsers.then((res) => {
         setUser(res.data);
-        console.log(res)
       });
     }, [])
 
 
     const handleDelete = () => {
       axios
-        .delete(`${process.env.REACT_APP_API_URL}/users/delete/${deleted.id}`, deleted)
+        .delete(`${process.env.REACT_APP_API_URL}/users/delete/${deleted.id}`, deleted, { withCredentials: true })
         .then((res) => {
           console.log(res);
         })
@@ -26,6 +27,15 @@ export default function UsersTable() {
     const handleSubmit = (u) => {
       setDeleted(u);
     };
+
+    const handleAdmin=(u)=>{
+      const {id, isAdmin} = u
+      axios.put(`http://localhost:3002/users/change/rol/${id}`)
+      .then(r => console.log("Rol change"))
+      .catch(er => console.log("Rol unchange"))
+      setChangeRol(!changeRol)
+    }
+
     return (
       <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         <div>
@@ -60,6 +70,15 @@ export default function UsersTable() {
               >
                 Delete
               </button>
+              {!u.isAdmin ? (
+                <button
+                onClick={() => handleAdmin(u)}
+                type="submit"
+                className="ml-3 btn btn-info"
+              >
+                Admin
+              </button>
+              ):<></>}
               </td>
             </tr>
            ))}
