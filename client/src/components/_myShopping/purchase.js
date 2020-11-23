@@ -88,7 +88,7 @@ const Purchase = ({ orderId }) => {
                   className="btn btn-outline-info col-2"
                   onClick={() => handlerRedirectLoadReview()}
                 >
-                  Ratings
+                  Leave a review!
                 </button>
               </div>
               
