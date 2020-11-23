@@ -28,7 +28,7 @@ const Dashboard = () => {
     return (
         
         <>
-        {!user ? <Redirect to='/products'/> : null}
+        {!user.isAdmin ? <Redirect to='/products'/> : null} 
         {redirect ? <Redirect to='/products'/> : null}
         { load ? <Spinner />  : (
         <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">

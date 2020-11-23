@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 export default function CategoriesList() {
   const [category, setCategory] = useState([]);
   const [deleted, setDeleted] = useState(null);
+  const user = useSelector((state) => state.user);
   useEffect(() => {
     getCategory.then((res) => {
       console.log(category)
@@ -30,6 +32,7 @@ export default function CategoriesList() {
   };
   return (
     <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+      {!user.isAdmin ? <Redirect to='/products'/> : null} 
       <div  style={{backgroundImage: "url(https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/FRDTR67UFNFYBJLZNIOWNMSUJQ.jpg)",  width: "100%",
         height: "300px",}} className="">
         <h1 style={{background:"white"}}   className="display-3 text-center">Categories</h1>

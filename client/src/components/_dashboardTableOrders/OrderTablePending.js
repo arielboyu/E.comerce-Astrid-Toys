@@ -1,10 +1,12 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function OrderTablePending() {
     const getOrderpe = axios.get(`${process.env.REACT_APP_API_URL}/orders/pending/all`);
     const [orderpe, setOrderpe] = useState([]);
+    const user = useSelector((state) => state.user);
     useEffect(() => {
       getOrderpe.then((res) => {
         setOrderpe(res.data);
@@ -23,6 +25,7 @@ export default function OrderTablePending() {
     };
     return (
       <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+        {!user.isAdmin ? <Redirect to='/products'/> : null}
         <div>
           <h1 className="display-3 text-center">ORDER PENDING LIST</h1>
             <table class="table table-borderless">

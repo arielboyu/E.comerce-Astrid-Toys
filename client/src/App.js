@@ -1,3 +1,4 @@
+
 /* CSS */
 import './index.css'
 /* React*/
@@ -29,6 +30,7 @@ import ContainerMyShopping from "./components/_myShopping/containerShop.js"
 import UpdateCategories from "./components/_dashboardUpdateCategories/updateCategories"
 import UsersList from "./components/_dashboardUsersTable/usersTable"
 import OrderListPending from "./components/_dashboardTableOrders/OrderTablePending"
+import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
 //****Import de prueba */
 import Reduxxx from './components/pruebaRedux'
 
@@ -86,6 +88,9 @@ function App() {
           <Route exact path="/dashboard/orders/pending">
             <OrderListPending />
           </Route>
+          <Route exact path="/dashboard/orders/detail/:idorden">
+          <OrderDetail />
+        </Route>
           <Route exact path="/cart">
             <Cart />
           </Route>

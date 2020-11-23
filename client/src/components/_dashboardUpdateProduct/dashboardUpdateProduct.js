@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
 const getProduct = axios.get(`${process.env.REACT_APP_API_URL}/products`);
 
 const DashboardUpdateProduct = () => {
   const [product, setProduct] = useState([]);
-
+  const user = useSelector((state) => state.user);
   useEffect(() => {
     getProduct.then((res) => {
       setProduct(res.data);
@@ -28,7 +28,9 @@ const DashboardUpdateProduct = () => {
 
   return (
     <div className="d-flex flex-column text-center col-12 col-md-12 col-lg-10 col-xl-8 mx-auto my-5 p-5 border shadow">
-      <div  style={{ backgroundImage: "url(https://img.unocero.com/2019/11/funko-pop-geek-barato.jpg)",  width: "100%",
+      {!user.isAdmin ? <Redirect to='/products'/> : null} 
+      <div  style={{backgroundImage: "url(https://img.unocero.com/2019/11/funko-pop-geek-barato.jpg)",  width: "100%",
+
   height: "280px",}} >
         <h1 style={{background:"white"}} class="display-3 d-none d-sm-block">Products</h1>
         <hr class="my-2" />
