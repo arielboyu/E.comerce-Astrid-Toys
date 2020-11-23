@@ -28,18 +28,20 @@ const DashboardUpdateProduct = () => {
 
   return (
     <div className="d-flex flex-column text-center col-12 col-md-12 col-lg-10 col-xl-8 mx-auto my-5 p-5 border shadow">
-      <div  style={{backgroundImage: "url(https://img.unocero.com/2019/11/funko-pop-geek-barato.jpg)",  width: "100%",
+      <div  style={{ backgroundImage: "url(https://img.unocero.com/2019/11/funko-pop-geek-barato.jpg)",  width: "100%",
   height: "280px",}} >
         <h1 style={{background:"white"}} class="display-3 d-none d-sm-block">Products</h1>
         <hr class="my-2" />
         <p class="lead">
         </p>
       </div>
-      <Link to="/dashboard/product/create">
+      <div className="col-12 d-flex justify-content-center pb-4">
+          <Link to="/dashboard/product/create">
             <button class="btn btn-danger btn-lg d-flex align-items-center ml-auto mt-3">
             <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Product 
             </button>
           </Link>
+      </div>
       <table className="table table-reflow w-75 mx-auto mb-5">
         <thead>
           <tr>

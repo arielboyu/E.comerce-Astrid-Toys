@@ -1,0 +1,10 @@
+.btnBack{
+    color: white;
+    width: 200px;
+    height: 50px;
+    background-color: #ce9a18dc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 30ms;
+}

@@ -37,17 +37,19 @@ export default function CategoriesList() {
         <p className="lead ">
         </p>
       </div>
+      <div className="col-12 d-flex justify-content-center pb-4">
+          <Link to="/dashboard/category/create">
+            <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
+            <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Category 
+            </button>
+          </Link>
+        </div>
       <table className="table table-reflow w-75 mx-auto mb-5">
         <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
             <th>Description</th>
-            <th><Link to="/dashboard/category/create">
-            <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
-            <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Category 
-            </button>
-          </Link></th>
           </tr>
         </thead>
         <tbody>
