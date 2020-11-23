@@ -23,23 +23,19 @@ function authSetUp(server) {
 	passport.use(localStrategy)
 
 	passport.serializeUser((user, done) => {
-		console.log('serializing user: ');
 		done(null, user.id);
 	});
 
 	passport.deserializeUser( function( id, done ) {
 		User.findByPk( id )
 			.then( ( user ) => {
-				console.log('deserializing user');
 				done( null, user );
 			} )
 			.catch( ( error ) => {
-				console.log('error in deserializeUser');
 				return done( error );
 			} );
 		} );
 
-		
 	server.use(cookieParser());
 	server.use(passport.initialize());
 	server.use(passport.session());
