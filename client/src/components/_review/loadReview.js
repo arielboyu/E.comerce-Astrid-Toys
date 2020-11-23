@@ -4,16 +4,17 @@ import { Link,useParams } from "react-router-dom";
 import Rating from "react-rating";
 import {useSelector} from 'react-redux'
 
-const LoadReview = () => {
+const LoadReview = ({idProduct}) => {
   const [loadReview, setLoadReview] = useState({
     userId:0,
     score: 0,
     description: ""
   });
-  const { idProduct } = useParams();
+  // const { idProduct } = useParams();
   console.log("idProduct:",idProduct)
   const user= useSelector(state => state.user)
   useEffect(()=>{
+    console.log("entrando a loadReview")
     setLoadReview({ ...loadReview, userId:user.id })
   },[])
   
@@ -33,7 +34,7 @@ const LoadReview = () => {
 
     console.log("loadReview: ",loadReview)
     axios
-      .post(`${process.env.REACT_APP_API_URL}/${idProduct}/review`, loadReview)
+      .post(`${process.env.REACT_APP_API_URL}/products/${idProduct}/review`, loadReview)
       .then((res) => {
         console.log("Review loaded");
       })
