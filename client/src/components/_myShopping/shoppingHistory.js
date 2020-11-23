@@ -20,8 +20,6 @@ const ShoppingHistory = ({ idUser }) => {
       });
   },[]);
 
-
-
   return (
     <>
  
