@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./dashboardLoadCategory.module.css";
+import { useSelector } from "react-redux";
 
 function DashboardLoadCategory() {
   const [categoryLoad, setCategory] = useState({
     name: "",
     description: "",
   });
+  const user = useSelector((state) => state.user);
 
   function handlerChange(e) {
     setCategory({ ...categoryLoad, [e.target.name]: e.target.value });
@@ -26,7 +28,9 @@ function DashboardLoadCategory() {
   }
 
   return (
+    
     <div className="container d-flex flex-column mx-auto my-5 col-sm-12 col-md-8 col-lg-6 p-5 border shadow">
+      {!user.isAdmin ? <Redirect to='/products'/> : null} 
       <h2 class="display-3 mb-4 text-center">New Category</h2>
       <form onSubmit={handlerFormSubmit}>
         <div className="form-group">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
@@ -8,7 +9,7 @@ function UpdateProduct() {
   const [category, setCategory] = useState([]);
   const [productUpdate, setProduct] = useState([]);
   const [load, setLoad] = useState(false);
-
+  const user = useSelector((state) => state.user);
   const { id } = useParams();
   
   useEffect(() => {
@@ -74,6 +75,7 @@ function UpdateProduct() {
 
   return (
     <div className="container d-flex flex-column mx-auto my-5 p-5 border shadow">
+      {!user.isAdmin ? <Redirect to='/products'/> : null} 
       <h2 className="display-3 text-center">Update Product</h2>
       <form onSubmit={handlerSubmit}>
         <div className="form-group">
