@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
     objectFit: "contain",
   };
   return (
-    <div className={`${style.card} card mr-0 mr-md-4 mt-1 mb-3 pt-5 pb-3 px-4`}>
+    <div className={`${style.card} card mx-1 mx-md-4 mt-1 mb-3 pt-5 pb-3 px-4`}>
       <Link className="text-decoration-none" to={`/products/id/${product.id}`}>
         <img style={imagen} src={product.image}></img>
         <div className="card-body text-center">

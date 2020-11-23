@@ -1,18 +1,11 @@
 import React from "react";
 import ProductCard from "../_productCard/productCard";
 
-
-
-
 const ProductList = ({ product }) => {
- 
-
   return (
-    <div>
-      <div className="d-flex flex-wrap justify-content-center justify-content-md-start text-center">
+      <div className="d-flex flex-wrap justify-content-center ">
         {product.map((p) => (p.active && <ProductCard product={p} />))}
       </div>
-    </div>
   );
 };
 

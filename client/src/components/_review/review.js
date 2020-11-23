@@ -23,9 +23,9 @@ export default function Review({productId}) {
     <>
       <div className="d-flex flex-column mx-auto text-center mt-5 mt-lg-0">
         <div className="mt-5 mt-lg-0">
-          {console.log(averageScore)}
+          <h3 className="mt-5 pt-5 pt-lg-0 mt-lg-2 mb-0">Popularity</h3>
           <h1 className="display-3 mt-5 pt-5 pt-lg-0 mt-lg-0">{!averageScore ? "S/C" : averageScore}</h1>
-          <span className="text-warning"><StarScore score = {averageScore}/></span>
+          <span className="text-warning display-4"><StarScore score = {averageScore}/></span>
         </div>
         
 
