@@ -27,19 +27,19 @@ export default function Profile() {
         </div>
         <div>
         <h4>Change Password </h4>
-        <Formik initialValues={{password: "" }} >
+        <Formik initialValues={{password: "" },{newpassword:""},{repeatpassword:""}} >
           <Form>
             <FormGroup>
               <label htmlFor="password">Enter Password</label>
-              <Field name="password" type="text" placeholder="Enter your password" className="form-control"/>
+              <Field name="password" type="password" placeholder="Enter your password" className="form-control"/>
             </FormGroup>
             <FormGroup>
               <label htmlFor="password">New Password</label>
-              <Field name="password" placeholder="Enter your new password" type="password" className="form-control" />
+              <Field name="newpassword" placeholder="Enter your new password" type="password" className="form-control" />
             </FormGroup>
             <FormGroup>
-              <label htmlFor="username">Repeat your New password</label>
-              <Field name="newpassword" type="text" placeholder="Repeat your new password" className="form-control"/>
+              <label htmlFor="password">Repeat your New password</label>
+              <Field name="repeatpassword" type="password" placeholder="Repeat your new password" className="form-control"/>
             </FormGroup>
             <Row>
               <Col lg={12} md={12}>
