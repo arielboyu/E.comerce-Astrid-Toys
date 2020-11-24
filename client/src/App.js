@@ -4,33 +4,36 @@ import './index.css'
 /* React*/
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, } from "react-router-dom";
-import CategoryList from "./components/_dashboardCategoriesList/categoriesList";
+import CategoryList from "./components/Dashboard/Categories/ListCategories/categoriesList";
 /*Importaciones de componentes*/
-import Home from "./components/_home/home.js";
-import Cart from "./components/_cart/cart.js";
-import AddToCart from "./components/_addToCart/addToCart.js";
-import Login from "./components/_login/login.js";
-import Register from "./components/_login/register.js";
-import Footer from "./components/_footer/footer.js";
-import NotFound from "./components/_error/error"
+import Home from "./components/Sections/Home/home.js";
+import Footer from "./components/Sections/Footer/footer.js";
+import NotFound from "./components/Sections/Error/error"
+import Navbar from "./components/NavBar/nav.js";
+/* Import de Profile */
+import Profile from "./components/Profile/profile.js"
+import Login from "./components/Profile/Login/login.js";
+import Register from "./components/Profile/Register/register.js";
+import Cart from "./components/Cart/cart.js";
+import ContainerMyShopping from "./components/Profile/MyShopping/containerShop.js"
 /*Componente Catalogo*/
-import Catalogue from "./components/_catalogue/catalogue";
-import Product from "./components/_product/product";
-/*Componente Navbar*/
-import Navbar from "./components/_navBar/nav.js";
-import Profile from "./components/_navBar/profile.js"
-/*Seccion Dashboard*/
-import Dashboard from "./components/_dashboard/dashboard";
-import DashboardLoadCategory from "./components/_dashboardLoadCategory/dashboardLoadCategory";
-import DashboardLoadProduct from "./components/_dashboardLoadProduct/dashboardLoadProduct";
-import DashboardUpdateProduct from "./components/_dashboardUpdateProduct/dashboardUpdateProduct";
-import UpdateProduct from "./components/_dashboardUpdateProduct/updateProduct"
-import OrderList from "./components/_dashboardTableOrders/orderTable"
-import ContainerMyShopping from "./components/_myShopping/containerShop.js"
-import UpdateCategories from "./components/_dashboardUpdateCategories/updateCategories"
-import UsersList from "./components/_dashboardUsersTable/usersTable"
-import OrderDetail from "./components/_dashboardOrderDetail/orderDetails"
-//****Import de prueba */
+import Catalogue from "./components/Catalogue/catalogue";
+import Product from "./components/Catalogue/ProductDetail/product";
+import AddToCart from "./components/Catalogue/AddToCart/addToCart.js";
+/* Dashboard Users*/
+import Dashboard from "./components/Dashboard/dashboard";
+import DashboardUsersList from "./components/Dashboard/Users/listUsers";
+/* Dashboard Products */
+import DashboardUpdateProducts from "./components/Dashboard/Products/updateProduct";
+import DashboardListProducts from "./components/Dashboard/Products/listProduct";
+import DashboardLoadProducts from "./components/Dashboard/Products/loadProduct";
+/* Dashboard Orders*/
+import DashboardOrderList from "./components/Dashboard/Orders/Orders/orderTable";
+import DashboardOrderDetail from "./components/Dashboard/Orders/OrderDetail/orderDetails";
+/* Dashboard Categories */
+import DashboardLoadCategory from "./components/Dashboard/Categories/LoadCategory/loadCategory";
+import DashboardUpdateCategories from "./components/Dashboard/Categories/UpdateCategories/updateCategories";
+/*Import de prueba */
 import Reduxxx from './components/pruebaRedux'
 
 function App() {
@@ -60,32 +63,34 @@ function App() {
           <Route path="/dashboard/category/create">
             <DashboardLoadCategory />
           </Route>
-          <Route exact path="/dashboard/product/create">
-            <DashboardLoadProduct />
-          </Route>
           <Route exact path="/profile/:id">
             <Profile />
           </Route>
           <Route exact path="/dashboard/product/update/:id">
-            <UpdateProduct />
+          <DashboardUpdateProducts />
+          
           </Route>
-          <Route exact path="/dashboard/product/update">
-            <DashboardUpdateProduct />
+          <Route exact path="/dashboard/product/list">
+          <DashboardListProducts />
+            
+          </Route>
+          <Route exact path="/dashboard/product/create">
+            <DashboardLoadProducts />
           </Route>
           <Route exact path="/dashboard/category/list">
             <CategoryList />
           </Route>
           <Route exact path="/dashboard/category/update/:idcategory">
-            <UpdateCategories />
+            <DashboardUpdateCategories />
           </Route>
           <Route exact path="/dashboard/orders/list">
-            <OrderList />
+            <DashboardOrderList />
           </Route>
           <Route exact path="/dashboard/users/list">
-            <UsersList />
+            <DashboardUsersList />
           </Route>
           <Route exact path="/dashboard/orders/detail/:idorden">
-          <OrderDetail />
+          <DashboardOrderDetail />
         </Route>
           <Route exact path="/cart">
             <Cart />

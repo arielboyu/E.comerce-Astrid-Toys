@@ -1,0 +1,69 @@
+:root{
+    --warning-color:#f0ac4ece;
+    --yellow1:  #f0ac4e;
+    --yellow2: #f0ac4e85;
+    --yellow3:#f0ac4e49;
+    --danger-color: #d9534f;
+}
+
+.shop{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    border: 1px solid #af7a2f94;
+    border-radius: 10px;
+    box-shadow: 0 .5rem 3rem rgba(0, 0, 0, 0.075) !important;
+
+}
+.button{
+    width: 300px;
+    color: var(--warning-color);
+    transition: color transform 100ms;
+    padding: 1em;
+    border: 1px solid var(--warning-color);
+    border-radius: 5px;
+}
+
+.button:hover{
+    transform: scale(1.5);
+    color: #000
+}
+
+.img{
+    height: 70px;
+    width: 100%;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.cabecera {
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.yellow{
+    background-color: var(--yellow3) ;
+}
+
+.btnShop{
+    width: 150px;
+    height: 30px;
+    background-color: var(--yellow1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 30ms;
+}
+
+.btnShop:hover{
+    background-color: #f0ac4ece;
+}
+
+.containerShop{
+    margin-top: 0px !important;
+    margin-bottom: 120px !important;
+    box-shadow: 0 .5rem 3rem rgba(0, 0, 0, 0.205) !important;
+    padding: 3rem!important;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.199);
+    border-radius: 10px;
+}
