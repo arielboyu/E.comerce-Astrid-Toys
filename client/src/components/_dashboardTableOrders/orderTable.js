@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 // Tabla que muestra una lista de ordenes.
 // Esta tabla es para el admin.
 // Tiene que mostrar todas las ordenes de todos los usuarios
-
 export default function OrderTable() {
     const getOrder = axios.get(`${process.env.REACT_APP_API_URL}/orders`);
     const [order, setOrder] = useState([]);
@@ -63,15 +62,15 @@ export default function OrderTable() {
                 <button  className="btn btn-danger ml-2">Detail</button>
               </Link></td>
               <td>      {o.state === "PENDING" ? (
-                  <button className="btn btn-danger ml-2" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel</button>
-                    ) : (
-                      <></>
-                    )}
-                         {o.state === "COMPLETE" ? (
-                        <button className="btn btn-danger ml-2" onClick={() => {handlerDistpach(o.id); window.location.reload();}}>SEND</button>
-                          ) : (
-                            <></>
-                          )}</td>
+              <button className="btn btn-danger ml-2" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel</button>
+                ) : (
+                <></>
+               )}
+              {o.state === "COMPLETE" ? (
+              <button className="btn btn-danger ml-2" onClick={() => {handlerDistpach(o.id); window.location.reload();}}>SEND</button>
+              ) : (
+             <></>
+            )}</td>
             </tr>
            ))}
             </tbody>
