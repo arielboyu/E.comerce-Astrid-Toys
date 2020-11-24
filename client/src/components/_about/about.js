@@ -3,11 +3,12 @@ import "./about.css";
 import CardAbout from './cardAbout.js';
 
 
-import img1 from "./image1.jpeg";
-import img2 from "./image2.jpeg";
-import img3 from "./image3.jpeg";
-import img4 from "./image4.jpeg";
-//import img5 from "./image5.jpeg";
+import img1 from "./ariel.jpeg";
+import img2 from "./maxi.jpeg";
+import img3 from "./rodri.jpeg";
+import img4 from "./astrid.jpeg";
+import img5 from "./nico.jpeg";
+import img6 from "./nahue.jpeg";
 
 
 const About = () => {
@@ -15,11 +16,12 @@ const About = () => {
         return(
             <div className="container-fluid d-flex justify-content-center">
                 <div className="row">
+                
                     <div className="col-md-4">
-                         <CardAbout imgsrc={img1} title="Full Stack Developer" name="Ariel Salcedo" />
+                         <CardAbout imgsrc={img1} title="Full Stack Developer" name="Ariel Salcedo" id="ari"/>
                     </div>
                         <div className="col-md-4">
-                         <CardAbout imgsrc={img2} title="Full Stack Developer" name="Maximiliano de Filipis" />
+                         <CardAbout imgsrc={img2} title="Full Stack Developer" name="Maximiliano de Filipis" id="max" />
                         </div>
                         <div className="col-md-4">
                          <CardAbout imgsrc={img3} title="Full Stack Developer" name="Rodrigo Penela" />
@@ -29,10 +31,10 @@ const About = () => {
                          <CardAbout imgsrc={img4} title="Full Stack Developer" name="Astrid Medina"/>
                         </div>
                         <div className="col-md-4">
-                         {/*<CardAbout imgsrc={img5} title="Full Stack Developer" name="Nicolas Acevedo"/>*/}
+                         <CardAbout imgsrc={img5} title="Full Stack Developer" name="Nicolas Acevedo"/>
                         </div>
                         <div className="col-md-4">
-                         {/*<CardAbout imgsrc={img6} title="Full Stack Developer" name="Nahuel Caputto"/>*/}
+                         <CardAbout imgsrc={img6} title="Full Stack Developer" name="Nahuel Caputto"/>
                         </div>
                     </div>
                 </div>     
