@@ -120,9 +120,12 @@ export default function Nav({ match }) {
   function PageTitle() {
     return (
       <>
-        <h1 className={`${style.title} mr-auto my-auto`}>
+        <h1 className={`${style.title} d-none d-lg-block mr-auto my-auto`}>
           <Link to="/"> Astrid Toys </Link>
         </h1>
+        <h5 className={`${style.title} d-block d-lg-none mr-auto my-auto`}>
+          <Link to="/"> A. Toys </Link>
+        </h5>
       </>
     );
   }

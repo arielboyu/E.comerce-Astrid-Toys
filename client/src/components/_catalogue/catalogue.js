@@ -4,6 +4,8 @@ import CategoryList from "../_productList/categoryList";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
 import style from './catalogue.module.css'
+import Spinner from '../_spinner/spinner'
+import Pagination from './pagination'
 
 const getProduct = axios.get(`${process.env.REACT_APP_API_URL}/products`);
 const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
@@ -11,25 +13,41 @@ const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 const Catalogue = () => {
   const [ product, setProduct ] = useState([]);
   const [ category, setCategory ] = useState([]);
-  const [ currentPage, setCurrentPage ] = useState (1);
-  const [ postPerPage, setPostsPerPage ] = useState(10)
-  const [ loading, setLoading ] = useState(false);
   const { cat } = useParams();
+  
+  // PAGINATION CONSTANTS
+  const [ currentPage, setCurrentPage ] = useState (1);
+  const [ loading, setLoading ] = useState(false);
+  const [ postsPerPage ] = useState(8)
 
   useEffect(() => {
     if(cat){
+      setLoading( true )
       axios.get(`${process.env.REACT_APP_API_URL}/products/search/${cat}`)
-      .then((productCategory)=>{ setProduct(productCategory.data) })
+      .then((productCategory)=>{ setProduct(productCategory.data) });
+      setLoading( false )
     } else {
+      setLoading( true )
       getProduct.then((res) => { setProduct(res.data) });
+      setLoading( false )
     }
     getCategory.then((res) => { setCategory(res.data) });
   }, [cat]);
 
+
+  // PAGINATION VARIABLES
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = product.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = ( pageNumber ) => { setCurrentPage(pageNumber) }
+
   const handlerSearch = (search) => {
+    setLoading(true)
     axios
       .get(`${process.env.REACT_APP_API_URL}/products/search?data=${search}`)
-      .then((res) => { setProduct(res.data) })
+      .then( res => { setProduct( res.data ) } )
+      .catch( err => console.log( err ) );
+    setLoading( false )
   }
 
   const handlerFilter = (categoria)=>{
@@ -41,16 +59,26 @@ const Catalogue = () => {
     getProduct.then((res) => { setProduct(res.data) });
   }
 
+  
+
+  if(loading){
+    return <Spinner />
+  }
   return (
     <>
+    {console.log(product)}
       <div className={`${style.containerCatalogue} container col-12 col-lg-10 text-center pb-0 mb-5`}>
         <h1 className="display-4">Catalogue</h1>
-        <div className="my-4 mx-0 mx-xl-5 px-xl-5">
+        <div className="mt-5 my-3 mx-0 mx-xl-5 px-xl-5">
           <CategoryList category={category} filter={handlerFilter} onSearch={handlerSearch} onClear={handlerClear}/>
         </div>
-        <div className="">
-          <ProductList product={product}/>
+        <div className="d-flex justify-content-center">
+          <Pagination postsPerPage={postsPerPage} totalPosts={product.length} paginate={paginate} />
         </div>
+        <div className="">
+          <ProductList product={currentPosts}/>
+        </div>
+        
       </div>
     </>
   );

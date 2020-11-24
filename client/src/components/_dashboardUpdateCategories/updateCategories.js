@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function UpdateCategories() {
  const [newCategory, setNewCategory] = useState([]);
  const [category, setCategory] = useState([]);
- const getCategory = axios.get("http://localhost:3002/categories");
+ const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
  useEffect(() => {
    getCategory.then((res) => {
@@ -20,7 +20,7 @@ const handlerChange = (e) => {
 
 const handlerSubmit = (e) => {
   axios
-    .put(`http://localhost:3002/categories/update/${category.id}`, newCategory)
+    .put(`${process.env.REACT_APP_API_URL}/categories/update/${category.id}`, newCategory)
     .then((res) => {
         console.log(res);
       })

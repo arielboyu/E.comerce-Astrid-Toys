@@ -30,7 +30,7 @@ export default function UsersTable() {
 
     const handleAdmin=(u)=>{
       const {id, isAdmin} = u
-      axios.put(`http://localhost:3002/users/change/rol/${id}`)
+      axios.put(`${process.env.REACT_APP_API_URL}/users/change/rol/${id}`)
       .then(r => console.log("Rol change"))
       .catch(er => console.log("Rol unchange"))
       setChangeRol(!changeRol)

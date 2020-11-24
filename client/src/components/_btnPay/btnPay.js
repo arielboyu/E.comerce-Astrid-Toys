@@ -16,7 +16,7 @@ function ButtonPay(){
         if(userLog === null){
             return console.log("Usuario no logeado")
         } else {
-            Axios.post("http://localhost:3002/users/cart/products", store)
+            Axios.post(`${process.env.REACT_APP_API_URL}/users/cart/products`, store)
             .then(r => {
                 console.log(r);
                 setBuyComplete(true)
