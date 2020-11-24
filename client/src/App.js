@@ -29,7 +29,6 @@ import DashboardListProducts from "./components/Dashboard/Products/listProduct";
 import DashboardLoadProducts from "./components/Dashboard/Products/loadProduct";
 /* Dashboard Orders*/
 import DashboardOrderList from "./components/Dashboard/Orders/Orders/orderTable";
-import DashboardOrderListPending from "./components/Dashboard/Orders/Orders/orderTablePending";
 import DashboardOrderDetail from "./components/Dashboard/Orders/OrderDetail/orderDetails";
 /* Dashboard Categories */
 import DashboardLoadCategory from "./components/Dashboard/Categories/LoadCategory/loadCategory";
@@ -89,9 +88,6 @@ function App() {
           </Route>
           <Route exact path="/dashboard/users/list">
             <DashboardUsersList />
-          </Route>
-          <Route exact path="/dashboard/orders/pending">
-            <DashboardOrderListPending />
           </Route>
           <Route exact path="/dashboard/orders/detail/:idorden">
           <DashboardOrderDetail />
