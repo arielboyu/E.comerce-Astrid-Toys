@@ -1,0 +1,27 @@
+.footer{   
+    background-color: #242526;
+    color: rgba(255, 255, 255, 0.76);
+    margin: 0px;
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.658);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    
+}
+.footer a:hover{
+    color: #f0ac4e94;
+}
+
+.textFooter{
+    color: #f0ac4e94;
+}
+
+.borderFooter{
+    border-bottom: 1px solid #f0ac4e94;
+}
+
+.title {
+    font-family: 'Rancho', cursive; 
+}
