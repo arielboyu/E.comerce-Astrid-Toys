@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const getUsers = axios.get(`${process.env.REACT_APP_API_URL}/users`);
@@ -9,6 +9,7 @@ export default function UsersTable() {
     const [user, setUser] = useState([]);
     const [deleted, setDeleted] = useState(null);
     const [changeRol, setChangeRol]= useState(false)
+    const userAct = useSelector((state) => state.user);
     useEffect(() => {
       getUsers.then((res) => {
         setUser(res.data);
@@ -38,6 +39,7 @@ export default function UsersTable() {
 
     return (
       <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+       {!userAct.isAdmin ? <Redirect to='/products'/> : null} 
         <div>
           <div style={{backgroundImage:"url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2020/10/figuras-funko-pop-2089019.jpg?itok=soYTFCkB)",  width: "100%",
            height: "370px",}}  >

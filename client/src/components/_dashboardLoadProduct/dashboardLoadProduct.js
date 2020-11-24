@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 
@@ -19,6 +20,7 @@ function DashboardLoadProduct() {
   });
   const [image, setImage] = useState(null);
   const [msg, setMsg] = useState("");
+  const user = useSelector((state) => state.user);
 
   const uploadAction = (image,idProduct) => {
     console.log("Este es el productInDB")
@@ -140,6 +142,7 @@ function DashboardLoadProduct() {
 
   return (
     <div className="container d-flex flex-column mx-auto my-5 p-5 border shadow">
+      {!user.isAdmin ? <Redirect to='/products'/> : null}
       <h2 className="display-3 text-center">Load Product</h2>
       <form
         id="loadProductForm"
