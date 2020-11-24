@@ -3,11 +3,9 @@
     padding: 20px;
     min-height: 80px;
     max-height: 130px;
-    border: 1px solid rgba(136, 136, 136, 0.192);
+    border: 1px solid rgba(180, 180, 180, 0.200);
     border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.10);
-    -moz-box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.10);
-    box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 .1rem 0.2rem rgba(0, 0, 0, 0.100);
     justify-content: space-between !important;
 }
 
@@ -23,11 +21,37 @@
 .containerCatalogue{
     padding: 3rem!important;
     width: 100%;
-
     border-radius: 10px;
-    box-shadow: 0 .5rem 3rem rgba(0, 0, 0, 0.205) !important;
+    box-shadow: 0 .1rem 0.5rem rgba(0, 0, 0, 0.200) !important;
     padding: 3rem!important;
     min-width: 450px;
-    background-color: rgba(236, 236, 236, 0.466);
+    background-color: rgba(255, 255, 255, 0.03);
     border-radius: 10px;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pageItem{
+    font-size: 25px;
+    margin: 10px 10px 50px 10px;
+    padding: 10px 15px;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 20%;
+    box-shadow: 0 .1rem 0.2rem rgba(0, 0, 0, 0.100);
+}
+
+.pageLink{
+    color: #f0ac4ece !important;
+    transition: all 200ms;
+}
+
+.pageLink:hover{
+    color: #000 !important;
+    transform: translate(10, 120) !important;
 }
