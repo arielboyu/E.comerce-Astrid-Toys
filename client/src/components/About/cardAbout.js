@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import img from "./background10.jpg";
+import img from "./img/background6.jpg";
 
 const CardAbout = (props) => {
   return (

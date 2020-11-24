@@ -3,12 +3,12 @@ import "./about.css";
 import CardAbout from './cardAbout.js';
 
 
-import img1 from "./ariel.jpeg";
-import img2 from "./maxi.jpeg";
-import img3 from "./rodri.jpeg";
-import img4 from "./astrid.jpeg";
-import img5 from "./nico.jpeg";
-import img6 from "./nahue.jpeg";
+import img1 from "./img/ariel.jpeg";
+import img2 from "./img/maxi.jpeg";
+import img3 from "./img/rodri.jpeg";
+import img4 from "./img/astrid.jpeg";
+import img5 from "./img/nico.jpeg";
+import img6 from "./img/nahue.jpeg";
 
 
 const About = () => {
