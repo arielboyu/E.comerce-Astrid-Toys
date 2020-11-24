@@ -36,7 +36,7 @@ const { reset } = require("nodemon");
 //var resetDB = true;
 conn.sync({ force: true }).then(() => {
   server.listen(process.env.PORT || 3002, () => {
-    console.log("%s listening at ", process.env.PORT ); // eslint-disable-line no-console
+    console.log("Server Listening at - PORT: ", process.env.PORT ); // eslint-disable-line no-console
 
     //El Loader carga la base con datos preestablecidos
     Loader();
