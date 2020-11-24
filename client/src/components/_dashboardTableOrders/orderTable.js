@@ -33,6 +33,7 @@ export default function OrderTable() {
         })
         .catch((err) => console.log(err));
     };
+    
     return (
       <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         {!user.isAdmin ? <Redirect to='/products'/> : null}
