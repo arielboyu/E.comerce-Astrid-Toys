@@ -21,41 +21,7 @@ server.post('/signup', ( req, res, next ) => {
 	}
   const { name, username, email, password } = req.body;
 
-  // User.findOne({where: {username: username}})
-  // .then(r =>{
-  //   if(r !== null)
-  //     res.setHeader("Error mail", 402)  
-  // })
-  // .catch(er =>{
-  //   res.status(402).send("Username not available")
-  // })
-
-  // User.findOne({where: {email: email}})
-  // .then(r =>{
-  //   if(r !== null){
-  //     res.setHeader("Error mail", 402)
-  //   }
-  // })
-  // .catch(er =>{
-  //   res.status(402).send("This email is already registered")
-  // })
-  var usernameExist= false;
-  User.findOne({where: {username: username}})
-  .then(r =>{
-    if(username === r.username){
-      console.log("Los usuarios son iguales")
-      return res.status(402).send("Username not available")
-      // res.header(400)
-      // res.send("User idems")
-    } 
-  })
-  .catch(er =>{
-    console.log("Por algun motivo entre aca")
-    // res.send("User idems pero catch")
-    // res.status(402).send("Username not available")
-  })
-
-  if(usernameExist) console.log("Los usarios son idems y eso no deberia pasar chinwenwencha")
+  //falta comparar cuando un username ya se encuentra en la base de datos
 
   if (name && username && email && password) {
     User.create({
