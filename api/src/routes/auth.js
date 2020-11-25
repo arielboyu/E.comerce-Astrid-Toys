@@ -21,25 +21,23 @@ server.post('/signup', ( req, res, next ) => {
 	}
   const { name, username, email, password } = req.body;
 
-  var usernameExist;
   User.findOne({where: {username: username}})
-  .then(r =>{ usernameExist= true})
-  .catch(r =>{ usernameExist= false})
-
-  var emailExist;
-  User.findOne({where: {email: email}})
-  .then(r =>{ emailExist= true})
-  .catch(r =>{ emailExist= false})
-
-  if(usernameExist){
+  .then(r =>{
     res.status(402).send("Username not available")
-    return "Username not available"
-  }
+  })
+  .catch(er =>{
+    console.log("Entre al catc")
+  })
 
-  if(emailExist){
+  User.findOne({where: {email: email}})
+  .then(r =>{
     res.status(402).send("This email is already registered")
-    return "This email is already registered"
-  }
+  })
+  .catch(er =>{
+    console.log("Entre al catch")
+  })
+
+
 
   if (name && username && email && password) {
     User.create({
@@ -53,10 +51,10 @@ server.post('/signup', ( req, res, next ) => {
         res.send(userCreated);
       })
       .catch((err) => {
-        res.status(400).send("Error al crear usuario ", err);
+        res.sendStatus(400)
       });
   } else {
-    res.status(400).send("Error! campos sin completar");
+    res.sendStatus(400)
   }
 } );
 
