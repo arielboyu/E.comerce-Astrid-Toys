@@ -1,7 +1,9 @@
 const server = require("express").Router();
 const passport = require('passport');
+const nodemailer = require('nodemailer')
 const { User } = require("../db.js");
 const isAuthenticated = require('../controllers/isAuthenticated.js')
+require('dotenv').config();
 
 server.get('/pruebaLogin', isAuthenticated, ( req, res ) => {
 	res.send('Estas logueado')
@@ -50,5 +52,29 @@ server.get('/logout', (req, res) => {
 server.get('/me', isAuthenticated, (req, res) => {
   res.status(200).send( req.user );
 })
+
+server.post('/send/register', isAuthenticated, (req, res)=>{
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
+    }
+  })
+  const mainConfig={
+    from: process.env.EMAIL,
+    to: req.body.email,
+    subject: "New account created in Astrid Toys",
+    text: `Hi ${req.body.name}! Welcome to our shop. You can now make purchases of your favorite toys`
+  }
+  transporter.sendMail(mainConfig, (err, info)=>{
+    if(err){
+      res.status(500).send("Failed send mail")
+    } else {
+      res.status(200).send("Mail send")
+    }
+  })
+})
+
 
 module.exports = server;
