@@ -20,6 +20,27 @@ server.post('/signup', ( req, res, next ) => {
 		return res.status( 400 ).send( { message: 'User is already logged in' } );
 	}
   const { name, username, email, password } = req.body;
+
+  var usernameExist;
+  User.findOne({where: {username: username}})
+  .then(r =>{ usernameExist= true})
+  .catch(r =>{ usernameExist= false})
+
+  var emailExist;
+  User.findOne({where: {email: email}})
+  .then(r =>{ emailExist= true})
+  .catch(r =>{ emailExist= false})
+
+  if(usernameExist){
+    res.status(402).send("Username not available")
+    return "Username not available"
+  }
+
+  if(emailExist){
+    res.status(402).send("This email is already registered")
+    return "This email is already registered"
+  }
+
   if (name && username && email && password) {
     User.create({
       name,
