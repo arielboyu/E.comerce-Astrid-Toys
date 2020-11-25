@@ -13,6 +13,17 @@ import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
 export default function Profile() {
   const user = useSelector(state => state.user);
   const [load, setLoad] = useState(false);
+  const handlerSubmit = (values) => {
+    console.log("values:",values)
+    if (values.newpassword === values.repeatpassword){
+      axios.put(`${process.env.REACT_APP_API_URL}/users/${user.id}/changepsw`,{password:values.newpassword})
+      .then(r=>console.log(r))
+      .catch(e=>console.log("error:",e))
+    }else{
+      alert("Error repeating new password")
+    }
+    
+  }
     return (
       <div className={`container justify-content-center align-items-center my-5 mx-auto rounded border shadow`}>
         <div className={`${style.card} d-flex flex-column flex-lg-row mx-auto mb-3`} >
@@ -27,8 +38,8 @@ export default function Profile() {
         </div>
         <div>
         <h4>Change Password </h4>
-        <Formik initialValues={{password: "" },{newpassword:""},{repeatpassword:""}} >
-          <Form>
+        <Formik initialValues={{password: "" },{newpassword:""},{repeatpassword:""}} onSubmit={(values) => handlerSubmit(values)} >
+          <Form >
             <FormGroup>
               <label htmlFor="password">Enter Password</label>
               <Field name="password" type="password" placeholder="Enter your password" className="form-control"/>
