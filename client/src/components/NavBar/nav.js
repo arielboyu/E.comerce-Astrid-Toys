@@ -45,8 +45,18 @@ export default function Nav({ match }) {
       .catch((err) => console.log(err));
   };
 
+  const getCarrito = () => {
+
+    axios
+    .get(`${process.env.REACT_APP_API_URL}/users/${state.user.id}/cart`)
+    .then((cart) => {
+      dispatch()
+    })
+  };
+
   useEffect(() => {
     getUser();
+    getCarrito();
   }, []);
 
   function Navbar(props) {

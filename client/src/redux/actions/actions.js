@@ -30,3 +30,7 @@ export function userLogOut(){
     return { type: CLEAR_USER }
 }
 
+export function cartSet(){
+    return {type: SET_CART}
+}
+
