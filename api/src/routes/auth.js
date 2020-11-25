@@ -3,6 +3,7 @@ const passport = require('passport');
 const nodemailer = require('nodemailer')
 const { User } = require("../db.js");
 const isAuthenticated = require('../controllers/isAuthenticated.js')
+require('dotenv').config();
 
 
 server.get('/pruebaLogin', isAuthenticated, ( req, res ) => {
@@ -55,18 +56,17 @@ server.get('/me', isAuthenticated, (req, res) => {
 
 server.post('/send/register', isAuthenticated, (req, res)=>{
   const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
+    service: 'gmail',
     auth: {
-        user: 'nola.schaefer20@ethereal.email',
-        pass: 'tvEce2yCEWT2jgfTTa'
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
     }
   })
   const mainConfig={
-    from: "nola.schaefer20@ethereal.email",
+    from: process.env.EMAIL,
     to: "rodrigo.m.penela@gmail.com",
     subject: "New account create in Astrid Toys",
-    text: "Text body"
+    text: "Anda el mail bebe!!!!"
   }
   transporter.sendMail(mainConfig, (err, info)=>{
     if(err){
