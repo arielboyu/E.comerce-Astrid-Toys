@@ -15,7 +15,7 @@ const Footer = ({match}) => {
         <div className="d-flex mt-3 mt-md-0">
         <ul className="nav justify-content-center">
         <Link to={{ pathname:"https://www.linkedin.com/in/ariel-salcedo-b423b61ba/"}} target="_blank"><li className="nav-item mr-2"><i className="fab fa-linkedin mr-1 ml-2 "></i> Ariel Salcedo </li></Link>
-        <Link to={{ pathname:"https://www.linkedin.com/in/astrid-medina-69a26a105/"}} target="_blank"><li className="nav-item mr-2"><i className="fab fa-linkedin mr-1 ml-2 "></i> Astrid Medina </li></Link>
+        <Link to={{ pathname:"https://www.linkedin.com/in/astrid-medina/"}} target="_blank"><li className="nav-item mr-2"><i className="fab fa-linkedin mr-1 ml-2 "></i> Astrid Medina </li></Link>
         <Link to={{ pathname:"https://www.linkedin.com/in/maxidf/"}} target="_blank"><li className="nav-item mr-2"><i className="fab fa-linkedin mr-1 ml-2 "></i> Maxi De Filippis </li></Link>
         <Link to={{ pathname:"https://www.linkedin.com/in/nahuel-caputto-63132b32/"}} target="_blank"><li className="nav-item mr-2"><i className="fab fa-linkedin mr-1 ml-2 "></i> Nahuel Caputto </li></Link>
         <Link to={{ pathname:"https://www.linkedin.com/in/nicolas-acevedo-b444a41b2/"}} target="_blank"><li className="nav-item mr-2"><i className="fab fa-linkedin ml-2 mr-1"></i> Nico Acevedo </li></Link>

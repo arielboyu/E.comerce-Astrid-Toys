@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import style from "./myShopping.module.css";
 import LoadReview from "../../Review/loadReview"
-import { Button, Toast, ToastBody, ToastHeader } from 'reactstrap';
+// import { Button, Toast, ToastBody, ToastHeader } from 'reactstrap';
 
 const Purchase = ({ orderId }) => {
   const [order, setOrder] = useState([]);
