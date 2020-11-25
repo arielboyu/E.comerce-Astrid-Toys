@@ -64,7 +64,7 @@ server.post('/send/register', isAuthenticated, (req, res)=>{
   })
   const mainConfig={
     from: process.env.EMAIL,
-    to: "rodrigo.m.penela@gmail.com",
+    to: req.email,
     subject: "New account create in Astrid Toys",
     text: "Anda el mail bebe!!!!"
   }
