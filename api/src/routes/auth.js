@@ -20,6 +20,9 @@ server.post('/signup', ( req, res, next ) => {
 		return res.status( 400 ).send( { message: 'User is already logged in' } );
 	}
   const { name, username, email, password } = req.body;
+
+  //falta comparar cuando un username ya se encuentra en la base de datos
+
   if (name && username && email && password) {
     User.create({
       name,
@@ -28,16 +31,16 @@ server.post('/signup', ( req, res, next ) => {
       password,
     })
       .then((userCreated) => {
-        console.log("Usuario creado OK ", userCreated);
-        res.send(userCreated);
+        console.log("User created");
+        res.sendStatus(200);
       })
       .catch((err) => {
-        res.status(400).send("Error al crear usuario ", err);
+        res.sendStatus(400)
       });
   } else {
-    res.status(400).send("Error! campos sin completar");
+    res.sendStatus(400)
   }
-} );
+});
 
 server.post('/login', passport.authenticate('local'), (req, res) => {
 	res.send( req.user );
@@ -53,7 +56,7 @@ server.get('/me', isAuthenticated, (req, res) => {
   res.status(200).send( req.user );
 })
 
-server.post('/send/register', isAuthenticated, (req, res)=>{
+server.post('/send/register', (req, res)=>{
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
