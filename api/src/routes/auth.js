@@ -3,7 +3,6 @@ const passport = require('passport');
 const { User } = require("../db.js");
 const isAuthenticated = require('../controllers/isAuthenticated.js')
 
-
 server.get('/pruebaLogin', isAuthenticated, ( req, res ) => {
 	res.send('Estas logueado')
 })
