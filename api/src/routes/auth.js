@@ -51,4 +51,8 @@ server.get('/me', isAuthenticated, (req, res) => {
   res.status(200).send( req.user );
 })
 
+server.get('/github', passport.authenticate('github', {scope: ['user:email'], display: 'popup'}));
+server.get('/github/redirect', passport.authenticate('github', {successRedirect: 'http://localhost:3000/oauth/success'})
+);
+
 module.exports = server;
