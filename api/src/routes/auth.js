@@ -39,13 +39,14 @@ server.post('/signup', ( req, res, next ) => {
   // .catch(er =>{
   //   res.status(402).send("This email is already registered")
   // })
-
+  var usernameExist= false;
   User.findOne({where: {username: username}})
   .then(r =>{
     if(username === r.username){
       console.log("Los usuarios son iguales")
-      res.header(400)
-      res.send("User idems")
+      return res.status(402).send("Username not available")
+      // res.header(400)
+      // res.send("User idems")
     } 
   })
   .catch(er =>{
@@ -53,6 +54,8 @@ server.post('/signup', ( req, res, next ) => {
     // res.send("User idems pero catch")
     // res.status(402).send("Username not available")
   })
+
+  if(usernameExist) console.log("Los usarios son idems y eso no deberia pasar chinwenwencha")
 
   if (name && username && email && password) {
     User.create({
