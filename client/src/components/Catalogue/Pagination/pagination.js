@@ -11,11 +11,11 @@ const Pagination = ({postsPerPage, totalPosts, paginate}) => {
         <nav>
             <ul className={`${style.pagination}`}>
                 {pageNumbers.map(number => (
-                    <li className={`${style.pageItem}`}>
-                        <a onClick={ () => paginate(number) } className={`${style.pageLink}`}>
-                            {number}
-                        </a>
-                    </li>
+                <a onClick={ () => paginate(number) } className={`${style.pageLink}`}>
+                    <button className={`${style.pageItem}`} style={{outline: "none"}}>
+                        {number}
+                    </button>
+                </a>  
                 ) ) }
             </ul>
         </nav>
