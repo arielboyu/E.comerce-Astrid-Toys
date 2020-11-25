@@ -36,6 +36,7 @@ import DashboardLoadCategory from "./components/Dashboard/Categories/LoadCategor
 import DashboardUpdateCategories from "./components/Dashboard/Categories/UpdateCategories/updateCategories";
 /*Import de prueba */
 import Reduxxx from './components/pruebaRedux'
+import { useSelector } from 'react-redux';
 
 function App() {
   return (
@@ -60,12 +61,13 @@ function App() {
           <Route path="/products">
             <Catalogue />
           </Route>
+          <Route exact path="/profile/:id">
+            <Profile />
+          </Route>
+          {/* <Route path='/dashboard' component={user.isAdmin ? <Dashboard /> : <></>}/> */}
           <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/dashboard/category/create">
             <DashboardLoadCategory />
-          </Route>
-          <Route exact path="/profile/:id">
-            <Profile />
           </Route>
           <Route exact path="/dashboard/product/update/:id">
             <DashboardUpdateProducts />
