@@ -10,7 +10,6 @@ import {
 } from "../../redux/actions/actions";
 import Style from "./cart.css";
 import ButtonPay from './ButtonPay/btnPay'
-
 import { Link } from "react-router-dom";
 
 //cart -product cart o pedido
@@ -30,9 +29,24 @@ const Cart = () => {
   // Lineas agregadas por Rodri 02:45
   const [isUpdateList, setList] = useState(false);
   const cartStore = useSelector((state) => state.carrito);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+
+  //para arreglar lo de las ordenes
+  //la logica seria:
+  /*
+si el usuario esta loggeado entonces:
+    si existe orden pendiente muestro carrito 
+    sino muestro el carrito vacio
+sino
+    muestro el carrito redux
+*/
+
+
+
   useEffect(() => {
+
     setCart(cartStore);
   }, [isUpdateList]);
 

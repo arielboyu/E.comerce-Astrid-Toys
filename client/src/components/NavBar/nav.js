@@ -9,9 +9,12 @@ import {
   userLogin,
   userLogOut,
   setCategories,
+  setCart,
+  addToCart
 } from "../../redux/actions/actions.js";
 // ---------- UTILS ----------
 import axios from "axios";
+import inicializeCart from "./Adapter.js";
 
 export default function Nav({ match }) {
   const dispatch = useDispatch();
@@ -40,23 +43,43 @@ export default function Nav({ match }) {
         withCredentials: true,
       })
       .then((user) => {
+        //ESTE CODIGO ADAPTA LA ORDER PENDING QUE RETORNA EL BACK A UNA ORDER PENDING QUE ACEPTA
+        //EL CARRITO DEL REDUX
+        //----------------------------------------------------------------------------
+        console.log("entro adapter")
+        var array = [];
+        axios.get(
+          `${process.env.REACT_APP_API_URL}/users/${user.data.id}/cart`
+        ).then((myCart)=>{
+          if (myCart.data) {
+            console.log("ya existe una orden pendiente");
+            console.log(myCart);
+            myCart.data.products.forEach((product) => {
+              product["cant"] = product.orderdetails.quantity;
+              array.push(product);
+            });
+          }
+          dispatch(setCart(array))
+        })
+        //-----------------------------------------------------------------------------
+
         dispatch(userLogin(user.data));
       })
       .catch((err) => console.log(err));
   };
 
-  const getCarrito = () => {
+  /*   const getCarrito = () => {
 
     axios
     .get(`${process.env.REACT_APP_API_URL}/users/${state.user.id}/cart`)
     .then((cart) => {
       dispatch()
     })
-  };
+  }; */
 
   useEffect(() => {
     getUser();
-    getCarrito();
+    //getCarrito();
   }, []);
 
   function Navbar(props) {

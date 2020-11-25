@@ -1,5 +1,5 @@
 import { 
-    ADD_CART, REMOVE_CART, REMOVE_ALL_CART, ADD_QUANTITY, SUB_QUANTITY, SET_USER, CLEAR_USER 
+    ADD_CART, REMOVE_CART, REMOVE_ALL_CART, ADD_QUANTITY, SUB_QUANTITY, SET_USER, CLEAR_USER, SET_CART
 } from '../constants';
 
 export function addToCart(payload){
@@ -30,7 +30,6 @@ export function userLogOut(){
     return { type: CLEAR_USER }
 }
 
-export function cartSet(){
-    return {type: SET_CART}
+export function setCart(payload){
+    return {type: SET_CART, payload}
 }
-
