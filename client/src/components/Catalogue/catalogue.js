@@ -46,7 +46,6 @@ const Catalogue = () => {
     setLoading(true)
     console.log(indexOfFirstPost, indexOfLastPost, currentPage)
     setCurrentPage(1);
-    setIndexOfLastPost(8);
 
     axios
       .get(`${process.env.REACT_APP_API_URL}/products/search?data=${search}`)
