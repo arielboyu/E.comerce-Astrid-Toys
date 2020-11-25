@@ -2,7 +2,6 @@ const server = require("express").Router();
 const passport = require('passport');
 const { User } = require("../db.js");
 const isAuthenticated = require('../controllers/isAuthenticated.js')
-const nodemailer = require('nodemailer')
 
 server.get('/pruebaLogin', isAuthenticated, ( req, res ) => {
 	res.send('Estas logueado')
@@ -50,32 +49,6 @@ server.get('/logout', (req, res) => {
 
 server.get('/me', isAuthenticated, (req, res) => {
   res.status(200).send( req.user );
-})
-
-
-server.post('/send/register', isAuthenticated, (req, res)=>{
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-        user: 'nola.schaefer20@ethereal.email',
-        pass: 'tvEce2yCEWT2jgfTTa'
-    }
-  })
-  const mainConfig={
-    from: "rodripenela",
-    to: "maxidefilippis@gmail.com",
-    subject: "New account create in Astrid Toys",
-    text: "Text body"
-  }
-  transporter.sendMail(mainConfig, (err, info)=>{
-    if(err){
-      console.log(err)
-      res.status(500).send("Failed send mail")
-    } else {
-      res.status(200).send("Mail send")
-    }
-  })
 })
 
 module.exports = server;

@@ -32,18 +32,22 @@ const Catalogue = () => {
       setLoading( false )
     }
     getCategory.then((res) => { setCategory(res.data) });
-  }, [cat ]);
+  }, [ cat ]);
 
 
   // PAGINATION VARIABLES
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = product.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = ( pageNumber ) => { setCurrentPage(pageNumber) }
+  const paginate = ( pageNumber ) => { 
+    setCurrentPage(pageNumber) }
 
   const handlerSearch = (search) => {
     setLoading(true)
-    handlerClear();
+    console.log(indexOfFirstPost, indexOfLastPost, currentPage)
+    setCurrentPage(1);
+    setIndexOfLastPost(8);
+
     axios
       .get(`${process.env.REACT_APP_API_URL}/products/search?data=${search}`)
       .then( res => { setProduct( res.data ) } )
@@ -52,13 +56,17 @@ const Catalogue = () => {
   }
 
   const handlerFilter = (categoria)=>{
-    handlerClear();
+    console.log(indexOfFirstPost, indexOfLastPost, currentPage)
+    setCurrentPage(1);
+    setIndexOfLastPost(8);
     axios.get(`${process.env.REACT_APP_API_URL}/products/search/${categoria}`)
     .then((res) => { setProduct(res.data) })
   }
 
   const handlerClear = ()=>{
-    getCategory.then((res) => { setCategory(res.data) });
+    console.log(indexOfFirstPost, indexOfLastPost, currentPage)
+    setCurrentPage(1);
+    setIndexOfLastPost(8);
     getProduct.then((res) => { setProduct(res.data) });
   }
 
