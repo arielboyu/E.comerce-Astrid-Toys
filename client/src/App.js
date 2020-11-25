@@ -68,12 +68,10 @@ function App() {
             <Profile />
           </Route>
           <Route exact path="/dashboard/product/update/:id">
-          <DashboardUpdateProducts />
-          
+            <DashboardUpdateProducts />
           </Route>
           <Route exact path="/dashboard/product/list">
-          <DashboardListProducts />
-            
+            <DashboardListProducts />
           </Route>
           <Route exact path="/dashboard/product/create">
             <DashboardLoadProducts />
@@ -94,8 +92,8 @@ function App() {
             <DashboardOrderListPending />
           </Route>
           <Route exact path="/dashboard/orders/detail/:idorden">
-          <DashboardOrderDetail />
-        </Route>
+            <DashboardOrderDetail />
+          </Route>
           <Route exact path="/cart">
             <Cart />
           </Route>

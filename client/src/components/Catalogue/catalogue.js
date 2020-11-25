@@ -32,7 +32,7 @@ const Catalogue = () => {
       setLoading( false )
     }
     getCategory.then((res) => { setCategory(res.data) });
-  }, [cat]);
+  }, [cat ]);
 
 
   // PAGINATION VARIABLES
@@ -43,6 +43,7 @@ const Catalogue = () => {
 
   const handlerSearch = (search) => {
     setLoading(true)
+    handlerClear();
     axios
       .get(`${process.env.REACT_APP_API_URL}/products/search?data=${search}`)
       .then( res => { setProduct( res.data ) } )
@@ -51,11 +52,13 @@ const Catalogue = () => {
   }
 
   const handlerFilter = (categoria)=>{
+    handlerClear();
     axios.get(`${process.env.REACT_APP_API_URL}/products/search/${categoria}`)
     .then((res) => { setProduct(res.data) })
   }
 
   const handlerClear = ()=>{
+    getCategory.then((res) => { setCategory(res.data) });
     getProduct.then((res) => { setProduct(res.data) });
   }
 
