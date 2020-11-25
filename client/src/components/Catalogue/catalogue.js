@@ -46,7 +46,6 @@ const Catalogue = () => {
     setLoading(true)
     console.log(indexOfFirstPost, indexOfLastPost, currentPage)
     setCurrentPage(1);
-    setIndexOfLastPost(8);
 
     axios
       .get(`${process.env.REACT_APP_API_URL}/products/search?data=${search}`)
@@ -58,7 +57,7 @@ const Catalogue = () => {
   const handlerFilter = (categoria)=>{
     console.log(indexOfFirstPost, indexOfLastPost, currentPage)
     setCurrentPage(1);
-    setIndexOfLastPost(8);
+
     axios.get(`${process.env.REACT_APP_API_URL}/products/search/${categoria}`)
     .then((res) => { setProduct(res.data) })
   }
@@ -66,7 +65,6 @@ const Catalogue = () => {
   const handlerClear = ()=>{
     console.log(indexOfFirstPost, indexOfLastPost, currentPage)
     setCurrentPage(1);
-    setIndexOfLastPost(8);
     getProduct.then((res) => { setProduct(res.data) });
   }
 
