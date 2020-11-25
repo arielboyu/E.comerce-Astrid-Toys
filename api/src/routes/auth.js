@@ -65,8 +65,8 @@ server.post('/send/register', isAuthenticated, (req, res)=>{
   const mainConfig={
     from: process.env.EMAIL,
     to: req.body.email,
-    subject: "New account create in Astrid Toys",
-    text: "Anda el mail bebe!!!!"
+    subject: "New account created in Astrid Toys",
+    text: `Hi ${req.body.name}! Welcome to our shop. You can now make purchases of your favorite toys`
   }
   transporter.sendMail(mainConfig, (err, info)=>{
     if(err){
