@@ -10,6 +10,7 @@ import Home from "./components/Sections/Home/home.js";
 import Footer from "./components/Sections/Footer/footer.js";
 import NotFound from "./components/Sections/Error/error"
 import Navbar from "./components/NavBar/nav.js";
+import About from "./components/About/about.js";
 /* Import de Profile */
 import Profile from "./components/Profile/profile.js"
 import Login from "./components/Profile/Login/login.js";
@@ -29,7 +30,6 @@ import DashboardListProducts from "./components/Dashboard/Products/listProduct";
 import DashboardLoadProducts from "./components/Dashboard/Products/loadProduct";
 /* Dashboard Orders*/
 import DashboardOrderList from "./components/Dashboard/Orders/Orders/orderTable";
-import DashboardOrderListPending from "./components/Dashboard/Orders/Orders/orderTablePending";
 import DashboardOrderDetail from "./components/Dashboard/Orders/OrderDetail/orderDetails";
 /* Dashboard Categories */
 import DashboardLoadCategory from "./components/Dashboard/Categories/LoadCategory/loadCategory";
@@ -90,9 +90,6 @@ function App() {
           <Route exact path="/dashboard/users/list">
             <DashboardUsersList />
           </Route>
-          <Route exact path="/dashboard/orders/pending">
-            <DashboardOrderListPending />
-          </Route>
           <Route exact path="/dashboard/orders/detail/:idorden">
           <DashboardOrderDetail />
         </Route>
@@ -104,6 +101,9 @@ function App() {
           </Route>
           <Route exact path="/addToCart">
             <AddToCart />
+          </Route>
+          <Route exact path="/about">
+            <About />
           </Route>
         </Switch>
       <Route path="/" render={({match}) => <Footer match={match} />} />

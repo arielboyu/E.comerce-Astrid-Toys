@@ -30,7 +30,6 @@ export default function Review({productId}) {
           <h1 className="display-3 mt-5 pt-5 pt-lg-0 mt-lg-0">{!averageScore ? "S/C" : averageScore}</h1>
           <span className="text-warning display-4"><StarScore score = {averageScore}/></span>
         </div>
-      
         <h3 className="mt-3 mt-lg-5">Reviews</h3>
         {reviews.map(review=>(
           <div className="d-flex headCont flex-column flex-lg-row w-75 mx-auto">
@@ -54,3 +53,4 @@ export default function Review({productId}) {
     </>
   );
 }
+
