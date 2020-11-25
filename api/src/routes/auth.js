@@ -53,7 +53,7 @@ server.get('/me', isAuthenticated, (req, res) => {
   res.status(200).send( req.user );
 })
 
-server.post('/send/register', isAuthenticated, (req, res)=>{
+server.post('/send/register', (req, res)=>{
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
