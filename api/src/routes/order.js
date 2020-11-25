@@ -124,4 +124,85 @@ server.put("/modify/dispatch/:id", (req, res) => {
     });
 });
 
+server.get("/pending/all", (req, res) => {
+    Order.findAll({
+      where: { state: "PENDING"},
+      include: [
+
+        {
+          model: Product,
+          as: "products",
+          attributes: [ "name", "description", "stock", "price"],
+        },
+        {
+            model: User,
+            as:"user",
+            attributes: ["name" , "username"]
+        }
+      ],
+    })
+    .then((orders) => res.status(200).json(orders))
+    .catch(() => {
+        return res.status(400).send("Error No se encontraron ordenes Pendientes")
+    })
+  });
+
+  server.get("/cancel/all", (req, res) => {
+      Order.findAll({
+        where: { state: "CANCELLED"},
+        include: [
+
+          {
+            model: Product,
+            as: "products",
+            attributes: [ "name", "description", "stock", "price"],
+          },
+          {
+              model: User,
+              as:"user",
+              attributes: ["name" , "username"]
+          }
+        ],
+      })
+      .then((orders) => res.status(200).json(orders))
+      .catch(() => {
+          return res.status(400).send("Error No se encontraron ordenes Caneladas")
+      })
+    });
+
+    server.get("/complete/all", (req, res) => {
+        Order.findAll({
+          where: { state: "COMPLETE"},
+          include: [
+
+            {
+              model: Product,
+              as: "products",
+              attributes: [ "name", "description", "stock", "price"],
+            },
+            {
+                model: User,
+                as:"user",
+                attributes: ["name" , "username"]
+            }
+          ],
+        })
+        .then((orders) => res.status(200).json(orders))
+        .catch(() => {
+            return res.status(400).send("Error No se encontraron ordenes Completas")
+        })
+      });
+
+
+      server.delete('/delete/:id', (req,res)=>{
+              const id = req.params.id;
+              Order.destroy({ where: { id } })
+              .then(order =>
+              res.status(200).send("se elimino la orden "))
+              .catch((err) => {
+               res.status(400).send(err);
+                });
+      });
+
+
 module.exports = server;
