@@ -31,11 +31,15 @@ import DashboardLoadProducts from "./components/Dashboard/Products/loadProduct";
 /* Dashboard Orders*/
 import DashboardOrderList from "./components/Dashboard/Orders/Orders/orderTable";
 import DashboardOrderDetail from "./components/Dashboard/Orders/OrderDetail/orderDetails";
+import OrderListCancel from "./components/Dashboard/Orders/Orders/orderCancel"
+import OrderListPending from "./components/Dashboard/Orders/Orders/orderTablePending"
+import OrderListComplete from "./components/Dashboard/Orders/Orders/orderComplete"
 /* Dashboard Categories */
 import DashboardLoadCategory from "./components/Dashboard/Categories/LoadCategory/loadCategory";
 import DashboardUpdateCategories from "./components/Dashboard/Categories/UpdateCategories/updateCategories";
 /*Import de prueba */
 import Reduxxx from './components/pruebaRedux'
+import { useSelector } from 'react-redux';
 
 function App() {
   return (
@@ -60,18 +64,19 @@ function App() {
           <Route path="/products">
             <Catalogue />
           </Route>
+          <Route exact path="/profile/:id">
+            <Profile />
+          </Route>
+          {/* <Route path='/dashboard' component={user.isAdmin ? <Dashboard /> : <></>}/> */}
           <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/dashboard/category/create">
             <DashboardLoadCategory />
           </Route>
-          <Route exact path="/profile/:id">
-            <Profile />
-          </Route>
           <Route exact path="/dashboard/product/update/:id">
-            <DashboardUpdateProducts />
+          <DashboardUpdateProducts />
           </Route>
           <Route exact path="/dashboard/product/list">
-            <DashboardListProducts />
+          <DashboardListProducts />
           </Route>
           <Route exact path="/dashboard/product/create">
             <DashboardLoadProducts />
@@ -89,6 +94,16 @@ function App() {
             <DashboardUsersList />
           </Route>
           <Route exact path="/dashboard/orders/detail/:idorden">
+          <DashboardOrderDetail />
+        </Route>
+        <Route path="/dashboard/orders/list/cancel">
+         <OrderListCancel />
+          </Route>
+          <Route path="/dashboard/orders/list/pending">
+          <OrderListPending />
+          </Route>
+          <Route path="/dashboard/orders/list/complete">
+          <OrderListComplete/>
             <DashboardOrderDetail />
           </Route>
           <Route exact path="/cart">
