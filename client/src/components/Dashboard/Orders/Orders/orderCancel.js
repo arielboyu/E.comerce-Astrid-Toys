@@ -24,17 +24,17 @@ export default function OrderTableCancel() {
         .catch((err) => console.log(err));
     };
     return (
-      <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+      <div style={{background:"white"}}  className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         {!user.isAdmin ? <Redirect to='/products'/> : null}
         <div>
           <h1 className="display-3 text-center">ORDER CANCEL LIST</h1>
             <table class="table table-borderless">
             <thead>
               <tr>
-                <th>ID#</th>
-                <th>State</th>
-                <th>User Name</th>
-                <th>Discharge Date</th>
+                <th>#</th>
+                <th>State <ion-icon name="information-circle-sharp"></ion-icon></th>
+                <th>User Name <ion-icon name="person-sharp"></ion-icon></th>
+                <th>Discharge Date <ion-icon name="time-sharp"></ion-icon></th>
               </tr>
             </thead>
             <tbody>
@@ -44,13 +44,15 @@ export default function OrderTableCancel() {
               <td>{o.state}</td>
               <td>{ o.user.username}</td>
               <td>{o.createdAt}</td>
-              <td><button class="btn btn-warning"onClick={() => {handlerDelete(o.id); window.location.reload();}}>Delete</button></td>
+              <td><button class="btn btn-outline-danger"onClick={() => {handlerDelete(o.id); window.location.reload();}}>
+              Delete  <ion-icon name="trash-sharp"></ion-icon> </button>
+              </td>
             </tr>
            ))}
             </tbody>
             </table>
             <Link to="/dashboard/orders/list" >
-            <button className="btn btn-danger ml-2" >Back</button>
+            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
             </Link>
         </div>
       </div>
