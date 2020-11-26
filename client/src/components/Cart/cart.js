@@ -64,37 +64,85 @@ sino
           dispatch(setCart(array));
           setCartLocal(array);
         });
-        //-----------------------------------------------------------------------------
-    }else{
+      //-----------------------------------------------------------------------------
+    } else {
       setCartLocal(cartStore);
-    } 
+    }
   }, [isUpdateList]);
 
   const handlerRemove = (f) => {
-    if(user.id !== null){
+    if (user.id !== null) {
       //logica base de datos
       //dispatch(removeProductToCart(f));
       //setList(!isUpdateList);
-    }else{
+    } else {
       dispatch(removeProductToCart(f));
-    setList(!isUpdateList);
+      setList(!isUpdateList);
     }
   };
 
   const handlerRemoveAll = (f) => {
-    dispatch(removeAllProductsToCart());
-    setList(!isUpdateList);
+    if (user.id !== null) {
+      //LOGICA BASE DE DATOS:
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/users/${user.id}/cart`)
+        .then((r) => {
+          console.log("Carrito vaciado en DB");
+          console.log(r);
+          dispatch(removeAllProductsToCart());
+          setList(!isUpdateList);
+        });
+    } else {
+      dispatch(removeAllProductsToCart());
+      setList(!isUpdateList);
+    }
   };
 
   const handlerAddQuantity = (f) => {
-    dispatch(addQuantity(f));
-    setList(!isUpdateList);
+    if (user.id !== null) {
+      ///:order/:id <=== order = orderId id = productId
+      var qty = { quantity: 1 }
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/users/${user.id}/cart`)
+        .then((mycart) => {
+          console.log("my cart to add qty: ", mycart)
+          axios.put(
+            `${process.env.REACT_APP_API_URL}/users/${mycart.data.id}/${f.id}`, qty
+          ).then((r)=>{
+            console.log(r)
+            dispatch(addQuantity(f));
+            setList(!isUpdateList);
+          })
+        });
+
+
+    } else {
+      dispatch(addQuantity(f));
+      setList(!isUpdateList);
+    }
   };
 
   const handlerSubQuantity = (f) => {
     if (f.cant > 1) {
-      dispatch(subQuantity(f));
-      setList(!isUpdateList);
+      if (user.id !== null) {
+        ///:order/:id <=== order = orderId id = productId
+        var qty = { quantity: -1 }
+        axios
+          .get(`${process.env.REACT_APP_API_URL}/users/${user.id}/cart`)
+          .then((mycart) => {
+            console.log("my cart to add qty: ", mycart)
+            axios.put(
+              `${process.env.REACT_APP_API_URL}/users/${mycart.data.id}/${f.id}`, qty
+            ).then((r)=>{
+              console.log(r)
+              dispatch(subQuantity(f));
+              setList(!isUpdateList);
+            })
+          });  
+      }else{
+        dispatch(subQuantity(f));
+        setList(!isUpdateList);
+      }
     }
   };
   /*const handlerCalculeAll = (f) => {
