@@ -1,0 +1,14 @@
+
+.cardAB1{
+   
+    min-width: 32rem;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    box-shadow: .5rem .5rem 3rem rgba(0,0,0,2);
+
+    
+}
