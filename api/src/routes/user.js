@@ -91,7 +91,7 @@ server.put("/:id/changepsw", (req, res) => {
     });
 });
 
-server.get("/:idUser/cart", (req, res) => {
+/* server.get("/:idUser/cart", (req, res) => {
   const idUsuario = req.params.idUser;
   User.findOne({
     include: [
@@ -109,6 +109,18 @@ server.get("/:idUser/cart", (req, res) => {
   }).then((user) => {
     res.send(user);
   });
+});  */
+
+// Esta ruta retorna un carrito, la volvi a hacer, antes estaba como esta arriba
+server.get("/:idUser/cart", (req, res) => {
+  const id = req.params.idUser;
+  Order.findOne({
+    where: {
+      userId: id,
+      state: "PENDING"
+    },
+    include: Product
+  }).then((order) => res.status(200).json(order));
 });
 
 //S40 : Crear Ruta para vaciar el carrito
