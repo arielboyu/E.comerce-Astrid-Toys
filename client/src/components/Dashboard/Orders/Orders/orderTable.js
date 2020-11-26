@@ -33,7 +33,15 @@ export default function OrderTable() {
         })
         .catch((err) => console.log(err));
     };
-    
+    const handlerDelete = (orderid) => {
+      console.log(orderid)
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/orders/delete/${orderid}`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    };
     return (
       <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         {!user.isAdmin ? <Redirect to='/products'/> : null}
@@ -49,6 +57,9 @@ export default function OrderTable() {
                 <th>State</th>
                 <th>User Name</th>
                 <th>Discharge Date</th>
+                <th><Link to={"/dashboard/orders/list/pending"}><button className="btn btn-dark" > Filter by pending</button></Link></th>
+                <th><Link to={"/dashboard/orders/list/complete"}> <button className="ml-3 btn btn-info" >  Filter by Complete</button></Link></th>
+                <th><Link to={"/dashboard/orders/list/cancel"}><button className="btn btn-danger ml-2" >  Filter by Cancel</button></Link></th>
               </tr>
             </thead>
             <tbody>
@@ -60,7 +71,7 @@ export default function OrderTable() {
               <td>{o.createdAt}</td>
               <td><Link to={`/dashboard/orders/detail/${o.id}`}>
               {/* para poder incluir los backticks debo colocar el path dentro de llaves */}
-                <button  className="btn btn-danger ml-2">Detail</button>
+                <button class="btn btn-secondary">Detail</button>
               </Link></td>
               <td>      {o.state === "PENDING" ? (
               <button className="btn btn-danger ml-2" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel</button>
@@ -68,10 +79,15 @@ export default function OrderTable() {
                 <></>
                )}
               {o.state === "COMPLETE" ? (
-              <button className="btn btn-danger ml-2" onClick={() => {handlerDistpach(o.id); window.location.reload();}}>SEND</button>
+              <button class="btn btn-success" onClick={() => {handlerDistpach(o.id); window.location.reload();}}>Send</button>
               ) : (
              <></>
-            )}</td>
+            )}
+            {o.state === "CANCELLED" ? (
+            <button class="btn btn-warning"onClick={() => {handlerDelete(o.id); window.location.reload();}}>Delete</button>
+            ) : (
+           <></>
+          )}</td>
             </tr>
            ))}
             </tbody>
@@ -83,3 +99,6 @@ export default function OrderTable() {
       </div>
     );
 }
+//   <th> <select class="form-control form-control-sm" > Filter By State
+//      <option className="btn btn-dark" >Filter By pending</option>
+// </select></th>
