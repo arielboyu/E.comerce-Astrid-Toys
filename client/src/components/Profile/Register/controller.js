@@ -8,15 +8,16 @@ export async function userExist(username){
             userAvailable= true;
         } 
     })
-    // .then((res)=>{
-    //     console.log(res.data)
-    //     res.data.forEach((us)=>{
-    //         console.log(us)
-    //         if(us.username === username){
-    //             userAvailable = true
-    //         }
-    //     })
-    // })
-    // .catch(err => console.log(err))
     return userAvailable;
+}
+
+export async function mailExist(mail){
+    let mailAvailable= false
+    const {data} = await Axios.get(`${process.env.REACT_APP_API_URL}/users`)
+    data.map((us)=>{
+        if(us.mail === mail){
+            mailAvailable= true;
+        } 
+    })
+    return mailAvailable;
 }
