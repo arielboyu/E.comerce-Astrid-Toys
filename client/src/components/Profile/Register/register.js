@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
 import axios from "axios";
+import {userExist} from './controller'
 
 const alerta = (mensaje, color = "danger") => {
   return (
@@ -36,6 +37,7 @@ const Register = () => {
   
 
   const handlerRegister=(values)=>{
+    if(userExist(values.username)){console.log("Son iguales")}
     setRegOk(false)
     axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, values)
     .then(r => {

@@ -6,7 +6,7 @@ import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
 import axios from "axios"
 import { useDispatch, useSelector} from 'react-redux'
 import { userLogin } from '../../../redux/actions/actions'
-import {userExist} from './controller'
+
 
 const alerta = (mensaje, color="danger") => {
   return <Alert className="mt-2" color={color}>{mensaje}</Alert>
