@@ -13,7 +13,7 @@ export default function OrderTablePending() {
         console.log(res)
       });
     }, [])
-  
+
     const handlerCancel = (orderid) => {
       console.log(orderid)
       axios
@@ -31,10 +31,10 @@ export default function OrderTablePending() {
             <table class="table table-borderless">
             <thead>
               <tr>
-                <th>ID#</th>
-                <th>State</th>
-                <th>User Name</th>
-                <th>Discharge Date</th>
+                <th>#</th>
+                <th>State <ion-icon name="information-circle-sharp"></ion-icon> </th>
+                <th>User Name <ion-icon name="person-sharp"></ion-icon> </th>
+                <th>Discharge Date <ion-icon name="time-sharp"></ion-icon> </th>
               </tr>
             </thead>
             <tbody>
@@ -44,15 +44,15 @@ export default function OrderTablePending() {
               <td>{o.state}</td>
               <td>{ o.user.username}</td>
               <td>{o.createdAt}</td>
-            <td><button className="btn btn-danger ml-2" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel</button></td>
-            </tr>    
+            <td><button class="btn btn-outline-danger" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel <ion-icon  name="close-sharp"></ion-icon> </button></td>
+            </tr>
            ))}
             </tbody>
             </table>
             <Link to="/dashboard/orders/list" >
-            <button className="btn btn-danger ml-2" >Back</button>
-            </Link> 
-        </div>   
+            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
+            </Link>
+        </div>
       </div>
     );
-} 
+}

@@ -30,20 +30,20 @@ export default function OrderDetail() {
   }
   return (
     <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-      {!userAct.isAdmin ? <Redirect to='/products'/> : null} 
+      {!userAct.isAdmin ? <Redirect to='/products'/> : null}
       <div>
       <h1 className="display-3 text-center">Order detail</h1>
       <h7> ORDER ID: {"  "} {order.id}</h7>
-      <h6>STATE: {"  "}{order.state}</h6>
-      <h6>NAME: {"  "}{user.name}</h6>
-      <h7>DISCHARGE DATE:  {"  "} {order.createdAt}</h7>
+      <h6>STATE: {"  "}{order.state} <ion-icon name="information-circle-sharp"></ion-icon> </h6>
+      <h6>NAME: {"  "}{user.name} <ion-icon name="person-sharp"></ion-icon></h6>
+      <h7>DISCHARGE DATE:  {"  "} {order.createdAt} <ion-icon name="time-sharp"></ion-icon>  </h7>
         <table class="table table-borderless">
           <thead>
             <tr>
-              <th>ID#</th>
-              <th>Products</th>
-              <th>Quantity</th>
-              <th>Price</th>
+              <th>#</th>
+              <th>Products  <ion-icon name="logo-reddit"></ion-icon></th>
+              <th>Quantity <ion-icon name="document-text-sharp"></ion-icon> </th>
+              <th>Price <ion-icon name="logo-usd"></ion-icon></th>
             </tr>
           </thead>
           <tbody>
@@ -59,7 +59,7 @@ export default function OrderDetail() {
         </table>
             <h5> Total: ${" "}  {total}</h5>
             <Link to="/dashboard/orders/list" >
-            <button className="btn btn-danger ml-2" >Back</button>
+            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
             </Link>
       </div>
     </div>
