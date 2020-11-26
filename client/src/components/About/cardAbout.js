@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import img from "./img/background10.jpg";
+import img from "./img/fondo.jpg";
 import "./about.css";
-
 
 
 import img1 from "./img/ariel.jpg";
@@ -24,23 +23,7 @@ const CardAbout = (props) => {
         </div>
 
         <div className="card-wrapperAB">
-          {/*ASTRID MEDINA*/}
-          <div className="cardAB">
-            <img src={img} alt="card background" className="cardAB-imgAB" />
-            <img src={img4} alt="card image" className="profileAB-imgAB" />
-            <h1 className="name"> Astrid Medina </h1>
-            <p className="job-title"> Front-End Developer and Designer</p>
-            <p className="aboutAB">Professional IT Engineer.</p>
-            <a href="#" className="btnAB">
-              Read More
-            </a>
-            <ul className="socialAB-mediaAB">
-              <li><i class="far fa-envelope"></i></li> 
-              <Link to={{ pathname:"https://www.linkedin.com/in/astrid-medina/"}}target="_blank"><li><i className="fab fa-linkedin-in"></i></li></Link>
-           
-                <Link to={{ pathname: "https://github.com/Sifrisky/"}}target="_blank"><li><i className="fab fa-github"></i></li></Link> 
-            </ul>  
-          </div>
+          
           {/*ARIEL SALCEDO*/}
           <div className="cardAB">
             <img src={img} alt="card background" className="cardAB-imgAB" />
@@ -55,6 +38,22 @@ const CardAbout = (props) => {
               <li><i className="far fa-envelope"></i></li> 
               <Link to={{ pathname: "https://www.linkedin.com/in/ariel-salcedo-b423b61ba/"}} target="_blank"><li><i className="fab fa-linkedin-in"></i></li></Link>
               <Link to={{ pathname: "https://github.com/arielboyu/"}}target="_blank"><li><i className="fab fa-github"></i></li></Link>
+            </ul>  
+          </div>
+          {/*ASTRID MEDINA*/}
+          <div className="cardAB">
+            <img src={img} alt="card background" className="cardAB-imgAB" />
+            <img src={img4} alt="card image" className="profileAB-imgAB" />
+            <h1 className="name"> Astrid Medina </h1>
+            <p className="job-title"> Full Stack Developer</p>
+            <p className="aboutAB">Professional IT Engineer.</p>
+            <a href="#" className="btnAB">
+              Read More
+            </a>
+            <ul className="socialAB-mediaAB">
+            <a href="mailto:astrid.amg@gmail.com"></a><li><i class="far fa-envelope"></i></li> 
+              <Link to={{ pathname:"https://www.linkedin.com/in/astrid-medina/"}}target="_blank"><li><i className="fab fa-linkedin-in"></i></li></Link>
+                <Link to={{ pathname: "https://github.com/Sifrisky/"}}target="_blank"><li><i className="fab fa-github"></i></li></Link> 
             </ul>  
           </div>
            {/*Maxi De Filippis*/}
