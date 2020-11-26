@@ -38,20 +38,29 @@
 }
 
 .pageItem{
+    background-color: rgba(245, 245, 245, 0.212);
     font-size: 25px;
     margin: 10px 10px 50px 10px;
     padding: 10px 15px;
-    border: 1px solid rgb(230, 230, 230);
+    border: 1px solid rgb(200, 200, 200);
     border-radius: 20%;
     box-shadow: 0 .1rem 0.2rem rgba(0, 0, 0, 0.100);
+    transition: all 200ms;
+    color: var(--danger);
 }
 
-.pageLink{
+button .pageLink{
     color: #f0ac4ece !important;
-    transition: all 200ms;
+    
 }
 
 .pageLink:hover{
-    color: #000 !important;
+    
+    transform: translate(10, 120) !important;
+}
+
+.pageItem:hover{
+    
+    border: 1px solid #9c661b9f;
     transform: translate(10, 120) !important;
 }

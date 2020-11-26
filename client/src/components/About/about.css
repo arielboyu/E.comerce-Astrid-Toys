@@ -1,22 +1,7 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
-}
-
-html {
-    font-size: 10px;
-    font-family: "Roboto", sans-serif;  
-}
-
-a  {
-    text-decoration: none;
-    color: #fff;
-}
-
-section {
-    padding: 10rem 0;
-    background-color: #fff;
 }
 
 .heading {
@@ -191,4 +176,4 @@ section {
             transform: scale(1.05);
     }
         
-}
+} */

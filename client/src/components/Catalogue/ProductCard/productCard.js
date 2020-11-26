@@ -26,9 +26,11 @@ export default function ProductCard({ product }) {
   if (product.image[0] === "h") {
     setProductImage(product.imagen);
   } else {
-    axios.get(`${process.env.REACT_APP_API_URL}/images/hola.jpg`).then((imagenrespuesta)=>{
+    axios.get(`${process.env.REACT_APP_API_URL}/images/${product.id}.jpeg`).then((imagenrespuesta)=>{
+      console.log(imagenrespuesta)
       setProductImage(imagenrespuesta);
     })
+    .catch(err => console.log(err))
   }
   }, []);
 
