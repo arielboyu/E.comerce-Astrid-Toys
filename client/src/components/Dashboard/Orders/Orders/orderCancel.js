@@ -26,8 +26,11 @@ export default function OrderTableCancel() {
     return (
       <div style={{background:"white"}}  className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         {!user.isAdmin ? <Redirect to='/products'/> : null}
-        <div>
-          <h1 className="display-3 text-center">ORDER CANCEL LIST</h1>
+        <h1 className="display-3 text-center">Order Cancel List</h1>
+        <div className="mx-auto" style={{backgroundImage: "url(https://static.seattletimes.com/wp-content/uploads/2017/12/9d655134-da2c-11e7-95fd-67055a788fec-780x508.jpg)",  width: "75%",
+          height: "244px",}} >
+        </div>
+        <div className="mt-4" >
             <table class="table table-borderless">
             <thead>
               <tr>
