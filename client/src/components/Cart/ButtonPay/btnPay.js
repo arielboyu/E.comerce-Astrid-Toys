@@ -29,12 +29,12 @@ function ButtonPay() {
     setUserLog(store.user.id);
     if (userLog === null) {
       return console.log("Usuario no logeado");
-    } else {
-      setModal(true);
+    } else {    
       Axios.post(`${process.env.REACT_APP_API_URL}/users/cart/products`, store)
         .then((r) => {
           console.log(r);
           setBuyComplete(true);
+          setModal(true);
           actions(removeAllProductsToCart());
         })
         .catch((err) => console.log("User not loggin!"));
@@ -76,7 +76,7 @@ function ButtonPay() {
         <ModalHeader toggle={toggle}>ShippingAdress</ModalHeader>
         <ModalBody>
           <Formik
-            initialValues={{country: "", state: "", street: "", number: "", zipCode: "", email: ""}}
+            initialValues={{country: "", city: "", street: "", number: "", zipCode: "", email: ""}}
             onSubmit={(values) => {
               handleSubmit(values);
             }}
@@ -99,17 +99,17 @@ function ButtonPay() {
                 />
               </FormGroup>
               <FormGroup>
-                <label htmlFor="street">State</label>
+                <label htmlFor="street">City</label>
                 {/* <RegionDropdown name="state" 
 	                country={country} /> */}
                 <Field
-                  name="state"
+                  name="city"
                   type="text"
-                  placeholder="Enter your state"
+                  placeholder="Enter your city"
                   className="form-control"
                 />    
                 <ErrorMessage
-                  name="state"
+                  name="city"
                   component="div"
                   className="field-error text-danger"
                 />
@@ -184,9 +184,9 @@ function ButtonPay() {
       </Modal>
       {userLog === null ? (
         <div className="alert alert-danger my-3" role="alert">
-          You're not loggin,
+          You're not logged in,
           <Link to="/login">
-            <span className="alert-link"> please sigup.</span>
+            <span className="alert-link"> please sign in.</span>
           </Link>
         </div>
       ) : (
