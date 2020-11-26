@@ -13,7 +13,7 @@ export default function OrderTablePending() {
         console.log(res)
       });
     }, [])
-  
+
     const handlerCancel = (orderid) => {
       console.log(orderid)
       axios
@@ -26,15 +26,18 @@ export default function OrderTablePending() {
     return (
       <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         {!user.isAdmin ? <Redirect to='/products'/> : null}
-        <div>
-          <h1 className="display-3 text-center">Order pending list</h1>
+        <h1 className="display-3 text-center">Order Pending List</h1>
+        <div className="mx-auto" style={{backgroundImage: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4wEgMVFna59G1299J_HVENjnaGd1ZPgRdxA&usqp=CAU)",  width: "85%",
+          height: "180px",}} >
+        </div>
+        <div className="mt-4" >
             <table class="table table-borderless">
             <thead>
               <tr>
-                <th>ID#</th>
-                <th>State</th>
-                <th>User Name</th>
-                <th>Discharge Date</th>
+                <th>#</th>
+                <th>State <ion-icon name="information-circle-sharp"></ion-icon> </th>
+                <th>User Name <ion-icon name="person-sharp"></ion-icon> </th>
+                <th>Discharge Date <ion-icon name="time-sharp"></ion-icon> </th>
               </tr>
             </thead>
             <tbody>
@@ -44,15 +47,15 @@ export default function OrderTablePending() {
               <td>{o.state}</td>
               <td>{ o.user.username}</td>
               <td>{o.createdAt}</td>
-            <td><button className="btn btn-danger ml-2" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel</button></td>
-            </tr>    
+            <td><button class="btn btn-outline-danger" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel <ion-icon  name="close-sharp"></ion-icon> </button></td>
+            </tr>
            ))}
             </tbody>
             </table>
             <Link to="/dashboard/orders/list" >
-            <button className="btn btn-danger ml-2" >Back</button>
-            </Link> 
-        </div>   
+            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
+            </Link>
+        </div>
       </div>
     );
-} 
+}

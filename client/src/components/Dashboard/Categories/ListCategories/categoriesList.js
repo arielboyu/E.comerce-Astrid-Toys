@@ -32,7 +32,7 @@ export default function CategoriesList() {
   };
   return (
     <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-      {!user.isAdmin ? <Redirect to='/products'/> : null} 
+      {!user.isAdmin ? <Redirect to='/products'/> : null}
       <div style={{backgroundImage: "url(https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/FRDTR67UFNFYBJLZNIOWNMSUJQ.jpg)",  width: "100%",
         height: "300px",}} className="">
         <h1 style={{background:"white"}} className="display-3 text-center">Categories</h1>
@@ -43,7 +43,7 @@ export default function CategoriesList() {
       <div className="col-12 d-flex justify-content-center pb-4">
           <Link to="/dashboard/category/create">
             <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
-            <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Category 
+            <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Category
             </button>
           </Link>
         </div>
@@ -64,16 +64,16 @@ export default function CategoriesList() {
               <td><Link to={`/dashboard/category/update/${c.id}`}>
               <button
               className="btn btn-danger"
-              >Update</button>
+              >Update <ion-icon name="reload-circle-sharp"></ion-icon> </button>
               </Link></td>
               <td><button
                 onClick={() => handleSubmit(c)}
                 type="submit"
-                className="btn btn-danger"
+                className="btn btn-dark"
                 data-toggle="modal"
                 data-target="#exampleModal"
               >
-                Delete
+                Delete <ion-icon name="trash-sharp"></ion-icon>
               </button>
               </td>
             </tr>
@@ -81,8 +81,8 @@ export default function CategoriesList() {
         </tbody>
       </table>
       <Link to="/dashboard" >
-            <button className="btn btn-danger ml-2" >Back</button>
-            </Link> 
+            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
+            </Link>
       {/* <!-- Modal --> */}
       <div
         className="modal"

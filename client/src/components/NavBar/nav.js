@@ -9,6 +9,8 @@ import {
   userLogin,
   userLogOut,
   setCategories,
+  setCart,
+  addToCart
 } from "../../redux/actions/actions.js";
 // ---------- UTILS ----------
 import axios from "axios";
@@ -44,6 +46,8 @@ export default function Nav({ match }) {
       })
       .catch((err) => console.log(err));
   };
+
+
 
   useEffect(() => {
     getUser();

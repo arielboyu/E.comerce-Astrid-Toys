@@ -104,7 +104,6 @@ function App() {
           </Route>
           <Route path="/dashboard/orders/list/complete">
           <OrderListComplete/>
-            <DashboardOrderDetail />
           </Route>
           <Route exact path="/cart">
             <Cart />
