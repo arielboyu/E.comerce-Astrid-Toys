@@ -3,10 +3,17 @@
     padding: 20px;
     min-height: 80px;
     max-height: 130px;
-    border: 1px solid rgba(180, 180, 180, 0.200);
+    border: 1px dashed #8a650950;
     border-radius: 10px;
-    box-shadow: 0 .1rem 0.2rem rgba(0, 0, 0, 0.100);
     justify-content: space-between !important;
+}
+
+.categoryLink:hover{
+    transition: all 200ms;   
+}
+
+.categoryLink:hover{
+    transform: scale(1.1)
 }
 
 .productList{
@@ -16,17 +23,6 @@
     margin: 0 auto !important;
     text-align: center !important;
     height: 80px;
-}
-
-.containerCatalogue{
-    padding: 3rem!important;
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 .1rem 0.5rem rgba(0, 0, 0, 0.200) !important;
-    padding: 3rem!important;
-    min-width: 450px;
-    background-color: rgba(255, 255, 255, 0.03);
-    border-radius: 10px;
 }
 
 .pagination{
@@ -42,25 +38,19 @@
     font-size: 25px;
     margin: 10px 10px 50px 10px;
     padding: 10px 15px;
-    border: 1px solid rgb(200, 200, 200);
+    border: 1px solid rgba(200, 200, 200, 0.253);
     border-radius: 20%;
-    box-shadow: 0 .1rem 0.2rem rgba(0, 0, 0, 0.100);
-    transition: all 200ms;
-    color: var(--danger);
-}
-
-button .pageLink{
-    color: #f0ac4ece !important;
-    
-}
-
-.pageLink:hover{
-    
-    transform: translate(10, 120) !important;
+    box-shadow: 0.05rem 0.1rem .1rem 0.1rem rgba(0, 0, 0, 0.050);
+    transition: all 150ms;
+    color: #ce9a18dc;
 }
 
 .pageItem:hover{
     
     border: 1px solid #9c661b9f;
-    transform: translate(10, 120) !important;
+    transform: scale(1.1);
+    color: var(--dark);
 }
+
+
+

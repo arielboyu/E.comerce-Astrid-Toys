@@ -40,10 +40,10 @@ const Purchase = ({ orderId }) => {
 
   return (
     <>
-      <div className={`${style.containerShop} text-center mb-0 pb-0`}>
+      <div className={`${style.containerShop} firstContainer text-center mb-0 pb-0`}>
         
         {/* CABECERA DE LA ORDEN */}
-        <div className="d-flex flex-column flex-md-row justify-content-between pb-2 px-5">
+        <div className=" d-flex flex-column flex-md-row justify-content-between pb-2 px-5">
           <h2>{"ORDER N° " + order.id}</h2>
           <h3 className={order.state === 'CANCELLED' ? 'text-danger' : 'text-success'}>{order.state}</h3>
         </div>
