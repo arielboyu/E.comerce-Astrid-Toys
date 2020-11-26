@@ -1,15 +1,14 @@
+
 .containerAB {
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
-
+    
 }
 
-html {
-    font-size: 10px;
-  
+.image-team {
+    max-width: 100%;
 }
-
 .sectionAB {
     padding: 10rem 0;
     background-color: #fff;
@@ -45,8 +44,11 @@ html {
     flex-direction: column;
 }
 
-.cardAB {
-   
+
+.cardAB  {
+    margin: -193px -92px !important;
+    transform: scale(0.5);/* Igual que: scaleX(0.5) scaleY(0.5) */
+    
     width: 32rem;
     background-color: #ffffff;
     display: flex;
@@ -55,6 +57,8 @@ html {
     justify-content: center;
     margin: 2rem 0;
     box-shadow: .5rem .5rem 3rem rgba(0,0,0,2);
+    font-size: 10px;
+    
 }
 
 .cardAB-imgAB {
@@ -102,7 +106,7 @@ html {
     margin: 1rem 0;
     text-transform: uppercase;
     color: rgb(233, 176, 52);
-    font-size: 1.4rems;
+    font-size: 22px;
     transition: all .5s;
 }
 
@@ -184,7 +188,7 @@ html {
             animation: fadeIn .5s 2s backwards;
         }
         .cardAB:hover {
-            transform: scale(1.05);
+            transform: scale(0.6);
     }
         
-}
+} 

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import img from "./img/background10.jpg";
+import "./about.css";
+
 
 
 import img1 from "./img/ariel.jpg";
@@ -9,13 +11,17 @@ import img3 from "./img/rodri.jpeg";
 import img4 from "./img/astrid.jpeg";
 import img5 from "./img/nico.jpg";
 import img6 from "./img/nahue.jpeg";
-
+import img7 from "./img/team.png";
 
 const CardAbout = (props) => {
   return (
     <div className="containerAB">
       <section className="sectionAB">
         <h1 className="headingAB">Meet the Team</h1>
+
+        <div className="row">
+        <img src={img7} alt="image team" className="image-team"/>
+        </div>
 
         <div className="card-wrapperAB">
           {/*ASTRID MEDINA*/}
