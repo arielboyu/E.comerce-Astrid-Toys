@@ -6,7 +6,7 @@ import CardAbout from './cardAbout.js';
 const About = () => {
 
         return(
-            <div className="container-fluid d-flex justify-content-center">
+            <div className="containerAB-fluid d-flex justify-content-center">
         <CardAbout />      
       </div>
                 
