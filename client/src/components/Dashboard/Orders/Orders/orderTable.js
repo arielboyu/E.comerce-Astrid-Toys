@@ -43,12 +43,12 @@ export default function OrderTable() {
         .catch((err) => console.log(err));
     };
     return (
-      <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+      <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         {!user.isAdmin ? <Redirect to='/products'/> : null}
         <div >
           <div  style={{backgroundImage:"url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2020/10/figuras-funko-pop-2089019.jpg?itok=soYTFCkB)",  width: "100%",
-           height: "370px",}}   >
-          <h1 style={{background:"white"}}   className="display-3 text-center">ORDER LIST</h1>
+           height: "300px",}}   >
+          <h1 style={{background:"white"}}   className="display-3 text-center">Order list</h1>
          </div>
             <table class="table table-borderless">
             <thead>

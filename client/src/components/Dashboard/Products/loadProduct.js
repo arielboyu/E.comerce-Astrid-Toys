@@ -141,7 +141,7 @@ function DashboardLoadProduct() {
   };
 
   return (
-    <div className="container d-flex flex-column mx-auto my-5 p-5 border shadow">
+    <div className="firstContainer container d-flex flex-column mx-auto my-5 p-5 border shadow">
       {!user.isAdmin ? <Redirect to='/products'/> : null}
       <h2 className="display-3 text-center">Load Product</h2>
       <form

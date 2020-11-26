@@ -29,10 +29,10 @@ export default function OrderDetail() {
     });
   }
   return (
-    <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+    <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
       {!userAct.isAdmin ? <Redirect to='/products'/> : null} 
       <div>
-      <h1 className="display-3 text-center">ORDER DETAILS</h1>
+      <h1 className="display-3 text-center">Order detail</h1>
       <h7> ORDER ID: {"  "} {order.id}</h7>
       <h6>STATE: {"  "}{order.state}</h6>
       <h6>NAME: {"  "}{user.name}</h6>

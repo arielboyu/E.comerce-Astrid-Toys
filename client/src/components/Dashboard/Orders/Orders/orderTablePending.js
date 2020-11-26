@@ -24,10 +24,10 @@ export default function OrderTablePending() {
         .catch((err) => console.log(err));
     };
     return (
-      <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+      <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         {!user.isAdmin ? <Redirect to='/products'/> : null}
         <div>
-          <h1 className="display-3 text-center">ORDER PENDING LIST</h1>
+          <h1 className="display-3 text-center">Order pending list</h1>
             <table class="table table-borderless">
             <thead>
               <tr>
