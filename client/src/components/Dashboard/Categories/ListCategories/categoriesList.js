@@ -31,11 +31,11 @@ export default function CategoriesList() {
     setDeleted(c);
   };
   return (
-    <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+    <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
       {!user.isAdmin ? <Redirect to='/products'/> : null} 
-      <div  style={{backgroundImage: "url(https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/FRDTR67UFNFYBJLZNIOWNMSUJQ.jpg)",  width: "100%",
+      <div style={{backgroundImage: "url(https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/FRDTR67UFNFYBJLZNIOWNMSUJQ.jpg)",  width: "100%",
         height: "300px",}} className="">
-        <h1 style={{background:"white"}}   className="display-3 text-center">Categories</h1>
+        <h1 style={{background:"white"}} className="display-3 text-center">Categories</h1>
         <hr className="my-2" />
         <p className="lead ">
         </p>

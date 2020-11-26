@@ -27,11 +27,10 @@ const DashboardUpdateProduct = () => {
   };
 
   return (
-    <div className="d-flex flex-column text-center col-12 col-md-12 col-lg-10 col-xl-8 mx-auto my-5 p-5 border shadow">
+    <div className="firstContainer container d-flex flex-column text-center col-12 col-md-12 col-lg-10 col-xl-8 mx-auto my-5 p-5 border shadow">
       {!user.isAdmin ? <Redirect to='/products'/> : null} 
       <div  style={{backgroundImage: "url(https://img.unocero.com/2019/11/funko-pop-geek-barato.jpg)",  width: "100%",
-
-  height: "280px",}} >
+  height: "300px",}} >
         <h1 style={{background:"white"}} class="display-3 d-none d-sm-block">Products</h1>
         <hr class="my-2" />
         <p class="lead">

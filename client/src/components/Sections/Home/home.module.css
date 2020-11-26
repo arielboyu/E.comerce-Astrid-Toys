@@ -5,7 +5,9 @@
 
 .btnIndex{
     transition: transform 0.15s;
-    color: rgba(206, 154, 24, 0.863)
+    color: rgba(206, 154, 24, 0.863);
+    box-shadow: 0 .1rem 2rem rgba(0, 0, 0, 0.582) !important;
+
     
 }
 
@@ -15,14 +17,3 @@
     border: 1px rgba(206, 154, 24, 0.863);
 }
 
-/* .btnIndex::before{
-     content: "";
-     position: absolute;
-     top: 50%;
-     margin-top: -19px;   
-     border-top: 19px solid transparent;
-     border-bottom: 19px solid transparent;
-     border-left: 1em solid;
-     right: -1em;
-    
-} */

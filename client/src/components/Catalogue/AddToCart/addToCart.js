@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import style from "../ProductCard/productCard.module.css";
-
 import {useDispatch} from 'react-redux'
 import {addToCart} from '../../../redux/actions/actions'
 
@@ -16,7 +15,7 @@ const AddToCart = ({ product }) => {
   return (
         <button 
           id="boton-agregar"
-          className={`btn btn-danger mb-1 ${style.cart}`}
+          className={`btn btn-danger mb-1 `}
           type="button"
           onClick={()=>dispatch(addToCart(productoParaAgregar))}
         >

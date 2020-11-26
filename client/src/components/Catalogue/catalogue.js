@@ -74,7 +74,7 @@ const Catalogue = () => {
   return (
     <>
     {console.log(product)}
-      <div className={`${style.containerCatalogue} container col-12 col-lg-10 text-center pb-0 mb-5`}>
+      <div className={`firstContainer container col-12 col-lg-10 text-center pb-0 mb-5`}>
         <h1 className="display-4">Catalogue</h1>
         <div className="mt-5 my-3 mx-0 mx-xl-5 px-xl-5">
           <CategoryList category={category} filter={handlerFilter} onSearch={handlerSearch} onClear={handlerClear}/>
