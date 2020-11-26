@@ -26,8 +26,12 @@ export default function OrderTableComplete() {
     return (
       <div style={{background:"white"}}  className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         {!user.isAdmin ? <Redirect to='/products'/> : null}
+        <h1 className="display-3 text-center">Order Complete List</h1>
         <div>
-          <h1 className="display-3 text-center">ORDER CANCEL LIST</h1>
+        <div className="mx-auto" style={{backgroundImage: "url(https://assets.frikily.com/wp-content/uploads/2019/09/Figuras-Funko-Pop-el-se%C3%B1or-de-los-anillos.jpg)",  width: "100%",
+          height: "300px",}} >
+        </div>
+        <div className="mt-4" >
             <table class="table table-borderless">
             <thead>
               <tr>
@@ -52,6 +56,7 @@ export default function OrderTableComplete() {
             <Link to="/dashboard/orders/list" >
             <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
             </Link>
+            </div>
         </div>
       </div>
     );

@@ -31,13 +31,16 @@ export default function OrderDetail() {
   return (
     <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
       {!userAct.isAdmin ? <Redirect to='/products'/> : null}
-      <div>
-      <h1 className="display-3 text-center">Order detail</h1>
+      <h1 className="display-3 text-center">Order Detail</h1>
+      <div className="mx-auto" style={{backgroundImage: "url(https://www.larepublica.net/storage/images/2018/10/08/20181008090118.impacfact.jpg)",  width: "85%",
+        height: "290px",}} >
+      </div>
+      <div className="mt-4" >
       <h7> ORDER ID: {"  "} {order.id}</h7>
       <h6>STATE: {"  "}{order.state} <ion-icon name="information-circle-sharp"></ion-icon> </h6>
       <h6>NAME: {"  "}{user.name} <ion-icon name="person-sharp"></ion-icon></h6>
       <h7>DISCHARGE DATE:  {"  "} {order.createdAt} <ion-icon name="time-sharp"></ion-icon>  </h7>
-        <table class="table table-borderless">
+        <table  className="table table-borderless mt-4" >
           <thead>
             <tr>
               <th>#</th>

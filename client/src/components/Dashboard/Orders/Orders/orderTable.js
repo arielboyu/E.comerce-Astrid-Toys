@@ -50,6 +50,7 @@ export default function OrderTable() {
            height: "300px",}}   >
           <h1 style={{background:"white"}}   className="display-3 text-center">Order list</h1>
          </div>
+         <div className="mt-4" >
           <table class="table table-borderless">
             <thead>
               <tr>
@@ -105,5 +106,6 @@ export default function OrderTable() {
             </Link>
         </div>
       </div>
+    </div>
     );
 }
