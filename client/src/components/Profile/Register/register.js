@@ -45,9 +45,17 @@ const Register = () => {
       }, 1000)
     })
     .catch( e => console.log(e))
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/send/register`, values)
+    .then(r =>{
+      console.log(r)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
   }
+
   return (
-    <div className="container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
+    <div className="firstContainer container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
       <h2 className="display-3 text-center">Register</h2>
       { regOk ? (
         <div className="alert alert-primary" role="alert">

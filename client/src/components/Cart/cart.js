@@ -104,8 +104,8 @@ sino
 
   return (
     <>
-      <div className="container d-flex flex-column text-center my-5 p-5 border shadow">
-        <h1 className="display-3 mb-4">My cart</h1>
+      <div className="firstContainer container d-flex flex-column text-center my-5 p-5 border shadow">
+        <h1 className="display-3 mb-4 mt-4">My cart</h1>
         {cart.length === 0 ? (
           <p>Your cart is empty!</p>
         ) : (

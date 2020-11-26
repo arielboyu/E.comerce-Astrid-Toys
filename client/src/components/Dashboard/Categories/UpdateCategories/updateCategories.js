@@ -31,7 +31,7 @@ const handlerSubmit = (e) => {
 };
 
   return (
-    <div className="container">
+    <div className="firstContainer container">
       {!user.isAdmin ? <Redirect to='/products'/> : null} 
       <h2>Update Category</h2>
       <form onSubmit={handlerSubmit} >
@@ -41,7 +41,7 @@ const handlerSubmit = (e) => {
             type="text"
             className="form-control"
             name="name"
-            placeholder="instert Name example 'Series'.. "
+            placeholder="insert Name example 'Series'.. "
             value={newCategory.name}
             onChange={handlerChange}
           />
@@ -52,7 +52,7 @@ const handlerSubmit = (e) => {
             className="form-control"
             name="description"
             value={newCategory.description}
-            placeholder=" insert Category Description.. example 'Series Funkos'"
+            placeholder=" insert Category Description.."
             rows="3"
             onChange={handlerChange}
           ></textarea>

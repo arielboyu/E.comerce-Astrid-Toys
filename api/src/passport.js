@@ -9,12 +9,13 @@ function authSetUp(server) {
 	const localStrategy = new Strategy({
 	    usernameField: "username",
 		passwordField: "password",
-	},
-
-	function ( username, password, done ) {
+	}, function ( username, password, done ) {
 		User.findOne({ where: { username } })
 			.then(( user ) => { 
 				if( !user ) { return done( null, false ) }
+				if (!user.validPassword(password)) {
+					return done(null, false, { message: 'Incorrect password.' });
+				  }
 				return done( null, user );
 			} )
 			.catch( ( error ) => { return done( error ) });

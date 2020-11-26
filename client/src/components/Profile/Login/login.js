@@ -6,7 +6,6 @@ import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
 import axios from "axios"
 import { useDispatch, useSelector} from 'react-redux'
 import { userLogin } from '../../../redux/actions/actions'
-import { Redirect } from 'react-router-dom'
 
 const alerta = (mensaje, color="danger") => {
   return <Alert className="mt-2" color={color}>{mensaje}</Alert>
@@ -43,7 +42,7 @@ const Login = () => {
     }
 
   return (
-    <div className="container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
+    <div className={`firstContainer container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow bg-white}`}>
       <h2 className="display-3 text-center">Login</h2>
       { redirect ? (
         <div className="alert alert-primary" role="alert">
@@ -81,7 +80,7 @@ const Login = () => {
           </Row>
           <Row>
             <Col>
-              <Link> Forgot your password ? </Link>
+              {/* <Link> Forgot your password ? </Link> */}
             </Col>
           </Row>
         </Form>

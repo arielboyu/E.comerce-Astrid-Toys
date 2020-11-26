@@ -32,17 +32,21 @@ const Catalogue = () => {
       setLoading( false )
     }
     getCategory.then((res) => { setCategory(res.data) });
-  }, [cat]);
+  }, [ cat ]);
 
 
   // PAGINATION VARIABLES
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = product.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = ( pageNumber ) => { setCurrentPage(pageNumber) }
+  const paginate = ( pageNumber ) => { 
+    setCurrentPage(pageNumber) }
 
   const handlerSearch = (search) => {
     setLoading(true)
+    console.log(indexOfFirstPost, indexOfLastPost, currentPage)
+    setCurrentPage(1);
+
     axios
       .get(`${process.env.REACT_APP_API_URL}/products/search?data=${search}`)
       .then( res => { setProduct( res.data ) } )
@@ -51,11 +55,16 @@ const Catalogue = () => {
   }
 
   const handlerFilter = (categoria)=>{
+    console.log(indexOfFirstPost, indexOfLastPost, currentPage)
+    setCurrentPage(1);
+
     axios.get(`${process.env.REACT_APP_API_URL}/products/search/${categoria}`)
     .then((res) => { setProduct(res.data) })
   }
 
   const handlerClear = ()=>{
+    console.log(indexOfFirstPost, indexOfLastPost, currentPage)
+    setCurrentPage(1);
     getProduct.then((res) => { setProduct(res.data) });
   }
 
@@ -65,7 +74,7 @@ const Catalogue = () => {
   return (
     <>
     {console.log(product)}
-      <div className={`${style.containerCatalogue} container col-12 col-lg-10 text-center pb-0 mb-5`}>
+      <div className={`firstContainer container col-12 col-lg-10 text-center pb-0 mb-5`}>
         <h1 className="display-4">Catalogue</h1>
         <div className="mt-5 my-3 mx-0 mx-xl-5 px-xl-5">
           <CategoryList category={category} filter={handlerFilter} onSearch={handlerSearch} onClear={handlerClear}/>

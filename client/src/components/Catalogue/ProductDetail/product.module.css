@@ -1,10 +1,9 @@
 .card {
     margin: 10px;
     text-align: center;
-    padding: 10px;
-    max-width: 800px;
-    height: 400px;
+    width: 100%;
     border-bottom: 1px solid #f0ac4e4f;
+    max-width: 800px;
 }
 
 .image {
@@ -18,35 +17,106 @@
     max-width: 100%;
     background-color: white;
     border: 2px solid #f0ac4e4f;
-    border-radius: 50px;
+    border-radius: 5px;
+    padding: 20px;
 }
 
 .containerProduct{
     margin-top: 130px !important;
     margin-bottom: 120px !important;
-    box-shadow: 0 .5rem 3rem rgba(0, 0, 0, 0.205) !important;
-    padding: 3rem!important;
+    box-shadow: 0 .1rem 0.5rem rgba(0, 0, 0, 0.200) !important;
     min-width: 450px;
-    max-width: 60%;
-    background-color: rgba(236, 236, 236, 0.466);
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.03);
 }
 
 .btnBack{
     color: white;
-    width: 200px;
-    height: 50px;
+    width: 150px;
+    height: 45px;
     background-color: #ce9a18dc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 400ms;
-    box-shadow: 0 .5rem 3rem rgba(0, 0, 0, 0.0) !important;
+    transition: all 150ms;
 }
 
 .btnBack:hover{
     color: white;
-    background-color: #b68407dc;
+    transform: scale(1.1);
     border: 1px solid #ce9a18dc;
-    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, 0.20) !important;
+}
+
+.description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    color: white !important;
+    background-color: var(--danger);
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .containerProduct{
+        max-width: 95%;
+    }
+    .title{
+        width: 100%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .card{
+        display: flex;
+        align-items: center;
+    }
+    .containerProduct{
+        max-width: 90%;
+    }
+    .title{
+        width: 100%;
+    }
+    .imageContainer {
+        margin: 20px auto;
+        width: 400px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .containerProduct{
+        max-width: 70%;
+    }
+    .title{
+        width: 100%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .card{
+        height: 400px;
+        box-shadow: 0 .2rem 0.9rem rgba(0, 0, 0, 0.20) !important;
+        border-radius: 30px;
+    }
+    .containerProduct{
+        max-width: 80%;
+    }
+    .title{
+        width: 75%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1500px) {
+    .card{
+        height: 400px;
+        width: 100%;
+    }
+    .containerProduct{
+        max-width: 60%;
+    }
 }

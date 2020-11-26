@@ -38,21 +38,21 @@ export default function UsersTable() {
     }
 
     return (
-      <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-       {!userAct.isAdmin ? <Redirect to='/products'/> : null} 
+      <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+       {!userAct.isAdmin ? <Redirect to='/products'/> : null}
         <div>
           <div style={{backgroundImage:"url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2020/10/figuras-funko-pop-2089019.jpg?itok=soYTFCkB)",  width: "100%",
-           height: "370px",}}  >
+           height: "300px",}}  >
           <h1 style={{background:"white"}}   className="display-3 text-center">USERS  LIST</h1>
          </div>
             <table className="table table-darkness">
             <thead>
               <tr>
-                <th>ID#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Active</th>
-                <th>IsAdmin</th>
+                <th>#</th>
+                <th>Name  <ion-icon name="person-sharp"></ion-icon> </th>
+                <th>Email  <ion-icon name="mail-open-sharp"></ion-icon></th>
+                <th>Active  <ion-icon name="checkbox-sharp"></ion-icon></th>
+                <th>IsAdmin  <ion-icon name="construct-sharp"></ion-icon></th>
               </tr>
             </thead>
             <tbody>
@@ -70,7 +70,7 @@ export default function UsersTable() {
                 data-toggle="modal"
                 data-target="#exampleModal"
               >
-                Delete
+                Delete <ion-icon name="trash-sharp"></ion-icon>
               </button>
               {!u.isAdmin ? (
                 <button
@@ -78,7 +78,7 @@ export default function UsersTable() {
                 type="submit"
                 className="ml-3 btn btn-info"
               >
-                Admin
+                Admin <ion-icon name="person-add-sharp"></ion-icon>
               </button>
               ):<></>}
               </td>
@@ -87,7 +87,7 @@ export default function UsersTable() {
             </tbody>
             </table>
             <Link to="/dashboard" >
-            <button className="btn btn-danger ml-2" >Back</button>
+            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
             </Link>
             <div
               className="modal"

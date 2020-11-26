@@ -13,7 +13,7 @@ export default function CategoryList({ category, filter, onSearch, onClear }) {
           <p className="d-none d-lg-block my-auto ml-lg-3 mr-lg-4 ">Categories </p>
           {category.map((cat) => (
             <Link to={`/products/category/${cat.name.toLowerCase()}`} onClick={() => filter(cat.name)} >
-              <span className="mx-2 text-uppercase">{cat.name}</span>
+              <span className={`${style.categoryLink} mx-2 text-uppercase`}>{cat.name}</span>
             </Link>
           ))}
         </div>
@@ -24,18 +24,19 @@ export default function CategoryList({ category, filter, onSearch, onClear }) {
       </div>
 
       {/* MOBILE VERSION */}
-      <div className={`${style.categoryList} d-block d-lg-none flex-row rounded justify-content-center justify-content-lg-start`}>
-        <div className="my-auto d-block d-lg-none ">
+      <div className={`${style.categoryList} d-block d-lg-none flex-row rounded justify-content-center align-items-center  justify-content-lg-start`}>
+        <div className="my-auto d-flex flex-wrap justify-content-center d-lg-none ">
           {category.map((cat) => (
             <Link to={`/products/category/${cat.name.toLowerCase()}`} onClick={() => filter(cat.name)} >
-              <span className="mx-2 text-uppercase">{cat.name}</span>
+              <p className={`mx-2 text-uppercase`}>{cat.name}</p>
             </Link>
           ))}
-        <div className="d-block d-lg-none mb-5 mt-3">
-        <SearchBar onSearch={onSearch} onClear={onClear} />
+          
         </div>
+        <div className="d-block d-lg-none mb-5 my-auto">
+            <SearchBar onSearch={onSearch} onClear={onClear} />
         </div>
-        </div>
+      </div>
       
       </>
   );

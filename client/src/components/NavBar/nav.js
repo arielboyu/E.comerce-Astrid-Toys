@@ -136,7 +136,7 @@ export default function Nav({ match }) {
 
   function CartAlert() {
     return (
-      <h1 className={`${style.cartAlert} d-none d-md-block my-auto`}>
+      <h1 className={`${style.cartAlert} my-auto`}>
         <Link to="/cart"> {cart.length} </Link>
       </h1>
     );

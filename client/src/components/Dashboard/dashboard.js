@@ -15,52 +15,54 @@ const Dashboard = () => {
     useEffect(() => {
         setRedirect(false)
         console.log(load)
-        
+
         setTimeout(()=>{
             validation
             .then(r => { console.log("Estas logueado!"); console.log(r.data); setLoad(false)})
-            .catch(err => { console.log("No estas logueado"); setRedirect(true) } ) 
-        }, 300)
+            .catch(err => { console.log("No estas logueado"); setRedirect(true) } )
+        }, 3000)
 
-        
+
       }, []);
-    
+
     return (
-        
+
         <>
-        {!user.isAdmin ? <Redirect to='/products'/> : null} 
+        {!user.isAdmin ? <Redirect to='/products'/> : null}
         {redirect ? <Redirect to='/products'/> : null}
         { load ? <Spinner />  : (
-        <div className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-                 <div style={{width: "100%",
-                 height: "280px",}} className="">
-                <h1 style={{background:"white"}}  className="display-3 text-center">Dashboard</h1>
+        <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
+        <h1 style={{background:"white"}}  className="display-3 text-center">Dashboard</h1>
+            <div style={{minwidth: "100wh", height: "400px",}} className="d-flex flex-column" >
+            <div className="mx-auto" style={{backgroundImage: "url(https://lh3.googleusercontent.com/proxy/V4UjjDNvjZ-PmR2sOnC1hri1FUk4t5UKQDdd7-9w_xILig_M5XjMv86_hX8PNtgVEbvkrDCDpkD3qmvUvkW-aC0xyD5Kr1oyO63IAxqFYRwRLOIAoKTULfbzoQBjqovs)",  width: "100%",
+              height: "280px",}} >
+            </div>
                 <hr className="my-2" />
-                <div className="d-flex justify-content-around px-5 mt-5">
+                <div className="d-flex justify-content-around px-5 my-auto">
                 <Link to="/dashboard/product/list">
                     <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
-                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Product
+                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Products
                     </button>
                 </Link>
                 <Link to="/dashboard/category/list">
                     <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
-                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Category 
+                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Categories
                     </button>
                 </Link>
                 <Link to="/dashboard/orders/list">
                     <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
-                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Orders 
+                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Orders
                     </button>
                 </Link>
                 <Link to="/dashboard/users/list">
                     <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
-                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Users 
+                    <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Users
                     </button>
                 </Link>
                 </div>
             </div>
         </div>
-        
+
         )}
 
         </>

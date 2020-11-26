@@ -6,7 +6,6 @@ const { Product, Category, Order, User } = require("../db.js");
 
 /* ------------------------------------------------------- */
 //INSTANCIAMOS MODELOS DE LA TABLA Y SALVAMOS DATOS
-//Hacer un Create es lo mismo que hacer un Build y luego Save de Sequelize.
 
 // AGREGO LA CREACIÓN DE REGISTROS EN LA TABLA DE USUARIOS
 //// returns a random integer from 0 to limit
@@ -55,14 +54,8 @@ async function cargarTablaProduct() {
     product.addCategories(categories[randomNum(categories.length)]);
     productsArray.push(product);
   }
-  //Las siguientes lineas HACEN LO MISMO:
-  //Para relacionar un producto con una categoria
-  //product.addCategories([category])
-  //Para relacionar una categoria con un producto
-  //category.addCategories([product])
-}
 
-//products[Math.floor(Math.random() * products.length)].addCategories(categories[Math.floor(Math.random() * categories.length)])
+}
 
 //CARGAR ORDENES
 //las ordenes tienen varios productos
@@ -72,8 +65,10 @@ async function cargarTablaOrder() {
     var order = await Order.create({
       state: DataOrders[i].state,
     });
-   
-    order.setUser(usuarios[Math.floor(Math.random()* (usuarios.length - 1))]);
+    //0 - 6
+    let aleatorio = Math.floor(Math.random() * (usuarios.length))
+    aleatorio = Math.floor(Math.random() * (usuarios.length))
+    order.setUser(usuarios[aleatorio]);
     var myProduct1 = productsArray[randomNum(productsArray.length)];
     var myProduct2 = productsArray[randomNum(productsArray.length)];
     order.addProduct(myProduct1, {
@@ -89,22 +84,26 @@ async function cargarTablaOrder() {
 
   }
 
-  //borro la primer orden porque se me canta el huevo
-  Order.findOne({where: {id: 1}}).then((fixOrder)=>{
-    fixOrder.setUser(usuarios[1])
+  //FIX ORDERS CON USER NULL
+  Order.findAll({where: {userId: null}}).then((fixOrders)=>{
+    fixOrders.forEach(element => {
+      User.findOne({where:{id:1}}).then((us)=>{
+        element.setUser(us)
+      })
+    });
   })
 }
 
 /* ------------------------------------------------------- */
 const Loader = function () {
   cargarUsuarios();
-  console.log("Usuarios cargados");
+  console.log("Users Loaded");
   cargarCategories();
-  console.log("Categorias cargadas");
+  console.log("Category Loaded");
   cargarTablaProduct();
-  console.log("tablas product cargada");
+  console.log("Products Loaded");
   cargarTablaOrder();
-  console.log("ordenes Cargadas");
+  console.log("Orders Loaded");
 };
 
 module.exports = Loader;

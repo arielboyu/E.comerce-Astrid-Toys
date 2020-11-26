@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Fredoka+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
-/* titulo */
+/* TITULO */
 @import url('https://fonts.googleapis.com/css2?family=Rancho&family=Satisfy&display=swap');
+/* FOOTER */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Xanh+Mono&display=swap');
 
 *{
@@ -13,6 +14,7 @@
 body{  
     font-family: 'Fredoka One', cursive; 
     width: 100%;
+    background-image: url('./fondo.jpg');
 }
 
 a{
@@ -36,4 +38,15 @@ a:hover{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.firstContainer{
+  background-color: white !important;
+  padding: 3rem!important;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 .1rem 0.5rem rgba(0, 0, 0, 0.582) !important;
+  min-width: 450px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
 }

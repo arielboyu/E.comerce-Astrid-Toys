@@ -70,6 +70,27 @@ server.put("/:id", (req, res) => {
     });
 });
 
+//Se agrega ruta para cambiar password
+
+server.put("/:id/changepsw", (req, res) => {
+  const { password } = req.body;
+  if (!password) {
+    res.status(400).send("Should enter new password");
+  }
+  User.findByPk(req.params.id)
+    .then((user) => {
+      user.update({
+        password: password,
+      });
+    })
+    .then(() => {
+      res.send("El User ha sido Actualizado");
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
 /* server.get("/:idUser/cart", (req, res) => {
   const idUsuario = req.params.idUser;
   User.findOne({
@@ -88,7 +109,7 @@ server.put("/:id", (req, res) => {
   }).then((user) => {
     res.send(user);
   });
-}); */
+});  */
 
 // Esta ruta retorna un carrito, la volvi a hacer, antes estaba como esta arriba
 server.get("/:idUser/cart", (req, res) => {
