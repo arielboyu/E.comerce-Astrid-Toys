@@ -55,7 +55,7 @@ const Register = () => {
   }
 
   return (
-    <div className="container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
+    <div className="firstContainer container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
       <h2 className="display-3 text-center">Register</h2>
       { regOk ? (
         <div className="alert alert-primary" role="alert">

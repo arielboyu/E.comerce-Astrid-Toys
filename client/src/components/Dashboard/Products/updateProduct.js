@@ -74,7 +74,7 @@ function UpdateProduct() {
   };
 
   return (
-    <div className="container d-flex flex-column mx-auto my-5 p-5 border shadow">
+    <div className="firstContainer container d-flex flex-column mx-auto my-5 p-5 border shadow">
       {!user.isAdmin ? <Redirect to='/products'/> : null} 
       <h2 className="display-3 text-center">Update Product</h2>
       <form onSubmit={handlerSubmit}>
@@ -233,7 +233,7 @@ function UpdateProduct() {
         >
           Submit
         </button>
-        <Link to="/dashboard/product/update">
+        <Link to="/dashboard/product/list">
           <button className="btn btn-danger ml-2">Back</button>
         </Link>
         {/* <!-- Modal --> */}

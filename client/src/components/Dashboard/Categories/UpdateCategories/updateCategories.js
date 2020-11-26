@@ -31,7 +31,7 @@ const handlerSubmit = (e) => {
 };
 
   return (
-    <div className="container">
+    <div className="firstContainer container">
       {!user.isAdmin ? <Redirect to='/products'/> : null} 
       <h2>Update Category</h2>
       <form onSubmit={handlerSubmit} >

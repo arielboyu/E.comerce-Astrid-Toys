@@ -21,20 +21,20 @@ export default function Product() {
 
   if (funkos) {
     return (
-      <div className={`${style.containerProduct} justify-content-center align-items-center my-5 mx-auto rounded border shadow`}>
+      <div className={`${style.containerProduct} firstContainer justify-content-center align-items-center my-5 mx-auto rounded border shadow`}>
         <div className={`${style.card} d-flex flex-column flex-lg-row mx-auto mb-3`} >
         {funkos.map((funko) => (
           <>
             {/* FUNKO IMAGE */}
-            <div className={`${style.imageContainer} col-6 mx-auto d-flex align-items-center`}>
+            <div className={`${style.imageContainer} col-12 col-md-5 mx-auto d-flex align-items-center`}>
               <img className={`${style.image} px-4`} src={funko.image}></img>
             </div>
             
             {/* FUNKO DESCRIPTION */}
-            <div className="p-2 text-center text-lg-left mx-auto my-0 my-lg-auto">
+            <div className={`${style.description} p-2 text-center text-lg-left mx-auto my-0 my-lg-auto`}>
               <h1>{funko.name}</h1>
-              <h4 className="text-danger mt-0 mt-lg-3">{funko.description}</h4>
-              <h1 className="p-1 font-weight-bold mt-0 mt-lg-4"> ${funko.price}</h1>
+              <h4 className={`${style.title} text-danger mt-2 mt-lg-0`}>{funko.description}</h4>
+              <h1 className="p-1 font-weight-bold mt-3 display-4 mt-lg-4"> ${funko.price}</h1>
               <p className="pt-3">
                 {funko.stock > 11 ? `Stock available :)` : <></>}
                 {funko.stock < 10 && funko.stock > 1  ? `Only ${funko.stock} units left, hurry up!` : <></>}
@@ -44,7 +44,9 @@ export default function Product() {
 
               {/* DINAMIC BUTTON ADD TO CART - OUT OF STOCK */}
               {funko.stock > 0 ? (
-              <AddToCart product= {funko} /> ) : (
+              <div className="mb-5 mb-lg-0">
+                <AddToCart product= {funko} />
+              </div> ) : (
               <button className="btn btn-outline-secondary">
                 OUT OF STOCK
               </button> )}
@@ -61,9 +63,9 @@ export default function Product() {
           </div>
         </div>
         
-        <div className="d-flex col-12 mx-auto justify-content-center m-5">
+        <div className="d-flex col-12 mx-auto justify-content-center my-0 my-sm-3 my-lg-3 mt-0 mt-lg-5">
           <Link to="/products">
-          <button className={`${style.btnBack} btn `}>
+          <button className={`${style.btnBack} btn`}>
             BACK
           </button>
           </Link>
