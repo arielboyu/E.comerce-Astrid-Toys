@@ -54,9 +54,12 @@ function ButtonPay() {
     );
   };
   const formSchema = Yup.object().shape({
-    street: Yup.string().required(alerta("Campo requerido")),
-    number: Yup.string().required(alerta("Campo requerido")),
-    email: Yup.string().required(alerta("Campo requerido"))
+    country: Yup.string().required(alerta("Required field")),
+    city: Yup.string().required(alerta("Required field")),
+    street: Yup.string().required(alerta("Required field")),
+    number: Yup.string().required(alerta("Required field")),
+    zipCode: Yup.string().required(alerta("Required field")),
+    email: Yup.string().required(alerta("Required field"))
   });
 
 
