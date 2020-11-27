@@ -59,11 +59,11 @@ export default function OrderTable() {
                 <th>User Name <ion-icon name="person-sharp"></ion-icon></th>
                 <th>Discharge Date <ion-icon name="time-sharp"></ion-icon></th>
                 <th><div className="btn btn-dark" class="btn-group dropup">
-                <button  class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button  class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <ion-icon name="reorder-three-sharp"></ion-icon>
                 Filter
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{background:"grey"}} >
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButon" style={{background:"grey"}} >
                 <Link to={"/dashboard/orders/list/pending"}><button style={{fontSize:"22px"}} class="dropdown-item">By Pending  <ion-icon style={{fontSize:"28px"}} name="download-sharp"></ion-icon></button></Link>
                 <Link to={"/dashboard/orders/list/complete"}> <button style={{fontSize:"22px"}}  class="dropdown-item">By Complete  <ion-icon style={{fontSize:"28px"}} name="checkmark-done-sharp"></ion-icon> </button></Link>
                 <Link to={"/dashboard/orders/list/cancel"}><button style={{fontSize:"22px"}} class="dropdown-item">By Cancel   <ion-icon style={{fontSize:"28px"}} name="close-sharp"></ion-icon> </button></Link>
