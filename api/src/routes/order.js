@@ -209,8 +209,8 @@ server.delete("/delete/:id", (req, res) => {
 //POST for ShippingData con envío de mail
 server.post("/shipping/:id", (req, res) => {
   const id = req.params.id;
-  const data = req.body;
-  const { country, city, street, number, zipCode, email, userId } = data;
+  const { country, city, street, number, zipCode, email, userId } = req.body;
+  const shippingData = { country, city, street, number, zipCode, email };
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -258,17 +258,9 @@ server.post("/shipping/:id", (req, res) => {
                   .status(400)
                   .send("ERROR: Some of the required fields are empty");
               } else {
-                console.log("orderId: ", id);
-                let orderId = id
-                ShippingData.create({
-                  country,
-                  city,
-                  street,
-                  number,
-                  zipCode,
-                  email,
-                  orderId
-                }).then((r) => 
+                console.log("order: ", order, " - shippingData: ", shippingData);
+                order.addShippingdata(shippingData)
+                .then((r) => 
                 res.send(r));
               }
             }
