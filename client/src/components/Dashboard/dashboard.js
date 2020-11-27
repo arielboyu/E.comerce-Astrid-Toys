@@ -33,10 +33,6 @@ const Dashboard = () => {
         { load ? <Spinner />  : (
         <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         <h1 style={{background:"white"}}  className="display-3 text-center">Dashboard</h1>
-            <div style={{minwidth: "100wh", height: "400px",}} className="d-flex flex-column" >
-            <div className="mx-auto" style={{backgroundImage: "url(https://lh3.googleusercontent.com/proxy/V4UjjDNvjZ-PmR2sOnC1hri1FUk4t5UKQDdd7-9w_xILig_M5XjMv86_hX8PNtgVEbvkrDCDpkD3qmvUvkW-aC0xyD5Kr1oyO63IAxqFYRwRLOIAoKTULfbzoQBjqovs)",  width: "100%",
-              height: "280px",}} >
-            </div>
                 <hr className="my-2" />
                 <div className="d-flex justify-content-around px-5 my-auto">
                 <Link to="/dashboard/product/list">
@@ -61,10 +57,7 @@ const Dashboard = () => {
                 </Link>
                 </div>
             </div>
-        </div>
-
         )}
-
         </>
         )
 }
