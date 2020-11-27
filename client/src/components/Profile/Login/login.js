@@ -41,6 +41,11 @@ const Login = () => {
       .catch( e => setError(true))
     }
 
+    const popup = e => {
+      e.preventDefault();
+      window.open(`${process.env.REACT_APP_API_URL}/auth/github`, { withCredentials: true } , 'height=500, width=500');
+    };
+
   return (
     <div className={`firstContainer container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow bg-white}`}>
       <h2 className="display-3 text-center">Login</h2>
@@ -78,11 +83,16 @@ const Login = () => {
               </Link>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              {/* <Link> Forgot your password ? </Link> */}
-            </Col>
-          </Row>
+          <div className="row mt-3 mb-0  d-flex justify-content-center">
+            <div className="col-5 d-flex justify-content-start">
+              <Link> Forgot your password ? </Link>
+            </div>
+            <div className="col-5 d-flex justify-content-end align-items-center">
+              <p className="text-dark"value="github" id="githubBtn" onClick={popup}>
+					      <a href='#'><span style={{fontSize: "18px"}}><i className="fab fa-github"> </i></span> Login whit Github</a>
+				      </p>
+            </div>
+          </div>
         </Form>
       </Formik>
     </div>

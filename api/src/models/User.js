@@ -23,9 +23,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    active: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+    githubId: {
+      type: DataTypes.STRING
+    },
+    facebookId: {
+      type: DataTypes.STRING
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
