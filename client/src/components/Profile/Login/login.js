@@ -43,7 +43,7 @@ const Login = () => {
     }
 
   return (
-    <div className="container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow">
+    <div className={`firstContainer container d-flex flex-column col-10 col-md-7 col-lg-5 mx-auto my-5 p-5 border shadow bg-white}`}>
       <h2 className="display-3 text-center">Login</h2>
       { redirect ? (
         <div className="alert alert-primary" role="alert">

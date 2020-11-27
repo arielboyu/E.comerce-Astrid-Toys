@@ -25,7 +25,7 @@ export default function Profile() {
     
   }
     return (
-      <div className={`container justify-content-center align-items-center my-5 mx-auto rounded border shadow`}>
+      <div className={`firstContainer container justify-content-center align-items-center my-5 mx-auto rounded border shadow`}>
         <div className={`${style.card} d-flex flex-column flex-lg-row mx-auto mb-3`} >
           <h1 className="mx-auto mt-5">Welcome {user.name} !</h1>
         </div>

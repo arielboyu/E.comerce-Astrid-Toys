@@ -9,6 +9,8 @@ import {
   userLogin,
   userLogOut,
   setCategories,
+  setCart,
+  addToCart
 } from "../../redux/actions/actions.js";
 // ---------- UTILS ----------
 import axios from "axios";
@@ -44,6 +46,8 @@ export default function Nav({ match }) {
       })
       .catch((err) => console.log(err));
   };
+
+
 
   useEffect(() => {
     getUser();
@@ -132,7 +136,7 @@ export default function Nav({ match }) {
 
   function CartAlert() {
     return (
-      <h1 className={`${style.cartAlert} d-none d-md-block my-auto`}>
+      <h1 className={`${style.cartAlert} my-auto`}>
         <Link to="/cart"> {cart.length} </Link>
       </h1>
     );
