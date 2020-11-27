@@ -10,7 +10,8 @@ import {
   userLogOut,
   setCategories,
   setCart,
-  addToCart
+  addToCart,
+  removeAllProductsToCart
 } from "../../redux/actions/actions.js";
 // ---------- UTILS ----------
 import axios from "axios";
@@ -29,6 +30,10 @@ export default function Nav({ match }) {
       })
       .then((r) => {
         dispatch(userLogOut());
+        dispatch(removeAllProductsToCart())
+        //no hay otra forma que no sea utilizando reload (nico)
+        window.location.reload()
+        
       })
       .catch((error) => {
         console.log(error);

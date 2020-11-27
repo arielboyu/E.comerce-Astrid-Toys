@@ -73,8 +73,9 @@ sino
   const handlerRemove = (f) => {
     if (user.id !== null) {
       //logica base de datos
-      //dispatch(removeProductToCart(f));
-      //setList(!isUpdateList);
+
+      dispatch(removeProductToCart(f));
+      setList(!isUpdateList);
     } else {
       dispatch(removeProductToCart(f));
       setList(!isUpdateList);

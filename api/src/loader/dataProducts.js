@@ -25,7 +25,7 @@ const DataProducts = [{
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTWYSTJRd3raeRLk-Fv-dlYe1E40mSkI45esg&usqp=CAU'
   },
   {
-    name: 'Río',
+    name: 'Rio',
     description: 'Game',
     price: returnRandom(),
     stock: returnRandom(),
@@ -39,7 +39,7 @@ const DataProducts = [{
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpdMnuMuAqOhteA_f4cN3tV6QQjt9vVBVg_A&usqp=CAU'
   },  
   {
-    name: 'Capitán',
+    name: 'Capitan',
     description: 'Serie',
     price: returnRandom(),
     stock: returnRandom(),
