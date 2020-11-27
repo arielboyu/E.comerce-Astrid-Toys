@@ -56,10 +56,9 @@ server.get('/me', isAuthenticated, (req, res) => {
   res.status(200).send( req.user );
 })
 
-server.get('/github', passport.authenticate('github'));
+server.get('/github', passport.authenticate('github', { successRedirect: 'https://www.google.com.ar', failureRedirect: 'https://www.google.com.ar/products' } ) );
 
-server.get('/github/callback', passport.authenticate('github')
-);
+server.get('/github/callback', passport.authenticate('github') );
 
 // server.get('/auth/facebook', passport.authenticate('facebook'));
 
