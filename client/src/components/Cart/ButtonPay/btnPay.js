@@ -43,8 +43,14 @@ function ButtonPay() {
 
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  const [country,setCountry] = useState('');
-  const handleSubmit = () => {}; //LLENAR ACA CON LA PARTE DE BACK
+
+  const handleSubmit = (values) => {
+    values['userId'] = store.user.id;
+    console.log("submit values: ",values)
+    Axios.post(`${process.env.REACT_APP_API_URL}/orders/shipping/:id`, values)
+      .then(r=> console.log(r))
+      .catch((err) => console.log("Error: ",err))
+  };
   
   const alerta = (mensaje, color = "danger") => {
     return (
@@ -54,9 +60,12 @@ function ButtonPay() {
     );
   };
   const formSchema = Yup.object().shape({
-    street: Yup.string().required(alerta("Campo requerido")),
-    number: Yup.string().required(alerta("Campo requerido")),
-    email: Yup.string().required(alerta("Campo requerido"))
+    country: Yup.string().required(alerta("Required field")),
+    city: Yup.string().required(alerta("Required field")),
+    street: Yup.string().required(alerta("Required field")),
+    number: Yup.string().required(alerta("Required field")),
+    zipCode: Yup.string().required(alerta("Required field")),
+    email: Yup.string().required(alerta("Required field"))
   });
 
 
@@ -169,18 +178,23 @@ function ButtonPay() {
                   component="div"
                   className="field-error text-danger"
                 />
-              </FormGroup>              
+              </FormGroup>
+              <Row>
+                <Col lg={12} md={12}>
+                  <Button
+                    type="submit"
+                    value="submit"
+                    color="primary"
+                    className="mr-1 mb-2 btn-block"
+                    onClick={toggle}
+                  >
+                    Submit
+                  </Button>
+                </Col>
+              </Row>
             </Form>
           </Formik>
         </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Submit
-          </Button>{" "}
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
       </Modal>
       {userLog === null ? (
         <div className="alert alert-danger my-3" role="alert">
