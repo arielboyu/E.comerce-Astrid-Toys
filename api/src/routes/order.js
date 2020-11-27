@@ -1,5 +1,12 @@
 const server = require("express").Router();
-const { Order, Product, User, OrderDetails } = require("../db.js");
+const {
+  Order,
+  Product,
+  User,
+  OrderDetails,
+  ShippingData,
+} = require("../db.js");
+const nodemailer = require("nodemailer");
 
 //Ruta que incluye los modelos en la lista del
 // Frontend con direccion en componente orderTables.js
@@ -125,84 +132,151 @@ server.put("/modify/dispatch/:id", (req, res) => {
 });
 
 server.get("/pending/all", (req, res) => {
-    Order.findAll({
-      where: { state: "PENDING"},
-      include: [
-
-        {
-          model: Product,
-          as: "products",
-          attributes: [ "name", "description", "stock", "price"],
-        },
-        {
-            model: User,
-            as:"user",
-            attributes: ["name" , "username"]
-        }
-      ],
-    })
+  Order.findAll({
+    where: { state: "PENDING" },
+    include: [
+      {
+        model: Product,
+        as: "products",
+        attributes: ["name", "description", "stock", "price"],
+      },
+      {
+        model: User,
+        as: "user",
+        attributes: ["name", "username"],
+      },
+    ],
+  })
     .then((orders) => res.status(200).json(orders))
     .catch(() => {
-        return res.status(400).send("Error No se encontraron ordenes Pendientes")
-    })
-  });
-
-  server.get("/cancel/all", (req, res) => {
-      Order.findAll({
-        where: { state: "CANCELLED"},
-        include: [
-
-          {
-            model: Product,
-            as: "products",
-            attributes: [ "name", "description", "stock", "price"],
-          },
-          {
-              model: User,
-              as:"user",
-              attributes: ["name" , "username"]
-          }
-        ],
-      })
-      .then((orders) => res.status(200).json(orders))
-      .catch(() => {
-          return res.status(400).send("Error No se encontraron ordenes Caneladas")
-      })
+      return res.status(400).send("Error No se encontraron ordenes Pendientes");
     });
+});
 
-    server.get("/complete/all", (req, res) => {
-        Order.findAll({
-          where: { state: "COMPLETE"},
-          include: [
+server.get("/cancel/all", (req, res) => {
+  Order.findAll({
+    where: { state: "CANCELLED" },
+    include: [
+      {
+        model: Product,
+        as: "products",
+        attributes: ["name", "description", "stock", "price"],
+      },
+      {
+        model: User,
+        as: "user",
+        attributes: ["name", "username"],
+      },
+    ],
+  })
+    .then((orders) => res.status(200).json(orders))
+    .catch(() => {
+      return res.status(400).send("Error No se encontraron ordenes Caneladas");
+    });
+});
 
-            {
-              model: Product,
-              as: "products",
-              attributes: [ "name", "description", "stock", "price"],
-            },
-            {
-                model: User,
-                as:"user",
-                attributes: ["name" , "username"]
+server.get("/complete/all", (req, res) => {
+  Order.findAll({
+    where: { state: "COMPLETE" },
+    include: [
+      {
+        model: Product,
+        as: "products",
+        attributes: ["name", "description", "stock", "price"],
+      },
+      {
+        model: User,
+        as: "user",
+        attributes: ["name", "username"],
+      },
+    ],
+  })
+    .then((orders) => res.status(200).json(orders))
+    .catch(() => {
+      return res.status(400).send("Error No se encontraron ordenes Completas");
+    });
+});
+
+server.delete("/delete/:id", (req, res) => {
+  const id = req.params.id;
+  Order.destroy({ where: { id } })
+    .then((order) => res.status(200).send("se elimino la orden "))
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
+//POST for ShippingData con envío de mail
+server.post("/shipping/:id", (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
+  const { country, city, street, number, zipCode, email, userId } = data;
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+  User.findOne({ where: { id: userId } }).then((r) => {
+    console.log(
+      "Parametros mail: from: ",
+      process.env.EMAIL,
+      " - to:  ",
+      email,
+      " - orderId: ",
+      id,
+      " - userName: ",
+      r.dataValues.name
+    );
+    const mainConfig = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: `AtridToys - Order ${id} purchased`,
+      text: `Hi ${r.dataValues.name}! 
+    Thank you for your purchase, we will send you another mail when we dispatch the product`,
+    };
+    transporter.sendMail(mainConfig, (err, info) => {
+      if (err) {
+        res.status(500).send("Failed send mail");
+      } else {
+        console.log("Mail send");
+        Order.findOne({ where: { id: id, state: "COMPLETE" } })
+          .then((order) => {
+            if (order == null) {
+              res.status(404).send("Order does not exist");
+            } else {
+              if (
+                !country ||
+                !city ||
+                !street ||
+                !number ||
+                !zipCode ||
+                !email
+              ) {
+                res
+                  .status(400)
+                  .send("ERROR: Some of the required fields are empty");
+              } else {
+                console.log("orderId: ", id);
+                let orderId = id
+                ShippingData.create({
+                  country,
+                  city,
+                  street,
+                  number,
+                  zipCode,
+                  email,
+                  orderId
+                }).then((r) => 
+                res.send(r));
+              }
             }
-          ],
-        })
-        .then((orders) => res.status(200).json(orders))
-        .catch(() => {
-            return res.status(400).send("Error No se encontraron ordenes Completas")
-        })
-      });
-
-
-      server.delete('/delete/:id', (req,res)=>{
-              const id = req.params.id;
-              Order.destroy({ where: { id } })
-              .then(order =>
-              res.status(200).send("se elimino la orden "))
-              .catch((err) => {
-               res.status(400).send(err);
-                });
-      });
-
+          })
+          .catch((e) => res.send(e));
+      }
+    });
+  });
+});
 
 module.exports = server;
