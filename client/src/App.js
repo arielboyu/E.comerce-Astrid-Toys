@@ -58,10 +58,10 @@ function App() {
           <Route exact path="/myshop/:idUser" component={ user ? ContainerMyShopping : Login } />
 
           {/* CATALOGUE COMPONENTS */}
-          <Route path="/products/category/:cat" component={Catalogue} />            
-          <Route path="/products/?search" component={Catalogue} />
-          <Route path="/products" component={Catalogue} />
           <Route exact path="/products/id/:index" component={Product} />
+          <Route exact path="/products/category/:cat" component={Catalogue} />            
+          <Route exact path="/products/?search" component={Catalogue} />
+          <Route path="/products" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />      
 
           {/* DASHBOARD COMPONENTS */}
