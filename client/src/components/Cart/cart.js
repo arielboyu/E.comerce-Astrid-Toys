@@ -67,7 +67,7 @@ sino
     } else {
       setCartLocal(cartStore);
     }
-  }, [isUpdateList]);
+  }, []);
 
   const handlerRemove = (f) => {
     if (user.id !== null) {
