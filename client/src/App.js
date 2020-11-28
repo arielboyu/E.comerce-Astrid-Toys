@@ -52,10 +52,10 @@ function App() {
           <Route exact path="/about" component={About} />
 
           {/* USER COMPONENTS */}
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register}/>
-          <Route exact path="/profile/:id" component={Profile} />
-          <Route exact path="/myshop/:idUser" component={ContainerMyShopping} />
+          <Route exact path="/login" component={ !user.id ? Login : Profile } />
+          <Route exact path="/register" component={ !user.id ? Register : Profile }/>
+          <Route exact path="/profile/:id" component={ user.id ? Profile : NotFound } />
+          <Route exact path="/myshop/:idUser" component={ user ? ContainerMyShopping : Login } />
 
           {/* CATALOGUE COMPONENTS */}
           <Route path="/products/category/:cat" component={Catalogue} />            
@@ -82,7 +82,7 @@ function App() {
           <Route exact path="/dashboard/orders/detail/:idorden" component={ user.isAdmin ? DashboardOrderDetail : NotFound } />
 
           <Route exact path="/dashboard/users/list"  component={ user.isAdmin ? DashboardUsersList : NotFound } />
-          
+          <NotFound />
         </Switch>
       <Route path="/" render={({match}) => <Footer match={match} />} />
     </Router>
