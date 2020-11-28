@@ -19,6 +19,13 @@
   z-index: 1;
   /* transform: translate(0, 2) */
 }
+
+.imagen{
+  background-color: white;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 .text{
   font-family: 'Fredoka One', cursive;
   transition: transform 0.2s;

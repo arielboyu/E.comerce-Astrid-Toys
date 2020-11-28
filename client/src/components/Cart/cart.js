@@ -172,11 +172,15 @@ sino
         {cart.map((f) => (
           <div className="row headCont">
             <div className="col-4 col-md-4 imageCont">
+<<<<<<< HEAD
+              <img style={{maxWidth: "80px" ,objectFit: "contain"}} src={f.image} alt={`Picture of ${f.name}`} />
+=======
               <img
                 style={{ maxWidth: "100px" }}
                 src={f.image}
                 alt={`Pictures of ${f.name}`}
               />
+>>>>>>> 95e4e0351e3de39ce3c46c6387185e68371aa468
             </div>
             <div className="col-8 col-md-2">
               <h3>{f.name}</h3>

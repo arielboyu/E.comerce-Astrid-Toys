@@ -28,7 +28,7 @@ export default function SearchBar({ onSearch, onClear }) {
             aria-label="Search"
           ></input>
         </div>
-        <button className="btn btn-dark ml-2 mr-1 " type="submit"> Submit </button>
+        <button className="btn btn-dark ml-2 mr-1" type="submit"> Submit </button> 
               {flag ? <Redirect to={`/products/search?data=${search}`} /> : <></>}
         <button className="btn btn-dark my-sm-0" type="button" onClick={onClear} > Clear </button>
         <div>
