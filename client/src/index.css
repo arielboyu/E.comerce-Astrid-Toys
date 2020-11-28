@@ -14,7 +14,7 @@
 body{  
     font-family: 'Fredoka One', cursive; 
     width: 100%;
-    background-image: url('./fondo.jpg');
+    background-image: url('./fondo4.jpg');
 }
 
 a{
@@ -43,7 +43,7 @@ a:hover{
 .firstContainer{
   min-height: 50vh;
   background-color: white !important;
-  padding: 3rem!important;
+  padding: 3rem !important;
   width: 100%;
   border-radius: 10px;
   box-shadow: 0 .1rem 0.5rem rgba(0, 0, 0, 0.582) !important;
