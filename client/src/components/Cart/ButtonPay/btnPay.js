@@ -41,31 +41,6 @@ function ButtonPay() {
     }
   };
 
-<<<<<<< HEAD
-    return(
-        <>
-            <div className="d-flex justify-content-end mr-5">
-                <button onClick={handlerClick} className="btn btn-info p-2">
-                    <span style={{fontSize: "20px"}}>CHECKOUT</span>
-                </button>
-            </div>
-            { userLog === null ? (
-                <div className="alert alert-danger my-3" role="alert">
-                    You're not loggin, 
-                    <Link to="/login">
-                        <span className="alert-link"> please sign up.</span>
-                    </Link>  
-                </div>) : <></>}
-            {buyComplete? (
-                <div className="alert alert-info my-3" role="alert">
-                    Successful purchase, 
-                    <Link to={`/myshop/${userLog}`}>
-                        <span className="alert-link"> My shop.</span>
-                    </Link>  
-                </div>) : <></>}
-        </>
-    )
-=======
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
@@ -243,7 +218,6 @@ function ButtonPay() {
       )}
     </>
   );
->>>>>>> 95e4e0351e3de39ce3c46c6387185e68371aa468
 }
 
 export default ButtonPay;
