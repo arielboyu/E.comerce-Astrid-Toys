@@ -38,9 +38,9 @@
     font-size: 25px;
     margin: 10px 10px 50px 10px;
     padding: 10px 15px;
-    border: 1px solid rgba(200, 200, 200, 0.253);
+    border: 1px solid rgba(200, 200, 200, 0.24);
     border-radius: 20%;
-    box-shadow: 0.05rem 0.1rem .1rem 0.1rem rgba(0, 0, 0, 0.050);
+    box-shadow: 0.05rem 0.1rem .1rem 0.1rem rgba(0, 0, 0, 0.178);
     transition: all 150ms;
     color: #ce9a18dc;
 }
