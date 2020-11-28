@@ -249,7 +249,6 @@ server.post("/shipping/:id", (req, res) => {
                   .status(400)
                   .send("ERROR: Some of the required fields are empty");
               } else {
-                console.log("order: ", order, " - shippingData: ", shippingData);
                 order.update({state:"COMPLETE"})
                 .then(()=>Shippingdata.create(shippingData))            
                 .then(r=> res.send(r))
