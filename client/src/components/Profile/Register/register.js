@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { FormGroup, Button, Alert, Row, Col, Container } from "reactstrap";
+import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
 import Axios from "axios";
 
 const alerta = (mensaje, color = "danger") => {
@@ -34,12 +34,12 @@ const Register = () => {
   const history = useHistory()
   const [regOk, setRegOk] = useState(false)
 
-  
-  
+
+
 
   const handlerRegister=(values)=>{
     setRegOk(false)
-   
+
     if(!regOk){
       Axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, values)
       .then(r => {

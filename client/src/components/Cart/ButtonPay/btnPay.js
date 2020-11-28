@@ -1,6 +1,6 @@
 import Axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAllProductsToCart } from "../../../redux/actions/actions";
 // import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
@@ -29,7 +29,7 @@ function ButtonPay() {
     setUserLog(store.user.id);
     if (userLog === null) {
       return console.log("Usuario no logeado");
-    } else {    
+    } else {
       Axios.post(`${process.env.REACT_APP_API_URL}/users/cart/products`, store)
         .then((r) => {
           console.log(r);
@@ -76,7 +76,7 @@ function ButtonPay() {
       .then(r=> console.log(r))
       .catch((err) => console.log("Error: ",err))
   };
-  
+
   const alerta = (mensaje, color = "danger") => {
     return (
       <Alert className="mt-2" color={color}>
@@ -125,7 +125,7 @@ function ButtonPay() {
                   type="text"
                   placeholder="Enter your country"
                   className="form-control"
-                />                
+                />
                 <ErrorMessage
                   name="country"
                   component="div"
@@ -134,20 +134,20 @@ function ButtonPay() {
               </FormGroup>
               <FormGroup>
                 <label htmlFor="street">City</label>
-                {/* <RegionDropdown name="state" 
+                {/* <RegionDropdown name="state"
 	                country={country} /> */}
                 <Field
                   name="city"
                   type="text"
                   placeholder="Enter your city"
                   className="form-control"
-                />    
+                />
                 <ErrorMessage
                   name="city"
                   component="div"
                   className="field-error text-danger"
                 />
-              </FormGroup>              
+              </FormGroup>
               <FormGroup>
                 <label htmlFor="street">Street</label>
                 <Field

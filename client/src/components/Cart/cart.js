@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   removeProductToCart,
   removeAllProductsToCart,
-  calculeAllCart,
   addQuantity,
   subQuantity,
   setCart,
@@ -37,7 +36,7 @@ const Cart = () => {
   //la logica seria:
   /*
 si el usuario esta loggeado entonces:
-    si existe orden pendiente muestro carrito 
+    si existe orden pendiente muestro carrito
     sino muestro el carrito vacio
 sino
     muestro el carrito redux
@@ -139,7 +138,7 @@ sino
               dispatch(subQuantity(f));
               setList(!isUpdateList);
             })
-          });  
+          });
       }else{
         dispatch(subQuantity(f));
         setList(!isUpdateList);
@@ -179,7 +178,7 @@ sino
               <img
                 style={{ maxWidth: "100px" }}
                 src={f.image}
-                alt={`Picture of ${f.name}`}
+                alt={`Pictures of ${f.name}`}
               />
 >>>>>>> 95e4e0351e3de39ce3c46c6387185e68371aa468
             </div>
