@@ -4,7 +4,7 @@ const {
   Product,
   User,
   OrderDetails,
-  ShippingData,
+  Shippingdata
 } = require("../db.js");
 const nodemailer = require("nodemailer");
 
@@ -206,11 +206,11 @@ server.delete("/delete/:id", (req, res) => {
     });
 });
 
-//POST for ShippingData con envío de mail
+//POST for ShippingData con envío de mail y cambio de state de la order a COMPLETE
 server.post("/shipping/:id", (req, res) => {
-  const id = req.params.id;
+  const orderId = req.params.id;
   const { country, city, street, number, zipCode, email, userId } = req.body;
-  const shippingData = { country, city, street, number, zipCode, email };
+  const shippingData = { country, city, street, number, zipCode, email, orderId };
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -219,21 +219,12 @@ server.post("/shipping/:id", (req, res) => {
     },
   });
   User.findOne({ where: { id: userId } }).then((r) => {
-    console.log(
-      "Parametros mail: from: ",
-      process.env.EMAIL,
-      " - to:  ",
-      email,
-      " - orderId: ",
-      id,
-      " - userName: ",
-      r.dataValues.name
-    );
+    const name = r.dataValues.name
     const mainConfig = {
       from: process.env.EMAIL,
       to: email,
-      subject: `AtridToys - Order ${id} purchased`,
-      text: `Hi ${r.dataValues.name}! 
+      subject: `AtridToys - Order ${orderId} purchased`,
+      text: `Hi ${name}! 
     Thank you for your purchase, we will send you another mail when we dispatch the product`,
     };
     transporter.sendMail(mainConfig, (err, info) => {
@@ -241,7 +232,7 @@ server.post("/shipping/:id", (req, res) => {
         res.status(500).send("Failed send mail");
       } else {
         console.log("Mail send");
-        Order.findOne({ where: { id: id, state: "COMPLETE" } })
+        Order.findOne({ where: { id:orderId } })
           .then((order) => {
             if (order == null) {
               res.status(404).send("Order does not exist");
@@ -259,9 +250,9 @@ server.post("/shipping/:id", (req, res) => {
                   .send("ERROR: Some of the required fields are empty");
               } else {
                 console.log("order: ", order, " - shippingData: ", shippingData);
-                order.addShippingdata(shippingData)
-                .then((r) => 
-                res.send(r));
+                order.update({state:"COMPLETE"})
+                .then(()=>Shippingdata.create(shippingData))            
+                .then(r=> res.send(r))
               }
             }
           })
