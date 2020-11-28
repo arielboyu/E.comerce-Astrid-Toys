@@ -59,8 +59,8 @@ function App() {
 
           {/* CATALOGUE COMPONENTS */}
           <Route exact path="/products/id/:index" component={Product} />
-          <Route path="/products/category/:cat" component={Catalogue} />            
-          <Route path="/products/?search" component={Catalogue} />
+          <Route exact path="/products/category/:cat" component={Catalogue} />            
+          <Route exact path="/products/?search" component={Catalogue} />
           <Route path="/products" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />      
 
