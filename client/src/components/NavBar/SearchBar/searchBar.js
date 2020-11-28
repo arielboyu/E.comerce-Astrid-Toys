@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import {Link, useParams, NavLink, Redirect} from 'react-router-dom'
-import ProductList from '../../Catalogue/ListProduct/productList'
-import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+
 
 export default function SearchBar({ onSearch, onClear }) {
   const [search, setSearch] = useState();
@@ -29,11 +28,11 @@ export default function SearchBar({ onSearch, onClear }) {
             aria-label="Search"
           ></input>
         </div>
-        <button className="btn btn-dark ml-2 mr-1 " type="submit"> Submit </button> 
+        <button className="btn btn-dark ml-2 mr-1" type="submit"> Submit </button> 
               {flag ? <Redirect to={`/products/search?data=${search}`} /> : <></>}
         <button className="btn btn-dark my-sm-0" type="button" onClick={onClear} > Clear </button>
         <div>
-      
+
         </div>
       </form>
 

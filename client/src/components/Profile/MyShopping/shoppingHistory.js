@@ -18,7 +18,7 @@ const ShoppingHistory = ({ idUser }) => {
   return (
     <>
  
-    <div className={`container text-center mb-0 pb-0`}>
+    <div className={`firstContainer container text-center mb-0 pb-0 d-flex flex-column justify-content-center align-items-center`}>
       <h1 className="pb-5 mb-0">My Shopping history</h1>
       
       {!shopping.length ? 

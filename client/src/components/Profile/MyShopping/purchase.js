@@ -23,7 +23,7 @@ const Purchase = ({ orderId }) => {
           setOrder(res.data);
           setProduct(res.data.products);
           setUser(res.data.user);
-          
+
         });
     } else {
       console.log("cargando orden papu");
@@ -41,7 +41,7 @@ const Purchase = ({ orderId }) => {
   return (
     <>
       <div className={`${style.containerShop} firstContainer text-center mb-0 pb-0`}>
-        
+
         {/* CABECERA DE LA ORDEN */}
         <div className=" d-flex flex-column flex-md-row justify-content-between pb-2 px-5">
           <h2>{"ORDER N° " + order.id}</h2>
@@ -58,7 +58,7 @@ const Purchase = ({ orderId }) => {
             <p className="my-auto">DATE</p>
             <p>{(order.createdAt)}</p>
           </div>
-          
+
           <div className={`rounded-sm col-sm-12 col-md-4 px-5 py-2 d-flex flex-column my-auto`}>
             <p className="my-auto mx-auto">ORDER TOTAL</p>
             <h1 className="mx-auto">${total}</h1>
@@ -67,15 +67,15 @@ const Purchase = ({ orderId }) => {
 
 
         </div>
-      
+
         {/* MAP DE PRODUCTOS DE CADA ORDEN */}
         {product.map((prod) => (
-     
+
         <div className={`${style.shop} mb-4`}>
           <div className={` d-flex flex-column flex-md-row  justify-content-center align-items-center pt-4 pb-2`}>
-          
+
             <div className="row d-md-flex flex-md-column col-md-2 mb-0 mb-md-3 m-md-3">
-              <img src={prod.image} className={style.img}></img>
+              <img alt="prod" src={prod.image} className={style.img}></img>
               <p className="pt-2 mx-auto">{prod.name}</p>
             </div>
 
@@ -83,7 +83,7 @@ const Purchase = ({ orderId }) => {
               <p className={style.cabecera}>Product ID</p>
               <p> {prod.id} </p>
             </div>
-            
+
             <div className="row d-flex flex-column col-md-2 ">
               <p className={style.cabecera}>Qty</p>
               <p>{prod.orderdetails.quantity}</p>
@@ -92,12 +92,12 @@ const Purchase = ({ orderId }) => {
               <p className={style.cabecera}>U/Price </p>
               <p>$ {prod.orderdetails.price}</p>
             </div>
-            
+
             <div className="row d-flex flex-column col-md-2">
               <p className={style.cabecera}>Sub-Total</p>
               <p>$ {prod.orderdetails.price * prod.orderdetails.quantity }</p>
             </div>
-            
+
             <div className="d-flex flex-md-column ">
               <Link to={`/products/id/${prod.id}`}>
                 <button className={`${style.btnShop} btn btn-warning m-2 text-white`} >
@@ -115,13 +115,13 @@ const Purchase = ({ orderId }) => {
           {order.state === 'COMPLETE' && show ? (
 
           <LoadReview idProduct={prod.id} toggle={toggle}/>
-         
-   
-          
+
+
+
           ) :  null }
         </div>
         ))}
-       
+
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
-import axios from "axios";
+import Axios from "axios";
 
 const alerta = (mensaje, color = "danger") => {
   return (
@@ -33,25 +33,30 @@ const formSchema = Yup.object().shape({
 const Register = () => {
   const history = useHistory()
   const [regOk, setRegOk] = useState(false)
-  
+
+
+
 
   const handlerRegister=(values)=>{
     setRegOk(false)
-    axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, values)
-    .then(r => {
-      setRegOk(true)
-      setTimeout(() => {
-        history.goBack()
-      }, 1000)
-    })
-    .catch( e => console.log(e))
-    axios.post(`${process.env.REACT_APP_API_URL}/auth/send/register`, values)
-    .then(r =>{
-      console.log(r)
-    })
-    .catch(err=>{
-      console.log(err)
-    })
+
+    if(!regOk){
+      Axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, values)
+      .then(r => {
+        setRegOk(true)
+        setTimeout(() => {
+          history.goBack()
+        }, 1000)
+      })
+      .catch( e => console.log(e))
+      Axios.post(`${process.env.REACT_APP_API_URL}/auth/send/register`, values)
+      .then(r =>{
+        console.log(r)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
   }
 
   return (

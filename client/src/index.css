@@ -41,6 +41,7 @@ a:hover{
 }
 
 .firstContainer{
+  min-height: 50vh;
   background-color: white !important;
   padding: 3rem!important;
   width: 100%;
@@ -49,4 +50,8 @@ a:hover{
   min-width: 450px;
   background-color: rgba(255, 255, 255, 0.03);
   border-radius: 10px;
+}
+
+.superMt{
+  margin-top: 140px !important;
 }

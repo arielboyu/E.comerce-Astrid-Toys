@@ -73,12 +73,12 @@ async function cargarTablaOrder() {
     var myProduct2 = productsArray[randomNum(productsArray.length)];
     order.addProduct(myProduct1, {
       through: { price: myProduct1.price,
-                  quantity: randomNum(100) },
+                  quantity: randomNum(5) },
     })
     if( myProduct1.id !== myProduct2.id){
       order.addProduct(myProduct2, {
         through: { price: myProduct2.price,
-                    quantity: randomNum(100) },
+                    quantity: randomNum(5) },
       })
     }
 
