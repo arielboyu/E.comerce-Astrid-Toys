@@ -4,11 +4,11 @@ import img from "./img/fondo.jpg";
 import "./about.css";
 
 
-import img1 from "./img/ariel.jpg";
+import img1 from "./img/ariel.jpeg";
 import img2 from "./img/maxi.jpeg";
 import img3 from "./img/rodri.jpeg";
 import img4 from "./img/astrid.jpeg";
-import img5 from "./img/nico.jpg";
+import img5 from "./img/nico.jpeg";
 import img6 from "./img/nahue.jpeg";
 import img7 from "./img/team.png";
 
@@ -21,9 +21,7 @@ const CardAbout = (props) => {
         <div className="row">
         <img src={img7} alt="image team" className="image-team"/>
         </div>
-
         <div className="card-wrapperAB">
-          
           {/*ARIEL SALCEDO*/}
           <div className="cardAB">
             <img src={img} alt="card background" className="cardAB-imgAB" />
@@ -46,7 +44,7 @@ const CardAbout = (props) => {
             <img src={img4} alt="card image" className="profileAB-imgAB" />
             <h1 className="name"> Astrid Medina </h1>
             <p className="job-title"> Full Stack Developer</p>
-            <p className="aboutAB">Professional IT Engineer.</p>
+            <p className="aboutAB">Describe lo que quieras aqui</p>
             <a href="#" className="btnAB">
               Read More
             </a>
