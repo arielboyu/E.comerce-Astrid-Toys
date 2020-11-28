@@ -72,12 +72,14 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ## Astrid Toys
 
-# Astrid Toys
 
 _Online Shop_
+
 E-commerce project in React and postgress.
+
 # Preview
-![](docs/screenshot.png)
+![](docs/screenshot1.jpeg)
+
 
 ## Comenzando 🚀
 
@@ -140,7 +142,8 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 
 This project was created with:
 * [Create React App](https://github.com/facebook/create-react-app).
-* [Bootstrapped](https://  /) - El framework web
+* [Bootstrapped]("https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css") - Framework web
+* [Google Apis](https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Xanh+Mono&display=swap)
 * [OTHER](https:// INSERT HERE /) - Use for
 * [OTHER](https:// INSERT HERE /) - Use for 
 
@@ -161,6 +164,14 @@ Para verificar que versión tienen instalada:
 > node -v
 >
 > npm -v
+
+
+## Final Project
+
+![](docs/screenshot2.jpeg)
+![](docs/screenshot3.jpeg)
+![](docs/screenshot4.jpeg)
+
 
 ## Autores ✒️
 
@@ -184,6 +195,17 @@ Desde - *Trabajo Inicial* -  *Documentación* - *Planificación* - *Maquetado* -
 
 
 ---
+
+**Find us in Linkedin:**
+
+"https://www.linkedin.com/in/ariel-salcedo-b423b61ba/"
+"https://www.linkedin.com/in/astrid-medina/"
+"https://www.linkedin.com/in/maxidf/"
+"https://www.linkedin.com/in/nahuel-caputto-63132b32/"
+"https://www.linkedin.com/in/nicolas-acevedo-b444a41b2/"
+"https://www.linkedin.com/in/rodrigomanuelpenela"
+
+
 ⌨️ con ❤️ por [AstridBoys] para Henry (Agregar Linkedin) 😊
 
 
