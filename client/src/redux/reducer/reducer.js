@@ -45,7 +45,7 @@ function rootReducer(state = initialState, action) {
     let array = state.carrito;
     array.forEach((p) => {
       if (p.id === action.payload.id) {
-        p.price = p.price + p.price / p.cant;
+        // p.price = p.price + p.price / p.cant;
         p.cant += 1;
         p.stock -= 1;
       }
@@ -58,7 +58,7 @@ function rootReducer(state = initialState, action) {
     let zero = false;
     array.forEach((p) => {
       if (p.id === action.payload.id) {
-        p.price = p.price - p.price / p.cant;
+        // p.price = p.price - p.price / p.cant;
         p.cant -= 1;
         p.stock += 1;
         if (p.cant === 0) {
