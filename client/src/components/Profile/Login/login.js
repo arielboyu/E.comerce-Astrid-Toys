@@ -83,16 +83,16 @@ const Login = () => {
               </Link>
             </Col>
           </Row>
-          <div className="row mt-3 mb-0  d-flex justify-content-center">
+          {/* <div className="row mt-3 mb-0  d-flex justify-content-center">
             <div className="col-5 d-flex justify-content-start">
               <Link> Forgot your password ? </Link>
             </div>
             <div className="col-5 d-flex justify-content-end align-items-center">
-              <p className="text-dark"value="github" id="githubBtn">
-					      <a href={`${process.env.REACT_APP_API_URL}/auth/github`}><span style={{fontSize: "18px"}}><i className="fab fa-github"> </i></span> Login whit Github</a>
+              <p className="text-dark"value="github" id="githubBtn" onClick={popup}>
+					      <a href='#'><span style={{fontSize: "18px"}}><i className="fab fa-github"> </i></span> Login whit Github</a>
 				      </p>
             </div>
-          </div>
+          </div> */}
         </Form>
       </Formik>
     </div>
