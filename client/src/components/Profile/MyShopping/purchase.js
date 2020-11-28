@@ -3,13 +3,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import style from "./myShopping.module.css";
 import LoadReview from "../../Review/loadReview"
-// import { Button, Toast, ToastBody, ToastHeader } from 'reactstrap';
 
 const Purchase = ({ orderId }) => {
   const [order, setOrder] = useState([]);
   const [product, setProduct] = useState([]);
   const [user, setUser] = useState({});
   const [total, setTotal] = useState(0)
+  
   //proba
   const [show, setShow] = useState(false);
   const toggle = () => setShow(!show);
@@ -25,9 +25,7 @@ const Purchase = ({ orderId }) => {
           setUser(res.data.user);
 
         });
-    } else {
-      console.log("cargando orden papu");
-    }
+    } 
   }, []);
 
   function totalShopCalculated(product){
@@ -99,11 +97,12 @@ const Purchase = ({ orderId }) => {
             </div>
 
             <div className="d-flex flex-md-column ">
-              <Link to={`/products/id/${prod.id}`}>
+              <a href={`/products/id/${prod.id}`}>
                 <button className={`${style.btnShop} btn btn-warning m-2 text-white`} >
                   View
                 </button>
-              </Link>
+              </a>
+              
               {order.state === 'COMPLETE' ? (
               <button onClick={toggle} className={`${style.btnShop} btn btn-warning m-2 text-white`} >
                   Set review
@@ -115,8 +114,6 @@ const Purchase = ({ orderId }) => {
           {order.state === 'COMPLETE' && show ? (
 
           <LoadReview idProduct={prod.id} toggle={toggle}/>
-
-
 
           ) :  null }
         </div>

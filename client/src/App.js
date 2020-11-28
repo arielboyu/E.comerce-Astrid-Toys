@@ -55,10 +55,10 @@ function App() {
           <Route exact path="/login" component={ !user.id ? Login : Profile } />
           <Route exact path="/register" component={ !user.id ? Register : Profile }/>
           <Route exact path="/profile/:id" component={ user.id ? Profile : NotFound } />
-          <Route exact path="/myshop/:idUser" component={ user ? ContainerMyShopping : Login } />
+          <Route exact path="/myshop/:idUser" component={ user.id ? ContainerMyShopping : Login } />
 
           {/* CATALOGUE COMPONENTS */}
-          <Route exact path="/products/id/:index" component={Product} />
+          <Route path="/products/id/:index" component={Product} />
           <Route exact path="/products/category/:cat" component={Catalogue} />            
           <Route exact path="/products/?search" component={Catalogue} />
           <Route path="/products" component={Catalogue} />
