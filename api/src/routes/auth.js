@@ -58,7 +58,7 @@ server.get('/me', isAuthenticated, (req, res) => {
 
 server.get('/github', passport.authenticate('github', { successRedirect: 'https://www.google.com.ar', failureRedirect: 'https://www.google.com.ar/products' } ) );
 
-server.get('/github/callback', passport.authenticate('github') );
+// server.get('github/redirect', passport.authenticate('github') );
 
 // server.get('/auth/facebook', passport.authenticate('facebook'));
 
@@ -69,11 +69,11 @@ server.get('/github/callback', passport.authenticate('github') );
 // server.get('/github',
 //   passport.authenticate('github', { display : 'popup'}));
 
-// server.get('/github/callback', 
-//   passport.authenticate('github'),
-//   function(req, res) {
-//     res.redirect('http://localhost:3000/');
-//   });
+server.get('/github/callback', 
+  passport.authenticate('github'),
+  function(req, res) {
+    res.redirect('http://localhost:3000/');
+  });
 
 server.post('/send/register', (req, res)=>{
   const transporter = nodemailer.createTransport({

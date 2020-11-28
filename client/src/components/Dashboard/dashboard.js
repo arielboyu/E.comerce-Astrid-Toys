@@ -8,28 +8,17 @@ import Spinner from "../Spinner/spinner";
 const validation = axios.get(`${process.env.REACT_APP_API_URL}/auth/me`, { withCredentials: true })
 
 const Dashboard = () => {
-    const [redirect, setRedirect] = useState(false)
     const [load, setLoad] = useState(true)
     const user = useSelector((state) => state.user);
 
     useEffect(() => {
-        setRedirect(false)
-        console.log(load)
-        
-        setTimeout(()=>{
-            validation
+    validation
             .then(r => { console.log("Estas logueado!"); console.log(r.data); setLoad(false)})
-            .catch(err => { console.log("No estas logueado"); setRedirect(true) } ) 
-        }, 3000)
-
-        
+            .catch(err => { console.log("No estas logueado") } )
       }, []);
     
     return (
-        
         <>
-        {!user.isAdmin ? <Redirect to='/products'/> : null} 
-        {redirect ? <Redirect to='/products'/> : null}
         { load ? <Spinner />  : (
         <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
             <div style={{minwidth: "100wh", height: "400px",}} className="d-flex flex-column" >

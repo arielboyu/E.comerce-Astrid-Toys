@@ -37,7 +37,7 @@ function ButtonPay(){
                 <div className="alert alert-danger my-3" role="alert">
                     You're not loggin, 
                     <Link to="/login">
-                        <span className="alert-link"> please sigup.</span>
+                        <span className="alert-link"> please sign up.</span>
                     </Link>  
                 </div>) : <></>}
             {buyComplete? (

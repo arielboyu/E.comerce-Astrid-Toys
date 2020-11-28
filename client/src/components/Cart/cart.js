@@ -84,7 +84,7 @@ const Cart = () => {
         {cart.map((f) => (
           <div className="row headCont">
             <div className="col-4 col-md-4 imageCont">
-              <img style={{maxWidth: "100px"}} src={f.image} alt={`Picture of ${f.name}`} />
+              <img style={{maxWidth: "80px" ,objectFit: "contain"}} src={f.image} alt={`Picture of ${f.name}`} />
             </div>
             <div className="col-8 col-md-2">
               <h3>{f.name}</h3>

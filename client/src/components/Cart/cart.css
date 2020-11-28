@@ -63,7 +63,17 @@
     text-align: center;
 }
 
+.imageCont{
 
+}
+
+.imagen{
+    width: 50px !important;
+    height: 50px;
+    max-width: 50px;
+    background-color: white;
+    object-fit: contain;
+}
 
 
 /* .cart ion-icon {
