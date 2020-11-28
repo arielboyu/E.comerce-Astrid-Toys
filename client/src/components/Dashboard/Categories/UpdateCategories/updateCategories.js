@@ -41,7 +41,7 @@ const handlerSubmit = (e) => {
             type="text"
             className="form-control"
             name="name"
-            placeholder="instert Name example 'Series'.. "
+            placeholder="insert Name example 'Series'.. "
             value={newCategory.name}
             onChange={handlerChange}
           />
@@ -52,7 +52,7 @@ const handlerSubmit = (e) => {
             className="form-control"
             name="description"
             value={newCategory.description}
-            placeholder=" insert Category Description.. example 'Series Funkos'"
+            placeholder=" insert Category Description.."
             rows="3"
             onChange={handlerChange}
           ></textarea>
