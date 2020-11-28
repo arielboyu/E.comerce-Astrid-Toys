@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import React from "react";
+import {useSelector } from "react-redux";
 import axios from "axios";
-import AddToCart from "../Catalogue/AddToCart/addToCart";
 import { Link } from "react-router-dom";
-import Review from "../Review/review.js";
 import style from "./profile.module.css"
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { FormGroup, Button, Alert, Row, Col } from "reactstrap";
+import { Formik, Field, Form} from "formik";
+import { FormGroup, Button, Row, Col } from "reactstrap";
 //Product
 
 export default function Profile() {
   const user = useSelector(state => state.user);
-  const [load, setLoad] = useState(false);
+  // const [load, setLoad] = useState(false);
   const handlerSubmit = (values) => {
     console.log("values:",values)
     if (values.newpassword === values.repeatpassword){
@@ -22,7 +19,7 @@ export default function Profile() {
     }else{
       alert("Error repeating new password")
     }
-    
+
   }
     return (
       <div className={`firstContainer container justify-content-center align-items-center my-5 mx-auto rounded border shadow`}>
@@ -30,7 +27,7 @@ export default function Profile() {
           <h1 className="mx-auto mt-5">Welcome {user.name} !</h1>
         </div>
         <div className="d-flex flex-column flex-lg-row mx-auto p-0">
-          <img src="https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posici%C3%B3n-de-foto-gris-vector-de-ilustr.jpg?ver=6"></img>
+          <img alt="user" src="https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posici%C3%B3n-de-foto-gris-vector-de-ilustr.jpg?ver=6"></img>
           </div>
         <div className="text-center">
           <span>

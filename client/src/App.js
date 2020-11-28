@@ -39,7 +39,7 @@ import DashboardLoadCategory from "./components/Dashboard/Categories/LoadCategor
 import DashboardUpdateCategories from "./components/Dashboard/Categories/UpdateCategories/updateCategories";
 /*Import de prueba */
 import Reduxxx from './components/pruebaRedux'
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 function App() {
   return (

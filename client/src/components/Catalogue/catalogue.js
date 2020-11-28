@@ -3,7 +3,7 @@ import ProductList from "./ListProduct/productList";
 import CategoryList from "./ListCategory/categoryList";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
-import style from './catalogue.module.css'
+// import style from './catalogue.module.css'
 import Spinner from '../Spinner/spinner'
 import Pagination from './Pagination/pagination'
 
@@ -14,7 +14,7 @@ const Catalogue = () => {
   const [ product, setProduct ] = useState([]);
   const [ category, setCategory ] = useState([]);
   const { cat } = useParams();
-  
+
   // PAGINATION CONSTANTS
   const [ currentPage, setCurrentPage ] = useState (1);
   const [ loading, setLoading ] = useState(false);
@@ -39,7 +39,7 @@ const Catalogue = () => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = product.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = ( pageNumber ) => { 
+  const paginate = ( pageNumber ) => {
     setCurrentPage(pageNumber) }
 
   const handlerSearch = (search) => {
@@ -85,7 +85,7 @@ const Catalogue = () => {
         <div className="">
           <ProductList product={currentPosts}/>
         </div>
-        
+
       </div>
     </>
   );

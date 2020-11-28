@@ -7,7 +7,7 @@ import axios from "axios";
 //const images = require.context("./../../../../api/public/image/19.jpeg")
 
 export default function ProductCard({ product }) {
-  const [productImage, setProductImage] = useState("");
+  const [productimage, setProductImage] = useState("");
 
   if (product.image[0] === "h") {
     var imagenMostrar = product.image ;
