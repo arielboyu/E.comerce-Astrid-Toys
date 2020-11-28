@@ -50,17 +50,26 @@ export default function OrderTable() {
            height: "300px",}}   >
           <h1 style={{background:"white"}}   className="display-3 text-center">Order list</h1>
          </div>
-            <table class="table table-borderless">
+         <div className="mt-4" >
+          <table class="table table-borderless">
             <thead>
               <tr>
-                <th>ID#</th>
-                <th>State</th>
-                <th>User Name</th>
-                <th>Discharge Date</th>
-                <th><Link to={"/dashboard/orders/list/pending"}><button className="btn btn-dark" > Filter by pending</button></Link></th>
-                <th><Link to={"/dashboard/orders/list/complete"}> <button className="ml-3 btn btn-info" >  Filter by Complete</button></Link></th>
-                <th><Link to={"/dashboard/orders/list/cancel"}><button className="btn btn-danger ml-2" >  Filter by Cancel</button></Link></th>
-              </tr>
+                <th>#</th>
+                <th>State <ion-icon name="information-circle-sharp"></ion-icon></th>
+                <th>User Name <ion-icon name="person-sharp"></ion-icon></th>
+                <th>Discharge Date <ion-icon name="time-sharp"></ion-icon></th>
+                <th><div className="btn btn-dark" class="btn-group dropup">
+                <button  class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <ion-icon name="reorder-three-sharp"></ion-icon>
+                Filter
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButon" style={{background:"grey"}} >
+                <Link to={"/dashboard/orders/list/pending"}><button style={{fontSize:"22px"}} class="dropdown-item">By Pending  <ion-icon style={{fontSize:"28px"}} name="download-sharp"></ion-icon></button></Link>
+                <Link to={"/dashboard/orders/list/complete"}> <button style={{fontSize:"22px"}}  class="dropdown-item">By Complete  <ion-icon style={{fontSize:"28px"}} name="checkmark-done-sharp"></ion-icon> </button></Link>
+                <Link to={"/dashboard/orders/list/cancel"}><button style={{fontSize:"22px"}} class="dropdown-item">By Cancel   <ion-icon style={{fontSize:"28px"}} name="close-sharp"></ion-icon> </button></Link>
+               </div>
+              </div></th>
+            </tr>
             </thead>
             <tbody>
               {  order.length  && order.map((o) => (
@@ -71,20 +80,20 @@ export default function OrderTable() {
               <td>{o.createdAt}</td>
               <td><Link to={`/dashboard/orders/detail/${o.id}`}>
               {/* para poder incluir los backticks debo colocar el path dentro de llaves */}
-                <button class="btn btn-secondary">Detail</button>
+                <button class="btn btn-dark">Detail <ion-icon name="calculator-sharp"></ion-icon> </button>
               </Link></td>
               <td>      {o.state === "PENDING" ? (
-              <button className="btn btn-danger ml-2" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel</button>
+              <button class="btn btn-outline-danger" onClick={() => {handlerCancel(o.id); window.location.reload();}}>Cancel <ion-icon  name="close-sharp"></ion-icon></button>
                 ) : (
                 <></>
                )}
               {o.state === "COMPLETE" ? (
-              <button class="btn btn-success" onClick={() => {handlerDistpach(o.id); window.location.reload();}}>Send</button>
+              <button class="btn btn-outline-success"onClick={() => {handlerDistpach(o.id); window.location.reload();}}>Send <ion-icon name="navigate-sharp"></ion-icon></button>
               ) : (
              <></>
             )}
             {o.state === "CANCELLED" ? (
-            <button class="btn btn-warning"onClick={() => {handlerDelete(o.id); window.location.reload();}}>Delete</button>
+            <button class="btn btn-outline-danger" onClick={() => {handlerDelete(o.id); window.location.reload();}}>Delete <ion-icon name="trash-sharp"></ion-icon></button>
             ) : (
            <></>
           )}</td>
@@ -93,12 +102,10 @@ export default function OrderTable() {
             </tbody>
             </table>
             <Link to="/dashboard" >
-            <button className="btn btn-danger ml-2" >Back</button>
+            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
             </Link>
         </div>
       </div>
+    </div>
     );
 }
-//   <th> <select class="form-control form-control-sm" > Filter By State
-//      <option className="btn btn-dark" >Filter By pending</option>
-// </select></th>

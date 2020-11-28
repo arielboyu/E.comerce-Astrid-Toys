@@ -14,8 +14,6 @@ const authSetUp = require( './passport.js' );
 const { FRONT_URL } = process.env;
 const server = express( );
 
-
-
 server.name = 'API';
 
 server.use(cors({
@@ -41,6 +39,7 @@ server.use(
   })
 );
 
+
 server.use(morgan("dev"));
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", FRONT_URL); // update to match the domain you will make the request from
@@ -53,23 +52,7 @@ server.use((req, res, next) => {
 });
 
 
-// server.use((req, res, next) => {
-
-//   // Dominio que tengan acceso (ej. 'http://example.com')
-//      res.setHeader('Access-Control-Allow-Origin', '*');
-  
-//   // Metodos de solicitud que deseas permitir
-//      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  
-//   // Encabecedados que permites (ej. 'X-Requested-With,content-type')
-//      res.setHeader('Access-Control-Allow-Headers', '*');
-  
-//   next();
-//   })
-
-
 authSetUp(server);
-
 server.use( '/', routes );
 
 server.use( ( error, request, response, next ) => {
@@ -80,5 +63,9 @@ server.use( ( error, request, response, next ) => {
 
 	response.status( status ).send( message );
 } );
+
+
+
+
 
 module.exports = server;

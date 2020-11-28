@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import axios from "axios";
+import React from "react";
+import { BrowserRouter as  Route, Switch } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ShoppingHistory from "./shoppingHistory.js";
 import LoadReview from "../../Review/loadReview.js";
@@ -16,7 +15,7 @@ const ContainerShop = () => {
       <Switch>
         <Route path="/myshop/loadReview">
           <LoadReview />
-        </Route>        
+        </Route>
         <Route path="/">
           <ShoppingHistory idUser={idUser} />
         </Route>

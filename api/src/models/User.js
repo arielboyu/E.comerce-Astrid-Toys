@@ -23,6 +23,12 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    githubId: {
+      type: DataTypes.STRING
+    },
+    facebookId: {
+      type: DataTypes.STRING
+    },
     active: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
