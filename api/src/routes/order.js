@@ -4,9 +4,16 @@ const {
   Product,
   User,
   OrderDetails,
-  Shippingdata
+  Shippingdata,
 } = require("../db.js");
 const nodemailer = require("nodemailer");
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+  },
+});
 
 //Ruta que incluye los modelos en la lista del
 // Frontend con direccion en componente orderTables.js
@@ -113,18 +120,43 @@ server.put("/modify/cancel/:id", (req, res) => {
 });
 
 server.put("/modify/dispatch/:id", (req, res) => {
-  Order.findOne({
-    where: {
-      id: req.params.id,
-    },
-  })
+  const orderId = req.params.id;
+  Order.findOne({ where: { id: orderId } })
     .then((orden) => {
-      orden.update({
-        state: "DISPATCHED",
-      });
-    })
-    .then(() => {
-      return res.send("se Despacha La Orden");
+      orden
+        .update({
+          state: "DISPATCHED",
+        })
+        .then((order) => {
+          User.findOne({ where: { id: order.userId } }).then((user) => {
+            let userName = user.name;
+            Shippingdata.findOne({ where: { orderId: orderId } }).then(
+              (shipping) => {
+                const mainConfig = {
+                  from: process.env.EMAIL,
+                  to: shipping.email,
+                  subject: `AtridToys - Order ${orderId} dispatched`,
+                  text: `Hi ${userName}! 
+              We just dispatched your order ${orderId} to the following adress:
+              ${shipping.street} ${shipping.number} 
+              ${shipping.city}, ${shipping.country}
+              ZIP code: ${shipping.zipCode}
+
+
+              Thanks for trusting us!
+              Astrid Toys`,
+                };
+                transporter.sendMail(mainConfig, (err, info) => {
+                  if (err) {
+                    res.status(500).send("Failed send mail");
+                  } else {
+                    res.send("Mail send");
+                  }
+                });
+              }
+            );
+          });
+        });
     })
     .catch(() => {
       return res.status(400).send("Error No se ha podido Despachar  La orden ");
@@ -210,29 +242,31 @@ server.delete("/delete/:id", (req, res) => {
 server.post("/shipping/:id", (req, res) => {
   const orderId = req.params.id;
   const { country, city, street, number, zipCode, email, userId } = req.body;
-  const shippingData = { country, city, street, number, zipCode, email, orderId };
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD,
-    },
-  });
+  const shippingData = {
+    country,
+    city,
+    street,
+    number,
+    zipCode,
+    email,
+    orderId,
+  };
   User.findOne({ where: { id: userId } }).then((r) => {
-    const name = r.dataValues.name
+    const name = r.dataValues.name;
     const mainConfig = {
       from: process.env.EMAIL,
       to: email,
       subject: `AtridToys - Order ${orderId} purchased`,
       text: `Hi ${name}! 
-    Thank you for your purchase, we will send you another mail when we dispatch the product`,
+    Thank you for your purchase, we will send you another mail when we dispatch the product.
+    Astrid Toys`,
     };
     transporter.sendMail(mainConfig, (err, info) => {
       if (err) {
         res.status(500).send("Failed send mail");
       } else {
         console.log("Mail send");
-        Order.findOne({ where: { id:orderId } })
+        Order.findOne({ where: { id: orderId } })
           .then((order) => {
             if (order == null) {
               res.status(404).send("Order does not exist");
@@ -249,9 +283,10 @@ server.post("/shipping/:id", (req, res) => {
                   .status(400)
                   .send("ERROR: Some of the required fields are empty");
               } else {
-                order.update({state:"COMPLETE"})
-                .then(()=>Shippingdata.create(shippingData))            
-                .then(r=> res.send(r))
+                order
+                  .update({ state: "COMPLETE" })
+                  .then(() => Shippingdata.create(shippingData))
+                  .then((r) => res.send(r));
               }
             }
           })
