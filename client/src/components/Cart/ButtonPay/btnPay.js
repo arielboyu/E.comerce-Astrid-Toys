@@ -55,7 +55,7 @@ function ButtonPay() {
       alert("Required Fields empty");
     } else {
       toggle()
-      values["userId"] = store.user.id;
+      values.userId = store.user.id;
       Axios.post(
         `${process.env.REACT_APP_API_URL}/orders/shipping/${orderId}`,
         values

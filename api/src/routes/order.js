@@ -251,6 +251,7 @@ server.post("/shipping/:id", (req, res) => {
     email,
     orderId,
   };
+
   User.findOne({ where: { id: userId } }).then((r) => {
     const name = r.dataValues.name;
     const mainConfig = {
@@ -259,7 +260,7 @@ server.post("/shipping/:id", (req, res) => {
       subject: `AtridToys - Order ${orderId} purchased`,
       text: `Hi ${name}! 
     Thank you for your purchase, we will send you another mail when we dispatch the product.
-    Astrid Toys`,
+    Astrid Toys`
     };
     transporter.sendMail(mainConfig, (err, info) => {
       if (err) {
