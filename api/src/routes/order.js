@@ -138,9 +138,8 @@ server.put("/modify/dispatch/:id", (req, res) => {
                   subject: `AtridToys - Order ${orderId} dispatched`,
                   text: `Hi ${userName}! 
               We just dispatched your order ${orderId} to the following adress:
-              ${shipping.street} ${shipping.number} 
+              ${shipping.adress} - ZIP code: ${shipping.zipCode}
               ${shipping.city}, ${shipping.country}
-              ZIP code: ${shipping.zipCode}
 
 
               Thanks for trusting us!
@@ -241,15 +240,14 @@ server.delete("/delete/:id", (req, res) => {
 //POST for ShippingData con envío de mail y cambio de state de la order a COMPLETE
 server.post("/shipping/:id", (req, res) => {
   const orderId = req.params.id;
-  const { country, city, street, number, zipCode, email, userId } = req.body;
+  const { country, city, adress, zipCode, email, userId } = req.body;
   const shippingData = {
     country,
     city,
-    street,
-    number,
+    adress,
     zipCode,
     email,
-    orderId,
+    orderId
   };
 
   User.findOne({ where: { id: userId } }).then((r) => {
@@ -275,8 +273,7 @@ server.post("/shipping/:id", (req, res) => {
               if (
                 !country ||
                 !city ||
-                !street ||
-                !number ||
+                !adress ||
                 !zipCode ||
                 !email
               ) {
