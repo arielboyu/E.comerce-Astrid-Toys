@@ -6,7 +6,7 @@ function isAuthenticated (req , res, next) {
         next();
     } else{
         console.log("No hay ningún usuario logueado")
-        res.status(400).send( req.session );
+        res.status(401).send( req.session );
     }   
   }
 

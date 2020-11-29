@@ -14,6 +14,8 @@ import About from "./components/About/about.js";
 /* Profile */
 import Profile from "./components/Profile/profile.js"
 import Login from "./components/Profile/Login/login.js";
+import ForgotPassword from "./components/Profile/ForgotPassword/forgotPassword"
+import ResetPassword from "./components/Profile/ForgotPassword/resetPassword"
 import Register from "./components/Profile/Register/register.js";
 import ContainerMyShopping from "./components/Profile/MyShopping/containerShop.js"
 /* Catalogue */
@@ -52,10 +54,12 @@ function App() {
           <Route exact path="/about" component={About} />
 
           {/* USER COMPONENTS */}
-          <Route exact path="/login" component={ !user.id ? Login : Profile } />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={ !user.id ? Register : Profile }/>
           <Route exact path="/profile/:id" component={ user.id ? Profile : NotFound } />
           <Route exact path="/myshop/:idUser" component={ user.id ? ContainerMyShopping : Login } />
+          <Route exact path="/forgot" component={ !user.id ? ForgotPassword : NotFound } />
+          <Route exact path="/reset/:id" component={ !user.id ? ResetPassword : NotFound } />
 
           {/* CATALOGUE COMPONENTS */}
           <Route path="/products/id/:index" component={Product} />

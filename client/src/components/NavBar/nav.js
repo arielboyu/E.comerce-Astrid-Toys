@@ -21,7 +21,6 @@ export default function Nav({ match }) {
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.carrito);
   const [open, setOpen] = useState(false);
-  const locationCart = useLocation().pathname === "/cart" ? true : false;
 
   const clearUser = () => {
     axios
@@ -51,8 +50,6 @@ export default function Nav({ match }) {
       })
       .catch((err) => console.log(err));
   };
-
-
 
   useEffect(() => {
     getUser();

@@ -8,9 +8,9 @@ const Footer = ({match}) => {
     <footer className="pt-3 pb-2 d-flex">
     <div className={`${style.footer} col-12 text-center p-5`}>
       <div className={`d-flex justify-content-between align-items-center flex-column flex-md-row pb-2 ${style.borderFooter}`}>
-        <h2 className={`${style.title} ml-0 ml-md-3 mb-4 mb-sm-2`}>Astrid Toys</h2>
+        <h2 className={`${style.title} ml-0 ml-md-3 mb-4 mb-md-2`}>Astrid Toys</h2>
         <Link to="/about">
-          <p className={`${style.aboutUs} mr-0 mr-md-4 mb-4 mb-sm-0`}>ABOUT US</p>
+          <p className={`${style.aboutUs} mr-0 mr-md-4 mb-4 mb-md-0`}>ABOUT US</p>
         </Link>
       </div>
      
