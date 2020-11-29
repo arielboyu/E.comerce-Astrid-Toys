@@ -43,7 +43,7 @@ sino
 */
 
   useEffect(() => {
-    console.log("Estoy hay en carrito "+cartStore)
+    console.log("Estoy hay en carrito " + cartStore);
     //ESTE CODIGO ADAPTA LA ORDER PENDING QUE RETORNA EL BACK A UNA ORDER PENDING QUE ACEPTA
     //EL CARRITO DEL REDUX
     //----------------------------------------------------------------------------
@@ -68,14 +68,20 @@ sino
     } else {
       setCartLocal(cartStore);
     }
-  }, []);
+  }, [isUpdateList]);
 
   const handlerRemove = (f) => {
     if (user.id !== null) {
-      //logica base de datos
-
-      dispatch(removeProductToCart(f));
-      setList(!isUpdateList);
+      //logica base de datos "/:idUser/cart/:productId"
+      axios
+        .delete(
+          `${process.env.REACT_APP_API_URL}/users/${user.id}/cart/${f.id}`
+        )
+        .then((ord) => {
+          console.log("producto eliminado de la orden pendiente", ord);
+          dispatch(removeProductToCart(f));
+          setList(!isUpdateList);
+        });
     } else {
       dispatch(removeProductToCart(f));
       setList(!isUpdateList);
@@ -102,21 +108,22 @@ sino
   const handlerAddQuantity = (f) => {
     if (user.id !== null) {
       ///:order/:id <=== order = orderId id = productId
-      var qty = { quantity: 1 }
+      var qty = { quantity: 1 };
       axios
         .get(`${process.env.REACT_APP_API_URL}/users/${user.id}/cart`)
         .then((mycart) => {
-          console.log("my cart to add qty: ", mycart)
-          axios.put(
-            `${process.env.REACT_APP_API_URL}/users/${mycart.data.id}/${f.id}`, qty
-          ).then((r)=>{
-            console.log(r)
-            dispatch(addQuantity(f));
-            setList(!isUpdateList);
-          })
+          console.log("my cart to add qty: ", mycart);
+          axios
+            .put(
+              `${process.env.REACT_APP_API_URL}/users/${mycart.data.id}/${f.id}`,
+              qty
+            )
+            .then((r) => {
+              console.log(r);
+              dispatch(addQuantity(f));
+              setList(!isUpdateList);
+            });
         });
-
-
     } else {
       dispatch(addQuantity(f));
       setList(!isUpdateList);
@@ -127,20 +134,23 @@ sino
     if (f.cant > 1) {
       if (user.id !== null) {
         ///:order/:id <=== order = orderId id = productId
-        var qty = { quantity: -1 }
+        var qty = { quantity: -1 };
         axios
           .get(`${process.env.REACT_APP_API_URL}/users/${user.id}/cart`)
           .then((mycart) => {
-            console.log("my cart to add qty: ", mycart)
-            axios.put(
-              `${process.env.REACT_APP_API_URL}/users/${mycart.data.id}/${f.id}`, qty
-            ).then((r)=>{
-              console.log(r)
-              dispatch(subQuantity(f));
-              setList(!isUpdateList);
-            })
+            console.log("my cart to add qty: ", mycart);
+            axios
+              .put(
+                `${process.env.REACT_APP_API_URL}/users/${mycart.data.id}/${f.id}`,
+                qty
+              )
+              .then((r) => {
+                console.log(r);
+                dispatch(subQuantity(f));
+                setList(!isUpdateList);
+              });
           });
-      }else{
+      } else {
         dispatch(subQuantity(f));
         setList(!isUpdateList);
       }
