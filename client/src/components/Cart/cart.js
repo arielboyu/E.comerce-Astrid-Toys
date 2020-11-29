@@ -43,6 +43,7 @@ sino
 */
 
   useEffect(() => {
+    console.log("Estoy hay en carrito "+cartStore)
     //ESTE CODIGO ADAPTA LA ORDER PENDING QUE RETORNA EL BACK A UNA ORDER PENDING QUE ACEPTA
     //EL CARRITO DEL REDUX
     //----------------------------------------------------------------------------
@@ -56,7 +57,7 @@ sino
             console.log("ya existe una orden pendiente");
             console.log(myCart);
             myCart.data.products.forEach((product) => {
-              product["cant"] = product.orderdetails.quantity;
+              product.cant = product.orderdetails.quantity;
               array.push(product);
             });
           }
@@ -211,7 +212,7 @@ sino
               </div>
             </div>
             <div className="priceCeld col-4 col-md-2">
-              <p>$ {f.price},00</p>
+              <p>$ {f.price * f.cant},00</p>
             </div>
           </div>
         ))}
