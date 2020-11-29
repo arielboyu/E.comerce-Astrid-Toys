@@ -7,12 +7,9 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../redux/actions/actions";
 
-
-
 const alerta = (mensaje, color="danger") => {
   return <Alert className="mt-2" color={color}>{mensaje}</Alert>
 }
-
 
 const formSchema = Yup.object().shape({
   username: Yup.string().required(alerta("Campo requerido")),
@@ -200,12 +197,12 @@ const Login = () => {
           </Row>
           <div className="row mt-3 mb-0  d-flex flex-column align-items-center justify-content-center">
             <div className="">
-              <p className="text-dark"value="github" id="githubBtn" onClick={popup}>
+              <p className="text-dark" value="github" id="githubBtn" onClick={popup}>
 					      <a href='#'><span style={{fontSize: "25px"}}><i className="fab fa-github"> </i></span></a>
 				      </p>
             </div>
             <div className="mt-2">
-              <Link> Forgot your password ? </Link>
+              <Link to="/forgot"> Forgot your password ? </Link>
             </div>
           </div>
         </Form>

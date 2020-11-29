@@ -37,7 +37,6 @@ export default function Nav({ match }) {
       .catch((error) => {
         console.log(error);
       });
-    dispatch(userLogOut());
   };
 
   const getUser = () => {

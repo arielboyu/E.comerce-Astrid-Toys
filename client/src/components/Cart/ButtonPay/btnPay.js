@@ -56,10 +56,7 @@ function ButtonPay() {
     } else {
       toggle()
       values.userId = store.user.id;
-      Axios.post(
-        `${process.env.REACT_APP_API_URL}/orders/shipping/${orderId}`,
-        values
-      )
+      Axios.post(`${process.env.REACT_APP_API_URL}/orders/shipping/${orderId}`, values, { withCredentials : true })
         .then((r) => {
           setBuyComplete(true);
           actions(removeAllProductsToCart());
