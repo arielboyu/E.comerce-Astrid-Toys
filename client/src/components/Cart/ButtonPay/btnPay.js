@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Spinner from "../../Spinner/spinner"
 
 function ButtonPay() {
   const [userLog, setUserLog] = useState();
@@ -24,6 +25,7 @@ function ButtonPay() {
   const store = useSelector((state) => state);
   const actions = useDispatch();
   const [orderId, SetOrderId] = useState("");
+  const [load, setLoad] = useState(false)
 
   const handlerClick = (e) => {
     e.preventDefault();
@@ -47,22 +49,24 @@ function ButtonPay() {
     if (
       !values.country ||
       !values.city ||
-      !values.street ||
-      !values.number ||
+      !values.adress ||
       !values.zipCode ||
       !values.email
     ) {
       alert("Required Fields empty");
     } else {
       toggle()
+      setLoad(true)
       values.userId = store.user.id;
       Axios.post(
         `${process.env.REACT_APP_API_URL}/orders/shipping/${orderId}`,
         values
       )
         .then((r) => {
+          setLoad(false)
           setBuyComplete(true);
           actions(removeAllProductsToCart());
+          setTimeout(window.location.reload(),1500)
         })
         .catch((err) => console.log("Error: ", err));
     }
@@ -78,8 +82,7 @@ function ButtonPay() {
   const formSchema = Yup.object().shape({
     country: Yup.string().required(alerta("Required field")),
     city: Yup.string().required(alerta("Required field")),
-    street: Yup.string().required(alerta("Required field")),
-    number: Yup.string().required(alerta("Required field")),
+    adress: Yup.string().required(alerta("Required field")),
     zipCode: Yup.string().required(alerta("Required field")),
     email: Yup.string().email("Invalid email").required("Required field"),
   });
@@ -98,8 +101,7 @@ function ButtonPay() {
             initialValues={{
               country: "",
               city: "",
-              street: "",
-              number: "",
+              adress: "",
               zipCode: "",
               email: "",
             }}
@@ -111,8 +113,7 @@ function ButtonPay() {
           >
             <Form>
               <FormGroup>
-                <label htmlFor="street">Country</label>
-                {/* <CountryDropdown name="country" onchange ={country =>setCountry(country)}/> */}
+                <label htmlFor="country">Country</label>
                 <Field
                   name="country"
                   type="text"
@@ -126,9 +127,7 @@ function ButtonPay() {
                 />
               </FormGroup>
               <FormGroup>
-                <label htmlFor="street">City</label>
-                {/* <RegionDropdown name="state"
-	                country={country} /> */}
+                <label htmlFor="city">City</label>
                 <Field
                   name="city"
                   type="text"
@@ -142,29 +141,15 @@ function ButtonPay() {
                 />
               </FormGroup>
               <FormGroup>
-                <label htmlFor="street">Street</label>
+                <label htmlFor="adress">Adress</label>
                 <Field
-                  name="street"
+                  name="adress"
                   type="text"
-                  placeholder="Enter your street"
+                  placeholder="Enter your adress"
                   className="form-control"
                 />
                 <ErrorMessage
-                  name="street"
-                  component="div"
-                  className="field-error text-danger"
-                />
-              </FormGroup>
-              <FormGroup>
-                <label htmlFor="number">Number</label>
-                <Field
-                  name="number"
-                  placeholder="Enter your number"
-                  type="number"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="number"
+                  name="adress"
                   component="div"
                   className="field-error text-danger"
                 />
@@ -213,6 +198,7 @@ function ButtonPay() {
           </Formik>
         </ModalBody>
       </Modal>
+      { load ? <Spinner />  : <></>}
       {userLog === null ? (
         <div className="alert alert-danger my-3" role="alert">
           You're not logged in,
