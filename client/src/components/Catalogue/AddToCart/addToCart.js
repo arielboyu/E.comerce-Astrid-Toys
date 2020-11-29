@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../redux/actions/actions";
 
 const AddToCart = ({ product }) => {
-  const [productoParaAgregar, setProducto] = useState();
+  // const [productoParaAgregar, setProducto] = useState({});
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
@@ -20,6 +20,7 @@ sino
     agrego producto al carrito redux
 */
   function handlerClick() {
+    
   
     if (user.id !== null) {
       //busco orden pendiente del user
@@ -61,17 +62,21 @@ sino
           }
         });
       //por ultimo agrego el producto al carrito redux a pesar de que el user esta loggeado
-      dispatch(addToCart(productoParaAgregar));
+      console.log("Agregue al carrito el productos "+product.name)
+      dispatch(addToCart(product));
     } else {
       //si el user no esta loggeado solo agrego el producto al carrito redux
-      dispatch(addToCart(productoParaAgregar));
+      console.log("Agregue al carrito el productos "+product.name)
+      dispatch(addToCart(product));
     }
   }
 
   useEffect(() => {
-    setProducto({ ...product, cant: 1 });
-  }, []);
-
+    console.log("Llego al UE de Add "+product.name)
+    product.cant = 1
+    // setProducto({ ...product, cant: 1 });
+  });
+  console.log("setcant "+product.cant)
   return (
     <button
       id="boton-agregar"

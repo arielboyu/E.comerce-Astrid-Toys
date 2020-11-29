@@ -43,6 +43,7 @@ sino
 */
 
   useEffect(() => {
+    console.log("Estoy hay en carrito "+cartStore)
     //ESTE CODIGO ADAPTA LA ORDER PENDING QUE RETORNA EL BACK A UNA ORDER PENDING QUE ACEPTA
     //EL CARRITO DEL REDUX
     //----------------------------------------------------------------------------

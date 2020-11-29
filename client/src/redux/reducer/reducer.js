@@ -20,6 +20,7 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   if (action.type === ADD_CART) {
+    
     let esta = false;
     state.carrito.forEach((p) => {
       if (p.id === action.payload.id) {
