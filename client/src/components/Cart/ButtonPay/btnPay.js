@@ -23,6 +23,7 @@ function ButtonPay() {
   const [buyComplete, setBuyComplete] = useState(false);
   const store = useSelector((state) => state);
   const actions = useDispatch();
+  const [orderId, SetOrderId] = useState("");
 
   const handlerClick = (e) => {
     e.preventDefault();
@@ -30,12 +31,10 @@ function ButtonPay() {
     if (userLog === null) {
       return console.log("Usuario no logeado");
     } else {
-      Axios.post(`${process.env.REACT_APP_API_URL}/users/cart/products`, store)
+      Axios.get(`${process.env.REACT_APP_API_URL}/users/${store.user.id}/cart`)
         .then((r) => {
-          console.log(r);
-          setBuyComplete(true);
+          SetOrderId(r.data.id);
           setModal(true);
-          actions(removeAllProductsToCart());
         })
         .catch((err) => console.log("User not loggin!"));
     }
@@ -45,11 +44,28 @@ function ButtonPay() {
   const toggle = () => setModal(!modal);
 
   const handleSubmit = (values) => {
-    values['userId'] = store.user.id;
-    console.log("submit values: ",values)
-    Axios.post(`${process.env.REACT_APP_API_URL}/orders/shipping/:id`, values)
-      .then(r=> console.log(r))
-      .catch((err) => console.log("Error: ",err))
+    if (
+      !values.country ||
+      !values.city ||
+      !values.street ||
+      !values.number ||
+      !values.zipCode ||
+      !values.email
+    ) {
+      alert("Required Fields empty");
+    } else {
+      toggle()
+      values["userId"] = store.user.id;
+      Axios.post(
+        `${process.env.REACT_APP_API_URL}/orders/shipping/${orderId}`,
+        values
+      )
+        .then((r) => {
+          setBuyComplete(true);
+          actions(removeAllProductsToCart());
+        })
+        .catch((err) => console.log("Error: ", err));
+    }
   };
 
   const alerta = (mensaje, color = "danger") => {
@@ -65,19 +81,13 @@ function ButtonPay() {
     street: Yup.string().required(alerta("Required field")),
     number: Yup.string().required(alerta("Required field")),
     zipCode: Yup.string().required(alerta("Required field")),
-    email: Yup.string().required(alerta("Required field"))
+    email: Yup.string().email("Invalid email").required("Required field"),
   });
-
 
   return (
     <>
       <div className="d-flex justify-content-end mr-5">
-        <button
-          onClick={handlerClick}
-          className="btn btn-info p-2"
-          data-toggle="modal"
-          data-target="#exampleModal"
-        >
+        <button onClick={handlerClick} className="btn btn-info p-2">
           <span style={{ fontSize: "20px" }}>CHECKOUT</span>
         </button>
       </div>
@@ -85,10 +95,18 @@ function ButtonPay() {
         <ModalHeader toggle={toggle}>ShippingAdress</ModalHeader>
         <ModalBody>
           <Formik
-            initialValues={{country: "", city: "", street: "", number: "", zipCode: "", email: ""}}
+            initialValues={{
+              country: "",
+              city: "",
+              street: "",
+              number: "",
+              zipCode: "",
+              email: "",
+            }}
             onSubmit={(values) => {
               handleSubmit(values);
             }}
+            onClose={toggle}
             validationSchema={formSchema}
           >
             <Form>
@@ -186,7 +204,6 @@ function ButtonPay() {
                     value="submit"
                     color="primary"
                     className="mr-1 mb-2 btn-block"
-                    onClick={toggle}
                   >
                     Submit
                   </Button>
