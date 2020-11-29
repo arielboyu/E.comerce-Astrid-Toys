@@ -11,12 +11,8 @@ module.exports = (sequelize) => {
         type : DataTypes.STRING,
         allowNull: false
     },
-    street:{
+    adress:{
         type : DataTypes.STRING,
-        allowNull: false
-    },
-    number:{
-        type : DataTypes.INTEGER,
         allowNull: false
     },
     zipCode:{

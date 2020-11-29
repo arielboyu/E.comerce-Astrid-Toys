@@ -32,7 +32,8 @@ const Catalogue = () => {
       setLoading( false )
     }
     getCategory.then((res) => { setCategory(res.data) });
-  }, [ cat ]);
+  }, [  ]);
+  //aca avisa un "cat"
 
 
   // PAGINATION VARIABLES
@@ -67,13 +68,13 @@ const Catalogue = () => {
     setCurrentPage(1);
     getProduct.then((res) => { setProduct(res.data) });
   }
-
+  console.log("Esto es current page "+currentPosts)
   if(loading){
     return <Spinner />
   }
   return (
     <>
-    {console.log(product)}
+    {console.log(currentPosts)}
       <div className={`firstContainer container col-12 col-lg-10 text-center pb-0 mb-5`}>
         <h1 className="display-4">Catalogue</h1>
         <div className="mt-5 my-3 mx-0 mx-xl-5 px-xl-5">

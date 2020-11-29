@@ -2,6 +2,7 @@
     background-color: #242526;
     color: rgba(255, 255, 255, 0.76);
     margin: 0px;
+    margin-bottom: -10px !important;
 }
 
 .footer a {
@@ -24,4 +25,9 @@
 
 .title {
     font-family: 'Rancho', cursive; 
+}
+
+.aboutUs{
+    font-family: 'Rancho', cursive;
+    font-size: 18px;
 }

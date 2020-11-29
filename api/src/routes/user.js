@@ -3,7 +3,7 @@ const { User, Order, Product, Orderdetails } = require("../db.js");
 const { Op } = require("sequelize");
 
 server.get("/", (req, res) => {
-  console.log(req.user)
+  console.log(req.user);
   User.findAll()
     .then((users) => {
       res.send(users);
@@ -117,9 +117,9 @@ server.get("/:idUser/cart", (req, res) => {
   Order.findOne({
     where: {
       userId: id,
-      state: "PENDING"
+      state: "PENDING",
     },
-    include: Product
+    include: Product,
   }).then((order) => res.status(200).json(order));
 });
 
@@ -155,14 +155,22 @@ server.delete("/:idUser/cart/:productId", (req, res) => {
         res.status(404);
         res.send("No se encontró el usuario");
       } else {
-        user
-          .getOrders({ where: { productId: productId } })
-          .then((orders) =>
+        user.getOrders({ where: { state: "PENDING" } }).then((orders) => {
+          //Orderdetails.destroy({where :{orderId:orders[0].id}})
+          Orderdetails.destroy({
+            where: {
+              [Op.and]: [{ productId: productId }, { orderId: orders[0].id }],
+            },
+          })
+          .then(()=>{
+            res.send(orders);
+          });
+          /*      
             orders.map((order) => {
               order.update({ state: "CANCELLED" });
-            })
-          )
-          .then((r) => res.send(r));
+            });
+           */
+        });
       }
     })
     .catch((e) => res.send("Hubo un error: ", e));
@@ -239,38 +247,38 @@ server.put("/:idUser/cart/", (req, res) => {
 //Ruta para agregar mas de un articulo a la orden
 
 server.post("/cart/products", (req, res) => {
-  const user = req.body.user
-  const arrProducts = req.body.carrito
-  if(user.id === null){
-    res.status(403).send(`User invalid ${user.id}`)
+  const user = req.body.user;
+  const arrProducts = req.body.carrito;
+  if (user.id === null) {
+    res.status(403).send(`User invalid ${user.id}`);
   } else {
-  Order.create({ state: "COMPLETE" })
-  .then((orden) => {
-    User.findOne({
-      where: { id: user.id }
-     }
-     ).then((resUser) => { 
+    Order.create({ state: "COMPLETE" }).then((orden) => {
+      User.findOne({
+        where: { id: user.id },
+      }).then((resUser) => {
         orden.setUser(resUser).then((order) => {
-          arrProducts.map((prod)=>{
+          arrProducts.map((prod) => {
             Product.findOne({
-              where: { id : prod.id}
-            }).then((resProd)=>{
-              order.addProduct(resProd, {
-                through: {
-                  price: prod.price,
-                  quantity: prod.cant
-                }
-              }).then(ord => {
-                console.log("Entre al final de Product")
-                res.sendStatus(200)})
-            })
-          })
+              where: { id: prod.id },
+            }).then((resProd) => {
+              order
+                .addProduct(resProd, {
+                  through: {
+                    price: prod.price,
+                    quantity: prod.cant,
+                  },
+                })
+                .then((ord) => {
+                  console.log("Entre al final de Product");
+                  res.sendStatus(200);
+                });
+            });
+          });
         });
-      })
+      });
     });
   }
-})
-
+});
 
 /* through: { price: myProduct.price,
   quantity: randomNum(100) }, */
@@ -330,16 +338,16 @@ server.get("/shopping/:id", (req, res) => {
 });
 
 //Cambiar User a Admin
-server.put("/change/rol/:id", (req, res)=>{
-  const id = req.params.id
-  User.findOne({where: { id: id}})
-  .then((userFind)=>{
-    userFind.update({ isAdmin : true})
-    .then(r => console.log("Rol change"))
-    .catch(err => console.log("Rol not change"))
-  })
-  .catch(err => console.log("User not found"))
-})
-
+server.put("/change/rol/:id", (req, res) => {
+  const id = req.params.id;
+  User.findOne({ where: { id: id } })
+    .then((userFind) => {
+      userFind
+        .update({ isAdmin: true })
+        .then((r) => console.log("Rol change"))
+        .catch((err) => console.log("Rol not change"));
+    })
+    .catch((err) => console.log("User not found"));
+});
 
 module.exports = server;

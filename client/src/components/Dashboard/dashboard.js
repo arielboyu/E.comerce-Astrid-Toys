@@ -5,15 +5,13 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Spinner from "../Spinner/spinner";
 
-const validation = axios.get(`${process.env.REACT_APP_API_URL}/auth/me`, { withCredentials: true })
-
 const Dashboard = () => {
     const [load, setLoad] = useState(true)
     const user = useSelector((state) => state.user);
     const [ redirect, setRedirect ] = useState(false);
 
     useEffect(() => {
-    validation
+        axios.get(`${process.env.REACT_APP_API_URL}/auth/me`, { withCredentials: true })
             .then(r => { console.log("Estas logueado!"); console.log(r.data); setLoad(false)})
             .catch(err => { console.log("No estas logueado") } )
         // setRedirect(false)

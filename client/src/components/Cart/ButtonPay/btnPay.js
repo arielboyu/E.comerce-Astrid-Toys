@@ -17,12 +17,15 @@ import {
 } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Spinner from "../../Spinner/spinner"
 
 function ButtonPay() {
   const [userLog, setUserLog] = useState();
   const [buyComplete, setBuyComplete] = useState(false);
   const store = useSelector((state) => state);
   const actions = useDispatch();
+  const [orderId, SetOrderId] = useState("");
+  const [load, setLoad] = useState(false)
 
   const handlerClick = (e) => {
     e.preventDefault();
@@ -30,12 +33,10 @@ function ButtonPay() {
     if (userLog === null) {
       return console.log("Usuario no logeado");
     } else {
-      Axios.post(`${process.env.REACT_APP_API_URL}/users/cart/products`, store)
+      Axios.get(`${process.env.REACT_APP_API_URL}/users/${store.user.id}/cart`)
         .then((r) => {
-          console.log(r);
-          setBuyComplete(true);
+          SetOrderId(r.data.id);
           setModal(true);
-          actions(removeAllProductsToCart());
         })
         .catch((err) => console.log("User not loggin!"));
     }
@@ -45,11 +46,30 @@ function ButtonPay() {
   const toggle = () => setModal(!modal);
 
   const handleSubmit = (values) => {
-    values['userId'] = store.user.id;
-    console.log("submit values: ",values)
-    Axios.post(`${process.env.REACT_APP_API_URL}/orders/shipping/:id`, values)
-      .then(r=> console.log(r))
-      .catch((err) => console.log("Error: ",err))
+    if (
+      !values.country ||
+      !values.city ||
+      !values.adress ||
+      !values.zipCode ||
+      !values.email
+    ) {
+      alert("Required Fields empty");
+    } else {
+      toggle()
+      setLoad(true)
+      values.userId = store.user.id;
+      Axios.post(
+        `${process.env.REACT_APP_API_URL}/orders/shipping/${orderId}`,
+        values
+      )
+        .then((r) => {
+          setLoad(false)
+          setBuyComplete(true);
+          actions(removeAllProductsToCart());
+          setTimeout(window.location.reload(),1500)
+        })
+        .catch((err) => console.log("Error: ", err));
+    }
   };
 
   const alerta = (mensaje, color = "danger") => {
@@ -62,22 +82,15 @@ function ButtonPay() {
   const formSchema = Yup.object().shape({
     country: Yup.string().required(alerta("Required field")),
     city: Yup.string().required(alerta("Required field")),
-    street: Yup.string().required(alerta("Required field")),
-    number: Yup.string().required(alerta("Required field")),
+    adress: Yup.string().required(alerta("Required field")),
     zipCode: Yup.string().required(alerta("Required field")),
-    email: Yup.string().required(alerta("Required field"))
+    email: Yup.string().email("Invalid email").required("Required field"),
   });
-
 
   return (
     <>
       <div className="d-flex justify-content-end mr-5">
-        <button
-          onClick={handlerClick}
-          className="btn btn-info p-2"
-          data-toggle="modal"
-          data-target="#exampleModal"
-        >
+        <button onClick={handlerClick} className="btn btn-info p-2">
           <span style={{ fontSize: "20px" }}>CHECKOUT</span>
         </button>
       </div>
@@ -85,16 +98,22 @@ function ButtonPay() {
         <ModalHeader toggle={toggle}>ShippingAdress</ModalHeader>
         <ModalBody>
           <Formik
-            initialValues={{country: "", city: "", street: "", number: "", zipCode: "", email: ""}}
+            initialValues={{
+              country: "",
+              city: "",
+              adress: "",
+              zipCode: "",
+              email: "",
+            }}
             onSubmit={(values) => {
               handleSubmit(values);
             }}
+            onClose={toggle}
             validationSchema={formSchema}
           >
             <Form>
               <FormGroup>
-                <label htmlFor="street">Country</label>
-                {/* <CountryDropdown name="country" onchange ={country =>setCountry(country)}/> */}
+                <label htmlFor="country">Country</label>
                 <Field
                   name="country"
                   type="text"
@@ -108,9 +127,7 @@ function ButtonPay() {
                 />
               </FormGroup>
               <FormGroup>
-                <label htmlFor="street">City</label>
-                {/* <RegionDropdown name="state"
-	                country={country} /> */}
+                <label htmlFor="city">City</label>
                 <Field
                   name="city"
                   type="text"
@@ -124,29 +141,15 @@ function ButtonPay() {
                 />
               </FormGroup>
               <FormGroup>
-                <label htmlFor="street">Street</label>
+                <label htmlFor="adress">Adress</label>
                 <Field
-                  name="street"
+                  name="adress"
                   type="text"
-                  placeholder="Enter your street"
+                  placeholder="Enter your adress"
                   className="form-control"
                 />
                 <ErrorMessage
-                  name="street"
-                  component="div"
-                  className="field-error text-danger"
-                />
-              </FormGroup>
-              <FormGroup>
-                <label htmlFor="number">Number</label>
-                <Field
-                  name="number"
-                  placeholder="Enter your number"
-                  type="number"
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="number"
+                  name="adress"
                   component="div"
                   className="field-error text-danger"
                 />
@@ -186,7 +189,6 @@ function ButtonPay() {
                     value="submit"
                     color="primary"
                     className="mr-1 mb-2 btn-block"
-                    onClick={toggle}
                   >
                     Submit
                   </Button>
@@ -196,6 +198,7 @@ function ButtonPay() {
           </Formik>
         </ModalBody>
       </Modal>
+      { load ? <Spinner />  : <></>}
       {userLog === null ? (
         <div className="alert alert-danger my-3" role="alert">
           You're not logged in,
