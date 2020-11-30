@@ -61,7 +61,6 @@ server.get('/me', isAuthenticated, (req, res) => {
   res.status(200).send( req.user );
 })
 
-
 // server.get('/auth/google',
 //   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
@@ -70,7 +69,6 @@ server.get('/me', isAuthenticated, (req, res) => {
 //   function(req, res) {
 //     res.redirect('/');
 //   });
-
 
 server.post('/send/register', (req, res)=>{
   var transporter = nodemailer.createTransport({

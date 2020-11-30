@@ -6,6 +6,7 @@ const Strategy = require( 'passport-local' ).Strategy;
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
+
 function authSetUp(server) {
 
 	const localStrategy = new Strategy({ 
@@ -23,7 +24,7 @@ function authSetUp(server) {
 				} )
 				.catch( ( error ) => { return done( error ) });
 	})
-
+  
 	// passport.use(new GoogleStrategy({
 	// 	clientID: process.env.GOOGLE_CONSUMER_KEY,
 	// 	clientSecret: process.env.GOOGLE_CONSUMER_SECRET,
