@@ -3,8 +3,7 @@ const { User } = require( './db.js' );
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const Strategy = require( 'passport-local' ).Strategy;
-const GitHubStrategy = require('passport-github2').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
 function authSetUp(server) {
@@ -25,48 +24,17 @@ function authSetUp(server) {
 				.catch( ( error ) => { return done( error ) });
 	})
 
-	
-	passport.use(new GitHubStrategy({ 
-		clientID: process.env.GITHUB_CLIENT_ID,
-		clientSecret: process.env.GITHUB_CLIENT_SECRET,
-		callbackURL: process.env.GITHUB_CLIENT_CALLBACK
-	},
-	  function(accessToken, refreshToken, profile, cb) {
-		User.findOrCreate( { 
-			where: {
-				github: profile.id},
-				defaults: {
-					name: profile.displayName,
-					email: profile.emails ? profile.emails[0].value : null
-				}} , 
-			function (err, user) {
-		  return cb(err, user);
-		});
+	passport.use(new GoogleStrategy({
+		clientID: process.env.GOOGLE_CONSUMER_KEY,
+		clientSecret: process.env.GOOGLE_CONSUMER_SECRET,
+		callbackURL: process.env.GOOGLE_CALLBACK
+	  },
+	  function(token, tokenSecret, profile, done) {
+		  User.findOrCreate({ googleId: profile.id }, function (err, user) {
+			return done(err, user);
+		  });
 	  }
 	));
-
-  
-
-// 	passport.use(new FacebookStrategy({
-// 		clientID: FACEBOOK_APP_ID,
-// 		clientSecret: FACEBOOK_APP_SECRET,
-// 		callbackURL: "http://www.example.com/auth/facebook/callback"
-//   	},
-// 	function(accessToken, refreshToken, profile, done) {
-// 		User.findOrCreate( {
-// 			where: {
-// 				facebookId: profile.id},
-// 				defaults: {
-// 					name: profile.displayName,
-// 					email: profile.emails ? profile.emails[0].value : null
-// 			}} , function(err, user) {
-			
-// 			if (err) { return done(err); }
-// 			done(null, user);
-// 			});
-// 	}
-// ));
-
 
 	passport.use(localStrategy)
 

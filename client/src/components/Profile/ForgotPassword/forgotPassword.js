@@ -38,7 +38,7 @@ const ForgotPassword = () => {
                 <h1 className="mt-3">FORGOT PASSWORD</h1>
                 <form onSubmit={submitHandler} className="d-flex flex-column mt-3">
                     <input 
-                        className="mt-4" 
+                        className="mt-4 border text-center" 
                         name="email" 
                         type="text" 
                         value={email} 

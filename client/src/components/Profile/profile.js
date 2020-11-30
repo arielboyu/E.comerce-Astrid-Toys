@@ -24,7 +24,7 @@ export default function Profile() {
     return (
       <div className={`firstContainer container justify-content-center align-items-center my-5 mx-auto rounded border shadow`}>
         <div className={`${style.card} d-flex flex-column flex-lg-row mx-auto mb-3`} >
-          <h1 className="mx-auto mt-5">Welcome <span className="text-danger">{user.name}</span> !</h1>
+          <h1 className="mx-auto mt-5">Welcome <span className={style.title}>{user.name}</span> !</h1>
         </div>
         <div className="d-flex flex-column flex-lg-row mx-auto p-0 justify-content-center">
           <img src="https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posici%C3%B3n-de-foto-gris-vector-de-ilustr.jpg?ver=6"></img>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
-import { Link,Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function OrderTablePending() {
@@ -25,7 +25,6 @@ export default function OrderTablePending() {
     };
     return (
       <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-        {!user.isAdmin ? <Redirect to='/products'/> : null}
         <h1 className="display-3 text-center">Order Pending List</h1>
         <div className="mx-auto" style={{backgroundImage: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4wEgMVFna59G1299J_HVENjnaGd1ZPgRdxA&usqp=CAU)",  width: "85%",
           height: "180px",}} >

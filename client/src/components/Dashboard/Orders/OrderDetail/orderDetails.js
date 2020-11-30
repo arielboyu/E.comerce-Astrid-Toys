@@ -30,23 +30,24 @@ export default function OrderDetail() {
   }
   return (
     <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-      {!userAct.isAdmin ? <Redirect to='/products'/> : null}
-      <h1 className="display-3 text-center">Order Detail</h1>
-      <div className="mx-auto" style={{backgroundImage: "url(https://www.larepublica.net/storage/images/2018/10/08/20181008090118.impacfact.jpg)",  width: "85%",
-        height: "290px",}} >
+      <h1 className="display-3 text-center mb-5">Order Detail</h1>
+      <div className="mx-auto rounded mb-5" style={{backgroundImage: "url(https://www.larepublica.net/storage/images/2018/10/08/20181008090118.impacfact.jpg)",  width: "95%",
+        height: "300px",}} >
       </div>
-      <div className="mt-4" >
-      <h7> ORDER ID: {"  "} {order.id}</h7>
-      <h6>STATE: {"  "}{order.state} <ion-icon name="information-circle-sharp"></ion-icon> </h6>
-      <h6>NAME: {"  "}{user.name} <ion-icon name="person-sharp"></ion-icon></h6>
-      <h7>DISCHARGE DATE:  {"  "} {order.createdAt} <ion-icon name="time-sharp"></ion-icon>  </h7>
+      <div className="mt-4 d-flex justify-content-around bg-warning pt-3 text-white rounded">
+        <p>ORDER ID: {"  "} {order.id}</p>
+        <p><ion-icon name="information-circle-sharp"></ion-icon>STATE: {"  "}{order.state}  </p>
+        <p><ion-icon name="person-sharp"></ion-icon> {"  "}{user.name} </p>
+        <p><ion-icon name="time-sharp"></ion-icon> DATE:  {"  "} {order.createdAt}   </p>
+      </div>
+      <div>
         <table  className="table table-borderless mt-4" >
           <thead>
             <tr>
               <th>#</th>
-              <th>Products  <ion-icon name="logo-reddit"></ion-icon></th>
-              <th>Quantity <ion-icon name="document-text-sharp"></ion-icon> </th>
-              <th>Price <ion-icon name="logo-usd"></ion-icon></th>
+              <th><ion-icon name="logo-reddit"></ion-icon> Products  </th>
+              <th><ion-icon name="document-text-sharp"></ion-icon> Quantity  </th>
+              <th><ion-icon name="logo-usd"></ion-icon> Price </th>
             </tr>
           </thead>
           <tbody>
@@ -60,11 +61,12 @@ export default function OrderDetail() {
             ))}
           </tbody>
         </table>
-            <h5> Total: ${" "}  {total}</h5>
+            <p className="display-4 mt-5"> Total: ${" "}  {total}</p>
             <Link to="/dashboard/orders/list" >
-            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
+              <button className="btn btn-danger mt-5" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
             </Link>
       </div>
+      
     </div>
   );
 }
