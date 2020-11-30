@@ -32,7 +32,7 @@ export default function Review({productId}) {
         </div>
         <h3 className="mt-3 mt-lg-5">Reviews</h3>
         {reviews.map(review=>(
-          <div className="d-flex headCont flex-column flex-lg-row w-75 mx-auto">
+          <div style={{minWidth: "500px"}} className="d-flex headCont flex-column flex-lg-row w-100">
             <div className="col-12 col-lg-3">
               <span>{review.user.name}</span>
             </div>
