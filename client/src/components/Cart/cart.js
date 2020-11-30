@@ -106,27 +106,29 @@ sino
   };
 
   const handlerAddQuantity = (f) => {
-    if (user.id !== null) {
-      ///:order/:id <=== order = orderId id = productId
-      var qty = { quantity: 1 };
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/users/${user.id}/cart`)
-        .then((mycart) => {
-          console.log("my cart to add qty: ", mycart);
-          axios
-            .put(
-              `${process.env.REACT_APP_API_URL}/users/${mycart.data.id}/${f.id}`,
-              qty
-            )
-            .then((r) => {
-              console.log(r);
-              dispatch(addQuantity(f));
-              setList(!isUpdateList);
-            });
-        });
-    } else {
-      dispatch(addQuantity(f));
-      setList(!isUpdateList);
+    if(f.stock > 0){
+      if (user.id !== null) {
+        ///:order/:id <=== order = orderId id = productId
+        var qty = { quantity: 1 };
+        axios
+          .get(`${process.env.REACT_APP_API_URL}/users/${user.id}/cart`)
+          .then((mycart) => {
+            console.log("my cart to add qty: ", mycart);
+            axios
+              .put(
+                `${process.env.REACT_APP_API_URL}/users/${mycart.data.id}/${f.id}`,
+                qty
+              )
+              .then((r) => {
+                console.log(r);
+                dispatch(addQuantity(f));
+                setList(!isUpdateList);
+              });
+          });
+      } else {
+        dispatch(addQuantity(f));
+        setList(!isUpdateList);
+      }
     }
   };
 
