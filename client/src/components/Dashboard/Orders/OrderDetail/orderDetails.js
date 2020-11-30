@@ -24,7 +24,7 @@ export default function OrderDetail() {
   function totalpr(product){
     var cont = 0;
     product.forEach(element => {
-      cont = cont + (element.price * element.orderdetails.quantity);
+      cont = cont + (element.orderdetails.price * element.orderdetails.quantity);
       setTotal(cont)
     });
   }
