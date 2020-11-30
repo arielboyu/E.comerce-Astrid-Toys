@@ -150,7 +150,7 @@
 .fa-envelope:hover,
 .fa-linkedin-in:hover,
 .fa-github:hover{
-    color: #45e19f;
+    color: var(--warning);
  
 }
 
