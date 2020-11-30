@@ -24,8 +24,7 @@ function DashboardLoadProduct() {
   const user = useSelector((state) => state.user);
 
   const uploadAction = (image,idProduct) => {
-    console.log("Este es el productInDB")
-    console.log(idProduct);
+    
     const formData = new FormData();
     formData.append("image", image);
     const config = {

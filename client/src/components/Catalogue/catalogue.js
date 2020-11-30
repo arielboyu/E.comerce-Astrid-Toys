@@ -45,7 +45,7 @@ const Catalogue = () => {
 
   const handlerSearch = (search) => {
     setLoading(true)
-    console.log(indexOfFirstPost, indexOfLastPost, currentPage)
+    
     setCurrentPage(1);
 
     axios
@@ -56,7 +56,7 @@ const Catalogue = () => {
   }
 
   const handlerFilter = (categoria)=>{
-    console.log(indexOfFirstPost, indexOfLastPost, currentPage)
+    
     setCurrentPage(1);
 
     axios.get(`${process.env.REACT_APP_API_URL}/products/search/${categoria}`)
@@ -64,17 +64,17 @@ const Catalogue = () => {
   }
 
   const handlerClear = ()=>{
-    console.log(indexOfFirstPost, indexOfLastPost, currentPage)
+    
     setCurrentPage(1);
     getProduct.then((res) => { setProduct(res.data) });
   }
-  console.log("Esto es current page "+currentPosts)
+  
   if(loading){
     return <Spinner />
   }
   return (
     <>
-    {console.log(currentPosts)}
+    
       <div className={`firstContainer container col-12 col-lg-10 text-center pb-0 mb-5`}>
         <h1 className="display-4">Catalogue</h1>
         <div className="mt-5 my-3 mx-0 mx-xl-5 px-xl-5">

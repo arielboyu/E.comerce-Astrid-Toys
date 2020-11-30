@@ -14,7 +14,7 @@ function UpdateProduct() {
   
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/products/${id}`).then((res) => {
-      console.log(res)
+      
       let initialState = res.data[0];
       setLoad(true);
       axios
@@ -34,7 +34,7 @@ function UpdateProduct() {
   }, [load]);
 
   const handlerChange = (e) => {
-    console.log("entra al handlerChange: ", e.target.name, "-", e.target.value);
+    
     if(e.target.name === 'active'){
       setProduct({ ...productUpdate, [e.target.name]: e.target.checked });
     } else {

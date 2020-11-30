@@ -10,9 +10,7 @@ export default function CategoriesList() {
   const user = useSelector((state) => state.user);
   useEffect(() => {
     getCategory.then((res) => {
-      console.log(category);
       setCategory(res.data);
-      console.log(res);
     });
   }, []);
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Rating from "react-rating";
 import {useSelector} from 'react-redux'
+import { useHistory } from "react-router-dom";
 
 const LoadReview = ({idProduct}) => {
   const user= useSelector(state => state.user)
@@ -10,6 +11,7 @@ const LoadReview = ({idProduct}) => {
     score: 0,
     description: ""
   });
+  const localy = useHistory()
 
   useEffect(()=>{
     setLoadReview({ ...loadReview, userId:user.id })
@@ -24,11 +26,12 @@ const LoadReview = ({idProduct}) => {
   }
 
   function handlerLoadReviewSubmit(e) {
-    e.preventDefault()
+    // e.preventDefault()
     axios
       .post(`${process.env.REACT_APP_API_URL}/products/${idProduct}/review`, loadReview)
       .then((res) => { console.log("Review loaded") })
       .catch((e) => { console.log(e) });
+    localy.push(`/products/id/${idProduct}`)
   }
 
   return (

@@ -49,24 +49,24 @@ function App() {
     <Router>
       <Route path="/" render={({match, location}) => <Navbar match={match} location={location} />} />
         
-        <Switch >
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
 
+          {/* CATALOGUE COMPONENTS */}
+          <Route exact path="/products/id/:index" component={Product} />
+          <Route exact path="/products/category/:cat" component={Catalogue} />            
+          <Route exact path="/products/?search" component={Catalogue} />
+          <Route exact path="/products" component={Catalogue}/>
+          <Route exact path="/cart" component={Cart} />      
           {/* USER COMPONENTS */}
+          
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={ !user.id ? Register : Profile }/>
           <Route exact path="/profile/:id" component={ user.id ? Profile : NotFound } />
           <Route exact path="/myshop/:idUser" component={ user.id ? ContainerMyShopping : Login } />
           <Route exact path="/forgot" component={ !user.id ? ForgotPassword : NotFound } />
           <Route exact path="/reset/:id" component={ !user.id ? ResetPassword : NotFound } />
-
-          {/* CATALOGUE COMPONENTS */}
-          <Route path="/products/id/:index" component={Product} />
-          <Route exact path="/products/category/:cat" component={Catalogue} />            
-          <Route exact path="/products/?search" component={Catalogue} />
-          <Route path="/products" component={Catalogue} />
-          <Route exact path="/cart" component={Cart} />      
 
           {/* DASHBOARD COMPONENTS */}
           <Route exact path='/dashboard' component={ user.isAdmin ? Dashboard : NotFound} />

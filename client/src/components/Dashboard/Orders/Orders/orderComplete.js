@@ -4,17 +4,14 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function OrderTableComplete() {
-  const getOrderco = axios.get(
-    `${process.env.REACT_APP_API_URL}/orders/complete/all`
-  );
-  const [orderco, setOrderco] = useState([]);
-  const user = useSelector((state) => state.user);
-  useEffect(() => {
-    getOrderco.then((res) => {
-      setOrderco(res.data);
-      console.log(res);
-    });
-  }, []);
+    const getOrderco = axios.get(`${process.env.REACT_APP_API_URL}/orders/complete/all`);
+    const [orderco, setOrderco] = useState([]);
+    const user = useSelector((state) => state.user);
+    useEffect(() => {
+      getOrderco.then((res) => {
+        setOrderco(res.data);
+      });
+    }, [])
 
   const handlerDistpach = (orderid) => {
     console.log(orderid);
