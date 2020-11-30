@@ -30,7 +30,7 @@ const ResetPassword = () => {
             { reset ? 
             
             <div>
-                Su contraseña fue cambiada con éxito.
+                Your password was changed successfully
             </div> 
             
             : 

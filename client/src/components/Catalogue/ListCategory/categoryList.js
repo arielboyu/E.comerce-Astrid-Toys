@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SearchBar from "../../NavBar/SearchBar/searchBar.js";
 import style from "../catalogue.module.css"
 
-export default function CategoryList({ category, filter, onSearch, onClear }) {
+export default function CategoryList({ category, filter, onSearch, onClear, filterCat }) {
   return (
       <>
       {/* DESKTOP VERSION */}
@@ -27,7 +27,7 @@ export default function CategoryList({ category, filter, onSearch, onClear }) {
       <div className={`${style.categoryList} d-block d-lg-none flex-row rounded justify-content-center align-items-center  justify-content-lg-start`}>
         <div className="my-auto d-flex flex-wrap justify-content-center d-lg-none ">
           {category.map((cat) => (
-            <Link to={`/products/category/${cat.name.toLowerCase()}`} onClick={() => filter(cat.name)} >
+            <Link to={`/products/category/${cat.name.toLowerCase()}`} onClick={() => {filter(cat.name); filterCat()}} >
               <p className={`mx-2 text-uppercase`}>{cat.name}</p>
             </Link>
           ))}
