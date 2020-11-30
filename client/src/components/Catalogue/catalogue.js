@@ -20,6 +20,11 @@ const Catalogue = () => {
   const [ loading, setLoading ] = useState(false);
   const [ postsPerPage ] = useState(8)
 
+  const [filter, setFilter] = useState(false)
+  function filterCat(){
+    setFilter(!filter)
+  }
+
   useEffect(() => {
     if(cat){
       setLoading( true )
@@ -32,7 +37,7 @@ const Catalogue = () => {
       setLoading( false )
     }
     getCategory.then((res) => { setCategory(res.data) });
-  }, [  ]);
+  }, [filter]);
   //aca avisa un "cat"
 
 
@@ -78,7 +83,7 @@ const Catalogue = () => {
       <div className={`firstContainer container col-12 col-lg-10 text-center pb-0 mb-5`}>
         <h1 className="display-4">Catalogue</h1>
         <div className="mt-5 my-3 mx-0 mx-xl-5 px-xl-5">
-          <CategoryList category={category} filter={handlerFilter} onSearch={handlerSearch} onClear={handlerClear}/>
+          <CategoryList filterCat={filterCat} category={category} filter={handlerFilter} onSearch={handlerSearch} onClear={handlerClear}/>
         </div>
         <div className="d-flex justify-content-center">
           <Pagination postsPerPage={postsPerPage} totalPosts={product.length} paginate={paginate} />
