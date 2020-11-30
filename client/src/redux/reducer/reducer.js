@@ -20,7 +20,6 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   if (action.type === ADD_CART) {
-    
     let esta = false;
     state.carrito.forEach((p) => {
       if (p.id === action.payload.id) {
@@ -28,6 +27,7 @@ function rootReducer(state = initialState, action) {
       }
     });
     if (!esta) {
+      action.payload.stock = action.payload.stock -1 
       return { ...state, carrito: state.carrito.concat(action.payload) };
     }
   }
