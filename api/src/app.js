@@ -49,7 +49,7 @@ server.use((req, res, next) => {
 });
 
 
-authSetUp(server);
+// authSetUp(server);
 server.use( '/', routes );
 
 server.use( ( error, request, response, next ) => {

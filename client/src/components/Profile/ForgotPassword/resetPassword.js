@@ -39,7 +39,7 @@ const ResetPassword = () => {
                 <h1 className="mt-3">RESET PASSWORD</h1>
                 <form onSubmit={submitHandler} className="d-flex flex-column mt-3" >
                     <input 
-                        className="mt-4" 
+                        className="mt-4 border text-center" 
                         type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)} 

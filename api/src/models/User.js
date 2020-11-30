@@ -29,6 +29,9 @@ module.exports = (sequelize) => {
     facebookId: {
       type: DataTypes.STRING
     },
+    googleId: {
+      type: DataTypes.STRING
+    },
     active: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

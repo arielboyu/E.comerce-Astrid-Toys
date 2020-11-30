@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 const getProduct = axios.get(`${process.env.REACT_APP_API_URL}/products`);
@@ -28,22 +28,34 @@ const DashboardUpdateProduct = () => {
 
   return (
     <div className="firstContainer container d-flex flex-column text-center col-12 col-md-12 col-lg-10 col-xl-8 mx-auto my-5 p-5 border shadow">
-      {!user.isAdmin ? <Redirect to='/products'/> : null}
-      <div className="mx-auto"  style={{backgroundImage: "url(https://img.unocero.com/2019/11/funko-pop-geek-barato.jpg)",  width: "90%",
-  height: "300px",}} >
-        <h1 style={{background:"white"}} class="display-3 d-none d-sm-block">Products</h1>
+      <h1 class="display-3 d-none d-sm-block">
+          Products
+      </h1>
+      <div
+        className="mx-auto rounded mb-5"
+        style={{
+          backgroundImage:
+            "url(https://img.unocero.com/2019/11/funko-pop-geek-barato.jpg)",
+          width: "95%",
+          height: "300px",
+        }}
+      >
+        
         <hr class="my-2" />
-        <p class="lead">
-        </p>
+        <p class="lead"></p>
       </div>
       <div className="col-12 d-flex justify-content-center pb-4">
-          <Link to="/dashboard/product/create">
-            <button class="btn btn-danger btn-lg d-flex align-items-center ml-auto mt-3">
-            <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Product
-            </button>
-          </Link>
+        <Link to="/dashboard/product/create">
+          <button className="btn btn-danger btn-lg d-flex align-items-center ml-auto mb-3">
+            <ion-icon
+              style={{ fontSize: "24px" }}
+              name="add-circle-outline"
+            ></ion-icon>{" "}
+            Add Product
+          </button>
+        </Link>
       </div>
-      <table className="table table-reflow w-75 mx-auto mb-5">
+      <table className="table table-reflow mx-auto mb-5">
         <thead>
           <tr>
             <th>#</th>
@@ -52,7 +64,8 @@ const DashboardUpdateProduct = () => {
             <th>Price</th>
             <th>Stock</th>
             <th>Active</th>
-            <th></th>
+            <th>Update</th>
+            <th>Activation</th>
           </tr>
         </thead>
         <tbody>
@@ -66,9 +79,7 @@ const DashboardUpdateProduct = () => {
               <td>{prod.active.toString()}</td>
               <td>
                 <Link to={`/dashboard/product/update/${prod.id}`}>
-                  <button className="btn btn-danger">
-                    Update
-                  </button>
+                  <button className="btn btn-danger">Update</button>
                 </Link>
               </td>
               <td>
@@ -87,7 +98,9 @@ const DashboardUpdateProduct = () => {
         </tbody>
       </table>
       <Link to="/dashboard" >
-      <button className="btn btn-danger ml-2" >Back</button>
+            <button className="btn btn-danger mt-5 w-25" >
+              BACK
+            </button>
       </Link>
     </div>
   );

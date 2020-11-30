@@ -61,6 +61,11 @@ footer a:hover{
 }
 
 .firstContainer{
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-content: center !important;
+
   min-height: 75vh;
   background-color: white !important;
   padding: 3rem !important;
