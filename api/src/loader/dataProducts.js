@@ -5,7 +5,7 @@ function returnRandomPrice() {
 }
 
 function returnRandom() {
-  return Math.floor(Math.random() * 100)+1;     // returns a random integer from 0 to 99
+  return Math.floor(Math.random() * 20)+1;     // returns a random integer from 0 to 99
 }
 
 const DataProducts = [{
