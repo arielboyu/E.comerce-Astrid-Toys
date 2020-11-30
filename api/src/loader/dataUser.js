@@ -37,7 +37,7 @@ const DataUsers = [
   {
     name: 'Maxi De Filippis',
     username: 'maxi',
-    email: 'maxi@henry.com',
+    email: 'maxidefilippis@gmail.com',
     password : '1234',
     isAdmin: true
   },

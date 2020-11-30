@@ -21,20 +21,39 @@ body{
 a{
   color: #ce9a18dc
 }
+
 a:hover{
   color: #000000cb;
   text-decoration:none;
 }
 
+footer{   
+  background-color: #242526;
+  color: rgba(255, 255, 255, 0.76);
+  margin: 0px;
+  margin-bottom: -10px !important;
+  min-width: 450px;
+  min-height: 20vh;
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.658);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+footer a:hover{
+  color: #f0ac4e94;
+}
+
 .container{
   margin-top: 140px !important;
   margin-bottom: 120px !important;
-
 }
 
 .appContainer{
   margin-top: 100px;
-  min-height: 65vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,7 +61,7 @@ a:hover{
 }
 
 .firstContainer{
-  min-height: 50vh;
+  min-height: 75vh;
   background-color: white !important;
   padding: 3rem !important;
   width: 100%;
@@ -56,3 +75,4 @@ a:hover{
 .superMt{
   margin-top: 140px !important;
 }
+
