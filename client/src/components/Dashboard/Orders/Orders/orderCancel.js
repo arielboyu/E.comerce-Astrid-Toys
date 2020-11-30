@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
-import { Link,Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function OrderTableCancel() {
@@ -25,19 +25,19 @@ export default function OrderTableCancel() {
     };
     return (
       <div style={{background:"white"}}  className="container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-        {!user.isAdmin ? <Redirect to='/products'/> : null}
-        <h1 className="display-3 text-center">Order Cancel List</h1>
-        <div className="mx-auto" style={{backgroundImage: "url(https://static.seattletimes.com/wp-content/uploads/2017/12/9d655134-da2c-11e7-95fd-67055a788fec-780x508.jpg)",  width: "75%",
-          height: "244px",}} >
+        <h1 className="display-3 text-center mb-5 ">Order Cancel List</h1>
+        <div className="mx-auto rounded mb-5" style={{backgroundImage: "url(https://static.seattletimes.com/wp-content/uploads/2017/12/9d655134-da2c-11e7-95fd-67055a788fec-780x508.jpg)",  width: "95%",
+          height: "300px",}} >
         </div>
         <div className="mt-4" >
             <table class="table table-borderless">
-            <thead>
+            <thead className="my-auto bg-warning rounded mb-5 w-75">
               <tr>
                 <th>#</th>
                 <th>State <ion-icon name="information-circle-sharp"></ion-icon></th>
                 <th>User Name <ion-icon name="person-sharp"></ion-icon></th>
                 <th>Discharge Date <ion-icon name="time-sharp"></ion-icon></th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -55,7 +55,7 @@ export default function OrderTableCancel() {
             </tbody>
             </table>
             <Link to="/dashboard/orders/list" >
-            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
+            <button className="btn btn-danger mt-5" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
             </Link>
         </div>
       </div>

@@ -114,7 +114,7 @@ const Login = () => {
 
     const popup = e => {
       e.preventDefault();
-      window.open(`${process.env.REACT_APP_API_URL}/auth/github`, { withCredentials: true } , 'height=500, width=500');
+      window.open(`${process.env.REACT_APP_API_URL}/auth/google`, { withCredentials: true } , 'height=500, width=500');
     };
 
   return (
@@ -199,11 +199,11 @@ const Login = () => {
             <div className="mt-4 mb-0">
               <Link to="/forgot" className="text-dark"> Forgot your password ? </Link>
             </div>
-            {/* <div className="mt-5">
-              <p className="text-dark" value="github" id="githubBtn" onClick={popup}>
-					      <a href='#'><span style={{fontSize: "25px"}}><i className="fab fa-github"> </i></span></a>
+            <div className="mt-4">
+              <p className="text-dark" value="google" id="googleBtn" onClick={popup}>
+					      <a href='#'><span style={{fontSize: "25px"}}><i className="fab fa-google mr-3"> </i></span>Login with Google</a>
 				      </p>
-            </div> */}
+            </div>
           </div>
         </Form>
       </Formik>

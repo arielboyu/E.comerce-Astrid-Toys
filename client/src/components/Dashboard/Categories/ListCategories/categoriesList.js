@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link,Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
@@ -10,16 +10,19 @@ export default function CategoriesList() {
   const user = useSelector((state) => state.user);
   useEffect(() => {
     getCategory.then((res) => {
-      console.log(category)
+      console.log(category);
       setCategory(res.data);
-      console.log(res)
+      console.log(res);
     });
   }, []);
 
   // esta funcion elimina la categoria seteada en el estado local
   const handleDelete = () => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/categories/delete/${deleted.id}`, deleted)
+      .delete(
+        `${process.env.REACT_APP_API_URL}/categories/delete/${deleted.id}`,
+        deleted
+      )
       .then((res) => {
         console.log(res);
       })
@@ -32,27 +35,30 @@ export default function CategoriesList() {
   };
   return (
     <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
-      {!user.isAdmin ? <Redirect to='/products'/> : null}
-      <div style={{backgroundImage: "url(https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/FRDTR67UFNFYBJLZNIOWNMSUJQ.jpg)",  width: "100%",
-        height: "300px",}} className="">
-        <h1 style={{background:"white"}} className="display-3 text-center">Categories</h1>
+      <h1 className="display-3 text-center mb-2"> Categories </h1>
+      <div style={{ backgroundImage: "url(https://www.wallpapertip.com/wmimgs/30-302870_funko-pop-wallpaper-hd.jpg)", backgroundSize: "cover", backgroundRepeat: "no-repeat", width: "95%", height: "300px" }} className="mb-5 rounded mx-auto" >
         <hr className="my-2" />
-        <p className="lead ">
-        </p>
+        <p className="lead "></p>
       </div>
       <div className="col-12 d-flex justify-content-center pb-4">
-          <Link to="/dashboard/category/create">
-            <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mt-3">
-            <ion-icon style={{fontSize:"24px"}} name="add-circle-outline"></ion-icon>{" "} Add Category
-            </button>
-          </Link>
-        </div>
-      <table className="table table-reflow w-75 mx-auto mb-5">
+        <Link to="/dashboard/category/create">
+          <button className="btn btn-danger btn-lg d-flex align-items-center mx-auto mb-3">
+            <ion-icon
+              style={{ fontSize: "24px" }}
+              name="add-circle-outline"
+            ></ion-icon>{" "}
+            Add Category
+          </button>
+        </Link>
+      </div>
+      <table className="table table-reflow  mx-auto mb-5">
         <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Update</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -61,28 +67,33 @@ export default function CategoriesList() {
               <td>{c.id}</td>
               <td>{c.name}</td>
               <td>{c.description}</td>
-              <td><Link to={`/dashboard/category/update/${c.id}`}>
-              <button
-              className="btn btn-danger"
-              >Update <ion-icon name="reload-circle-sharp"></ion-icon> </button>
-              </Link></td>
-              <td><button
-                onClick={() => handleSubmit(c)}
-                type="submit"
-                className="btn btn-dark"
-                data-toggle="modal"
-                data-target="#exampleModal"
-              >
-                Delete <ion-icon name="trash-sharp"></ion-icon>
-              </button>
+              <td>
+                <Link to={`/dashboard/category/update/${c.id}`}>
+                  <button className="btn btn-danger">
+                    Update <ion-icon name="reload-circle-sharp"></ion-icon>{" "}
+                  </button>
+                </Link>
+              </td>
+              <td>
+                <button
+                  onClick={() => handleSubmit(c)}
+                  type="submit"
+                  className="btn btn-dark"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  Delete <ion-icon name="trash-sharp"></ion-icon>
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       <Link to="/dashboard" >
-            <button className="btn btn-danger ml-2" >Back <ion-icon name="arrow-back-sharp"></ion-icon></button>
-            </Link>
+            <button className="btn btn-danger mt-5 w-25" >
+              BACK
+            </button>
+      </Link>
       {/* <!-- Modal --> */}
       <div
         className="modal"
@@ -121,7 +132,11 @@ export default function CategoriesList() {
               >
                 Yes
               </button>
-              <button type="button" className="btn btn-danger" data-dismiss="modal">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >
                 No
               </button>
             </div>

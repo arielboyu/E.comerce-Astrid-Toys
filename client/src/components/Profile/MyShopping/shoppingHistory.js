@@ -24,11 +24,11 @@ const ShoppingHistory = ({ idUser }) => {
       {!shopping.length ? 
       <>
       <h5 className="pb-5">You have no purchases made yet</h5> 
-        <Link to="/products">
-          <span className={`${style.button}`} >
+        <a href="/products">
+          <span className={`${style.button} btn`} >
               GO SHOP
           </span>
-        </Link>
+        </a>
       </>
       
       :
