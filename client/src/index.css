@@ -14,7 +14,8 @@
 body{  
     font-family: 'Fredoka One', cursive; 
     width: 100%;
-    background-image: url('./fondo4.jpg');
+    background-image: url('./fondo.jpg');
+    background-repeat: repeat;
 }
 
 a{
