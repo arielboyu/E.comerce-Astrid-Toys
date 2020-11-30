@@ -41,11 +41,11 @@ const Purchase = ({ orderId }) => {
       <div className={`${style.containerShop} firstContainer text-center mb-0 pb-0`}>
 
         {/* CABECERA DE LA ORDEN */}
-        <div className=" d-flex flex-column flex-md-row justify-content-between pb-2 px-5">
+        <div className=" d-flex flex-column flex-md-row justify-content-between py-2 px-5">
           <h2>{"ORDER N° " + order.id}</h2>
           <h3 className={order.state === 'CANCELLED' ? 'text-danger' : 'text-success'}>{order.state}</h3>
         </div>
-        <div className={`${style.yellow} rounded`}>
+        <div className={`${style.yellow} rounded pt-3`}>
           <div className="row mb-3">
             <div className={`rounded-sm col-sm-12 col-md-4 px-5 py-2 d-flex flex-column my-auto`}>
             <p className="my-auto">CLIENT</p>
@@ -69,7 +69,7 @@ const Purchase = ({ orderId }) => {
         {/* MAP DE PRODUCTOS DE CADA ORDEN */}
         {product.map((prod) => (
 
-        <div className={`${style.shop} mb-4`}>
+        <div className={`${style.shop} my-4`}>
           <div className={` d-flex flex-column flex-md-row  justify-content-center align-items-center pt-4 pb-2`}>
 
             <div className="row d-md-flex flex-md-column col-md-2 mb-0 mb-md-3 m-md-3">

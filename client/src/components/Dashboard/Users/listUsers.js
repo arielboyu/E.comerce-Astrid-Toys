@@ -45,12 +45,14 @@ export default function UsersTable() {
     <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
       <div className="mx-auto w-100">
         <h1 className="display-3 text-center mb-2">
-            USERS LIST
+            Users
         </h1>
         <div
           style={{
             backgroundImage:
-              "url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2020/10/figuras-funko-pop-2089019.jpg?itok=soYTFCkB)",
+              "url(https://as.com/meristation/imagenes/2019/09/18/noticias/1568811605_114761_1568811649_noticia_normal.jpg)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
             width: "95%",
             height: "300px",
           }}

@@ -36,7 +36,7 @@ export default function CategoriesList() {
   return (
     <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
       <h1 className="display-3 text-center mb-2"> Categories </h1>
-      <div style={{ backgroundImage: "url(https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/FRDTR67UFNFYBJLZNIOWNMSUJQ.jpg)", width: "95%", height: "300px" }} className="mb-5 rounded mx-auto" >
+      <div style={{ backgroundImage: "url(https://www.wallpapertip.com/wmimgs/30-302870_funko-pop-wallpaper-hd.jpg)", backgroundSize: "cover", backgroundRepeat: "no-repeat", width: "95%", height: "300px" }} className="mb-5 rounded mx-auto" >
         <hr className="my-2" />
         <p className="lead "></p>
       </div>

@@ -43,7 +43,7 @@ export default function OrderTable() {
     return (
       <div className="firstContainer container d-flex flex-column text-center mx-auto my-5 p-5 border shadow">
         <h1 className="display-3 text-center mb-2">Orders</h1>
-        <div className="mx-auto rounded" style={{backgroundImage:"url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2020/10/figuras-funko-pop-2089019.jpg?itok=soYTFCkB)", width: "95%", height: "300px",}}></div>
+        <div className="mx-auto rounded" style={{backgroundImage:"url(https://images2.minutemediacdn.com/image/upload/c_crop,h_1122,w_2000,x_0,y_91/v1554924465/shape/mentalfloss/546285-28549976060_561dba798c_o-flickr.jpg?itok=yIvvw9Ax)", backgroundRepeat: "no-repeat", backgroundSize: "cover", width: "95%", height: "300px",}}></div>
         <div className="mt-4">
           <table class="table table-borderless">
             <thead className="my-auto bg-warning rounded mb-5">
