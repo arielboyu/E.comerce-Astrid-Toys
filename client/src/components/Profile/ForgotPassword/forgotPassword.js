@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const ForgotPassword = () => {
@@ -7,21 +8,29 @@ const ForgotPassword = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        console.log()
         const body = {
             email
         }
-        axios.post(`${process.env.REACT_APP_API_URL}/forgot`, body, { withCredentials: true })
+        axios.post(`${process.env.REACT_APP_API_URL}/auth/forgot`, body, { withCredentials: true })
             .then(res => setEmailSent(true))
+            .catch(err => console.log(err))
     }
 
     return (
         <div className="firstContainer container text-center w-50">
-            
+
             {emailSent ? 
-            
+            <>
             <div>
                 Se envió un mail para reestablecer su contraseña
             </div> 
+            <Link to="/login">
+            <button className='btn btn-dark mt-5' >
+                BACK
+            </button>
+            </Link>
+            </>
             
             : 
 
@@ -37,11 +46,17 @@ const ForgotPassword = () => {
                         placeholder="Ingrese su email">
                     </input>
                     <button 
-                        className="mt-4 btn btn-danger"
+                        className="my-4 btn btn-danger"
                         type="submit">
                         GET RESET LINK
                     </button>
                 </form>
+                <Link to="/login">
+                    <button className='btn btn-dark mt-5' >
+                    
+                        BACK
+                    </button>
+                </Link>
                 
             </div>
 

@@ -106,7 +106,7 @@ const Login = () => {
         //-----------------------------------------------------------------------------
         
         setTimeout(() => {
-          history.goBack();
+          history.push('/products');
         }, 1000);
       })
       .catch((e) => setError(true));
@@ -196,14 +196,14 @@ const Login = () => {
             </Col>
           </Row>
           <div className="row mt-3 mb-0  d-flex flex-column align-items-center justify-content-center">
-            <div className="">
+            <div className="mt-4 mb-0">
+              <Link to="/forgot" className="text-dark"> Forgot your password ? </Link>
+            </div>
+            {/* <div className="mt-5">
               <p className="text-dark" value="github" id="githubBtn" onClick={popup}>
 					      <a href='#'><span style={{fontSize: "25px"}}><i className="fab fa-github"> </i></span></a>
 				      </p>
-            </div>
-            <div className="mt-2">
-              <Link to="/forgot"> Forgot your password ? </Link>
-            </div>
+            </div> */}
           </div>
         </Form>
       </Formik>

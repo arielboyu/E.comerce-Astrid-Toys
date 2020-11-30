@@ -114,13 +114,8 @@ server.post('/forgot', (req, res) => {
     // CREO UN TOKEN DE RECUPERACIÓN DE CONTRASEÑA
     .then(user => {
       var id = uuid.v1();
-      var request = {
-        id,
-        email: user.dataValues.email
-      };
-      user.dataValues.forgotToken = id;
-
-      console.log("encontré al usuario")
+      user.setDataValue('forgotToken', id);
+      user.save();
       
       return user;
     })
@@ -153,20 +148,21 @@ server.post('/forgot', (req, res) => {
 })
 
 server.post('/reset', (req, res) => {
-  let id = req.body.id;
-  let password = req.body.password 
+  const id = req.body.id;
+  const password = req.body.password 
+
 
   // ENCUENTRO EL USUARIO QUE SOLICITA EL REINICIO DE PASSWORD
   User.findOne( { where: { forgotToken: id } } )
 
-    // CAMBIO LA CONTRASEÑA HASHEADA
+    // CAMBIO LA CONTRASEÑA
     .then(user => {
-      hashPassword = bcrypt.hash(password);
+      user.update({
+        password,
+        forgotToken: null
+      });
 
-      user.setDataValue('password', hashPassword);
-      user.save();
-      
-      res.status(200).send({msg: "Contraseña recuperada con éxito"})
+    res.status(200).send({msg: "Contraseña recuperada con éxito"})
 
     })
 

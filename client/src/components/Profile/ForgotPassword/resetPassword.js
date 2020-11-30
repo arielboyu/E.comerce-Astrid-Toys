@@ -1,26 +1,43 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 
-const ResetPassword = (props) => {
+const ResetPassword = () => {
     const [password, setPassword] = useState("");
+    const [ reset, setReset ] = useState(false);
+    const location = useLocation().pathname.substring(7);
+    const history = useHistory();
 
     const submitHandler = (e) => {
         e.preventDefault();
         const body = {
             password,
-            id: props.match.params.id
+            id: location
         }
-        axios.put(`${process.env.REACT_APP_API_URL}/reset/`, body, { withCredentials : true })
+        
+        axios.post(`${process.env.REACT_APP_API_URL}/auth/reset/`, body, { withCredentials : true })
             .then( () => {
-                props.history.push("/login")
+                setReset(true);
+                setTimeout( () => history.push("/login"), 2000);
+                
             })
+            .catch(err => console.log(err))
     }
 
     return (
         <div className="firstContainer container text-center w-50">
+
+            { reset ? 
+            
+            <div>
+                Su contraseña fue cambiada con éxito.
+            </div> 
+            
+            : 
+
             <div className="d-flex flex-column mx-auto w-75 mt-5">
                 <h1 className="mt-3">RESET PASSWORD</h1>
-                <form onSubmit={submitHandler}>
+                <form onSubmit={submitHandler} className="d-flex flex-column mt-3" >
                     <input 
                         className="mt-4" 
                         type="password"
@@ -34,7 +51,13 @@ const ResetPassword = (props) => {
                         SAVE
                     </button>
                 </form>
+                <Link to="/login">
+                    <button className='btn btn-dark mt-5' >
+                        BACK
+                    </button>
+                </Link>
             </div>
+            }
         </div>
     )
 }
