@@ -23,7 +23,7 @@ const ForgotPassword = () => {
             {emailSent ? 
             <>
             <div>
-                Se envió un mail para reestablecer su contraseña
+                If your mail is correct, a message will be send you for reset your password
             </div> 
             <Link to="/login">
             <button className='btn btn-dark mt-5' >
