@@ -12,11 +12,11 @@ export default function OrderTable() {
     useEffect(() => {
       getOrder.then((res) => {
         setOrder(res.data);
-        console.log(res)
+        
       });
     }, [])
     const handlerCancel = (orderid) => {
-      console.log(orderid)
+      
       axios
         .put(`${process.env.REACT_APP_API_URL}/orders/modify/cancel/${orderid}`)
         .then((res) => {
@@ -25,7 +25,7 @@ export default function OrderTable() {
         .catch((err) => console.log(err));
     };
     const handlerDistpach = (orderid) => {
-      console.log(orderid)
+      
       axios
         .put(`${process.env.REACT_APP_API_URL}/orders/modify/dispatch/${orderid}`)
         .then((res) => {
@@ -34,7 +34,7 @@ export default function OrderTable() {
         .catch((err) => console.log(err));
     };
     const handlerDelete = (orderid) => {
-      console.log(orderid)
+      
       axios
         .delete(`${process.env.REACT_APP_API_URL}/orders/delete/${orderid}`)
         .then((res) => {

@@ -10,7 +10,7 @@ export default function OrderTablePending() {
     useEffect(() => {
       getOrderpe.then((res) => {
         setOrderpe(res.data);
-        console.log(res)
+        
       });
     }, [])
 

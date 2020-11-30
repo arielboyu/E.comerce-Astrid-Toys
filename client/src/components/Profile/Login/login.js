@@ -34,7 +34,7 @@ const Login = () => {
       .then((user) => {
         setRedirect(true);
         dispatch(userLogin(user.data));
-        console.log("usuario recien logeado: ", user.data);
+        
 
         //ESTE CODIGO SETEA EN LA DB LO QUE HAY EN EL CARRITO DEL REDUX
         //PARA SINCRONIZAR REDUX CON DB
@@ -43,10 +43,7 @@ const Login = () => {
           .get(`${process.env.REACT_APP_API_URL}/users/${user.data.id}/cart`)
           .then((cart) => {
             if (cart.data) {
-              console.log(
-                "ya existe una orden pendiente, le voy a agregar lo del redux"
-              );
-              console.log(cart);
+              
               carrito.forEach((prod) => {
                 let prodAlCarro = {
                   quantity: prod.cant,
@@ -78,17 +75,14 @@ const Login = () => {
                   )
                   .then((ord) => {
 
-                    console.log("nueva orden creada");
-                    console.log(ord);
-                    console.log("carrito: ",carrito)
-                    console.log("ord.data.id: ",ord)
+                   
                     carrito.forEach((prod) => {
                       let prodAlCarro = {
                         quantity: prod.cant,
                         productId: prod.id,
                         orderId: ord.data[0].orderId, //el id de la orden pending (osea el carrito)
                       };
-                      console.log("body enviado: ", prodAlCarro)
+                      
                       axios
                         .put(
                           `${process.env.REACT_APP_API_URL}/users/${user.data.id}/cart`,

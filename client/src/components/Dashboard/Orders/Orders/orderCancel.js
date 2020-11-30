@@ -10,12 +10,12 @@ export default function OrderTableCancel() {
     useEffect(() => {
       getOrderca.then((res) => {
         setOrderca(res.data);
-        console.log(res)
+        
       });
     }, [])
 
     const handlerDelete = (orderid) => {
-      console.log(orderid)
+      
       axios
         .delete(`${process.env.REACT_APP_API_URL}/orders/delete/${orderid}`)
         .then((res) => {

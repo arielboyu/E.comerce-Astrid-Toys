@@ -29,7 +29,7 @@ sino
         .then((cart) => {
           if (cart.data) {
             console.log("ya existe una orden pendiente");
-            console.log(cart);
+            
             let prodAlCarro = {
               quantity: 1,
               productId: product.id,
@@ -42,7 +42,7 @@ sino
               )
               .then((respuesta) => {
                 console.log("producto agregado a la orden pendiente");
-                console.log(respuesta);
+                
               });
           } else {
             console.log("no existe orden pendiente");
@@ -57,26 +57,26 @@ sino
               )
               .then((ord) => {
                 console.log("nueva orden creada");
-                console.log(ord);
+                
               });
           }
         });
       //por ultimo agrego el producto al carrito redux a pesar de que el user esta loggeado
-      console.log("Agregue al carrito el productos "+product.name)
+      
       dispatch(addToCart(product));
     } else {
       //si el user no esta loggeado solo agrego el producto al carrito redux
-      console.log("Agregue al carrito el productos "+product.name)
+      
       dispatch(addToCart(product));
     }
   }
 
   useEffect(() => {
-    console.log("Llego al UE de Add "+product.name)
+    
     product.cant = 1
     // setProducto({ ...product, cant: 1 });
   });
-  console.log("setcant "+product.cant)
+  
   return (
     <button
       id="boton-agregar"

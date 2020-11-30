@@ -10,7 +10,7 @@ export default function OrderTableComplete() {
     useEffect(() => {
       getOrderco.then((res) => {
         setOrderco(res.data);
-        console.log(res)
+        
       });
     }, [])
 

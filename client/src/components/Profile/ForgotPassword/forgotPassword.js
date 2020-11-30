@@ -8,7 +8,7 @@ const ForgotPassword = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log()
+        
         const body = {
             email
         }

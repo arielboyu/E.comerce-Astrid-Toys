@@ -12,7 +12,6 @@ export default function UpdateCategories() {
  useEffect(() => {
    getCategory.then((res) => {
      setCategory(res.data[0]);
-     console.log(res)
    });
  }, [])
 
