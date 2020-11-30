@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link,Redirect } from "react-router-dom";
+import { Link,Redirect, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
@@ -8,6 +8,7 @@ const getCategory = axios.get(`${process.env.REACT_APP_API_URL}/categories`);
 function DashboardLoadProduct() {
   //Seteo un estado general para mostrar las categorias en las listas desplegrables
   const [category, setCategory] = useState([]);
+  const localy = useHistory()
   //Seteo un estado general
   const [productLoad, setProduct] = useState({
     name: "",
@@ -98,15 +99,18 @@ function DashboardLoadProduct() {
         .post(`${process.env.REACT_APP_API_URL}/products`, productLoad)
         .then((productInDB) => {
           uploadAction(image,productInDB.data.id);
+          alert("Producto Cargado")
+          window.location.reload()
         })
         .catch((er) => {
           console.log(er);
         });
+    }else{
+      alert("Falta completar campos")
     }
     //para reiniciar el form:
     //e.target.reset();
     //para no reiniciar y poder leer la consola:
-
     e.preventDefault()
 
 
