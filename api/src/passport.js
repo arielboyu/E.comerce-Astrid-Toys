@@ -3,7 +3,8 @@ const { User } = require( './db.js' );
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const Strategy = require( 'passport-local' ).Strategy;
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 
 
 function authSetUp(server) {
@@ -23,18 +24,18 @@ function authSetUp(server) {
 				} )
 				.catch( ( error ) => { return done( error ) });
 	})
-
-	passport.use(new GoogleStrategy({
-		clientID: process.env.GOOGLE_CONSUMER_KEY,
-		clientSecret: process.env.GOOGLE_CONSUMER_SECRET,
-		callbackURL: process.env.GOOGLE_CALLBACK
-	  },
-	  function(token, tokenSecret, profile, done) {
-		  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-			return done(err, user);
-		  });
-	  }
-	));
+  
+	// passport.use(new GoogleStrategy({
+	// 	clientID: process.env.GOOGLE_CONSUMER_KEY,
+	// 	clientSecret: process.env.GOOGLE_CONSUMER_SECRET,
+	// 	callbackURL: process.env.GOOGLE_CALLBACK
+	//   },
+	//   function(token, tokenSecret, profile, done) {
+	// 	  User.findOrCreate({ googleId: profile.id }, function (err, user) {
+	// 		return done(err, user);
+	// 	  });
+	//   }
+	// ));
 
 	passport.use(localStrategy)
 
