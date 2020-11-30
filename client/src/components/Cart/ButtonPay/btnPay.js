@@ -58,6 +58,13 @@ function ButtonPay() {
       toggle()
       setLoad(true)
       values.userId = store.user.id;
+      Axios.put(`${process.env.REACT_APP_API_URL}/orders/stock/${orderId}`)
+        .then((r)=>{
+          console.log("Stock descontado")
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
       Axios.post(`${process.env.REACT_APP_API_URL}/orders/shipping/${orderId}`, values, { withCredentials : true })
         .then((r) => {
           setLoad(false)

@@ -3,7 +3,7 @@ const {
   Order,
   Product,
   User,
-  OrderDetails,
+  Orderdetails,
   Shippingdata,
 } = require("../db.js");
 const nodemailer = require("nodemailer");
@@ -236,6 +236,22 @@ server.delete("/delete/:id", (req, res) => {
       res.status(400).send(err);
     });
 });
+
+server.put("/stock/:orderId", (req, res)=>{  //ooder-detail => products => update(stock) - cant- orderdetail
+  const orderId = req.params.orderId
+  Orderdetails.findAll({
+    where: {orderId : orderId}
+  }).then((detalles)=>{
+    detalles.map(producto=>{
+      Product.findOne({where:{id: producto.productId}}).then((objProduct)=>{
+        objProduct.setDataValue("stock", objProduct.stock - producto.quantity)
+        objProduct.save()
+        res.send("Cantidad restada del stock")
+      })
+    })
+  })
+
+})
 
 //POST for ShippingData con envío de mail y cambio de state de la order a COMPLETE
 server.post("/shipping/:id", (req, res) => {
