@@ -10,6 +10,10 @@ import style from "./product.module.css"
 export default function Product() {
   const [funkos, setFunkos] = useState([]);
   const [load, setLoad] = useState(false);
+  const [imagenMostrar, setImagenMostrar] = useState("")
+
+    
+
 
   const { index } = useParams();
   useEffect(() => {
@@ -17,6 +21,14 @@ export default function Product() {
       setFunkos(res.data);
       setLoad(true);
     });
+    axios.get(`${process.env.REACT_APP_API_URL}/products/${index}`).then((product) => {
+      if (product.data[0].image[0] === "h") {
+        setImagenMostrar(product.data[0].image)
+      } else {
+        setImagenMostrar(`${process.env.REACT_APP_API_URL}/images/${product.data[0].id}.jpeg`)
+        }
+    });
+
   }, [load]);
 
   if (funkos) {
@@ -27,7 +39,7 @@ export default function Product() {
           <>
             {/* FUNKO IMAGE */}
             <div className={`${style.imageContainer} col-12 col-md-5 mx-auto d-flex align-items-center`}>
-              <img className={`${style.image} px-4`} src={funko.image}></img>
+              <img className={`${style.image} px-4`} src={imagenMostrar}></img>
             </div>
             
             {/* FUNKO DESCRIPTION */}
