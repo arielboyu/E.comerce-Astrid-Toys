@@ -6,8 +6,8 @@ export default function Spinner(){
 
     return(
         <>
-        <h2 style={{marginTop: "100px", marginLeft:"45%"}}>Loading...</h2>
-        <div style={{height : "400px"}} className={`${style.ldsEllipsis} `}><div></div><div></div><div></div><div></div></div>
+        <h2 style={{marginTop: "30px" }}>Loading...</h2>
+        <div style={{marginTop: "30px" }} className={`${style.ldsEllipsis} `}><div></div><div></div><div></div><div></div></div>
         </>
     )
 }
