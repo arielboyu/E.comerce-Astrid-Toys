@@ -2,6 +2,25 @@
     <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' </img>
 </p>
 
+
+# Algunas Capturas del Proyecto
+
+Puedes ver la página en el siguiente link  : [AstridToys](https://astridtoys.herokuapp.com/products)
+
+
+![](https://scontent.faep24-1.fna.fbcdn.net/v/t1.0-9/139308449_232164315101691_6948644297216951867_o.jpg?_nc_cat=104&ccb=2&_nc_sid=730e14&_nc_ohc=jMswMrMZq9QAX_9bH5M&_nc_ht=scontent.faep24-1.fna&oh=c459118356ce81c02257e7f77a907490&oe=602537E0)
+
+### `Los funkos del equipo en sección about -->`
+
+![](https://scontent.faep24-1.fna.fbcdn.net/v/t1.0-9/s960x960/138928438_232164015101721_7606698245150653858_o.jpg?_nc_cat=102&ccb=2&_nc_sid=730e14&_nc_ohc=gjfjD8flwkAAX81ih-i&_nc_ht=scontent.faep24-1.fna&tp=7&oh=aa49575f5096d22259b8da3493bd2061&oe=6024784A)
+
+### `-->`
+
+![](https://scontent.faep24-1.fna.fbcdn.net/v/t1.0-9/138891539_232164281768361_4410102705406138241_o.jpg?_nc_cat=104&ccb=2&_nc_sid=730e14&_nc_ohc=ZeV6q9aGTvwAX9E7wgO&_nc_ht=scontent.faep24-1.fna&oh=0ee13aa81fe3f29f4ab8bb88d6cdd52d&oe=6027784E)
+<p align='center'>
+    <img style= width:100px src='https://media0.giphy.com/media/Kxz0KxYONqIhIGXK0F/giphy.webp?cid=ecf05e47uo1z30l1ej5zbogfo314vfc72sbcfp4rkx6raidr&rid=giphy.webp' </img>
+</p>
+
 # Henry
 
 ## Objetivos del Proyecto
